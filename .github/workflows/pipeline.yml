@@ -1,0 +1,152 @@
+name: Pipeline
+
+# Collect → (measure → seal, from P1b/P2) → publish.
+# Code lives on main. Machine-written state lives on the `data` branch, checked
+# out at ./data, so collection never rewrites main's history.
+
+on:
+  schedule:
+    # GitHub delivers only a fraction of scheduled runs on busy hours; two
+    # off-peak minutes per hour raise the number that actually arrive.
+    - cron: '23 * * * *'
+    - cron: '53 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pipeline
+  cancel-in-progress: false
+
+jobs:
+  collect-and-publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: main
+
+      - name: Create the state branch on first run
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if ! git ls-remote --exit-code --heads origin data >/dev/null 2>&1; then
+            empty_tree=$(git hash-object -t tree /dev/null)
+            commit=$(git commit-tree "$empty_tree" -m 'Start machine state branch')
+            git push origin "$commit:refs/heads/data"
+          fi
+
+      - name: Check out last state
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: data
+          path: data
+
+      - name: Install pinned source parsers and CA certificates
+        run: |
+          python3 -m venv .venv-cloud
+          .venv-cloud/bin/python -m pip install --disable-pip-version-check -r requirements.txt
+
+      # New code must pass before it collects or publishes. Scheduled runs skip
+      # this: a test problem must not stop data gathering (ci.yml reports it).
+      - name: Verify source contracts for newly pushed code
+        if: github.event_name == 'push'
+        run: .venv-cloud/bin/python -m unittest discover -s tests -p 'test_*.py'
+
+      - name: Collect current observations with actual retrieval timestamps
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: >
+          .venv-cloud/bin/python -m lm.collect.cloud_feeds
+          --output-root .run/live --checkpoint data/live
+          --public-output data/public/live-data.json
+
+      - name: Collect native current-vintage histories for display only
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: >
+          .venv-cloud/bin/python -m lm.collect.chart_history
+          --output-root .run/chart-history --live-root data/live
+          --checkpoint data/chart-history
+          --public-output data/public/chart-data.json
+
+      - name: Preserve full source receipts for replay
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: liquidity-source-receipts
+          path: .run/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 90
+
+      # Runs even if a later collection step failed, so a successful checkpoint
+      # is never thrown away. A missing checkpoint is never committed as a deletion.
+      - name: Save state to the data branch
+        if: always()
+        working-directory: data
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if [ ! -f live/public.json ]; then
+            echo '::error::Checkpoint is missing; state was not saved.'
+            exit 1
+          fi
+          paths=''
+          for path in live chart-history public; do
+            if [ -e "$path" ]; then paths="$paths $path"; fi
+          done
+          git add -A -- $paths
+          if git diff --cached --quiet; then
+            echo 'State unchanged.'
+            exit 0
+          fi
+          git commit -q -m 'Update observations and checkpoint'
+          for attempt in 1 2 3; do
+            if git push origin HEAD:data; then
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt); replaying this run's commit on the newer state."
+            git fetch --no-tags --depth=1 origin data
+            # Replay only this run's commit. A plain rebase would also replay the
+            # shallow base commit and conflict with itself.
+            git rebase --onto FETCH_HEAD HEAD~1
+          done
+          echo '::error::Could not save state after three attempts.'
+          exit 1
+
+      # The page validates what it loads. Check the data about to be published
+      # with the page's own validator, so a bad snapshot keeps the last good site.
+      - name: Check the snapshot against the page contract
+        env:
+          LM_PUBLIC_DIR: data/public
+        run: .venv-cloud/bin/python -m unittest tests.test_chart_page
+
+      - name: Package explicitly approved public artifacts
+        run: .venv-cloud/bin/python -m lm.render.package --public-dir data/public
+
+      - name: Upload public page package
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          path: _site
+
+      - name: Publish GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+
+      - name: Report actual source coverage
+        if: always()
+        run: .venv-cloud/bin/python -m lm.collect.report --public-dir data/public

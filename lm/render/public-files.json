@@ -1,0 +1,31 @@
+{
+  "site": [
+    "index.html",
+    "sources.html",
+    "overview.js",
+    "overview.css",
+    "interpretation.js",
+    "interpretation-copy.json",
+    "charts.js",
+    "dashboard.css",
+    "vendor/chart.umd.min.js",
+    "vendor/LICENSE.chartjs.txt",
+    ".nojekyll"
+  ],
+  "repo": [
+    "research/archive/buffett-v3_1/REPORT.md",
+    "research/archive/buffett-v3_1/SOURCES.md",
+    "research/archive/buffett-v3_1/quarterly.csv",
+    "research/archive/transmission-v3/EXPECTED-EARNINGS.md",
+    "research/archive/transmission-v3/INPUT_REQUIREMENTS.md",
+    "research/archive/transmission-v3/REPORT.md",
+    "research/archive/transmission-v3/cross-path-multiplicity.json",
+    "research/archive/transmission-v3/protocol.json",
+    "research/archive/transmission-v3/reserve-benchmark/REPORT.md",
+    "research/archive/us-equities-v3_2/REPORT.md",
+    "research/archive/us-equities-v3_2/SOURCES.md",
+    "research/archive/us-equities-v3_2/cross-study-multiplicity.json",
+    "research/archive/us-equities-v3_2/policy/REPORT.md",
+    "research/archive/us-equities-v3_2/protocol.json"
+  ]
+}
