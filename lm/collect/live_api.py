@@ -117,8 +117,11 @@ def load_catalog():
 class FredClient:
     def __init__(self, key: str, transport: Callable | None = None,
                  sleeper=time.sleep, timeout=18, max_attempts=2,
-                 throttle_seconds=.15):
+                 throttle_seconds=.15, allowed=None):
         self.key = key
+        # The live poller keeps its own allow-list (no prices or returns). The
+        # history store passes the registry's history series explicitly.
+        self.allowed = ALLOWED_SERIES if allowed is None else frozenset(allowed)
         self.transport = transport
         self.sleeper = sleeper
         self.timeout = timeout
@@ -132,7 +135,7 @@ class FredClient:
     def request(self, endpoint, params):
         if endpoint not in {"series", "series/observations"}:
             raise FredError("endpoint_not_allowed")
-        if params.get("series_id") not in ALLOWED_SERIES:
+        if params.get("series_id") not in self.allowed:
             raise FredError("series_not_allowed")
         for attempt in range(self.max_attempts):
             if self._remaining() <= 0:
