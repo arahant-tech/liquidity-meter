@@ -111,6 +111,26 @@ class IntermediaryTests(unittest.TestCase):
         with self.assertRaises(m.IntermediaryError):
             m.parse_pd(p, PD_DEFS, "SBN2024", TODAY)
 
+    def test_pd_withheld_cell_skips_only_that_series(self):
+        p = json.loads(json.dumps(PD_VALUES))
+        p["pd"]["timeseries"][2]["value"] = "*"
+        withheld = []
+        rows = m.parse_pd(p, PD_DEFS, "SBN2024", TODAY, withheld)
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(len(withheld), 1)
+        self.assertNotIn(withheld[0], {r["series_id"] for r in rows})
+        # Strict callers still see it as an error, and it is never read as zero.
+        with self.assertRaisesRegex(m.IntermediaryError, "withheld_by_source"):
+            m.parse_pd(p, PD_DEFS, "SBN2024", TODAY)
+        self.assertTrue(all(r["value"] != 0 for r in rows))
+
+    def test_pd_all_cells_withheld_is_an_error_not_an_empty_success(self):
+        p = json.loads(json.dumps(PD_VALUES))
+        for row in p["pd"]["timeseries"]:
+            row["value"] = "*"
+        with self.assertRaisesRegex(m.IntermediaryError, "withheld_by_source"):
+            m.parse_pd(p, PD_DEFS, "SBN2024", TODAY, [])
+
     def test_pd_definition_change_requires_review(self):
         d = json.loads(json.dumps(PD_DEFS))
         d["pd"]["timeseries"][0]["description"] = "Different asset class"

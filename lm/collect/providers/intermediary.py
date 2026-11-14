@@ -153,7 +153,14 @@ def choose_break(payload, today):
     return active[0]["seriesbreak"]
 
 
-def parse_pd(payload, definitions, seriesbreak, today):
+def parse_pd(payload, definitions, seriesbreak, today, withheld=None):
+    """Latest weekly dealer balances.
+
+    The New York Fed publishes ``*`` instead of a number when it withholds a
+    cell. That is one series the source did not report this week, not a broken
+    file: the other series are still valid. Pass ``withheld`` (a list) to have
+    such series skipped and named there; without it a withheld cell is an error.
+    """
     defs = definitions.get("pd", {}).get("timeseries")
     rows = payload.get("pd", {}).get("timeseries")
     if not isinstance(defs, list) or not isinstance(rows, list):
@@ -170,12 +177,19 @@ def parse_pd(payload, definitions, seriesbreak, today):
         end = date.fromisoformat(row["asofdate"])
         if end > today or end.weekday() != 2:
             raise IntermediaryError("nyfed_invalid_reference_date")
+        if row.get("value") == "*":
+            if withheld is None:
+                raise IntermediaryError("nyfed_value_withheld_by_source")
+            withheld.append(series)
+            continue
         value = numeric(row["value"], signed=key == "PDPOSGST-TOT")
         result.append(base(series, label, value, end.isoformat(), "weekly", "dealer_balance_sheet_use",
                            native_series_id=key, seriesbreak=seriesbreak, source_label=found[0]["description"],
                            source_universe="New York Fed reporting primary dealers; U.S. Treasury securities excluding TIPS",
                            status="stale" if (today-end).days > 21 else "ok",
                            notes="딜러 잔액 관측. 잔여 여력·담보 재사용률·A_t 추정치가 아님."))
+    if not result:
+        raise IntermediaryError("nyfed_value_withheld_by_source")
     if len({r["period_end"] for r in result}) != 1:
         raise IntermediaryError("nyfed_latest_dates_disagree")
     return result
@@ -402,7 +416,12 @@ def collect(output_root, transport=None, clock=None):
                 seriesbreak = choose_break(json.loads(breaks), current.date())
                 definitions, _ = get(NY_DEFS)
                 body, evidence = get(f"{NY_BASE}/api/pd/latest/{seriesbreak}.json")
-                observations = parse_pd(json.loads(body), json.loads(definitions), seriesbreak, current.date())
+                withheld = []
+                observations = parse_pd(json.loads(body), json.loads(definitions), seriesbreak, current.date(), withheld)
+                if withheld:
+                    # Reported per series so the aggregator keeps only those at their last good value.
+                    result["errors"].append({"source_group": group, "series_ids": withheld,
+                                             "code": "nyfed_value_withheld_by_source"})
             elif group == "finra":
                 body, evidence = get(FINRA)
                 observations = parse_finra(body, current.date())
