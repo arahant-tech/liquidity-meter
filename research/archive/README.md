@@ -7,5 +7,6 @@
 | `transmission-v3/` | 조달시장·정책 이벤트·밸류에이션 전달 경로 44개 검정 |
 | `buffett-v3_1/` | 시가총액/GDP 대용치에 대한 8개 검정 |
 | `us-equities-v3_2/` | 미국 주식 월간 48개 검정과 누적 다중검정(Holm 106) |
+| `v6-btc-forward/` | 2026-09-07에 봉인된 BTC 1개월 예측의 사후 채점(새 저장소에서 추가) |
 
 용량이 큰 원결과 두 파일(`buffett-v3_1/results.json` 0.7MB, `us-equities-v3_2/results.json` 5.8MB)은 옮기지 않았다. 이전 저장소의 같은 경로에 남아 있다.
