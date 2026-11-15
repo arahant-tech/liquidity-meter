@@ -9,97 +9,97 @@
     "Only the latest five native observations are fetched, so older revisions can be missed.",
     "The collection covers a subset of the five-layer model; missing sources are not imputed."
   ],
-  "capture_id": "20261115T220508930339Z_6d6d77c578a6",
+  "capture_id": "20261115T220819881486Z_f32662d514f4",
   "changed": 0,
-  "completed_at": "2026-11-15T22:05:08.930724Z",
-  "errors": 16,
-  "outcome": "error",
+  "completed_at": "2026-11-15T22:08:47.606245Z",
+  "errors": 0,
+  "outcome": "ok",
   "research_eligible": false,
   "schema_version": 1,
   "series": {
     "DPSACBW027SBOG": {
-      "checked_at": "2026-11-15T22:05:08.930675Z",
-      "error": "credential_unavailable",
-      "status": "error"
+      "checked_at": "2026-11-15T22:08:29.949982Z",
+      "error": null,
+      "status": "ok"
     },
     "DRTSCILM": {
-      "checked_at": "2026-11-15T22:05:08.930710Z",
-      "error": "credential_unavailable",
-      "status": "error"
+      "checked_at": "2026-11-15T22:08:44.192660Z",
+      "error": null,
+      "status": "ok"
     },
     "ECBASSETSW": {
-      "checked_at": "2026-11-15T22:05:08.930699Z",
-      "error": "credential_unavailable",
-      "status": "error"
+      "checked_at": "2026-11-15T22:08:38.604992Z",
+      "error": null,
+      "status": "ok"
     },
     "IORB": {
-      "checked_at": "2026-11-15T22:05:08.930665Z",
-      "error": "credential_unavailable",
-      "status": "error"
+      "checked_at": "2026-11-15T22:08:28.107617Z",
+      "error": null,
+      "status": "ok"
     },
     "JPNASSETS": {
-      "checked_at": "2026-11-15T22:05:08.930703Z",
-      "error": "credential_unavailable",
-      "status": "error"
+      "checked_at": "2026-11-15T22:08:40.998781Z",
+      "error": null,
+      "status": "ok"
     },
     "MMMFFAQ027S": {
-      "checked_at": "2026-11-15T22:05:08.930715Z",
-      "error": "credential_unavailable",
-      "status": "error"
+      "checked_at": "2026-11-15T22:08:47.605161Z",
+      "error": null,
+      "status": "ok"
     },
     "RRPONTSYD": {
-      "checked_at": "2026-11-15T22:05:08.930648Z",
-      "error": "credential_unavailable",
-      "status": "error"
+      "checked_at": "2026-11-15T22:08:25.264635Z",
+      "error": null,
+      "status": "ok"
     },
     "SOFR": {
-      "checked_at": "2026-11-15T22:05:08.930660Z",
-      "error": "credential_unavailable",
-      "status": "error"
+      "checked_at": "2026-11-15T22:08:27.150730Z",
+      "error": null,
+      "status": "ok"
     },
     "TOTBKCR": {
-      "checked_at": "2026-11-15T22:05:08.930670Z",
-      "error": "credential_unavailable",
-      "status": "error"
+      "checked_at": "2026-11-15T22:08:28.986631Z",
+      "error": null,
+      "status": "ok"
     },
     "TOTLL": {
-      "checked_at": "2026-11-15T22:05:08.930694Z",
-      "error": "credential_unavailable",
-      "status": "error"
+      "checked_at": "2026-11-15T22:08:37.516222Z",
+      "error": null,
+      "status": "ok"
     },
     "WALCL": {
-      "checked_at": "2026-11-15T22:05:08.930620Z",
-      "error": "credential_unavailable",
-      "status": "error"
+      "checked_at": "2026-11-15T22:08:22.148330Z",
+      "error": null,
+      "status": "ok"
     },
     "WDTGAL": {
-      "checked_at": "2026-11-15T22:05:08.930689Z",
-      "error": "credential_unavailable",
-      "status": "error"
+      "checked_at": "2026-11-15T22:08:34.714457Z",
+      "error": null,
+      "status": "ok"
     },
     "WLRRAOL": {
-      "checked_at": "2026-11-15T22:05:08.930684Z",
-      "error": "credential_unavailable",
-      "status": "error"
+      "checked_at": "2026-11-15T22:08:33.045824Z",
+      "error": null,
+      "status": "ok"
     },
     "WRBWFRBL": {
-      "checked_at": "2026-11-15T22:05:08.930680Z",
-      "error": "credential_unavailable",
-      "status": "error"
+      "checked_at": "2026-11-15T22:08:31.040263Z",
+      "error": null,
+      "status": "ok"
     },
     "WRESBAL": {
-      "checked_at": "2026-11-15T22:05:08.930640Z",
-      "error": "credential_unavailable",
-      "status": "error"
+      "checked_at": "2026-11-15T22:08:23.152274Z",
+      "error": null,
+      "status": "ok"
     },
     "WTREGEN": {
-      "checked_at": "2026-11-15T22:05:08.930654Z",
-      "error": "credential_unavailable",
-      "status": "error"
+      "checked_at": "2026-11-15T22:08:26.176808Z",
+      "error": null,
+      "status": "ok"
     }
   },
   "stale": 0,
-  "started_at": "2026-11-15T22:05:08.930339Z",
-  "success": 0,
+  "started_at": "2026-11-15T22:08:19.881486Z",
+  "success": 16,
   "total": 16
 }

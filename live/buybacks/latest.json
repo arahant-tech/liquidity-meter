@@ -14,8 +14,8 @@
     "Current SEC concept history is revised; these captures do not recreate historic point-in-time availability.",
     "SEC companyconcept and companyfacts can disagree on coverage. Visa's empty successful concept response permits only the identical standard concept from official companyfacts; its native period may lag issuer IR."
   ],
-  "capture_id": "20261115T220514147084Z_f4a7ba6b32fe",
-  "completed_at": "2026-11-15T22:05:14.705524Z",
+  "capture_id": "20261115T220855049307Z_12dfe34f05cb",
+  "completed_at": "2026-11-15T22:08:55.631452Z",
   "errors": [
     {
       "error": "sec_http_403",
@@ -43,10 +43,10 @@
       "ticker": "V"
     }
   ],
-  "fetched_at": "2026-11-15T22:05:14.705524Z",
+  "fetched_at": "2026-11-15T22:08:55.631452Z",
   "issuer_status": [
     {
-      "checked_at": "2026-11-15T22:05:14.147256Z",
+      "checked_at": "2026-11-15T22:08:55.049509Z",
       "cik": "0000320193",
       "error": "sec_http_403",
       "fingerprint": "5a13aeeac5f3ed2872d227ebbf4da380dde779375f753a75e86ac7a6bf074a18",
@@ -102,7 +102,7 @@
       "ticker": "AAPL"
     },
     {
-      "checked_at": "2026-11-15T22:05:14.705495Z",
+      "checked_at": "2026-11-15T22:08:55.631421Z",
       "cik": "0000789019",
       "error": "sec_http_403_remaining_panel_not_requested",
       "fingerprint": "c06b1f54a8b43d0897c4b2c97fa39cf5deae878b73ab0fb248deeb41cb13ac40",
@@ -158,7 +158,7 @@
       "ticker": "MSFT"
     },
     {
-      "checked_at": "2026-11-15T22:05:14.705511Z",
+      "checked_at": "2026-11-15T22:08:55.631437Z",
       "cik": "0001652044",
       "error": "sec_http_403_remaining_panel_not_requested",
       "fingerprint": "c45a99813fe84a91970cd25dae72bfdc096d3d874321884c81727168af89c3cd",
@@ -214,7 +214,7 @@
       "ticker": "GOOGL"
     },
     {
-      "checked_at": "2026-11-15T22:05:14.705516Z",
+      "checked_at": "2026-11-15T22:08:55.631443Z",
       "cik": "0001326801",
       "error": "sec_http_403_remaining_panel_not_requested",
       "fingerprint": "de063ce4e86fe65ccfbce1ef9faa9ba327e9dc5c7fc1eeba1c8ebe0ce801bd85",
@@ -270,7 +270,7 @@
       "ticker": "META"
     },
     {
-      "checked_at": "2026-11-15T22:05:14.705520Z",
+      "checked_at": "2026-11-15T22:08:55.631448Z",
       "cik": "0001403161",
       "error": "sec_http_403_remaining_panel_not_requested",
       "fingerprint": "1ba4c3cf89a03fd650fcf51c0e03e2f7d99077cbb342b3bcf269cacd134e8cd6",
@@ -368,14 +368,14 @@
   "provider": "buybacks",
   "raw_captures": [],
   "research_eligible": false,
-  "retrieved_at": "2026-11-15T22:05:14.705524Z",
+  "retrieved_at": "2026-11-15T22:08:55.631452Z",
   "schema_version": 1,
   "sources": [
     "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
     "https://www.sec.gov/about/developer-resources"
   ],
   "stale": 0,
-  "started_at": "2026-11-15T22:05:14.147084Z",
+  "started_at": "2026-11-15T22:08:55.049307Z",
   "status": "error",
   "success": 0,
   "total": 5
