@@ -9,97 +9,97 @@
     "Only the latest five native observations are fetched, so older revisions can be missed.",
     "The collection covers a subset of the five-layer model; missing sources are not imputed."
   ],
-  "capture_id": "20261116T022513630468Z_a91924a4e812",
-  "changed": 0,
-  "completed_at": "2026-11-16T02:25:20.850674Z",
-  "errors": 16,
-  "outcome": "error",
+  "capture_id": "20261116T095103693488Z_f74cb5551eed",
+  "changed": 1,
+  "completed_at": "2026-11-16T09:51:22.230485Z",
+  "errors": 0,
+  "outcome": "ok",
   "research_eligible": false,
   "schema_version": 1,
   "series": {
     "DPSACBW027SBOG": {
-      "checked_at": "2026-11-16T02:25:17.309540Z",
-      "error": "http_400",
-      "status": "error"
+      "checked_at": "2026-11-16T09:51:13.644727Z",
+      "error": null,
+      "status": "ok"
     },
     "DRTSCILM": {
-      "checked_at": "2026-11-16T02:25:20.366352Z",
-      "error": "http_400",
-      "status": "error"
+      "checked_at": "2026-11-16T09:51:21.457828Z",
+      "error": null,
+      "status": "ok"
     },
     "ECBASSETSW": {
-      "checked_at": "2026-11-16T02:25:19.528199Z",
-      "error": "http_400",
-      "status": "error"
+      "checked_at": "2026-11-16T09:51:18.481660Z",
+      "error": null,
+      "status": "ok"
     },
     "IORB": {
-      "checked_at": "2026-11-16T02:25:16.478121Z",
-      "error": "http_400",
-      "status": "error"
+      "checked_at": "2026-11-16T09:51:12.146482Z",
+      "error": null,
+      "status": "ok"
     },
     "JPNASSETS": {
-      "checked_at": "2026-11-16T02:25:19.945966Z",
-      "error": "http_400",
-      "status": "error"
+      "checked_at": "2026-11-16T09:51:19.339095Z",
+      "error": null,
+      "status": "ok"
     },
     "MMMFFAQ027S": {
-      "checked_at": "2026-11-16T02:25:20.850624Z",
-      "error": "http_400",
-      "status": "error"
+      "checked_at": "2026-11-16T09:51:22.229170Z",
+      "error": null,
+      "status": "ok"
     },
     "RRPONTSYD": {
-      "checked_at": "2026-11-16T02:25:14.879317Z",
-      "error": "http_400",
-      "status": "error"
+      "checked_at": "2026-11-16T09:51:07.292344Z",
+      "error": null,
+      "status": "ok"
     },
     "SOFR": {
-      "checked_at": "2026-11-16T02:25:16.010830Z",
-      "error": "http_400",
-      "status": "error"
+      "checked_at": "2026-11-16T09:51:09.933886Z",
+      "error": null,
+      "status": "ok"
     },
     "TOTBKCR": {
-      "checked_at": "2026-11-16T02:25:16.920481Z",
-      "error": "http_400",
-      "status": "error"
+      "checked_at": "2026-11-16T09:51:12.921940Z",
+      "error": null,
+      "status": "ok"
     },
     "TOTLL": {
-      "checked_at": "2026-11-16T02:25:19.041433Z",
-      "error": "http_400",
-      "status": "error"
+      "checked_at": "2026-11-16T09:51:17.755453Z",
+      "error": null,
+      "status": "ok"
     },
     "WALCL": {
-      "checked_at": "2026-11-16T02:25:14.096277Z",
-      "error": "http_400",
-      "status": "error"
+      "checked_at": "2026-11-16T09:51:04.767138Z",
+      "error": null,
+      "status": "ok"
     },
     "WDTGAL": {
-      "checked_at": "2026-11-16T02:25:18.631855Z",
-      "error": "http_400",
-      "status": "error"
+      "checked_at": "2026-11-16T09:51:16.252934Z",
+      "error": null,
+      "status": "ok"
     },
     "WLRRAOL": {
-      "checked_at": "2026-11-16T02:25:18.157542Z",
-      "error": "http_400",
-      "status": "error"
+      "checked_at": "2026-11-16T09:51:15.452457Z",
+      "error": null,
+      "status": "ok"
     },
     "WRBWFRBL": {
-      "checked_at": "2026-11-16T02:25:17.677914Z",
-      "error": "http_400",
-      "status": "error"
+      "checked_at": "2026-11-16T09:51:14.556492Z",
+      "error": null,
+      "status": "ok"
     },
     "WRESBAL": {
-      "checked_at": "2026-11-16T02:25:14.469823Z",
-      "error": "http_400",
-      "status": "error"
+      "checked_at": "2026-11-16T09:51:06.439828Z",
+      "error": null,
+      "status": "ok"
     },
     "WTREGEN": {
-      "checked_at": "2026-11-16T02:25:15.454016Z",
-      "error": "http_400",
-      "status": "error"
+      "checked_at": "2026-11-16T09:51:09.232961Z",
+      "error": null,
+      "status": "ok"
     }
   },
   "stale": 0,
-  "started_at": "2026-11-16T02:25:13.630468Z",
-  "success": 0,
+  "started_at": "2026-11-16T09:51:03.693488Z",
+  "success": 16,
   "total": 16
 }
