@@ -14,36 +14,10 @@
     "Current SEC concept history is revised; these captures do not recreate historic point-in-time availability.",
     "SEC companyconcept and companyfacts can disagree on coverage. Visa's empty successful concept response permits only the identical standard concept from official companyfacts; its native period may lag issuer IR."
   ],
-  "capture_id": "20261116T101228111154Z_d596309f3f0d",
-  "completed_at": "2026-11-16T10:12:28.642912Z",
-  "errors": [
-    {
-      "error": "sec_http_403",
-      "series_id": "SEC_BUYBACKS_AAPL",
-      "ticker": "AAPL"
-    },
-    {
-      "error": "sec_http_403_remaining_panel_not_requested",
-      "series_id": "SEC_BUYBACKS_MSFT",
-      "ticker": "MSFT"
-    },
-    {
-      "error": "sec_http_403_remaining_panel_not_requested",
-      "series_id": "SEC_BUYBACKS_GOOGL",
-      "ticker": "GOOGL"
-    },
-    {
-      "error": "sec_http_403_remaining_panel_not_requested",
-      "series_id": "SEC_BUYBACKS_META",
-      "ticker": "META"
-    },
-    {
-      "error": "sec_http_403_remaining_panel_not_requested",
-      "series_id": "SEC_BUYBACKS_V",
-      "ticker": "V"
-    }
-  ],
-  "fetched_at": "2026-11-16T10:12:28.642912Z",
+  "capture_id": "20261116T112914792601Z_27f1d0868354",
+  "completed_at": "2026-11-16T11:29:18.197250Z",
+  "errors": [],
+  "fetched_at": "2026-11-16T11:29:18.197250Z",
   "limitations": [
     "A five-issuer panel is not aggregate US equity buybacks and has selection and survivorship bias.",
     "Cash payments can differ in timing from execution of market purchases and can include accelerated-repurchase settlements.",
@@ -54,7 +28,7 @@
     "SEC companyconcept and companyfacts can disagree on coverage. Visa's empty successful concept response permits only the identical standard concept from official companyfacts; its native period may lag issuer IR."
   ],
   "market_aggregate": null,
-  "outcome": "error",
+  "outcome": "ok",
   "panel": [
     {
       "cik": "0000320193",
@@ -84,15 +58,15 @@
   ],
   "provider": "buybacks",
   "research_eligible": false,
-  "retrieved_at": "2026-11-16T10:12:28.642912Z",
+  "retrieved_at": "2026-11-16T11:29:18.197250Z",
   "schema_version": 1,
   "sources": [
     "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
     "https://www.sec.gov/about/developer-resources"
   ],
   "stale": 0,
-  "started_at": "2026-11-16T10:12:28.111154Z",
-  "status": "error",
-  "success": 0,
+  "started_at": "2026-11-16T11:29:14.792601Z",
+  "status": "ok",
+  "success": 5,
   "total": 5
 }
