@@ -14,8 +14,8 @@
     "Current SEC concept history is revised; these captures do not recreate historic point-in-time availability.",
     "SEC companyconcept and companyfacts can disagree on coverage. Visa's empty successful concept response permits only the identical standard concept from official companyfacts; its native period may lag issuer IR."
   ],
-  "capture_id": "20261116T095133092490Z_aa3f54825e1e",
-  "completed_at": "2026-11-16T09:51:33.624207Z",
+  "capture_id": "20261116T101228111154Z_d596309f3f0d",
+  "completed_at": "2026-11-16T10:12:28.642912Z",
   "errors": [
     {
       "error": "sec_http_403",
@@ -43,7 +43,7 @@
       "ticker": "V"
     }
   ],
-  "fetched_at": "2026-11-16T09:51:33.624207Z",
+  "fetched_at": "2026-11-16T10:12:28.642912Z",
   "limitations": [
     "A five-issuer panel is not aggregate US equity buybacks and has selection and survivorship bias.",
     "Cash payments can differ in timing from execution of market purchases and can include accelerated-repurchase settlements.",
@@ -84,14 +84,14 @@
   ],
   "provider": "buybacks",
   "research_eligible": false,
-  "retrieved_at": "2026-11-16T09:51:33.624207Z",
+  "retrieved_at": "2026-11-16T10:12:28.642912Z",
   "schema_version": 1,
   "sources": [
     "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
     "https://www.sec.gov/about/developer-resources"
   ],
   "stale": 0,
-  "started_at": "2026-11-16T09:51:33.092490Z",
+  "started_at": "2026-11-16T10:12:28.111154Z",
   "status": "error",
   "success": 0,
   "total": 5
