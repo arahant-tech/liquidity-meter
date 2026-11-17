@@ -16,6 +16,7 @@
 
 - provider나 FRED 계열을 더하거나 뺄 때는 `catalog/series.json`부터 고친다. 다른 목록은 여기서 파생하거나 `tests/test_catalog.py`가 일치를 검사한다.
 - 사이트에 새 파일을 내보내려면 `lm/render/public-files.json`에 이름을 넣는다.
+- 측정(`lm/measure/`)은 가격을 읽지 않는다. 수익률과의 관계는 `research/studies/`의 고정된 연구 결과로만 화면에 싣고, 증거 등급을 함께 표시한다.
 - 기계가 쓰는 상태는 `data` 브랜치에만 둔다. `main`에 상태 파일을 커밋하지 않는다.
 - 코드 변경 후에는 항상 테스트를 돌린다.
 
@@ -25,5 +26,6 @@
 python -m unittest discover -s tests -p 'test_*.py'      # 전체 테스트 (오프라인, 페이지 테스트는 Node 필요)
 python -m lm.collect.cloud_feeds --output-root .run/live --checkpoint data/live --public-output data/public/live-data.json
 python -m lm.collect.chart_history --output-root .run/chart-history --live-root data/live --checkpoint data/chart-history --public-output data/public/chart-data.json
+python -m lm.measure.quadrant --history data/history --output data/public/quadrant.json   # 사분면 지도
 python -m lm.render.package --public-dir data/public     # _site/ 생성
 ```

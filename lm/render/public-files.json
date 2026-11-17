@@ -1,6 +1,9 @@
 {
   "site": [
     "index.html",
+    "observatory.html",
+    "judgment.js",
+    "judgment.css",
     "sources.html",
     "overview.js",
     "overview.css",
@@ -26,6 +29,9 @@
     "research/archive/us-equities-v3_2/SOURCES.md",
     "research/archive/us-equities-v3_2/cross-study-multiplicity.json",
     "research/archive/us-equities-v3_2/policy/REPORT.md",
-    "research/archive/us-equities-v3_2/protocol.json"
+    "research/archive/us-equities-v3_2/protocol.json",
+    "research/studies/quadrant-2026-11/PROTOCOL.md",
+    "research/studies/quadrant-2026-11/README.md",
+    "research/studies/quadrant-2026-11/results.json"
   ]
 }
