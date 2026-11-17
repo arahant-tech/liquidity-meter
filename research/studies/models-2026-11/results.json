@@ -1,0 +1,3259 @@
+{
+ "schema_version": 1,
+ "study": "models-2026-11",
+ "models": {
+  "Q1": "준비금 증가",
+  "Q2": "방향 양",
+  "Q3": "총량 양",
+  "Q4": "총량↓ 방향↑",
+  "Q5": "총량↑·준비금↓ 회피",
+  "Q6": "준비금 가속",
+  "Q7": "재무부 현금 제외",
+  "Q8": "통설 순유동성",
+  "Q9": "전진식 칸 규칙",
+  "F1": "신용 스프레드 축소",
+  "F2": "실질금리 하락",
+  "F3": "달러 약세",
+  "F4": "변동성 낮음",
+  "F5": "연준 비긴축",
+  "F6": "M2 증가",
+  "C1": "다수결",
+  "C2": "점수 비례",
+  "C3": "둘 다 나쁠 때만 회피",
+  "C4": "전진식 릿지 회귀",
+  "C5": "실시간 선택"
+ },
+ "fixed": [
+  "Q1",
+  "Q2",
+  "Q3",
+  "Q4",
+  "Q5",
+  "Q6",
+  "Q7",
+  "Q8",
+  "F1",
+  "F2",
+  "F3",
+  "F4",
+  "F5",
+  "F6",
+  "C1",
+  "C2",
+  "C3"
+ ],
+ "forward": [
+  "Q9",
+  "C4",
+  "C5"
+ ],
+ "voters": [
+  "Q1",
+  "Q2",
+  "Q7",
+  "F1",
+  "F2",
+  "F3",
+  "F4"
+ ],
+ "assets": {
+  "SPY": {
+   "from": "2010-01-06",
+   "to": "2026-11-04",
+   "weeks": 879,
+   "forward_from": "2013-01-02",
+   "forward_weeks": 723,
+   "shifts": {
+    "fixed": 828,
+    "forward": 672
+   },
+   "cost_bp": 5,
+   "models": {
+    "Q1": {
+     "name": "준비금 증가",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 7.2,
+     "p_raw": 0.1375,
+     "p_family": 0.7805,
+     "p_global": 1.0,
+     "periods": [
+      1.5,
+      6.6,
+      11.2
+     ],
+     "delayed": 0.3,
+     "perf": {
+      "cagr": 8.9,
+      "vol": 11.6,
+      "sharpe": 0.66,
+      "mdd": -31.8,
+      "exposure": 49,
+      "turns_per_year": 7.0
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 9.2,
+      "26": 7.5
+     }
+    },
+    "Q2": {
+     "name": "방향 양",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -4.1,
+     "p_raw": 0.7177,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -18.4,
+      9.4,
+      -4.0
+     ],
+     "delayed": -2.1,
+     "perf": {
+      "cagr": 4.9,
+      "vol": 9.3,
+      "sharpe": 0.4,
+      "mdd": -21.1,
+      "exposure": 42,
+      "turns_per_year": 9.3
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 0.6,
+      "26": 0.9
+     }
+    },
+    "Q3": {
+     "name": "총량 양",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 1.7,
+     "p_raw": 0.3534,
+     "p_family": 0.9855,
+     "p_global": 1.0,
+     "periods": [
+      -3.0,
+      5.8,
+      -0.2
+     ],
+     "delayed": 1.5,
+     "perf": {
+      "cagr": 7.9,
+      "vol": 12.2,
+      "sharpe": 0.56,
+      "mdd": -31.8,
+      "exposure": 51,
+      "turns_per_year": 2.8
+     },
+     "grade": "미달",
+     "windows": {
+      "8": -1.2,
+      "26": 2.7
+     }
+    },
+    "Q4": {
+     "name": "총량↓ 방향↑",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -5.4,
+     "p_raw": 0.7768,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      20.1,
+      5.4,
+      -17.8
+     ],
+     "delayed": -3.9,
+     "perf": {
+      "cagr": 3.1,
+      "vol": 7.0,
+      "sharpe": 0.26,
+      "mdd": -23.4,
+      "exposure": 25,
+      "turns_per_year": 5.2
+     },
+     "grade": "미달",
+     "windows": {
+      "8": -6.5,
+      "26": 5.5
+     }
+    },
+    "Q5": {
+     "name": "총량↑·준비금↓ 회피",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 14.6,
+     "p_raw": 0.0555,
+     "p_family": 0.4922,
+     "p_global": 1.0,
+     "periods": [
+      -3.8,
+      6.5,
+      35.0
+     ],
+     "delayed": 6.6,
+     "perf": {
+      "cagr": 13.7,
+      "vol": 14.8,
+      "sharpe": 0.84,
+      "mdd": -31.8,
+      "exposure": 85,
+      "turns_per_year": 4.5
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 22.7,
+      "26": 1.6
+     }
+    },
+    "Q6": {
+     "name": "준비금 가속",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 6.9,
+     "p_raw": 0.1749,
+     "p_family": 0.8577,
+     "p_global": 1.0,
+     "periods": [
+      14.8,
+      -2.0,
+      7.6
+     ],
+     "delayed": 7.4,
+     "perf": {
+      "cagr": 8.6,
+      "vol": 11.1,
+      "sharpe": 0.66,
+      "mdd": -15.6,
+      "exposure": 50,
+      "turns_per_year": 13.4
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 22.3,
+      "26": 8.0
+     }
+    },
+    "Q7": {
+     "name": "재무부 현금 제외",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 8.7,
+     "p_raw": 0.0965,
+     "p_family": 0.661,
+     "p_global": 1.0,
+     "periods": [
+      10.8,
+      -1.1,
+      13.2
+     ],
+     "delayed": 4.4,
+     "perf": {
+      "cagr": 9.2,
+      "vol": 11.4,
+      "sharpe": 0.69,
+      "mdd": -31.8,
+      "exposure": 48,
+      "turns_per_year": 6.8
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 11.2,
+      "26": 2.1
+     }
+    },
+    "Q8": {
+     "name": "통설 순유동성",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 14.4,
+     "p_raw": 0.0157,
+     "p_family": 0.1834,
+     "p_global": 0.9168,
+     "periods": [
+      29.7,
+      8.9,
+      11.8
+     ],
+     "delayed": 6.8,
+     "perf": {
+      "cagr": 11.7,
+      "vol": 12.5,
+      "sharpe": 0.83,
+      "mdd": -31.8,
+      "exposure": 56,
+      "turns_per_year": 6.2
+     },
+     "grade": "후보",
+     "windows": {
+      "8": 0.1,
+      "26": 11.4
+     }
+    },
+    "F1": {
+     "name": "신용 스프레드 축소",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -2.2,
+     "p_raw": 0.6007,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      14.7,
+      -5.4,
+      -13.0
+     ],
+     "delayed": -2.5,
+     "perf": {
+      "cagr": 7.6,
+      "vol": 10.3,
+      "sharpe": 0.62,
+      "mdd": -24.1,
+      "exposure": 58,
+      "turns_per_year": 5.4
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 2.9,
+      "26": -8.9
+     }
+    },
+    "F2": {
+     "name": "실질금리 하락",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 1.8,
+     "p_raw": 0.3957,
+     "p_family": 0.9855,
+     "p_global": 1.0,
+     "periods": [
+      -7.1,
+      14.5,
+      -2.5
+     ],
+     "delayed": 2.7,
+     "perf": {
+      "cagr": 7.7,
+      "vol": 11.8,
+      "sharpe": 0.56,
+      "mdd": -33.3,
+      "exposure": 51,
+      "turns_per_year": 5.6
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 2.5,
+      "26": 9.3
+     }
+    },
+    "F3": {
+     "name": "달러 약세",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 1.5,
+     "p_raw": 0.3945,
+     "p_family": 0.9891,
+     "p_global": 1.0,
+     "periods": [
+      -10.9,
+      4.6,
+      8.1
+     ],
+     "delayed": 2.5,
+     "perf": {
+      "cagr": 6.7,
+      "vol": 9.1,
+      "sharpe": 0.59,
+      "mdd": -15.8,
+      "exposure": 43,
+      "turns_per_year": 6.2
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 1.3,
+      "26": 0.1
+     }
+    },
+    "F4": {
+     "name": "변동성 낮음",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -8.3,
+     "p_raw": 0.8733,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -21.8,
+      -4.5,
+      -2.3
+     ],
+     "delayed": -12.9,
+     "perf": {
+      "cagr": 5.5,
+      "vol": 7.9,
+      "sharpe": 0.53,
+      "mdd": -15.2,
+      "exposure": 55,
+      "turns_per_year": 8.3
+     },
+     "grade": "미달"
+    },
+    "F5": {
+     "name": "연준 비긴축",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 6.4,
+     "p_raw": 0.1062,
+     "p_family": 0.6321,
+     "p_global": 1.0,
+     "periods": [
+      null,
+      -1.1,
+      13.2
+     ],
+     "delayed": 8.4,
+     "perf": {
+      "cagr": 11.4,
+      "vol": 13.7,
+      "sharpe": 0.75,
+      "mdd": -31.8,
+      "exposure": 70,
+      "turns_per_year": 0.4
+     },
+     "grade": "미달"
+    },
+    "F6": {
+     "name": "M2 증가",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -6.9,
+     "p_raw": 0.7624,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -37.5,
+      null,
+      -6.6
+     ],
+     "delayed": -6.1,
+     "perf": {
+      "cagr": 11.9,
+      "vol": 15.3,
+      "sharpe": 0.71,
+      "mdd": -31.8,
+      "exposure": 91,
+      "turns_per_year": 0.4
+     },
+     "grade": "미달"
+    },
+    "C1": {
+     "name": "다수결",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -2.3,
+     "p_raw": 0.6128,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -13.1,
+      4.3,
+      -0.7
+     ],
+     "delayed": -4.7,
+     "perf": {
+      "cagr": 6.4,
+      "vol": 9.5,
+      "sharpe": 0.54,
+      "mdd": -14.9,
+      "exposure": 50,
+      "turns_per_year": 8.1
+     },
+     "grade": "미달",
+     "windows": {
+      "8": -0.1,
+      "26": -2.7
+     }
+    },
+    "C2": {
+     "name": "점수 비례",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 2.5,
+     "p_raw": 0.4041,
+     "p_family": 0.9891,
+     "p_global": 1.0,
+     "periods": [
+      -16.1,
+      10.7,
+      6.6
+     ],
+     "delayed": -3.8,
+     "perf": {
+      "cagr": 7.5,
+      "vol": 7.6,
+      "sharpe": 0.8,
+      "mdd": -16.6,
+      "exposure": 49,
+      "turns_per_year": 5.6
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 11.0,
+      "26": 1.6
+     }
+    },
+    "C3": {
+     "name": "둘 다 나쁠 때만 회피",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -6.4,
+     "p_raw": 0.7226,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -8.9,
+      -4.2,
+      -8.1
+     ],
+     "delayed": -6.3,
+     "perf": {
+      "cagr": 8.9,
+      "vol": 13.9,
+      "sharpe": 0.58,
+      "mdd": -32.8,
+      "exposure": 75,
+      "turns_per_year": 5.6
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 5.1,
+      "26": -4.1
+     }
+    },
+    "Q9": {
+     "name": "전진식 칸 규칙",
+     "kind": "forward",
+     "weeks": 723,
+     "from": "2013-01-02",
+     "spread": 4.0,
+     "p_raw": 0.2585,
+     "p_family": 0.9747,
+     "p_global": 1.0,
+     "periods": [
+      11.1,
+      5.4,
+      -7.6
+     ],
+     "delayed": 1.6,
+     "perf": {
+      "cagr": 7.4,
+      "vol": 10.6,
+      "sharpe": 0.56,
+      "mdd": -31.4,
+      "exposure": 42,
+      "turns_per_year": 9.8
+     },
+     "grade": "미달"
+    },
+    "C4": {
+     "name": "전진식 릿지 회귀",
+     "kind": "forward",
+     "weeks": 723,
+     "from": "2013-01-02",
+     "spread": 1.7,
+     "p_raw": 0.4577,
+     "p_family": 0.997,
+     "p_global": 1.0,
+     "periods": [
+      0.1,
+      -10.5,
+      11.3
+     ],
+     "delayed": -10.6,
+     "perf": {
+      "cagr": 12.6,
+      "vol": 15.2,
+      "sharpe": 0.74,
+      "mdd": -31.8,
+      "exposure": 86,
+      "turns_per_year": 3.8
+     },
+     "grade": "미달"
+    },
+    "C5": {
+     "name": "실시간 선택",
+     "kind": "forward",
+     "weeks": 723,
+     "from": "2013-01-02",
+     "spread": 0.8,
+     "p_raw": 0.4279,
+     "p_family": 0.9955,
+     "p_global": 1.0,
+     "periods": [
+      0.3,
+      -11.6,
+      12.4
+     ],
+     "delayed": 0.7,
+     "perf": {
+      "cagr": 7.9,
+      "vol": 10.9,
+      "sharpe": 0.59,
+      "mdd": -33.3,
+      "exposure": 51,
+      "turns_per_year": 7.4
+     },
+     "grade": "미달"
+    }
+   },
+   "baselines": {
+    "보유": {
+     "cagr": 13.8,
+     "vol": 16.1,
+     "sharpe": 0.79,
+     "mdd": -31.8,
+     "exposure": 100,
+     "turns_per_year": 0.0
+    },
+    "보유(전진식 구간)": {
+     "cagr": 14.4,
+     "vol": 15.8,
+     "sharpe": 0.82,
+     "mdd": -31.8,
+     "exposure": 100,
+     "turns_per_year": 0.0
+    },
+    "40주 추세": {
+     "cagr": 9.1,
+     "vol": 11.8,
+     "sharpe": 0.67,
+     "mdd": -20.2,
+     "exposure": 84,
+     "turns_per_year": 3.1,
+     "spread": -16.7,
+     "p_raw": 0.9674
+    },
+    "40주 추세(전진식 구간)": {
+     "cagr": 11.3,
+     "vol": 11.6,
+     "sharpe": 0.83,
+     "mdd": -15.0,
+     "exposure": 85,
+     "turns_per_year": 2.4
+    }
+   },
+   "pick_history": {
+    "Q4": 2,
+    "Q6": 60,
+    "Q8": 650,
+    "F5": 8,
+    "F6": 3
+   },
+   "pick_now": "Q8",
+   "mean_excess_per_year": 11.4
+  },
+  "QQQ": {
+   "from": "2010-01-06",
+   "to": "2026-11-04",
+   "weeks": 879,
+   "forward_from": "2013-01-02",
+   "forward_weeks": 723,
+   "shifts": {
+    "fixed": 828,
+    "forward": 672
+   },
+   "cost_bp": 5,
+   "models": {
+    "Q1": {
+     "name": "준비금 증가",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 12.4,
+     "p_raw": 0.0808,
+     "p_family": 0.5416,
+     "p_global": 1.0,
+     "periods": [
+      8.7,
+      8.3,
+      18.6
+     ],
+     "delayed": 3.5,
+     "perf": {
+      "cagr": 12.4,
+      "vol": 13.1,
+      "sharpe": 0.85,
+      "mdd": -27.3,
+      "exposure": 49,
+      "turns_per_year": 7.0
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 6.9,
+      "26": 12.4
+     }
+    },
+    "Q2": {
+     "name": "방향 양",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -2.2,
+     "p_raw": 0.5983,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -9.6,
+      10.4,
+      -5.6
+     ],
+     "delayed": 0.5,
+     "perf": {
+      "cagr": 7.1,
+      "vol": 11.8,
+      "sharpe": 0.51,
+      "mdd": -26.7,
+      "exposure": 42,
+      "turns_per_year": 9.3
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 1.0,
+      "26": 5.5
+     }
+    },
+    "Q3": {
+     "name": "총량 양",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 4.4,
+     "p_raw": 0.2557,
+     "p_family": 0.9493,
+     "p_global": 1.0,
+     "periods": [
+      2.6,
+      9.7,
+      2.1
+     ],
+     "delayed": 5.9,
+     "perf": {
+      "cagr": 10.8,
+      "vol": 13.9,
+      "sharpe": 0.7,
+      "mdd": -31.3,
+      "exposure": 51,
+      "turns_per_year": 2.8
+     },
+     "grade": "미달",
+     "windows": {
+      "8": -1.3,
+      "26": 3.6
+     }
+    },
+    "Q4": {
+     "name": "총량↓ 방향↑",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -7.4,
+     "p_raw": 0.7853,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      19.3,
+      2.2,
+      -19.9
+     ],
+     "delayed": -2.7,
+     "perf": {
+      "cagr": 3.7,
+      "vol": 9.1,
+      "sharpe": 0.28,
+      "mdd": -26.8,
+      "exposure": 25,
+      "turns_per_year": 5.2
+     },
+     "grade": "미달",
+     "windows": {
+      "8": -5.5,
+      "26": 11.0
+     }
+    },
+    "Q5": {
+     "name": "총량↑·준비금↓ 회피",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 26.6,
+     "p_raw": 0.0157,
+     "p_family": 0.1399,
+     "p_global": 0.6996,
+     "periods": [
+      -2.7,
+      8.7,
+      61.7
+     ],
+     "delayed": 7.1,
+     "perf": {
+      "cagr": 19.2,
+      "vol": 17.4,
+      "sharpe": 1.01,
+      "mdd": -27.3,
+      "exposure": 85,
+      "turns_per_year": 4.5
+     },
+     "grade": "후보",
+     "windows": {
+      "8": 22.3,
+      "26": 6.8
+     }
+    },
+    "Q6": {
+     "name": "준비금 가속",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 1.7,
+     "p_raw": 0.4234,
+     "p_family": 0.994,
+     "p_global": 1.0,
+     "periods": [
+      7.9,
+      -1.3,
+      -0.5
+     ],
+     "delayed": 8.9,
+     "perf": {
+      "cagr": 9.2,
+      "vol": 13.1,
+      "sharpe": 0.63,
+      "mdd": -17.9,
+      "exposure": 50,
+      "turns_per_year": 13.4
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 26.3,
+      "26": 4.0
+     }
+    },
+    "Q7": {
+     "name": "재무부 현금 제외",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 10.2,
+     "p_raw": 0.117,
+     "p_family": 0.6828,
+     "p_global": 1.0,
+     "periods": [
+      15.1,
+      -5.6,
+      17.2
+     ],
+     "delayed": 5.4,
+     "perf": {
+      "cagr": 11.6,
+      "vol": 13.4,
+      "sharpe": 0.78,
+      "mdd": -27.3,
+      "exposure": 48,
+      "turns_per_year": 6.8
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 16.6,
+      "26": 2.9
+     }
+    },
+    "Q8": {
+     "name": "통설 순유동성",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 18.5,
+     "p_raw": 0.0145,
+     "p_family": 0.1472,
+     "p_global": 0.7358,
+     "periods": [
+      36.0,
+      10.9,
+      17.9
+     ],
+     "delayed": 12.0,
+     "perf": {
+      "cagr": 15.3,
+      "vol": 14.2,
+      "sharpe": 0.97,
+      "mdd": -27.3,
+      "exposure": 56,
+      "turns_per_year": 6.2
+     },
+     "grade": "후보",
+     "windows": {
+      "8": -2.5,
+      "26": 17.6
+     }
+    },
+    "F1": {
+     "name": "신용 스프레드 축소",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -4.8,
+     "p_raw": 0.6791,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      9.8,
+      -3.8,
+      -17.0
+     ],
+     "delayed": -5.4,
+     "perf": {
+      "cagr": 9.3,
+      "vol": 13.2,
+      "sharpe": 0.63,
+      "mdd": -30.1,
+      "exposure": 58,
+      "turns_per_year": 5.4
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 1.5,
+      "26": -14.5
+     }
+    },
+    "F2": {
+     "name": "실질금리 하락",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 6.4,
+     "p_raw": 0.1942,
+     "p_family": 0.8866,
+     "p_global": 1.0,
+     "periods": [
+      -3.7,
+      17.9,
+      4.3
+     ],
+     "delayed": 8.2,
+     "perf": {
+      "cagr": 11.1,
+      "vol": 13.6,
+      "sharpe": 0.73,
+      "mdd": -28.1,
+      "exposure": 51,
+      "turns_per_year": 5.6
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 8.2,
+      "26": 14.7
+     }
+    },
+    "F3": {
+     "name": "달러 약세",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 5.6,
+     "p_raw": 0.2292,
+     "p_family": 0.9264,
+     "p_global": 1.0,
+     "periods": [
+      -7.6,
+      7.4,
+      14.0
+     ],
+     "delayed": 10.4,
+     "perf": {
+      "cagr": 9.6,
+      "vol": 11.6,
+      "sharpe": 0.72,
+      "mdd": -26.0,
+      "exposure": 43,
+      "turns_per_year": 6.2
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 6.5,
+      "26": 6.2
+     }
+    },
+    "F4": {
+     "name": "변동성 낮음",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -7.5,
+     "p_raw": 0.8034,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -21.7,
+      -5.7,
+      0.5
+     ],
+     "delayed": -15.9,
+     "perf": {
+      "cagr": 8.0,
+      "vol": 10.7,
+      "sharpe": 0.63,
+      "mdd": -16.5,
+      "exposure": 55,
+      "turns_per_year": 8.3
+     },
+     "grade": "미달"
+    },
+    "F5": {
+     "name": "연준 비긴축",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 8.3,
+     "p_raw": 0.1122,
+     "p_family": 0.6478,
+     "p_global": 1.0,
+     "periods": [
+      null,
+      2.7,
+      16.0
+     ],
+     "delayed": 11.3,
+     "perf": {
+      "cagr": 14.9,
+      "vol": 15.9,
+      "sharpe": 0.86,
+      "mdd": -27.3,
+      "exposure": 70,
+      "turns_per_year": 0.4
+     },
+     "grade": "미달"
+    },
+    "F6": {
+     "name": "M2 증가",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -10.2,
+     "p_raw": 0.7986,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -29.9,
+      null,
+      -11.4
+     ],
+     "delayed": -9.8,
+     "perf": {
+      "cagr": 15.5,
+      "vol": 18.0,
+      "sharpe": 0.81,
+      "mdd": -31.8,
+      "exposure": 91,
+      "turns_per_year": 0.4
+     },
+     "grade": "미달"
+    },
+    "C1": {
+     "name": "다수결",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 1.3,
+     "p_raw": 0.3993,
+     "p_family": 0.994,
+     "p_global": 1.0,
+     "periods": [
+      -10.4,
+      4.3,
+      6.8
+     ],
+     "delayed": -0.8,
+     "perf": {
+      "cagr": 9.5,
+      "vol": 12.1,
+      "sharpe": 0.69,
+      "mdd": -19.6,
+      "exposure": 50,
+      "turns_per_year": 8.1
+     },
+     "grade": "미달",
+     "windows": {
+      "8": -1.2,
+      "26": 3.8
+     }
+    },
+    "C2": {
+     "name": "점수 비례",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 10.5,
+     "p_raw": 0.2593,
+     "p_family": 0.9373,
+     "p_global": 1.0,
+     "periods": [
+      -4.4,
+      13.0,
+      18.8
+     ],
+     "delayed": 3.6,
+     "perf": {
+      "cagr": 10.3,
+      "vol": 9.4,
+      "sharpe": 0.93,
+      "mdd": -15.7,
+      "exposure": 49,
+      "turns_per_year": 5.6
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 18.9,
+      "26": 10.4
+     }
+    },
+    "C3": {
+     "name": "둘 다 나쁠 때만 회피",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -1.2,
+     "p_raw": 0.5271,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -7.5,
+      0.7,
+      1.4
+     ],
+     "delayed": -3.1,
+     "perf": {
+      "cagr": 13.2,
+      "vol": 16.3,
+      "sharpe": 0.75,
+      "mdd": -27.6,
+      "exposure": 75,
+      "turns_per_year": 5.6
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 9.6,
+      "26": -0.6
+     }
+    },
+    "Q9": {
+     "name": "전진식 칸 규칙",
+     "kind": "forward",
+     "weeks": 723,
+     "from": "2013-01-02",
+     "spread": 7.9,
+     "p_raw": 0.1902,
+     "p_family": 0.899,
+     "p_global": 1.0,
+     "periods": [
+      1.4,
+      18.3,
+      -2.6
+     ],
+     "delayed": 7.5,
+     "perf": {
+      "cagr": 9.6,
+      "vol": 11.0,
+      "sharpe": 0.73,
+      "mdd": -26.8,
+      "exposure": 38,
+      "turns_per_year": 9.3
+     },
+     "grade": "미달"
+    },
+    "C4": {
+     "name": "전진식 릿지 회귀",
+     "kind": "forward",
+     "weeks": 723,
+     "from": "2013-01-02",
+     "spread": 3.9,
+     "p_raw": 0.4071,
+     "p_family": 0.9941,
+     "p_global": 1.0,
+     "periods": [
+      9.7,
+      -162.9,
+      -1.5
+     ],
+     "delayed": -14.2,
+     "perf": {
+      "cagr": 17.2,
+      "vol": 18.2,
+      "sharpe": 0.87,
+      "mdd": -36.6,
+      "exposure": 88,
+      "turns_per_year": 3.4
+     },
+     "grade": "미달"
+    },
+    "C5": {
+     "name": "실시간 선택",
+     "kind": "forward",
+     "weeks": 723,
+     "from": "2013-01-02",
+     "spread": 16.0,
+     "p_raw": 0.0475,
+     "p_family": 0.4398,
+     "p_global": 1.0,
+     "periods": [
+      -2.8,
+      22.0,
+      26.9
+     ],
+     "delayed": 8.7,
+     "perf": {
+      "cagr": 15.9,
+      "vol": 14.2,
+      "sharpe": 0.99,
+      "mdd": -27.3,
+      "exposure": 60,
+      "turns_per_year": 6.3
+     },
+     "grade": "후보"
+    }
+   },
+   "baselines": {
+    "보유": {
+     "cagr": 18.2,
+     "vol": 19.2,
+     "sharpe": 0.89,
+     "mdd": -35.1,
+     "exposure": 100,
+     "turns_per_year": 0.0
+    },
+    "보유(전진식 구간)": {
+     "cagr": 19.1,
+     "vol": 19.1,
+     "sharpe": 0.92,
+     "mdd": -35.1,
+     "exposure": 100,
+     "turns_per_year": 0.0
+    },
+    "40주 추세": {
+     "cagr": 13.3,
+     "vol": 15.3,
+     "sharpe": 0.79,
+     "mdd": -24.6,
+     "exposure": 84,
+     "turns_per_year": 2.7,
+     "spread": -12.3,
+     "p_raw": 0.8239
+    },
+    "40주 추세(전진식 구간)": {
+     "cagr": 16.8,
+     "vol": 15.3,
+     "sharpe": 0.98,
+     "mdd": -18.1,
+     "exposure": 84,
+     "turns_per_year": 1.7
+    }
+   },
+   "pick_history": {
+    "Q5": 106,
+    "Q6": 2,
+    "Q8": 577,
+    "F5": 28,
+    "F6": 10
+   },
+   "pick_now": "Q5",
+   "mean_excess_per_year": 15.2
+  },
+  "QQQ↔SPY": {
+   "from": "2010-01-06",
+   "to": "2026-11-04",
+   "weeks": 879,
+   "forward_from": "2013-01-02",
+   "forward_weeks": 723,
+   "shifts": {
+    "fixed": 828,
+    "forward": 672
+   },
+   "cost_bp": 10,
+   "models": {
+    "Q1": {
+     "name": "준비금 증가",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 5.2,
+     "p_raw": 0.0736,
+     "p_family": 0.5887,
+     "p_global": 1.0,
+     "periods": [
+      7.2,
+      1.7,
+      7.4
+     ],
+     "delayed": 3.2,
+     "perf": {
+      "cagr": 16.6,
+      "vol": 17.1,
+      "sharpe": 0.9,
+      "mdd": -27.3,
+      "exposure": 49,
+      "turns_per_year": 7.0
+     },
+     "grade": "미달",
+     "windows": {
+      "8": -2.3,
+      "26": 4.9
+     }
+    },
+    "Q2": {
+     "name": "방향 양",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 1.9,
+     "p_raw": 0.2859,
+     "p_family": 0.9747,
+     "p_global": 1.0,
+     "periods": [
+      8.8,
+      0.9,
+      -1.5
+     ],
+     "delayed": 2.7,
+     "perf": {
+      "cagr": 15.0,
+      "vol": 17.6,
+      "sharpe": 0.8,
+      "mdd": -32.1,
+      "exposure": 42,
+      "turns_per_year": 9.3
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 0.4,
+      "26": 4.7
+     }
+    },
+    "Q3": {
+     "name": "총량 양",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 2.7,
+     "p_raw": 0.1954,
+     "p_family": 0.8854,
+     "p_global": 1.0,
+     "periods": [
+      5.6,
+      3.9,
+      2.3
+     ],
+     "delayed": 4.4,
+     "perf": {
+      "cagr": 16.5,
+      "vol": 17.3,
+      "sharpe": 0.88,
+      "mdd": -33.5,
+      "exposure": 51,
+      "turns_per_year": 2.8
+     },
+     "grade": "미달",
+     "windows": {
+      "8": -0.1,
+      "26": 0.9
+     }
+    },
+    "Q4": {
+     "name": "총량↓ 방향↑",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -2.0,
+     "p_raw": 0.6972,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -0.8,
+      -3.2,
+      -2.0
+     ],
+     "delayed": 1.3,
+     "perf": {
+      "cagr": 13.8,
+      "vol": 17.1,
+      "sharpe": 0.76,
+      "mdd": -31.8,
+      "exposure": 25,
+      "turns_per_year": 5.2
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 1.0,
+      "26": 5.5
+     }
+    },
+    "Q5": {
+     "name": "총량↑·준비금↓ 회피",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 12.0,
+     "p_raw": 0.0072,
+     "p_family": 0.0832,
+     "p_global": 0.4162,
+     "periods": [
+      1.1,
+      2.1,
+      26.7
+     ],
+     "delayed": 0.5,
+     "perf": {
+      "cagr": 18.8,
+      "vol": 18.6,
+      "sharpe": 0.94,
+      "mdd": -27.3,
+      "exposure": 85,
+      "turns_per_year": 4.5
+     },
+     "grade": "후보",
+     "windows": {
+      "8": -0.3,
+      "26": 5.2
+     }
+    },
+    "Q6": {
+     "name": "준비금 가속",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -5.1,
+     "p_raw": 0.9276,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -6.8,
+      0.7,
+      -8.1
+     ],
+     "delayed": 1.5,
+     "perf": {
+      "cagr": 12.9,
+      "vol": 17.5,
+      "sharpe": 0.7,
+      "mdd": -30.5,
+      "exposure": 50,
+      "turns_per_year": 13.4
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 4.0,
+      "26": -4.1
+     }
+    },
+    "Q7": {
+     "name": "재무부 현금 제외",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 1.5,
+     "p_raw": 0.3353,
+     "p_family": 0.9891,
+     "p_global": 1.0,
+     "periods": [
+      4.3,
+      -4.6,
+      4.0
+     ],
+     "delayed": 0.9,
+     "perf": {
+      "cagr": 15.5,
+      "vol": 17.5,
+      "sharpe": 0.83,
+      "mdd": -29.4,
+      "exposure": 48,
+      "turns_per_year": 6.8
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 5.5,
+      "26": 0.7
+     }
+    },
+    "Q8": {
+     "name": "통설 순유동성",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 4.1,
+     "p_raw": 0.1122,
+     "p_family": 0.7189,
+     "p_global": 1.0,
+     "periods": [
+      6.3,
+      2.0,
+      6.1
+     ],
+     "delayed": 5.2,
+     "perf": {
+      "cagr": 16.7,
+      "vol": 17.4,
+      "sharpe": 0.89,
+      "mdd": -27.3,
+      "exposure": 56,
+      "turns_per_year": 6.2
+     },
+     "grade": "미달",
+     "windows": {
+      "8": -2.7,
+      "26": 6.2
+     }
+    },
+    "F1": {
+     "name": "신용 스프레드 축소",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -2.6,
+     "p_raw": 0.7298,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -5.0,
+      1.6,
+      -4.0
+     ],
+     "delayed": -2.9,
+     "perf": {
+      "cagr": 15.0,
+      "vol": 18.0,
+      "sharpe": 0.78,
+      "mdd": -31.9,
+      "exposure": 58,
+      "turns_per_year": 5.4
+     },
+     "grade": "미달",
+     "windows": {
+      "8": -1.4,
+      "26": -5.6
+     }
+    },
+    "F2": {
+     "name": "실질금리 하락",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 4.6,
+     "p_raw": 0.0941,
+     "p_family": 0.661,
+     "p_global": 1.0,
+     "periods": [
+      3.5,
+      3.3,
+      6.8
+     ],
+     "delayed": 5.5,
+     "perf": {
+      "cagr": 16.7,
+      "vol": 17.4,
+      "sharpe": 0.89,
+      "mdd": -27.3,
+      "exposure": 51,
+      "turns_per_year": 5.6
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 5.8,
+      "26": 5.4
+     }
+    },
+    "F3": {
+     "name": "달러 약세",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 4.1,
+     "p_raw": 0.1448,
+     "p_family": 0.7744,
+     "p_global": 1.0,
+     "periods": [
+      3.3,
+      2.8,
+      5.9
+     ],
+     "delayed": 7.9,
+     "perf": {
+      "cagr": 16.1,
+      "vol": 17.6,
+      "sharpe": 0.85,
+      "mdd": -32.4,
+      "exposure": 43,
+      "turns_per_year": 6.2
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 5.2,
+      "26": 6.1
+     }
+    },
+    "F4": {
+     "name": "변동성 낮음",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 0.8,
+     "p_raw": 0.4138,
+     "p_family": 0.9964,
+     "p_global": 1.0,
+     "periods": [
+      0.2,
+      -1.1,
+      2.8
+     ],
+     "delayed": -2.9,
+     "perf": {
+      "cagr": 15.5,
+      "vol": 17.6,
+      "sharpe": 0.82,
+      "mdd": -32.4,
+      "exposure": 55,
+      "turns_per_year": 8.3
+     },
+     "grade": "미달"
+    },
+    "F5": {
+     "name": "연준 비긴축",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 1.9,
+     "p_raw": 0.3112,
+     "p_family": 0.9723,
+     "p_global": 1.0,
+     "periods": [
+      null,
+      3.8,
+      2.8
+     ],
+     "delayed": 2.9,
+     "perf": {
+      "cagr": 17.3,
+      "vol": 18.0,
+      "sharpe": 0.89,
+      "mdd": -29.5,
+      "exposure": 70,
+      "turns_per_year": 0.4
+     },
+     "grade": "미달"
+    },
+    "F6": {
+     "name": "M2 증가",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": -3.3,
+     "p_raw": 0.76,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      7.6,
+      null,
+      -4.8
+     ],
+     "delayed": -3.7,
+     "perf": {
+      "cagr": 17.4,
+      "vol": 18.7,
+      "sharpe": 0.87,
+      "mdd": -32.3,
+      "exposure": 91,
+      "turns_per_year": 0.4
+     },
+     "grade": "미달"
+    },
+    "C1": {
+     "name": "다수결",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 3.6,
+     "p_raw": 0.1773,
+     "p_family": 0.8263,
+     "p_global": 1.0,
+     "periods": [
+      2.7,
+      0.1,
+      7.5
+     ],
+     "delayed": 3.9,
+     "perf": {
+      "cagr": 16.1,
+      "vol": 17.7,
+      "sharpe": 0.85,
+      "mdd": -31.5,
+      "exposure": 50,
+      "turns_per_year": 8.1
+     },
+     "grade": "미달",
+     "windows": {
+      "8": -1.1,
+      "26": 6.5
+     }
+    },
+    "C2": {
+     "name": "점수 비례",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 8.0,
+     "p_raw": 0.1315,
+     "p_family": 0.76,
+     "p_global": 1.0,
+     "periods": [
+      11.7,
+      2.3,
+      12.2
+     ],
+     "delayed": 7.4,
+     "perf": {
+      "cagr": 16.0,
+      "vol": 17.2,
+      "sharpe": 0.86,
+      "mdd": -30.1,
+      "exposure": 49,
+      "turns_per_year": 5.6
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 7.9,
+      "26": 8.8
+     }
+    },
+    "C3": {
+     "name": "둘 다 나쁠 때만 회피",
+     "kind": "fixed",
+     "weeks": 879,
+     "from": "2010-01-06",
+     "spread": 5.2,
+     "p_raw": 0.1218,
+     "p_family": 0.7177,
+     "p_global": 1.0,
+     "periods": [
+      1.3,
+      4.9,
+      9.4
+     ],
+     "delayed": 3.1,
+     "perf": {
+      "cagr": 17.6,
+      "vol": 18.2,
+      "sharpe": 0.9,
+      "mdd": -29.7,
+      "exposure": 75,
+      "turns_per_year": 5.6
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 4.5,
+      "26": 3.5
+     }
+    },
+    "Q9": {
+     "name": "전진식 칸 규칙",
+     "kind": "forward",
+     "weeks": 723,
+     "from": "2013-01-02",
+     "spread": 7.3,
+     "p_raw": 0.0446,
+     "p_family": 0.5527,
+     "p_global": 1.0,
+     "periods": [
+      0.5,
+      1.0,
+      21.0
+     ],
+     "delayed": 5.1,
+     "perf": {
+      "cagr": 17.2,
+      "vol": 16.7,
+      "sharpe": 0.93,
+      "mdd": -29.6,
+      "exposure": 39,
+      "turns_per_year": 8.8
+     },
+     "grade": "후보"
+    },
+    "C4": {
+     "name": "전진식 릿지 회귀",
+     "kind": "forward",
+     "weeks": 723,
+     "from": "2013-01-02",
+     "spread": -3.9,
+     "p_raw": 0.8202,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -5.4,
+      -2.2,
+      -5.3
+     ],
+     "delayed": -6.2,
+     "perf": {
+      "cagr": 16.4,
+      "vol": 18.1,
+      "sharpe": 0.83,
+      "mdd": -33.5,
+      "exposure": 73,
+      "turns_per_year": 4.2
+     },
+     "grade": "미달"
+    },
+    "C5": {
+     "name": "실시간 선택",
+     "kind": "forward",
+     "weeks": 723,
+     "from": "2013-01-02",
+     "spread": 1.0,
+     "p_raw": 0.4116,
+     "p_family": 0.9955,
+     "p_global": 1.0,
+     "periods": [
+      -2.0,
+      null,
+      2.5
+     ],
+     "delayed": 0.8,
+     "perf": {
+      "cagr": 17.4,
+      "vol": 18.0,
+      "sharpe": 0.88,
+      "mdd": -36.1,
+      "exposure": 73,
+      "turns_per_year": 5.2
+     },
+     "grade": "미달"
+    }
+   },
+   "baselines": {
+    "보유": {
+     "cagr": 18.2,
+     "vol": 19.2,
+     "sharpe": 0.89,
+     "mdd": -35.1,
+     "exposure": 100,
+     "turns_per_year": 0.0
+    },
+    "보유(전진식 구간)": {
+     "cagr": 19.1,
+     "vol": 19.1,
+     "sharpe": 0.92,
+     "mdd": -35.1,
+     "exposure": 100,
+     "turns_per_year": 0.0
+    },
+    "40주 추세": {
+     "cagr": 16.6,
+     "vol": 17.9,
+     "sharpe": 0.87,
+     "mdd": -27.3,
+     "exposure": 72,
+     "turns_per_year": 3.4,
+     "spread": 0.4,
+     "p_raw": 0.4391
+    },
+    "40주 추세(전진식 구간)": {
+     "cagr": 17.7,
+     "vol": 17.7,
+     "sharpe": 0.91,
+     "mdd": -27.3,
+     "exposure": 70,
+     "turns_per_year": 3.2
+    },
+    "SPY만": {
+     "cagr": 13.8,
+     "vol": 16.1,
+     "sharpe": 0.79,
+     "mdd": -31.8,
+     "exposure": 0,
+     "turns_per_year": 0.0
+    }
+   },
+   "pick_history": {
+    "Q1": 3,
+    "Q2": 31,
+    "Q5": 130,
+    "F2": 28,
+    "F5": 63,
+    "F6": 289,
+    "C2": 150,
+    "C3": 29
+   },
+   "pick_now": "Q5",
+   "mean_excess_per_year": 3.8
+  },
+  "BTC": {
+   "from": "2014-10-01",
+   "to": "2026-11-04",
+   "weeks": 632,
+   "forward_from": "2017-09-27",
+   "forward_weeks": 476,
+   "shifts": {
+    "fixed": 581,
+    "forward": 425
+   },
+   "cost_bp": 20,
+   "models": {
+    "Q1": {
+     "name": "준비금 증가",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": 40.7,
+     "p_raw": 0.1718,
+     "p_family": 0.8316,
+     "p_global": 1.0,
+     "periods": [
+      111.3,
+      79.6,
+      -48.7
+     ],
+     "delayed": 55.3,
+     "perf": {
+      "cagr": 32.3,
+      "vol": 42.4,
+      "sharpe": 0.82,
+      "mdd": -52.8,
+      "exposure": 42,
+      "turns_per_year": 7.3
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 39.6,
+      "26": 45.3
+     }
+    },
+    "Q2": {
+     "name": "방향 양",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": 52.1,
+     "p_raw": 0.0997,
+     "p_family": 0.6443,
+     "p_global": 1.0,
+     "periods": [
+      98.1,
+      68.2,
+      18.2
+     ],
+     "delayed": 40.0,
+     "perf": {
+      "cagr": 37.6,
+      "vol": 43.2,
+      "sharpe": 0.9,
+      "mdd": -48.4,
+      "exposure": 45,
+      "turns_per_year": 8.5
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 44.6,
+      "26": 54.0
+     }
+    },
+    "Q3": {
+     "name": "총량 양",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": -12.7,
+     "p_raw": 0.6065,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      42.2,
+      -23.1,
+      -67.0
+     ],
+     "delayed": -3.5,
+     "perf": {
+      "cagr": 16.7,
+      "vol": 43.5,
+      "sharpe": 0.53,
+      "mdd": -75.8,
+      "exposure": 42,
+      "turns_per_year": 3.0
+     },
+     "grade": "미달",
+     "windows": {
+      "8": -25.5,
+      "26": 11.3
+     }
+    },
+    "Q4": {
+     "name": "총량↓ 방향↑",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": 30.7,
+     "p_raw": 0.2388,
+     "p_family": 0.9192,
+     "p_global": 1.0,
+     "periods": [
+      64.6,
+      -4.4,
+      56.2
+     ],
+     "delayed": 56.8,
+     "perf": {
+      "cagr": 22.3,
+      "vol": 33.9,
+      "sharpe": 0.69,
+      "mdd": -40.2,
+      "exposure": 31,
+      "turns_per_year": 5.8
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 54.6,
+      "26": 29.9
+     }
+    },
+    "Q5": {
+     "name": "총량↑·준비금↓ 회피",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": 77.6,
+     "p_raw": 0.0825,
+     "p_family": 0.5842,
+     "p_global": 1.0,
+     "periods": [
+      19.2,
+      178.2,
+      -8.7
+     ],
+     "delayed": 54.5,
+     "perf": {
+      "cagr": 58.5,
+      "vol": 60.8,
+      "sharpe": 1.02,
+      "mdd": -81.7,
+      "exposure": 85,
+      "turns_per_year": 4.4
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 75.1,
+      "26": 48.7
+     }
+    },
+    "Q6": {
+     "name": "준비금 가속",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": 2.1,
+     "p_raw": 0.4845,
+     "p_family": 0.9983,
+     "p_global": 1.0,
+     "periods": [
+      -110.0,
+      157.2,
+      -33.7
+     ],
+     "delayed": 14.3,
+     "perf": {
+      "cagr": 22.6,
+      "vol": 43.9,
+      "sharpe": 0.64,
+      "mdd": -64.1,
+      "exposure": 50,
+      "turns_per_year": 13.6
+     },
+     "grade": "미달",
+     "windows": {
+      "8": -4.7,
+      "26": 15.8
+     }
+    },
+    "Q7": {
+     "name": "재무부 현금 제외",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": 47.3,
+     "p_raw": 0.1443,
+     "p_family": 0.7526,
+     "p_global": 1.0,
+     "periods": [
+      65.8,
+      107.9,
+      -21.3
+     ],
+     "delayed": 59.2,
+     "perf": {
+      "cagr": 34.1,
+      "vol": 45.1,
+      "sharpe": 0.83,
+      "mdd": -63.0,
+      "exposure": 42,
+      "turns_per_year": 8.0
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 92.0,
+      "26": 2.2
+     }
+    },
+    "Q8": {
+     "name": "통설 순유동성",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": 37.9,
+     "p_raw": 0.1907,
+     "p_family": 0.854,
+     "p_global": 1.0,
+     "periods": [
+      72.6,
+      70.8,
+      -28.5
+     ],
+     "delayed": 44.2,
+     "perf": {
+      "cagr": 34.2,
+      "vol": 45.4,
+      "sharpe": 0.83,
+      "mdd": -59.0,
+      "exposure": 47,
+      "turns_per_year": 7.1
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 45.5,
+      "26": 36.2
+     }
+    },
+    "F1": {
+     "name": "신용 스프레드 축소",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": 43.6,
+     "p_raw": 0.1426,
+     "p_family": 0.7457,
+     "p_global": 1.0,
+     "periods": [
+      89.7,
+      40.8,
+      3.1
+     ],
+     "delayed": 27.2,
+     "perf": {
+      "cagr": 42.3,
+      "vol": 53.1,
+      "sharpe": 0.88,
+      "mdd": -66.3,
+      "exposure": 57,
+      "turns_per_year": 5.3
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 60.5,
+      "26": 57.4
+     }
+    },
+    "F2": {
+     "name": "실질금리 하락",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": 67.5,
+     "p_raw": 0.0515,
+     "p_family": 0.4227,
+     "p_global": 1.0,
+     "periods": [
+      57.6,
+      120.2,
+      33.5
+     ],
+     "delayed": 72.1,
+     "perf": {
+      "cagr": 42.8,
+      "vol": 43.2,
+      "sharpe": 0.99,
+      "mdd": -51.4,
+      "exposure": 44,
+      "turns_per_year": 5.8
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 36.5,
+      "26": 13.9
+     }
+    },
+    "F3": {
+     "name": "달러 약세",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": 65.5,
+     "p_raw": 0.0533,
+     "p_family": 0.4158,
+     "p_global": 1.0,
+     "periods": [
+      117.7,
+      57.3,
+      34.3
+     ],
+     "delayed": 78.0,
+     "perf": {
+      "cagr": 40.0,
+      "vol": 42.6,
+      "sharpe": 0.95,
+      "mdd": -62.0,
+      "exposure": 41,
+      "turns_per_year": 5.9
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 46.8,
+      "26": 38.1
+     }
+    },
+    "F4": {
+     "name": "변동성 낮음",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": 72.8,
+     "p_raw": 0.0189,
+     "p_family": 0.232,
+     "p_global": 1.0,
+     "periods": [
+      165.6,
+      1.0,
+      50.6
+     ],
+     "delayed": 22.6,
+     "perf": {
+      "cagr": 49.2,
+      "vol": 51.5,
+      "sharpe": 0.98,
+      "mdd": -62.5,
+      "exposure": 52,
+      "turns_per_year": 7.9
+     },
+     "grade": "후보"
+    },
+    "F5": {
+     "name": "연준 비긴축",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": -23.0,
+     "p_raw": 0.6753,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -62.3,
+      48.3,
+      -34.9
+     ],
+     "delayed": -19.0,
+     "perf": {
+      "cagr": 22.7,
+      "vol": 45.6,
+      "sharpe": 0.63,
+      "mdd": -55.2,
+      "exposure": 59,
+      "turns_per_year": 0.6
+     },
+     "grade": "미달"
+    },
+    "F6": {
+     "name": "M2 증가",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": -0.4,
+     "p_raw": 0.5086,
+     "p_family": 0.9983,
+     "p_global": 1.0,
+     "periods": [
+      null,
+      101.3,
+      -76.5
+     ],
+     "delayed": -16.1,
+     "perf": {
+      "cagr": 46.1,
+      "vol": 62.8,
+      "sharpe": 0.88,
+      "mdd": -81.7,
+      "exposure": 88,
+      "turns_per_year": 0.3
+     },
+     "grade": "미달"
+    },
+    "C1": {
+     "name": "다수결",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": 71.8,
+     "p_raw": 0.0258,
+     "p_family": 0.3333,
+     "p_global": 1.0,
+     "periods": [
+      85.0,
+      128.7,
+      19.1
+     ],
+     "delayed": 79.9,
+     "perf": {
+      "cagr": 44.1,
+      "vol": 45.5,
+      "sharpe": 0.98,
+      "mdd": -51.1,
+      "exposure": 44,
+      "turns_per_year": 7.4
+     },
+     "grade": "후보",
+     "windows": {
+      "8": 36.1,
+      "26": 35.9
+     }
+    },
+    "C2": {
+     "name": "점수 비례",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": 190.7,
+     "p_raw": 0.0086,
+     "p_family": 0.0739,
+     "p_global": 0.3694,
+     "periods": [
+      277.8,
+      256.0,
+      43.7
+     ],
+     "delayed": 173.2,
+     "perf": {
+      "cagr": 45.2,
+      "vol": 37.2,
+      "sharpe": 1.13,
+      "mdd": -40.5,
+      "exposure": 46,
+      "turns_per_year": 5.4
+     },
+     "grade": "후보",
+     "windows": {
+      "8": 209.1,
+      "26": 142.4
+     }
+    },
+    "C3": {
+     "name": "둘 다 나쁠 때만 회피",
+     "kind": "fixed",
+     "weeks": 632,
+     "from": "2014-10-01",
+     "spread": 48.5,
+     "p_raw": 0.1529,
+     "p_family": 0.7577,
+     "p_global": 1.0,
+     "periods": [
+      125.2,
+      50.8,
+      -56.1
+     ],
+     "delayed": 44.8,
+     "perf": {
+      "cagr": 49.6,
+      "vol": 57.3,
+      "sharpe": 0.95,
+      "mdd": -66.8,
+      "exposure": 72,
+      "turns_per_year": 5.8
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 63.6,
+      "26": 74.7
+     }
+    },
+    "Q9": {
+     "name": "전진식 칸 규칙",
+     "kind": "forward",
+     "weeks": 476,
+     "from": "2017-09-27",
+     "spread": -15.7,
+     "p_raw": 0.5986,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -26.2,
+      42.7,
+      -63.3
+     ],
+     "delayed": 47.2,
+     "perf": {
+      "cagr": 13.5,
+      "vol": 48.0,
+      "sharpe": 0.45,
+      "mdd": -52.9,
+      "exposure": 56,
+      "turns_per_year": 8.4
+     },
+     "grade": "미달"
+    },
+    "C4": {
+     "name": "전진식 릿지 회귀",
+     "kind": "forward",
+     "weeks": 476,
+     "from": "2017-09-27",
+     "spread": -42.9,
+     "p_raw": 0.7653,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -159.9,
+      117.1,
+      -43.6
+     ],
+     "delayed": -18.9,
+     "perf": {
+      "cagr": 17.8,
+      "vol": 60.1,
+      "sharpe": 0.52,
+      "mdd": -88.3,
+      "exposure": 78,
+      "turns_per_year": 3.3
+     },
+     "grade": "미달"
+    },
+    "C5": {
+     "name": "실시간 선택",
+     "kind": "forward",
+     "weeks": 476,
+     "from": "2017-09-27",
+     "spread": 197.1,
+     "p_raw": 0.0141,
+     "p_family": 0.1432,
+     "p_global": 0.716,
+     "periods": [
+      261.5,
+      299.8,
+      10.9
+     ],
+     "delayed": 232.8,
+     "perf": {
+      "cagr": 38.1,
+      "vol": 38.1,
+      "sharpe": 0.96,
+      "mdd": -40.5,
+      "exposure": 48,
+      "turns_per_year": 4.9
+     },
+     "grade": "후보"
+    }
+   },
+   "baselines": {
+    "보유": {
+     "cagr": 54.0,
+     "vol": 65.7,
+     "sharpe": 0.95,
+     "mdd": -81.7,
+     "exposure": 100,
+     "turns_per_year": 0.0
+    },
+    "보유(전진식 구간)": {
+     "cagr": 35.7,
+     "vol": 67.0,
+     "sharpe": 0.75,
+     "mdd": -81.7,
+     "exposure": 100,
+     "turns_per_year": 0.0
+    },
+    "40주 추세": {
+     "cagr": 55.9,
+     "vol": 54.1,
+     "sharpe": 1.04,
+     "mdd": -64.4,
+     "exposure": 65,
+     "turns_per_year": 2.4,
+     "spread": 71.3,
+     "p_raw": 0.0842
+    },
+    "40주 추세(전진식 구간)": {
+     "cagr": 34.5,
+     "vol": 54.0,
+     "sharpe": 0.76,
+     "mdd": -64.4,
+     "exposure": 63,
+     "turns_per_year": 2.8
+    }
+   },
+   "pick_history": {
+    "F3": 1,
+    "C2": 475
+   },
+   "pick_now": "C2",
+   "mean_excess_per_year": 41.1
+  },
+  "ETH": {
+   "from": "2017-11-15",
+   "to": "2026-11-04",
+   "weeks": 469,
+   "forward_from": "2020-11-11",
+   "forward_weeks": 313,
+   "shifts": {
+    "fixed": 418,
+    "forward": 262
+   },
+   "cost_bp": 20,
+   "models": {
+    "Q1": {
+     "name": "준비금 증가",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": 63.2,
+     "p_raw": 0.1241,
+     "p_family": 0.7613,
+     "p_global": 1.0,
+     "periods": [
+      135.4,
+      120.0,
+      -56.5
+     ],
+     "delayed": 83.6,
+     "perf": {
+      "cagr": 27.3,
+      "vol": 54.8,
+      "sharpe": 0.67,
+      "mdd": -67.4,
+      "exposure": 43,
+      "turns_per_year": 6.7
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 90.7,
+      "26": 133.1
+     }
+    },
+    "Q2": {
+     "name": "방향 양",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": 24.0,
+     "p_raw": 0.3246,
+     "p_family": 0.9833,
+     "p_global": 1.0,
+     "periods": [
+      90.9,
+      84.4,
+      -58.9
+     ],
+     "delayed": -15.7,
+     "perf": {
+      "cagr": 16.1,
+      "vol": 55.3,
+      "sharpe": 0.48,
+      "mdd": -68.7,
+      "exposure": 47,
+      "turns_per_year": 8.1
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 45.8,
+      "26": 69.4
+     }
+    },
+    "Q3": {
+     "name": "총량 양",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": 34.9,
+     "p_raw": 0.2411,
+     "p_family": 0.9379,
+     "p_global": 1.0,
+     "periods": [
+      178.7,
+      -69.0,
+      -26.9
+     ],
+     "delayed": 78.0,
+     "perf": {
+      "cagr": 19.3,
+      "vol": 57.5,
+      "sharpe": 0.55,
+      "mdd": -85.8,
+      "exposure": 41,
+      "turns_per_year": 1.3
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 17.9,
+      "26": 72.2
+     }
+    },
+    "Q4": {
+     "name": "총량↓ 방향↑",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": -35.7,
+     "p_raw": 0.6683,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      -71.8,
+      12.6,
+      -29.5
+     ],
+     "delayed": -34.0,
+     "perf": {
+      "cagr": -0.7,
+      "vol": 40.3,
+      "sharpe": 0.11,
+      "mdd": -70.7,
+      "exposure": 35,
+      "turns_per_year": 5.4
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 29.6,
+      "26": 68.3
+     }
+    },
+    "Q5": {
+     "name": "총량↑·준비금↓ 회피",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": 94.5,
+     "p_raw": 0.1217,
+     "p_family": 0.821,
+     "p_global": 1.0,
+     "periods": [
+      -121.5,
+      302.4,
+      -55.7
+     ],
+     "delayed": 68.5,
+     "perf": {
+      "cagr": 31.3,
+      "vol": 80.2,
+      "sharpe": 0.7,
+      "mdd": -93.4,
+      "exposure": 87,
+      "turns_per_year": 3.3
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 113.9,
+      "26": 9.9
+     }
+    },
+    "Q6": {
+     "name": "준비금 가속",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": 13.1,
+     "p_raw": 0.4391,
+     "p_family": 0.9952,
+     "p_global": 1.0,
+     "periods": [
+      -64.4,
+      229.5,
+      -132.1
+     ],
+     "delayed": 46.9,
+     "perf": {
+      "cagr": 12.3,
+      "vol": 57.0,
+      "sharpe": 0.44,
+      "mdd": -85.2,
+      "exposure": 49,
+      "turns_per_year": 13.4
+     },
+     "grade": "미달",
+     "windows": {
+      "8": -60.6,
+      "26": 23.7
+     }
+    },
+    "Q7": {
+     "name": "재무부 현금 제외",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": 105.3,
+     "p_raw": 0.0382,
+     "p_family": 0.4606,
+     "p_global": 1.0,
+     "periods": [
+      238.6,
+      93.6,
+      -25.2
+     ],
+     "delayed": 110.2,
+     "perf": {
+      "cagr": 41.7,
+      "vol": 59.2,
+      "sharpe": 0.83,
+      "mdd": -64.3,
+      "exposure": 44,
+      "turns_per_year": 5.7
+     },
+     "grade": "후보",
+     "windows": {
+      "8": 94.6,
+      "26": 105.6
+     }
+    },
+    "Q8": {
+     "name": "통설 순유동성",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": 87.2,
+     "p_raw": 0.0453,
+     "p_family": 0.5418,
+     "p_global": 1.0,
+     "periods": [
+      144.8,
+      141.3,
+      -27.7
+     ],
+     "delayed": 65.9,
+     "perf": {
+      "cagr": 35.6,
+      "vol": 56.4,
+      "sharpe": 0.77,
+      "mdd": -64.9,
+      "exposure": 45,
+      "turns_per_year": 6.4
+     },
+     "grade": "후보",
+     "windows": {
+      "8": 67.1,
+      "26": 158.4
+     }
+    },
+    "F1": {
+     "name": "신용 스프레드 축소",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": 103.0,
+     "p_raw": 0.0239,
+     "p_family": 0.3007,
+     "p_global": 1.0,
+     "periods": [
+      230.0,
+      84.8,
+      -11.3
+     ],
+     "delayed": 85.7,
+     "perf": {
+      "cagr": 43.7,
+      "vol": 68.2,
+      "sharpe": 0.82,
+      "mdd": -74.1,
+      "exposure": 59,
+      "turns_per_year": 6.2
+     },
+     "grade": "후보",
+     "windows": {
+      "8": 104.6,
+      "26": 46.2
+     }
+    },
+    "F2": {
+     "name": "실질금리 하락",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": 75.7,
+     "p_raw": 0.1146,
+     "p_family": 0.7303,
+     "p_global": 1.0,
+     "periods": [
+      130.6,
+      30.8,
+      53.8
+     ],
+     "delayed": 75.1,
+     "perf": {
+      "cagr": 31.4,
+      "vol": 57.0,
+      "sharpe": 0.71,
+      "mdd": -53.6,
+      "exposure": 43,
+      "turns_per_year": 5.8
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 139.2,
+      "26": 118.6
+     }
+    },
+    "F3": {
+     "name": "달러 약세",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": 49.3,
+     "p_raw": 0.1551,
+     "p_family": 0.821,
+     "p_global": 1.0,
+     "periods": [
+      94.0,
+      -23.9,
+      71.0
+     ],
+     "delayed": 69.6,
+     "perf": {
+      "cagr": 23.1,
+      "vol": 54.0,
+      "sharpe": 0.59,
+      "mdd": -70.9,
+      "exposure": 43,
+      "turns_per_year": 6.7
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 52.4,
+      "26": 88.7
+     }
+    },
+    "F4": {
+     "name": "변동성 낮음",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": 96.1,
+     "p_raw": 0.0358,
+     "p_family": 0.3747,
+     "p_global": 1.0,
+     "periods": [
+      147.7,
+      29.5,
+      136.0
+     ],
+     "delayed": 91.6,
+     "perf": {
+      "cagr": 40.1,
+      "vol": 60.5,
+      "sharpe": 0.8,
+      "mdd": -55.5,
+      "exposure": 50,
+      "turns_per_year": 7.1
+     },
+     "grade": "후보"
+    },
+    "F5": {
+     "name": "연준 비긴축",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": 64.9,
+     "p_raw": 0.2411,
+     "p_family": 0.8329,
+     "p_global": 1.0,
+     "periods": [
+      100.0,
+      91.9,
+      149.2
+     ],
+     "delayed": 75.5,
+     "perf": {
+      "cagr": 32.6,
+      "vol": 63.6,
+      "sharpe": 0.72,
+      "mdd": -67.4,
+      "exposure": 60,
+      "turns_per_year": 0.4
+     },
+     "grade": "미달"
+    },
+    "F6": {
+     "name": "M2 증가",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": -30.1,
+     "p_raw": 0.7112,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      null,
+      -38.8,
+      -104.0
+     ],
+     "delayed": -48.5,
+     "perf": {
+      "cagr": 13.1,
+      "vol": 81.5,
+      "sharpe": 0.52,
+      "mdd": -93.4,
+      "exposure": 83,
+      "turns_per_year": 0.4
+     },
+     "grade": "미달"
+    },
+    "C1": {
+     "name": "다수결",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": 137.3,
+     "p_raw": 0.0024,
+     "p_family": 0.031,
+     "p_global": 0.1551,
+     "periods": [
+      280.8,
+      126.4,
+      19.6
+     ],
+     "delayed": 107.4,
+     "perf": {
+      "cagr": 53.8,
+      "vol": 57.4,
+      "sharpe": 0.98,
+      "mdd": -58.8,
+      "exposure": 46,
+      "turns_per_year": 7.1
+     },
+     "grade": "후보",
+     "windows": {
+      "8": 91.3,
+      "26": 106.5
+     }
+    },
+    "C2": {
+     "name": "점수 비례",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": 269.6,
+     "p_raw": 0.0024,
+     "p_family": 0.0072,
+     "p_global": 0.0358,
+     "periods": [
+      543.1,
+      182.3,
+      74.3
+     ],
+     "delayed": 261.2,
+     "perf": {
+      "cagr": 40.2,
+      "vol": 47.1,
+      "sharpe": 0.88,
+      "mdd": -48.4,
+      "exposure": 47,
+      "turns_per_year": 4.8
+     },
+     "grade": "통과",
+     "windows": {
+      "8": 341.0,
+      "26": 327.4
+     }
+    },
+    "C3": {
+     "name": "둘 다 나쁠 때만 회피",
+     "kind": "fixed",
+     "weeks": 469,
+     "from": "2017-11-15",
+     "spread": 78.8,
+     "p_raw": 0.1002,
+     "p_family": 0.6802,
+     "p_global": 1.0,
+     "periods": [
+      224.0,
+      73.2,
+      -83.3
+     ],
+     "delayed": 67.6,
+     "perf": {
+      "cagr": 34.2,
+      "vol": 72.8,
+      "sharpe": 0.72,
+      "mdd": -76.8,
+      "exposure": 72,
+      "turns_per_year": 5.8
+     },
+     "grade": "미달",
+     "windows": {
+      "8": 90.0,
+      "26": 105.9
+     }
+    },
+    "Q9": {
+     "name": "전진식 칸 규칙",
+     "kind": "forward",
+     "weeks": 313,
+     "from": "2020-11-11",
+     "spread": 0.4,
+     "p_raw": 0.4829,
+     "p_family": 1.0,
+     "p_global": 1.0,
+     "periods": [
+      165.3,
+      -55.2,
+      -109.2
+     ],
+     "delayed": -19.4,
+     "perf": {
+      "cagr": 11.7,
+      "vol": 58.8,
+      "sharpe": 0.42,
+      "mdd": -77.3,
+      "exposure": 47,
+      "turns_per_year": 8.3
+     },
+     "grade": "미달"
+    },
+    "C4": {
+     "name": "전진식 릿지 회귀",
+     "kind": "forward",
+     "weeks": 313,
+     "from": "2020-11-11",
+     "spread": 103.6,
+     "p_raw": 0.0646,
+     "p_family": 0.4829,
+     "p_global": 1.0,
+     "periods": [
+      169.4,
+      69.5,
+      77.3
+     ],
+     "delayed": 16.7,
+     "perf": {
+      "cagr": 47.4,
+      "vol": 63.7,
+      "sharpe": 0.87,
+      "mdd": -55.5,
+      "exposure": 62,
+      "turns_per_year": 6.3
+     },
+     "grade": "미달"
+    },
+    "C5": {
+     "name": "실시간 선택",
+     "kind": "forward",
+     "weeks": 313,
+     "from": "2020-11-11",
+     "spread": 232.2,
+     "p_raw": 0.019,
+     "p_family": 0.2586,
+     "p_global": 1.0,
+     "periods": [
+      423.7,
+      229.6,
+      -112.9
+     ],
+     "delayed": 182.5,
+     "perf": {
+      "cagr": 38.9,
+      "vol": 49.4,
+      "sharpe": 0.83,
+      "mdd": -48.4,
+      "exposure": 51,
+      "turns_per_year": 5.3
+     },
+     "grade": "후보"
+    }
+   },
+   "baselines": {
+    "보유": {
+     "cagr": 21.5,
+     "vol": 85.4,
+     "sharpe": 0.62,
+     "mdd": -93.4,
+     "exposure": 100,
+     "turns_per_year": 0.0
+    },
+    "보유(전진식 구간)": {
+     "cagr": 26.2,
+     "vol": 77.7,
+     "sharpe": 0.64,
+     "mdd": -77.3,
+     "exposure": 100,
+     "turns_per_year": 0.0
+    },
+    "40주 추세": {
+     "cagr": 16.6,
+     "vol": 59.3,
+     "sharpe": 0.51,
+     "mdd": -74.1,
+     "exposure": 49,
+     "turns_per_year": 2.6,
+     "spread": 20.2,
+     "p_raw": 0.2148
+    },
+    "40주 추세(전진식 구간)": {
+     "cagr": 22.2,
+     "vol": 61.7,
+     "sharpe": 0.57,
+     "mdd": -66.0,
+     "exposure": 57,
+     "turns_per_year": 2.7
+    }
+   },
+   "pick_history": {
+    "C2": 313
+   },
+   "pick_now": "C2",
+   "mean_excess_per_year": 16.8
+  }
+ },
+ "now": {
+  "week": "2026-11-11",
+  "cell": "C+",
+  "values": {
+   "s": -0.016,
+   "v": 0.347,
+   "g": 0.331,
+   "g_ex_tga": -0.369,
+   "g_accel": 1.363,
+   "d_net": 0.692,
+   "d_real": 0.47,
+   "d_usd": 2.818,
+   "d_ffr": 0.25,
+   "d_m2": 336.2
+  },
+  "states": {
+   "Q1": {
+    "on": 1.0,
+    "since": "2026-11-11"
+   },
+   "Q2": {
+    "on": 1.0,
+    "since": "2026-11-11"
+   },
+   "Q3": {
+    "on": 0.0,
+    "since": "2026-11-04"
+   },
+   "Q4": {
+    "on": 1.0,
+    "since": "2026-11-11"
+   },
+   "Q5": {
+    "on": 1.0,
+    "since": "2026-11-04"
+   },
+   "Q6": {
+    "on": 1.0,
+    "since": "2026-10-28"
+   },
+   "Q7": {
+    "on": 0.0,
+    "since": "2026-10-28"
+   },
+   "Q8": {
+    "on": 1.0,
+    "since": "2026-11-11"
+   },
+   "F1": {
+    "on": 1.0,
+    "since": "2026-09-09"
+   },
+   "F2": {
+    "on": 0.0,
+    "since": "2026-04-29"
+   },
+   "F3": {
+    "on": 0.0,
+    "since": "2026-09-30"
+   },
+   "F4": {
+    "on": 0.0,
+    "since": "2026-10-21"
+   },
+   "F5": {
+    "on": 0.0,
+    "since": "2026-09-16"
+   },
+   "F6": {
+    "on": 1.0,
+    "since": "2024-02-07"
+   },
+   "C1": {
+    "on": 0.0,
+    "since": "2026-09-30"
+   },
+   "C2": {
+    "on": 0.43,
+    "since": "2026-11-11"
+   },
+   "C3": {
+    "on": 1.0,
+    "since": "2026-09-09"
+   }
+  },
+  "forward": {
+   "SPY": {
+    "Q9": 0.0,
+    "C4": 1.0,
+    "C5": 1.0,
+    "C5_follows": "Q5"
+   },
+   "QQQ": {
+    "Q9": 0.0,
+    "C4": 1.0,
+    "C5": 1.0,
+    "C5_follows": "Q5"
+   },
+   "QQQ↔SPY": {
+    "Q9": 0.0,
+    "C4": 0.0,
+    "C5": 1.0,
+    "C5_follows": "Q5"
+   },
+   "BTC": {
+    "Q9": 1.0,
+    "C4": 0.0,
+    "C5": 0.43,
+    "C5_follows": "C2"
+   },
+   "ETH": {
+    "Q9": 0.0,
+    "C4": 0.0,
+    "C5": 0.43,
+    "C5_follows": "C2"
+   }
+  }
+ },
+ "asof": "2026-11-11"
+}
