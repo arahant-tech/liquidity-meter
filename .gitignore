@@ -7,3 +7,5 @@ __pycache__/
 .venv*/
 .env
 .private/
+# price downloads made when re-running a study by hand
+research/studies/*/scripts/data/

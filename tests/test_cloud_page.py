@@ -139,6 +139,21 @@ class CloudPackagingTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'unsafe_public_artifact_path'):
                     self.package()
 
+    def test_quadrant_map_is_published_only_when_it_exists(self):
+        self.package()
+        self.assertNotIn('quadrant.json', self.published())           # absent: the page says so itself
+        self.write('data/public/quadrant.json', '{"schema_version": 1}')
+        self.write('data/public/unlisted.json', 'PRIVATE_CREDENTIAL_SENTINEL')
+        self.package()
+        self.assertIn('quadrant.json', self.published())
+        self.assertNotIn('unlisted.json', self.published())           # still an allow-list, not a sweep
+
+    def test_symlinked_quadrant_map_is_rejected(self):
+        self.write('private.json', 'PRIVATE_CREDENTIAL_SENTINEL')
+        (self.root / 'data/public/quadrant.json').symlink_to(self.root / 'private.json')
+        with self.assertRaisesRegex(ValueError, 'unsafe_or_missing_public_artifact'):
+            self.package()
+
     def test_snapshot_must_cover_exactly_the_registered_providers(self):
         self.write('data/public/live-data.json', json.dumps({'research_eligible': False, 'generated_at': '2026-09-09T00:00:00Z',
                                                              'providers': [{'provider': p} for p in self.providers[:-1]]}))

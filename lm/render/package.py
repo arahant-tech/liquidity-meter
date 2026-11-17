@@ -15,6 +15,8 @@ from lm import catalog
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = Path("lm") / "render" / "public-files.json"
 PUBLIC_DATA = ("live-data.json", "chart-data.json")
+# Written by a later, failure-tolerant step. Published when present; its page explains when it is not.
+OPTIONAL_DATA = ("quadrant.json",)
 VINTAGE_POLICY = "current_snapshot_not_historical_availability"
 
 
@@ -31,6 +33,9 @@ def _plan(public_dir):
     plan["docs/CLOUD_OPERATION.md"] = Path("docs") / "CLOUD_OPERATION.md"
     for name in PUBLIC_DATA:
         plan[name] = public_dir / name
+    for name in OPTIONAL_DATA:
+        if (public_dir / name).exists() or (public_dir / name).is_symlink():
+            plan[name] = public_dir / name
     return plan
 
 

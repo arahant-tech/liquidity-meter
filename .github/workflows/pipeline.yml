@@ -94,6 +94,14 @@ jobs:
           .venv-cloud/bin/python -m lm.store.history
           --root data/history --runtime .private/history
 
+      # Scalar × vector map for the judgment screen. On failure the last good map
+      # stays in place, marked as retained with its original date.
+      - name: Compute the liquidity quadrant
+        continue-on-error: true
+        run: >
+          .venv-cloud/bin/python -m lm.measure.quadrant
+          --history data/history --output data/public/quadrant.json
+
       - name: Preserve full source receipts for replay
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -144,7 +152,7 @@ jobs:
       - name: Check the snapshot against the page contract
         env:
           LM_PUBLIC_DIR: data/public
-        run: .venv-cloud/bin/python -m unittest tests.test_chart_page
+        run: .venv-cloud/bin/python -m unittest tests.test_chart_page tests.test_judgment_page
 
       - name: Package explicitly approved public artifacts
         run: .venv-cloud/bin/python -m lm.render.package --public-dir data/public

@@ -69,7 +69,7 @@ const get=()=>c.makeData(live,history,now).series[0];
         self.assertEqual(result['live_generated_at'],'2026-09-09T00:00:00Z')
 
     def test_main_page_loads_runtime_without_embedded_snapshot(self):
-        html=(ROOT/'index.html').read_text()
+        html=(ROOT/'observatory.html').read_text()
         self.assertIn('overview.js',html)
         self.assertIn('interpretation.js',html)
         self.assertIn('sources.html',html)
