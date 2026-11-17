@@ -1,5 +1,5 @@
 {
-  "known_by": "2026-11-17T21:23:35.464926Z",
+  "known_by": "2026-11-17T22:27:39.562173Z",
   "metadata_response": {
     "realtime_end": "2026-11-17",
     "realtime_start": "2026-11-17",
@@ -82,7 +82,7 @@
     "provider": "FRED"
   },
   "research_eligible": false,
-  "retrieved_at": "2026-11-17T21:23:35.464926Z",
+  "retrieved_at": "2026-11-17T22:27:39.562173Z",
   "schema_version": 1,
   "series_id": "SOFR"
 }

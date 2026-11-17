@@ -26,7 +26,7 @@
       "weeks": 217
     }
   },
-  "checked_at": "2026-11-17T21:25:43.609050Z",
+  "checked_at": "2026-11-17T22:29:41.848547Z",
   "definition": {
     "bucket": "quintile of s + v against strictly earlier weeks since 2009-01-01",
     "identity": "s + v = change in reserve balances (WRBWFRBL)",
@@ -35,7 +35,7 @@
     "vector": "minus the change in non-reserve liabilities (WALCL − WRBWFRBL)",
     "window_weeks": 13
   },
-  "generated_at": "2026-11-17T21:25:43.609050Z",
+  "generated_at": "2026-11-17T22:29:41.848547Z",
   "inputs": {
     "WALCL": {
       "last_date": "2026-11-11",
