@@ -428,6 +428,18 @@
         "persist": true
       },
       {
+        "series_id": "DFII10",
+        "persist": true
+      },
+      {
+        "series_id": "DFEDTARU",
+        "persist": true
+      },
+      {
+        "series_id": "M2SL",
+        "persist": true
+      },
+      {
         "series_id": "CBBTCUSD",
         "persist": false,
         "reason": "copyrighted on FRED: reproduction prohibited without permission"
@@ -441,6 +453,16 @@
         "series_id": "SP500",
         "persist": false,
         "reason": "copyrighted on FRED: reproduction prohibited without permission"
+      },
+      {
+        "series_id": "BAA10Y",
+        "persist": false,
+        "reason": "copyrighted on FRED: Moody's data may not be redistributed or stored without consent"
+      },
+      {
+        "series_id": "VIXCLS",
+        "persist": false,
+        "reason": "copyrighted on FRED: Cboe data, reprinted there with permission"
       }
     ]
   }

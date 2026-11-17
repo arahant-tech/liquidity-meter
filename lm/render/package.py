@@ -15,8 +15,8 @@ from lm import catalog
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = Path("lm") / "render" / "public-files.json"
 PUBLIC_DATA = ("live-data.json", "chart-data.json")
-# Written by a later, failure-tolerant step. Published when present; its page explains when it is not.
-OPTIONAL_DATA = ("quadrant.json",)
+# Written by later, failure-tolerant steps. Published when present; the page explains when they are not.
+OPTIONAL_DATA = ("quadrant.json", "models.json")
 VINTAGE_POLICY = "current_snapshot_not_historical_availability"
 
 

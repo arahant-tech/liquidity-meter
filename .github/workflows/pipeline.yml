@@ -102,6 +102,15 @@ jobs:
           .venv-cloud/bin/python -m lm.measure.quadrant
           --history data/history --output data/public/quadrant.json
 
+      # Which of the pre-declared provisional rules are on this week. Two inputs are
+      # copyrighted and are read from .private/; only on/off states are written.
+      - name: Evaluate the provisional model board
+        continue-on-error: true
+        run: >
+          .venv-cloud/bin/python -m lm.measure.models
+          --history data/history --runtime .private/history
+          --output data/public/models.json
+
       - name: Preserve full source receipts for replay
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

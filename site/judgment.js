@@ -6,6 +6,10 @@ const SHORT = { 'A': '총량↑ 방향↑', 'B+': '총량↑ 방향↓', 'B-': '
 const SIDE = { 'A': '준비금↑', 'B+': '준비금↑', 'C+': '준비금↑', 'B-': '준비금↓', 'C-': '준비금↓', 'D': '준비금↓' };
 const STATUS = { ok: ['정상', 'ok'], stale: ['갱신 지연', 'stale'], retained: ['이전 정상값', 'retained'], unavailable: ['자료 없음', 'error'] };
 const STUDY_URL = './research/studies/quadrant-2026-11/results.json';
+const MODELS_URL = './models.json';
+const MODEL_STUDY = './research/studies/models-2026-11/';
+const RULES = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'C1', 'C2', 'C3'];
+const ASSETS = ['SPY', 'QQQ', 'QQQ↔SPY', 'BTC', 'ETH'];
 const STALE_DAYS = 14;
 const up = (cell) => SIDE[cell] === '준비금↑';
 const finite = (x) => typeof x === 'number' && Number.isFinite(x);
@@ -42,7 +46,42 @@ function validate(q, now = Date.now()) {
   return { ...q, status, age, points: q.points.map((p) => ({ ...p, g: p.s + p.v })) };
 }
 
-if (typeof module !== 'undefined') module.exports = { classify, validate, CELLS, SHORT, SIDE };
+/* Refuse a model board that is malformed or whose score disagrees with its own states. */
+function validateModels(m, now = Date.now()) {
+  if (!m || m.schema_version !== 1 || !(m.status in STATUS)) throw Error('모델 보드 자료의 형식을 확인할 수 없습니다.');
+  if (m.status === 'unavailable') return { status: 'unavailable', reason: m.reason || null };
+  const st = m.states, sc = m.score;
+  if (!validDate(m.asof) || !st || !sc || !m.names || !Array.isArray(sc.voters) || !sc.voters.length || sc.of !== sc.voters.length) throw Error('모델 보드 자료가 비어 있습니다.');
+  for (const k of RULES) {
+    const r = st[k];
+    if (!r || !validDate(r.since) || r.since > m.asof || typeof m.names[k] !== 'string' || !m.names[k]) throw Error('모델 보드에 빠진 규칙이 있습니다.');
+    if (k === 'C2' ? !(finite(r.on) && r.on >= 0 && r.on <= 1) : typeof r.on !== 'boolean') throw Error('모델 보드에 읽을 수 없는 상태가 있습니다.');
+  }
+  if (!sc.voters.every((k) => RULES.includes(k) && k !== 'C2')) throw Error('모델 보드의 점수 구성이 잘못됐습니다.');
+  const count = sc.voters.filter((k) => st[k].on).length;
+  if (count !== sc.on || Math.abs(st.C2.on - count / sc.of) > 0.001 || st.C1.on !== (2 * count > sc.of) || st.C3.on !== (st.Q1.on || st.F1.on)) throw Error('모델 보드의 점수가 상태와 맞지 않습니다.');
+  if (!Array.isArray(m.history) || !m.history.length) throw Error('모델 보드의 이력이 비어 있습니다.');
+  let previous = '';
+  for (const h of m.history) {
+    if (!validDate(h.d) || h.d <= previous || !Number.isInteger(h.n) || h.n < 0 || h.n > sc.of) throw Error('모델 보드의 이력이 잘못됐습니다.');
+    previous = h.d;
+  }
+  const last = m.history[m.history.length - 1];
+  if (last.d !== m.asof || last.n !== sc.on) throw Error('모델 보드의 기준 주가 서로 다릅니다.');
+  if (Date.parse(m.asof + 'T00:00:00Z') > now + 864e5) throw Error('모델 보드에 미래 날짜가 있습니다.');
+  const age = Math.floor((now - Date.parse(m.asof + 'T00:00:00Z')) / 864e5);
+  return { ...m, status: m.status === 'ok' && age > STALE_DAYS ? 'stale' : m.status, age };
+}
+
+/* The board and the map read the same balance sheet. If they describe the same week they must agree. */
+function boardMatchesMap(m, q) {
+  if (!q || !q.now || m.asof !== q.asof) return true;
+  const sure = (x) => Math.abs(x) > 0.002;
+  const n = q.now, g = n.s + n.v;
+  return (!sure(g) || m.states.Q1.on === g > 0) && (!sure(n.v) || m.states.Q2.on === n.v > 0) && (!sure(n.s) || m.states.Q3.on === n.s > 0);
+}
+
+if (typeof module !== 'undefined') module.exports = { classify, validate, validateModels, boardMatchesMap, CELLS, SHORT, SIDE, RULES, ASSETS };
 if (typeof document === 'undefined') return;
 
 const $ = (id) => document.getElementById(id);
@@ -211,6 +250,122 @@ function drawStudy(study, current) {
   $('study').hidden = false;
 }
 
+const scoreGroup = (label, n) => { const [lo, hi] = label.split('~').map(Number); return n >= lo && n <= (hi === undefined ? lo : hi); };
+const VALUE_OF = { Q1: ['g', '%'], Q2: ['v', '%'], Q3: ['s', '%'], Q6: ['g_accel', '%p'], Q7: ['g_ex_tga', '%'], Q8: ['d_net', '%'], F2: ['d_real', '%p'], F3: ['d_usd', '%'], F5: ['d_ffr', '%p'], F6: ['d_m2', '십억 달러'] };
+let board = null;
+
+function drawStrip() {
+  if (!board) return;
+  const host = $('score-strip'), pts = board.history, of = board.score.of;
+  const W = Math.max(280, Math.min(host.clientWidth || 520, 720)), H = 132, left = 22, top = 8, bottom = 22;
+  const step = (W - left - 4) / pts.length, y = (n) => top + (H - top - bottom) * (1 - n / of);
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, width: W, height: H, role: 'img', 'aria-label': `최근 ${pts.length}주의 조건 점수` });
+  for (let n = 0; n <= of; n += 1) {
+    if (n % 2 === 0 || n === of) svg.append(el('text', { x: left - 6, y: y(n) + 4, 'text-anchor': 'end' }, String(n)));
+    svg.append(el('line', { x1: left, x2: W - 4, y1: y(n), y2: y(n), stroke: 2 * n > of && 2 * (n - 1) <= of ? 'var(--guide)' : 'var(--grid)', 'stroke-dasharray': 2 * n > of && 2 * (n - 1) <= of ? '3 3' : '' }));
+  }
+  pts.forEach((p, i) => {
+    const hi = 2 * p.n > of, lo = 2 * (p.n + 1) < of;
+    const bar = el('rect', { x: left + i * step + 1, y: y(Math.max(p.n, 0.12)), width: Math.max(1, step - 2), height: H - bottom - y(Math.max(p.n, 0.12)), rx: 1.5, fill: hi ? 'var(--pos)' : lo ? 'var(--neg)' : 'var(--guide)' });
+    bar.addEventListener('pointermove', (e) => showTip(e, [p.d, `켜진 조건 ${p.n} / ${of}`]));
+    bar.addEventListener('pointerleave', hideTip);
+    svg.append(bar);
+  });
+  svg.append(el('text', { x: left, y: H - 6 }, pts[0].d.slice(0, 7)), el('text', { x: W - 4, y: H - 6, 'text-anchor': 'end' }, pts[pts.length - 1].d.slice(0, 7)));
+  host.replaceChildren(svg);
+  const hi = Math.floor(of / 2) + 1, lo = Math.ceil(of / 2) - 2;
+  $('legend-hi').textContent = `${hi}개 이상`;
+  $('legend-mid').textContent = hi - 1 > lo + 1 ? `${lo + 1}~${hi - 1}개` : `${hi - 1}개`;
+  $('legend-lo').textContent = `${lo}개 이하`;
+}
+
+function drawBoard(m, study, diag) {
+  const st = m.states, sc = m.score;
+  $('score-now').textContent = `${sc.on} / ${sc.of}`;
+  $('score-week').textContent = `기준 주 ${m.asof}` + (m.decision_date ? ` · 판단일 ${m.decision_date}` : '');
+  const chips = $('score-chips'); chips.replaceChildren();
+  sc.voters.forEach((k) => {
+    const c = html('span', 'chip ' + (st[k].on ? 'on' : 'off'), `${m.names[k]} · ${st[k].on ? '켜짐' : '꺼짐'}`);
+    c.title = `${st[k].since}부터`; chips.append(c);
+  });
+
+  const graded = (a, k) => (diag && diag[a] && diag[a].conservative_grades && diag[a].conservative_grades[k]) || study.assets[a].models[k].grade;
+  const haveStudy = study && study.assets && ASSETS.every((a) => study.assets[a] && RULES.every((k) => study.assets[a].models && study.assets[a].models[k]));
+  const haveCounts = diag && ASSETS.every((a) => diag[a] && diag[a].by_count);
+
+  // Past weeks with the same score. A post-hoc table; it carries no grade.
+  if (haveCounts) {
+    const labels = Object.keys(diag[ASSETS[0]].by_count).sort((x, y) => parseInt(x, 10) - parseInt(y, 10)), t = $('score-table'), head = html('tr');
+    head.append(html('th', '', '켜진 조건 수')); ASSETS.forEach((a) => head.append(html('th', '', a)));
+    const thead = html('thead'); thead.append(head); const body = html('tbody');
+    labels.forEach((label) => {
+      const here = scoreGroup(label, sc.on), tr = html('tr', here ? 'current' : ''), first = html('td', '', label + '개');
+      if (here) first.append(html('span', 'here', '지금'));
+      tr.append(first);
+      ASSETS.forEach((a) => { const r = diag[a].by_count[label], c = html('td'); c.append(document.createTextNode(fmt(r.mean, 0)), html('small', '', `${r.weeks}주`)); tr.append(c); });
+      body.append(tr);
+    });
+    t.replaceChildren(thead, body); $('score-past').hidden = false;
+  }
+
+  // Every rule: its state this week, and what it was worth in the fixed study.
+  const t = $('rules'), head = html('tr');
+  ['규칙', '이번 주', '언제부터', '근거 값'].forEach((h) => head.append(html('th', '', h)));
+  if (haveStudy) ASSETS.forEach((a) => head.append(html('th', '', a)));
+  const thead = html('thead'); thead.append(head); const body = html('tbody');
+  RULES.forEach((k) => {
+    const r = st[k], tr = html('tr', sc.voters.includes(k) ? 'voter' : ''), name = html('td'), state = html('td');
+    name.append(html('span', 'rule-id', k), document.createTextNode(m.names[k]));
+    const on = k === 'C2' ? r.on * 2 > 1 : r.on;
+    state.append(html('span', 'chip ' + (on ? 'on' : 'off'), k === 'C2' ? `비중 ${Math.round(r.on * 100)}%` : (r.on ? '켜짐' : '꺼짐')));
+    const v = VALUE_OF[k] && m.values ? m.values[VALUE_OF[k][0]] : undefined;
+    const shown = finite(v) ? `${fmt(v, k === 'F6' ? 0 : 2)} ${VALUE_OF[k][1]}` : (k === 'F1' || k === 'F4' ? '값 비공개' : k[0] === 'C' ? `${sc.on} / ${sc.of}` : '—');
+    tr.append(name, state, html('td', '', r.since), html('td', '', shown));
+    if (haveStudy) ASSETS.forEach((a) => {
+      const row = study.assets[a].models[k], c = html('td');
+      if (!finite(row.spread)) { c.textContent = '—'; tr.append(c); return; }
+      c.append(document.createTextNode(fmt(row.spread)), html('small', '', finite(row.p_raw) ? `p ${row.p_raw.toFixed(3)}` : ''));
+      const grade = graded(a, k);
+      if (grade !== '미달') { c.append(html('span', 'tag', grade)); c.className = 'cand'; }
+      tr.append(c);
+    });
+    body.append(tr);
+  });
+  t.replaceChildren(thead, body);
+
+  if (haveStudy) {
+    const all = ASSETS.flatMap((a) => Object.keys(study.assets[a].models).map((k) => graded(a, k)));
+    const passed = all.filter((g) => g === '통과').length, candidates = all.filter((g) => g === '후보').length;
+    $('models-grade').textContent = passed ? '표본내 통과 · 실시간 검증 전' : '후보 · 실시간 검증 전';
+    $('models-lead').textContent = `규칙마다 이번 주에 켜졌는지만 계산한다. 과거 성적은 ${study.asof} 기준으로 고정된 연구에서 왔고 매주 다시 계산하지 않는다. 검정 ${all.length}개 가운데 사전에 정한 기준과 두 번째 검정을 모두 넘은 것은 ${passed}개, 후보는 ${candidates}개다.`;
+    $('rules-note').textContent = '자산 칸의 숫자는 규칙이 보유하라고 한 주와 빼라고 한 주의 연율 수익 차이(%)이고, 그 아래는 보정하기 전의 p 값이다. "후보"는 보정 전 p 가 0.05 미만이고 세 기간 중 둘 이상에서 방향이 같았다는 뜻이며 보정을 넘었다는 뜻이 아니다. "점수 비례"의 숫자는 점수 0과 1 사이의 차이로 환산한 값이라 다른 줄과 크기를 비교할 수 없다. 왼쪽에 줄이 있는 일곱 규칙이 조건 점수를 이룬다. 신용 스프레드와 변동성은 자료의 저작권 때문에 값 없이 상태만 싣는다.';
+  } else {
+    $('models-lead').textContent = '규칙마다 이번 주에 켜졌는지만 계산한다. 과거 성적을 담은 연구 결과를 불러오지 못해 상태만 보여 준다.';
+    $('rules-note').textContent = '왼쪽에 줄이 있는 일곱 규칙이 조건 점수를 이룬다. 신용 스프레드와 변동성은 자료의 저작권 때문에 값 없이 상태만 싣는다.';
+  }
+  $('models-body').hidden = false;
+  board = m; drawStrip();          // needs the panel's real width, so only after it is shown
+}
+
+async function startBoard(q) {
+  const banner = $('models-banner'), say = (text) => { banner.textContent = text; banner.hidden = !text; };
+  $('models').hidden = false;
+  let m;
+  try { m = validateModels(await get(MODELS_URL)); }
+  catch (error) { return say(/^\d+$/.test(error.message) ? '모델 보드 자료를 아직 만들지 못했다. 다음 수집이 끝나면 나타난다.' : error.message); }
+  if (m.status === 'unavailable') return say(`모델 보드 자료를 아직 만들지 못했다. 사유: ${m.reason || '미확인'}.`);
+  if (!boardMatchesMap(m, q)) return say('모델 보드와 사분면 지도가 같은 주를 서로 다르게 말하고 있어 보드를 표시하지 않는다.');
+  const notes = [];
+  if (m.status === 'stale') notes.push(`보드의 마지막 기준 주가 ${m.age}일 전이다.`);
+  if (m.status === 'retained') notes.push(`이번 계산에 실패해 ${m.asof} 기준의 마지막 정상 보드를 보여 준다. 사유: ${m.reason || '미확인'}.`);
+  if (m.asof !== q.asof) notes.push(`보드의 기준 주(${m.asof})가 지도의 기준 주(${q.asof})와 다르다.`);
+  if (m.daily_complete === false) notes.push('목요일 일별 값이 아직 들어오지 않았다. 금리·달러·변동성에서 나온 상태는 바뀔 수 있다.');
+  say(notes.join(' '));
+  let study = null, diag = null;
+  try { [study, diag] = await Promise.all([get(MODEL_STUDY + 'results.json'), get(MODEL_STUDY + 'diagnostics.json').catch(() => null)]); } catch { /* states still stand without the study */ }
+  drawBoard(m, study, diag);
+}
+
 function drawCharts() {
   if (!state) return;
   const pts = state.points, trail = pts.slice(-52), last = trail[trail.length - 1];
@@ -256,9 +411,10 @@ async function start() {
   $('content').hidden = false;
   drawTiles(q); drawRecent(q.points); drawCharts();
   try { drawStudy(await get(STUDY_URL), q.now.cell); } catch { /* the map stands on its own without the study table */ }
+  try { await startBoard(q); } catch { /* the map stands on its own without the board */ }
 }
 
 let timer;
-addEventListener('resize', () => { clearTimeout(timer); timer = setTimeout(drawCharts, 150); });
+addEventListener('resize', () => { clearTimeout(timer); timer = setTimeout(() => { drawCharts(); drawStrip(); }, 150); });
 start();
 })();
