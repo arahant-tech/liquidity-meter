@@ -1,5 +1,5 @@
 {
-  "known_by": "2026-11-17T18:04:05.090528Z",
+  "known_by": "2026-11-17T18:07:46.173206Z",
   "metadata_response": {
     "realtime_end": "2026-11-17",
     "realtime_start": "2026-11-17",
@@ -83,7 +83,7 @@
     "provider": "FRED"
   },
   "research_eligible": false,
-  "retrieved_at": "2026-11-17T18:04:05.090528Z",
+  "retrieved_at": "2026-11-17T18:07:46.173206Z",
   "schema_version": 1,
   "series_id": "RRPONTSYD"
 }

@@ -9,8 +9,8 @@
     "Only the latest five native observations are fetched, so older revisions can be missed.",
     "The collection covers a subset of the five-layer model; missing sources are not imputed."
   ],
-  "capture_id": "20261117T180402180959Z_e56f0a435157",
-  "completed_at": "2026-11-17T18:04:17.481735Z",
+  "capture_id": "20261117T180743931749Z_c2eac2ce7b47",
+  "completed_at": "2026-11-17T18:07:57.281652Z",
   "derived": {
     "SOFR_IORB": {
       "formula": "100 * (SOFR - IORB), identical observation date",
@@ -39,7 +39,7 @@
   "series": {
     "DPSACBW027SBOG": {
       "block": "sector_distribution",
-      "checked_at": "2026-11-17T18:04:09.916672Z",
+      "checked_at": "2026-11-17T18:07:50.486930Z",
       "error": null,
       "freshness": {
         "age_calendar_days": 13,
@@ -51,9 +51,9 @@
         "stale_after_days": 21
       },
       "last_capture": {
-        "raw_path": "raw/20261117T180402180959Z_e56f0a435157/DPSACBW027SBOG.json",
-        "raw_sha256": "7c3d393d94eb3bc533961628c31a6b2e82df53f18a88e1d72eb3ec5b4ce7ed1b",
-        "retrieved_at": "2026-11-17T18:04:09.916672Z"
+        "raw_path": "raw/20261117T180743931749Z_c2eac2ce7b47/DPSACBW027SBOG.json",
+        "raw_sha256": "d8305a2e97fbc1524e63aed47939e9f6b835eb463483b3f86e4176c976a7d951",
+        "retrieved_at": "2026-11-17T18:07:50.486930Z"
       },
       "last_good": {
         "fingerprint": "d7f3b9a16bad61f22b10b1f37273bfb34049e5de9b1beb57a9915e47caf242a8",
@@ -112,7 +112,7 @@
     },
     "DRTSCILM": {
       "block": "bank_credit",
-      "checked_at": "2026-11-17T18:04:16.609606Z",
+      "checked_at": "2026-11-17T18:07:56.414750Z",
       "error": null,
       "freshness": {
         "age_calendar_days": 47,
@@ -124,9 +124,9 @@
         "stale_after_days": 190
       },
       "last_capture": {
-        "raw_path": "raw/20261117T180402180959Z_e56f0a435157/DRTSCILM.json",
-        "raw_sha256": "0f349974dbb4c4a070e55d0cdb21b5597011d23f12f4387d613e95dd6dbddfb1",
-        "retrieved_at": "2026-11-17T18:04:16.609606Z"
+        "raw_path": "raw/20261117T180743931749Z_c2eac2ce7b47/DRTSCILM.json",
+        "raw_sha256": "de3a2d0f84a0ab08640ddcbdc63ce67740afe4889a8d918bc405f1d2b4428a48",
+        "retrieved_at": "2026-11-17T18:07:56.414750Z"
       },
       "last_good": {
         "fingerprint": "5af729408babf580fb522fbfe30d8a85f11f4bbd2bfee7af270d711e866ecc9d",
@@ -185,7 +185,7 @@
     },
     "ECBASSETSW": {
       "block": "ecb",
-      "checked_at": "2026-11-17T18:04:14.463172Z",
+      "checked_at": "2026-11-17T18:07:54.563757Z",
       "error": null,
       "freshness": {
         "age_calendar_days": 4,
@@ -197,9 +197,9 @@
         "stale_after_days": 21
       },
       "last_capture": {
-        "raw_path": "raw/20261117T180402180959Z_e56f0a435157/ECBASSETSW.json",
-        "raw_sha256": "9786793916dd6ed889bbe8f4a119a76fa6baaec12b780d4e491e81280efeb551",
-        "retrieved_at": "2026-11-17T18:04:14.463172Z"
+        "raw_path": "raw/20261117T180743931749Z_c2eac2ce7b47/ECBASSETSW.json",
+        "raw_sha256": "df32c3fe61fad2aa93cacacdb0a3e2e00ccf63cc66fe73844303e4ec8fb552e9",
+        "retrieved_at": "2026-11-17T18:07:54.563757Z"
       },
       "last_good": {
         "fingerprint": "9da7aa1a1a600d0de274fecfee216497b61a6dbeec3325f2b9e29e107990dca2",
@@ -258,7 +258,7 @@
     },
     "IORB": {
       "block": "fed_funding",
-      "checked_at": "2026-11-17T18:04:07.952923Z",
+      "checked_at": "2026-11-17T18:07:48.685340Z",
       "error": null,
       "freshness": {
         "age_calendar_days": 0,
@@ -270,9 +270,9 @@
         "stale_after_days": 7
       },
       "last_capture": {
-        "raw_path": "raw/20261117T180402180959Z_e56f0a435157/IORB.json",
-        "raw_sha256": "29c778e188071f43520d11f7e82634557ca5d32721dd35fa500062b15dbb3e37",
-        "retrieved_at": "2026-11-17T18:04:07.952923Z"
+        "raw_path": "raw/20261117T180743931749Z_c2eac2ce7b47/IORB.json",
+        "raw_sha256": "bc73bed3bde121639cb423c97b34a0ca361f0dd2ecee4fe05bcd5ec1ec7a9ea6",
+        "retrieved_at": "2026-11-17T18:07:48.685340Z"
       },
       "last_good": {
         "fingerprint": "97c77ee9c3317d45e427514b68bd03a33d5493b7b7425cda74d51a1a4a60f8ee",
@@ -331,7 +331,7 @@
     },
     "JPNASSETS": {
       "block": "boj",
-      "checked_at": "2026-11-17T18:04:15.647002Z",
+      "checked_at": "2026-11-17T18:07:55.487774Z",
       "error": null,
       "freshness": {
         "age_calendar_days": 47,
@@ -343,9 +343,9 @@
         "stale_after_days": 75
       },
       "last_capture": {
-        "raw_path": "raw/20261117T180402180959Z_e56f0a435157/JPNASSETS.json",
-        "raw_sha256": "89ab9aeb3996a5872a8485fada7ca02263662455c18d06cbb798200b02edd301",
-        "retrieved_at": "2026-11-17T18:04:15.647002Z"
+        "raw_path": "raw/20261117T180743931749Z_c2eac2ce7b47/JPNASSETS.json",
+        "raw_sha256": "44329d4b9923aee013a869dbecaa48ff865365b09a63c1bab21991ecfcbf90c3",
+        "retrieved_at": "2026-11-17T18:07:55.487774Z"
       },
       "last_good": {
         "fingerprint": "c8d7befce90665863eb00aea1975d4c7e7bca3ead3959a15680a424bf57ed2ea",
@@ -404,7 +404,7 @@
     },
     "MMMFFAQ027S": {
       "block": "sector_distribution",
-      "checked_at": "2026-11-17T18:04:17.480845Z",
+      "checked_at": "2026-11-17T18:07:57.265489Z",
       "error": null,
       "freshness": {
         "age_calendar_days": 140,
@@ -416,9 +416,9 @@
         "stale_after_days": 190
       },
       "last_capture": {
-        "raw_path": "raw/20261117T180402180959Z_e56f0a435157/MMMFFAQ027S.json",
-        "raw_sha256": "3101b47b63cfb79dee07f7cfccd7e49b56abff0404f55fecf3e2e4b47b48ff9c",
-        "retrieved_at": "2026-11-17T18:04:17.480845Z"
+        "raw_path": "raw/20261117T180743931749Z_c2eac2ce7b47/MMMFFAQ027S.json",
+        "raw_sha256": "6f135021eb4622fbb9e39d4ab940615f4108ab5ed6d1d9a2ef466238ccbf32b4",
+        "retrieved_at": "2026-11-17T18:07:57.265489Z"
       },
       "last_good": {
         "fingerprint": "a807e8a4b80b62ce3f33bbdea688a617ebb9639ad6b2c6d0953e670e00cbdfdb",
@@ -477,7 +477,7 @@
     },
     "RRPONTSYD": {
       "block": "fed",
-      "checked_at": "2026-11-17T18:04:05.090528Z",
+      "checked_at": "2026-11-17T18:07:46.173206Z",
       "error": null,
       "freshness": {
         "age_calendar_days": 1,
@@ -489,9 +489,9 @@
         "stale_after_days": 7
       },
       "last_capture": {
-        "raw_path": "raw/20261117T180402180959Z_e56f0a435157/RRPONTSYD.json",
-        "raw_sha256": "73d914287c81cb5ebd7d25f91175f7c54a725c6f0db8b83c85e87912a996dad8",
-        "retrieved_at": "2026-11-17T18:04:05.090528Z"
+        "raw_path": "raw/20261117T180743931749Z_c2eac2ce7b47/RRPONTSYD.json",
+        "raw_sha256": "ed0f6234f12b6996c0f82e63bccee2691b8ce75294f9ed455132848cff963e83",
+        "retrieved_at": "2026-11-17T18:07:46.173206Z"
       },
       "last_good": {
         "fingerprint": "20f608bbe7a80b20da409f0e81ff2c891681486550363001f493c13fbdb5eabb",
@@ -544,7 +544,7 @@
     },
     "SOFR": {
       "block": "fed_funding",
-      "checked_at": "2026-11-17T18:04:07.021144Z",
+      "checked_at": "2026-11-17T18:07:48.027201Z",
       "error": null,
       "freshness": {
         "age_calendar_days": 1,
@@ -556,9 +556,9 @@
         "stale_after_days": 7
       },
       "last_capture": {
-        "raw_path": "raw/20261117T180402180959Z_e56f0a435157/SOFR.json",
-        "raw_sha256": "016eefdb1181ed8c30ed2cd18fa2dd52bef83d8ec9147370715657c30ff4c121",
-        "retrieved_at": "2026-11-17T18:04:07.021144Z"
+        "raw_path": "raw/20261117T180743931749Z_c2eac2ce7b47/SOFR.json",
+        "raw_sha256": "35143a1a72603390a25d2cf52acab93c42eff4ede42653856c4b9ca209bdc7de",
+        "retrieved_at": "2026-11-17T18:07:48.027201Z"
       },
       "last_good": {
         "fingerprint": "109db0952a1ed62db93047e2de512e70aaac24bd81d511e4cc8c415329135565",
@@ -611,7 +611,7 @@
     },
     "TOTBKCR": {
       "block": "bank_credit",
-      "checked_at": "2026-11-17T18:04:08.912338Z",
+      "checked_at": "2026-11-17T18:07:49.516286Z",
       "error": null,
       "freshness": {
         "age_calendar_days": 13,
@@ -623,9 +623,9 @@
         "stale_after_days": 21
       },
       "last_capture": {
-        "raw_path": "raw/20261117T180402180959Z_e56f0a435157/TOTBKCR.json",
-        "raw_sha256": "7fa0e76ffedd7617f4cde072706e0b3b9caf5a958b11c82addd7da5cb926c85e",
-        "retrieved_at": "2026-11-17T18:04:08.912338Z"
+        "raw_path": "raw/20261117T180743931749Z_c2eac2ce7b47/TOTBKCR.json",
+        "raw_sha256": "06c725a97b47842d1d83f49e051f1889ebfd4e9cb912bba4e61cafa75e7efa4a",
+        "retrieved_at": "2026-11-17T18:07:49.516286Z"
       },
       "last_good": {
         "fingerprint": "6666a97b6986c7378a17cd0e2b42fadd74d88509f92f5dbc4d6f4117f235a914",
@@ -684,7 +684,7 @@
     },
     "TOTLL": {
       "block": "bank_credit",
-      "checked_at": "2026-11-17T18:04:13.590390Z",
+      "checked_at": "2026-11-17T18:07:53.745579Z",
       "error": null,
       "freshness": {
         "age_calendar_days": 13,
@@ -696,9 +696,9 @@
         "stale_after_days": 21
       },
       "last_capture": {
-        "raw_path": "raw/20261117T180402180959Z_e56f0a435157/TOTLL.json",
-        "raw_sha256": "89aeed16b573342fe60a2018eccaec4bc10de1765879ae8d42fe3f2cc08287d9",
-        "retrieved_at": "2026-11-17T18:04:13.590390Z"
+        "raw_path": "raw/20261117T180743931749Z_c2eac2ce7b47/TOTLL.json",
+        "raw_sha256": "604c6724b8de2b73078974e5d25b97a2d389edd9624e9addd799869ddd1b99e5",
+        "retrieved_at": "2026-11-17T18:07:53.745579Z"
       },
       "last_good": {
         "fingerprint": "68ee71821a0fa3dcce0dcbd16d661376d4f14f370c2f0709b0aaa9bb05131b40",
@@ -757,7 +757,7 @@
     },
     "WALCL": {
       "block": "fed",
-      "checked_at": "2026-11-17T18:04:03.164216Z",
+      "checked_at": "2026-11-17T18:07:44.634041Z",
       "error": null,
       "freshness": {
         "age_calendar_days": 6,
@@ -769,9 +769,9 @@
         "stale_after_days": 21
       },
       "last_capture": {
-        "raw_path": "raw/20261117T180402180959Z_e56f0a435157/WALCL.json",
-        "raw_sha256": "29df15da427611e46aa69a5992457cde108741d7b348c0f06507841ee44d9393",
-        "retrieved_at": "2026-11-17T18:04:03.164216Z"
+        "raw_path": "raw/20261117T180743931749Z_c2eac2ce7b47/WALCL.json",
+        "raw_sha256": "fef872c14ae9f7bb56463494f19b5cb4a7b2afc2f500e358652a9b54fee2b8cb",
+        "retrieved_at": "2026-11-17T18:07:44.634041Z"
       },
       "last_good": {
         "fingerprint": "d3cfceecabbcaf7518aeb40a170b206f4ede2ea80d5c48f4d5697d96925fb642",
@@ -830,7 +830,7 @@
     },
     "WDTGAL": {
       "block": "fed",
-      "checked_at": "2026-11-17T18:04:12.672504Z",
+      "checked_at": "2026-11-17T18:07:52.965167Z",
       "error": null,
       "freshness": {
         "age_calendar_days": 6,
@@ -842,9 +842,9 @@
         "stale_after_days": 21
       },
       "last_capture": {
-        "raw_path": "raw/20261117T180402180959Z_e56f0a435157/WDTGAL.json",
-        "raw_sha256": "ec67ff5c6226b2636244a5dbffd11cff0161fa762c36144bcf975f6376ec9d95",
-        "retrieved_at": "2026-11-17T18:04:12.672504Z"
+        "raw_path": "raw/20261117T180743931749Z_c2eac2ce7b47/WDTGAL.json",
+        "raw_sha256": "6d2e72e5d4d6859a79624bd7fc8dce8a37a2b28a64a74b5f4e9df079e6346e0c",
+        "retrieved_at": "2026-11-17T18:07:52.965167Z"
       },
       "last_good": {
         "fingerprint": "62999fadb78f794797e125bcdf6049fdad8e3200bd11460230ef707ec25042ce",
@@ -903,7 +903,7 @@
     },
     "WLRRAOL": {
       "block": "fed",
-      "checked_at": "2026-11-17T18:04:11.806895Z",
+      "checked_at": "2026-11-17T18:07:52.248209Z",
       "error": null,
       "freshness": {
         "age_calendar_days": 6,
@@ -915,9 +915,9 @@
         "stale_after_days": 21
       },
       "last_capture": {
-        "raw_path": "raw/20261117T180402180959Z_e56f0a435157/WLRRAOL.json",
-        "raw_sha256": "c94e0670e99aefd38b821c7b0ba58d75c85e9f77ce2f56b50eae767d69d5d9c9",
-        "retrieved_at": "2026-11-17T18:04:11.806895Z"
+        "raw_path": "raw/20261117T180743931749Z_c2eac2ce7b47/WLRRAOL.json",
+        "raw_sha256": "fafd9acd33b9e823b0ae9ca1afac267974abafdeec64a6bd300c684a7604739a",
+        "retrieved_at": "2026-11-17T18:07:52.248209Z"
       },
       "last_good": {
         "fingerprint": "fd42d2ab2b3f051776f4ac4bb1fdb490879b10e903b3b898d744de792973fec5",
@@ -976,7 +976,7 @@
     },
     "WRBWFRBL": {
       "block": "fed",
-      "checked_at": "2026-11-17T18:04:10.955032Z",
+      "checked_at": "2026-11-17T18:07:51.484526Z",
       "error": null,
       "freshness": {
         "age_calendar_days": 6,
@@ -988,9 +988,9 @@
         "stale_after_days": 21
       },
       "last_capture": {
-        "raw_path": "raw/20261117T180402180959Z_e56f0a435157/WRBWFRBL.json",
-        "raw_sha256": "326f7deda16da7962472279a42a933caa25be88c2dd7cd996a5063b068c31502",
-        "retrieved_at": "2026-11-17T18:04:10.955032Z"
+        "raw_path": "raw/20261117T180743931749Z_c2eac2ce7b47/WRBWFRBL.json",
+        "raw_sha256": "7c2e0f9eb77235d366250c169984054462536cf06ef36d59016cdb39c0a952b5",
+        "retrieved_at": "2026-11-17T18:07:51.484526Z"
       },
       "last_good": {
         "fingerprint": "822ae0b22d4b5074ba89f1f6f67b4065ee98b54206b55ced83b4fadd53a04179",
@@ -1049,7 +1049,7 @@
     },
     "WRESBAL": {
       "block": "fed",
-      "checked_at": "2026-11-17T18:04:04.033302Z",
+      "checked_at": "2026-11-17T18:07:45.411845Z",
       "error": null,
       "freshness": {
         "age_calendar_days": 6,
@@ -1061,9 +1061,9 @@
         "stale_after_days": 21
       },
       "last_capture": {
-        "raw_path": "raw/20261117T180402180959Z_e56f0a435157/WRESBAL.json",
-        "raw_sha256": "4db0ff6f3b50ab2df9488598ac3240cda249ab302c666c5e62afed74a29763da",
-        "retrieved_at": "2026-11-17T18:04:04.033302Z"
+        "raw_path": "raw/20261117T180743931749Z_c2eac2ce7b47/WRESBAL.json",
+        "raw_sha256": "76726c5e400eac16fc4576dcacf92d6e8a5cf275474b9d6a2bd0cd316e461004",
+        "retrieved_at": "2026-11-17T18:07:45.411845Z"
       },
       "last_good": {
         "fingerprint": "93789fb31247ca6d1fb353faa6b5e3ad31d514478af8929f28e6b67dbe88f87f",
@@ -1122,7 +1122,7 @@
     },
     "WTREGEN": {
       "block": "fed",
-      "checked_at": "2026-11-17T18:04:06.023649Z",
+      "checked_at": "2026-11-17T18:07:47.117602Z",
       "error": null,
       "freshness": {
         "age_calendar_days": 6,
@@ -1134,9 +1134,9 @@
         "stale_after_days": 21
       },
       "last_capture": {
-        "raw_path": "raw/20261117T180402180959Z_e56f0a435157/WTREGEN.json",
-        "raw_sha256": "abb257e31ea25059e8053e89f4a696e65e8cf992bbb7bf1dab018b920407bd81",
-        "retrieved_at": "2026-11-17T18:04:06.023649Z"
+        "raw_path": "raw/20261117T180743931749Z_c2eac2ce7b47/WTREGEN.json",
+        "raw_sha256": "3611ba9af43b3d06d12c4efde0238d2f87e43ea2b4b7f1ab8c8bfa03604454b9",
+        "retrieved_at": "2026-11-17T18:07:47.117602Z"
       },
       "last_good": {
         "fingerprint": "e68cf7fa3453ed51b1c9a84cc4d5643c4e7129a879a7ab9ec29585fbb2d9813c",
@@ -1194,5 +1194,5 @@
       "status": "ok"
     }
   },
-  "started_at": "2026-11-17T18:04:02.180959Z"
+  "started_at": "2026-11-17T18:07:43.931749Z"
 }
