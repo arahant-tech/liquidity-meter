@@ -34,3 +34,12 @@ def providers(path=PATH):
 def fred(path=PATH):
     """The FRED section: scope, series specs, assumptions and breaks."""
     return load(path)["fred"]
+
+
+def history(path=PATH):
+    """Model-input histories: observation start and the series to keep in full."""
+    section = load(path)["history"]
+    ids = [s["series_id"] for s in section["series"]]
+    if len(ids) != len(set(ids)) or not ids:
+        raise ValueError("empty_or_duplicate_history_catalog")
+    return section

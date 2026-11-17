@@ -83,6 +83,17 @@ jobs:
           --checkpoint data/chart-history
           --public-output data/public/chart-data.json
 
+      # Model inputs. A failure here must not stop collection or publishing: the
+      # last good histories stay in place and the index records the error.
+      # Copyrighted price series go to .private/, which is never committed or uploaded.
+      - name: Refresh model-input histories
+        continue-on-error: true
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: >
+          .venv-cloud/bin/python -m lm.store.history
+          --root data/history --runtime .private/history
+
       - name: Preserve full source receipts for replay
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -106,7 +117,7 @@ jobs:
             exit 1
           fi
           paths=''
-          for path in live chart-history public; do
+          for path in live chart-history public history; do
             if [ -e "$path" ]; then paths="$paths $path"; fi
           done
           git add -A -- $paths

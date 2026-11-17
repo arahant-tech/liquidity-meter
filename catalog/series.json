@@ -286,5 +286,158 @@
       "Live collection does not certify original publication timestamps or historic point-in-time availability.",
       "PBoC, offshore dollar credit, collateral, operator, terminal flow and crypto coverage remain incomplete."
     ]
+  },
+  "history": {
+    "note": "Full native histories for the measurement layer. persist=false series are fetched per run and never written to the public data branch.",
+    "observation_start": "2002-12-01",
+    "series": [
+      {
+        "series_id": "WALCL",
+        "persist": true
+      },
+      {
+        "series_id": "WDTGAL",
+        "persist": true
+      },
+      {
+        "series_id": "WRESBAL",
+        "persist": true
+      },
+      {
+        "series_id": "WRBWFRBL",
+        "persist": true
+      },
+      {
+        "series_id": "WCURCIR",
+        "persist": true
+      },
+      {
+        "series_id": "WLFN",
+        "persist": true
+      },
+      {
+        "series_id": "WLRRAL",
+        "persist": true
+      },
+      {
+        "series_id": "WLRRAFOIAL",
+        "persist": true
+      },
+      {
+        "series_id": "WLODL",
+        "persist": true
+      },
+      {
+        "series_id": "WDFOL",
+        "persist": true
+      },
+      {
+        "series_id": "WLAD",
+        "persist": true
+      },
+      {
+        "series_id": "WCTCL",
+        "persist": true
+      },
+      {
+        "series_id": "WLCFLL",
+        "persist": true
+      },
+      {
+        "series_id": "SWPT",
+        "persist": true
+      },
+      {
+        "series_id": "TREAST",
+        "persist": true
+      },
+      {
+        "series_id": "WSHOMCB",
+        "persist": true
+      },
+      {
+        "series_id": "WCICL",
+        "persist": true
+      },
+      {
+        "series_id": "RRPONTSYD",
+        "persist": true
+      },
+      {
+        "series_id": "RPONTSYD",
+        "persist": true
+      },
+      {
+        "series_id": "SOFR",
+        "persist": true
+      },
+      {
+        "series_id": "IORB",
+        "persist": true
+      },
+      {
+        "series_id": "DGS10",
+        "persist": true
+      },
+      {
+        "series_id": "DGS30",
+        "persist": true
+      },
+      {
+        "series_id": "DTWEXBGS",
+        "persist": true
+      },
+      {
+        "series_id": "DEXUSEU",
+        "persist": true
+      },
+      {
+        "series_id": "DEXJPUS",
+        "persist": true
+      },
+      {
+        "series_id": "TOTBKCR",
+        "persist": true
+      },
+      {
+        "series_id": "TOTLL",
+        "persist": true
+      },
+      {
+        "series_id": "DPSACBW027SBOG",
+        "persist": true
+      },
+      {
+        "series_id": "TLAACBW027NBOG",
+        "persist": true
+      },
+      {
+        "series_id": "GDP",
+        "persist": true
+      },
+      {
+        "series_id": "ECBASSETSW",
+        "persist": true
+      },
+      {
+        "series_id": "JPNASSETS",
+        "persist": true
+      },
+      {
+        "series_id": "CBBTCUSD",
+        "persist": false,
+        "reason": "copyrighted on FRED: reproduction prohibited without permission"
+      },
+      {
+        "series_id": "NASDAQCOM",
+        "persist": false,
+        "reason": "copyrighted on FRED: reproduction prohibited without permission"
+      },
+      {
+        "series_id": "SP500",
+        "persist": false,
+        "reason": "copyrighted on FRED: reproduction prohibited without permission"
+      }
+    ]
   }
 }
