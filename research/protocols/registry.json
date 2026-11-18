@@ -9,9 +9,41 @@
       "sha256": null,
       "fixed_at": null,
       "scoring": [
-        {"asset": "CBBTCUSD", "horizon_weeks": 8, "role": "claim"},
-        {"asset": "NASDAQCOM", "horizon_weeks": 8, "role": "reference"},
-        {"asset": "SP500", "horizon_weeks": 8, "role": "reference"}
+        {
+          "asset": "CBBTCUSD",
+          "horizon_weeks": 8,
+          "role": "claim"
+        },
+        {
+          "asset": "NASDAQCOM",
+          "horizon_weeks": 8,
+          "role": "reference"
+        },
+        {
+          "asset": "SP500",
+          "horizon_weeks": 8,
+          "role": "reference"
+        }
+      ]
+    },
+    {
+      "id": "tilt-v1",
+      "status": "draft",
+      "document": "PROTOCOL_tilt_v1.md",
+      "sha256": null,
+      "fixed_at": null,
+      "scoring": [
+        {
+          "asset": "NASDAQ100",
+          "minus": "SP500",
+          "horizon_weeks": 13,
+          "role": "claim"
+        },
+        {
+          "asset": "SP500",
+          "horizon_weeks": 13,
+          "role": "reference"
+        }
       ]
     }
   ]

@@ -211,6 +211,37 @@ class ScoreTests(Base):
         self.assertNotIn("73900", text)
         self.assertEqual(score.due(self.dir, prices, PLAN, clock=lambda: later), [])     # scored once
 
+    def test_spread_outcome_is_a_log_return_difference_on_days_both_were_observed(self):
+        import math
+        plan = {"tilt-v1": [{"asset": "GROWTH", "minus": "MARKET", "horizon_weeks": 13, "role": "claim"},
+                            {"asset": "MARKET", "horizon_weeks": 13, "role": "reference"}]}
+        protocols = {"tilt-v1": {"id": "tilt-v1", "status": "fixed"}}
+        self.seal(judgment(protocol="tilt-v1", signal=1.2), protocols=protocols)       # sealed Thu 12 Nov
+        growth = self.daily("2026-11-10", 120, value=lambda i: 20000 + 40 * i)
+        market = self.daily("2026-11-10", 120, value=lambda i: 6000 + 5 * i, skip={"2026-11-13"})
+        added = score.due(self.dir, {"GROWTH": growth, "MARKET": market}, plan, clock=lambda: THURSDAY)
+        claim = next(s for s in added if s["asset"] == "GROWTH")
+        # Friday 13 Nov has no market value, so both legs enter on Saturday 14 Nov and leave 91 days later.
+        self.assertEqual((claim["entry_date"], claim["exit_date"]), ("2026-11-14", "2027-02-13"))
+        self.assertEqual((claim["minus"], claim["measure"]), ("MARKET", "log_return_difference"))
+        g0, g1 = 20000 + 40 * 4, 20000 + 40 * 95
+        m0, m1 = 6000 + 5 * 4, 6000 + 5 * 95
+        self.assertAlmostEqual(claim["return"], math.log(g1 / g0) - math.log(m1 / m0), places=6)
+        reference = next(s for s in added if s["asset"] == "MARKET")
+        self.assertNotIn("minus", reference)
+        self.assertAlmostEqual(reference["return"], m1 / m0 - 1, places=6)
+        text = (self.dir / score.SCORES).read_text()
+        for level in (str(g0), str(g1), str(m0), str(m1)):
+            self.assertNotIn(level, text)                                              # dates and returns only
+        self.assertEqual(score.due(self.dir, {"GROWTH": growth, "MARKET": market}, plan, clock=lambda: THURSDAY), [])
+
+    def test_spread_waits_until_the_benchmark_is_available(self):
+        plan = {"tilt-v1": [{"asset": "GROWTH", "minus": "MARKET", "horizon_weeks": 13, "role": "claim"}]}
+        self.seal(judgment(protocol="tilt-v1"), protocols={"tilt-v1": {"id": "tilt-v1", "status": "fixed"}})
+        growth = self.daily("2026-11-10", 120)
+        self.assertEqual(score.due(self.dir, {"GROWTH": growth, "MARKET": []}, plan, clock=lambda: THURSDAY), [])
+        self.assertEqual(score.due(self.dir, {"GROWTH": growth}, plan, clock=lambda: THURSDAY), [])
+
     def test_provisional_and_unavailable_records_are_not_scored(self):
         self.seal(judgment(kind="provisional"), when=datetime(2026, 11, 11, 12, tzinfo=timezone.utc))
         self.seal({"protocol": "primary-v1", "week": "2026-11-11", "kind": "confirmed", "status": "unavailable",
@@ -278,10 +309,26 @@ class ProtocolRegistryTests(unittest.TestCase):
         known = {s["series_id"] for s in catalog.history()["series"]}
         for entry in self.registry:
             assets = [item["asset"] for item in entry["scoring"]]
-            self.assertTrue(set(assets) <= known, set(assets) - known)
+            named = set(assets) | {item["minus"] for item in entry["scoring"] if "minus" in item}
+            self.assertTrue(named <= known, named - known)
             self.assertEqual(len(assets), len(set(assets)))
             self.assertEqual([item["role"] for item in entry["scoring"]].count("claim"), 1)
             self.assertTrue(all(item["role"] in ("claim", "reference") for item in entry["scoring"]))
+
+    def test_tilt_protocol_states_the_lines_the_study_derived(self):
+        study = json.loads((self.ROOT.parent / "studies" / "tilt-2026-11" / "results.json").read_text())
+        text = (self.ROOT / "PROTOCOL_tilt_v1.md").read_text().replace("−", "-")
+        live = study["live_criteria"]
+        self.assertEqual(live["reviews"], [104, 156, 208, 260])
+        for line in live["kill_lines"]:
+            self.assertIn(f"{line:.2f}", text)
+        self.assertIn(f"+{live['pass_line_at_260']:.2f}", text)
+        for name in ("H0", "H1"):
+            for key in ("passed", "killed_total", "unresolved"):
+                self.assertIn(f"{live['outcomes'][name][key]:.1f}%", text, (name, key))
+        entry = next(e for e in self.registry if e["id"] == "tilt-v1")
+        claim = next(i for i in entry["scoring"] if i["role"] == "claim")
+        self.assertEqual((claim["asset"], claim["minus"], claim["horizon_weeks"]), ("NASDAQ100", "SP500", 13))
 
     def test_draft_protocol_cannot_be_sealed_under(self):
         usable = seal.load_protocols(self.ROOT)

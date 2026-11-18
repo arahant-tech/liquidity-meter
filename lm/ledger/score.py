@@ -43,7 +43,9 @@ def due(directory, prices, plan, *, clock=None):
     """Append a score for every confirmed judgment whose horizon is now observable.
 
     ``prices`` maps asset id to its rows; ``plan`` is the protocol's list of
-    {"asset", "horizon_weeks", "role"}. Returns the scores added.
+    {"asset", "horizon_weeks", "role"}. An item may also name ``"minus"``: the
+    outcome is then the asset's log return minus that benchmark's, both taken
+    on the same two days. Returns the scores added.
     """
     directory = Path(directory)
     records = chain.read(directory / RECORDS)
@@ -58,23 +60,38 @@ def due(directory, prices, plan, *, clock=None):
         for item in plan.get(record["protocol"], []):
             key = (reference, item["asset"], item["horizon_weeks"])
             rows = prices.get(item["asset"])
-            if key in done or not rows:
+            minus = item.get("minus")
+            benchmark = prices.get(minus) if minus else None
+            if key in done or not rows or (minus and not benchmark):
                 continue
+            if minus:
+                # Enter and leave only on days both series were observed.
+                other = {d: v for d, v in benchmark if v is not None}
+                rows = [(d, v) for d, v in rows if v is not None and d in other]
             found = entry_exit(rows, record["sealed_at"], item["horizon_weeks"])
             if found is None:
                 continue
             (entry_day, entry_value), (exit_day, exit_value) = found
             start, end = float(entry_value), float(exit_value)
-            if not (math.isfinite(start) and math.isfinite(end)) or start <= 0:
+            if not (math.isfinite(start) and math.isfinite(end)) or start <= 0 or end <= 0:
                 raise LedgerError("price_not_usable")
-            evidence = hashlib.sha256(f"{entry_day},{entry_value}\n{exit_day},{exit_value}\n".encode()).hexdigest()
+            lines = f"{entry_day},{entry_value}\n{exit_day},{exit_value}\n"
+            outcome, extra = end / start - 1, {}
+            if minus:
+                base_start, base_end = float(other[entry_day]), float(other[exit_day])
+                if not (math.isfinite(base_start) and math.isfinite(base_end)) or base_start <= 0 or base_end <= 0:
+                    raise LedgerError("price_not_usable")
+                lines += f"{entry_day},{other[entry_day]}\n{exit_day},{other[exit_day]}\n"
+                outcome = math.log(end / start) - math.log(base_end / base_start)
+                extra = {"minus": minus, "measure": "log_return_difference"}
+            evidence = hashlib.sha256(lines.encode()).hexdigest()
             added.append(chain.append(directory / SCORES, {
                 "record": reference, "protocol": record["protocol"], "week": record["week"],
                 "bucket": record["bucket"], "asset": item["asset"], "role": item["role"],
                 "horizon_weeks": item["horizon_weeks"],
                 "entry_date": entry_day, "exit_date": exit_day,
                 "entry_lag_days": (date.fromisoformat(entry_day) - date.fromisoformat(record["sealed_at"][:10])).days,
-                "return": round(end / start - 1, 6),
+                "return": round(outcome, 6), **extra,
                 "price_rows_sha256": evidence, "scored_at": stamp(now),
             }))
             done.add(key)

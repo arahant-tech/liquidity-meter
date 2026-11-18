@@ -200,7 +200,7 @@ class HistoryStoreTests(unittest.TestCase):
 class HistoryRegistryTests(unittest.TestCase):
     def test_price_series_are_registered_as_not_persisted(self):
         series = {s["series_id"]: s for s in catalog.history()["series"]}
-        for sid in ("SP500", "NASDAQCOM", "CBBTCUSD", "BAA10Y", "VIXCLS"):
+        for sid in ("SP500", "NASDAQCOM", "NASDAQ100", "CBBTCUSD", "BAA10Y", "VIXCLS"):
             self.assertFalse(series[sid]["persist"], sid)
             self.assertTrue(series[sid]["reason"])
         self.assertTrue(all(isinstance(s["persist"], bool) for s in series.values()))
