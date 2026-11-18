@@ -1,5 +1,5 @@
 {
-  "known_by": "2026-11-18T14:50:34.964352Z",
+  "known_by": "2026-11-18T15:43:11.293884Z",
   "metadata_response": {
     "realtime_end": "2026-11-18",
     "realtime_start": "2026-11-18",
@@ -83,7 +83,7 @@
     "provider": "FRED"
   },
   "research_eligible": false,
-  "retrieved_at": "2026-11-18T14:50:34.964352Z",
+  "retrieved_at": "2026-11-18T15:43:11.293884Z",
   "schema_version": 1,
   "series_id": "WDTGAL"
 }
