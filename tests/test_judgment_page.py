@@ -7,7 +7,7 @@ import shutil
 import subprocess
 import unittest
 
-from lm.measure import quadrant
+from lm.measure import models, quadrant
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
@@ -24,10 +24,12 @@ class JudgmentPageTests(unittest.TestCase):
         live = os.environ.get("LM_PUBLIC_DIR")
         cls.live = Path(live).resolve() / "quadrant.json" if live else None
         cls.fixture = ROOT / "tests" / "fixtures" / "public" / "quadrant.json"
+        cls.live_board = Path(live).resolve() / "models.json" if live else None
+        cls.board = ROOT / "tests" / "fixtures" / "public" / "models.json"
 
-    def evaluate(self, body, path=None):
+    def evaluate(self, body, path=None, second=None):
         setup = "const j=require(process.argv[1]);const fs=require('fs');const q=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));"
-        run = subprocess.run([self.node, "-e", setup + body, str(SITE / "judgment.js"), str(path or self.fixture)],
+        run = subprocess.run([self.node, "-e", setup + body, str(SITE / "judgment.js"), str(path or self.fixture), str(second or "")],
                              capture_output=True, text=True, check=True)
         return json.loads(run.stdout)
 
@@ -80,6 +82,86 @@ class JudgmentPageTests(unittest.TestCase):
             with self.subTest(case=label):
                 out = self.evaluate(mutate + f"try{{j.validate(q,{NOW});console.log('false')}}catch{{console.log('true')}}")
                 self.assertTrue(out, label)
+
+    def test_real_board_passes_the_page_contract_and_agrees_with_the_map(self):
+        out = self.evaluate(f"const m=j.validateModels(q,{NOW});const map=JSON.parse(fs.readFileSync(process.argv[3],'utf8'));"
+                            "console.log(JSON.stringify([m.status,m.score.on,m.score.of,j.boardMatchesMap(m,map),j.RULES,j.ASSETS]));",
+                            self.board, self.fixture)
+        self.assertEqual(out[0], "ok")
+        self.assertEqual(out[2], len(models.VOTERS))
+        self.assertTrue(out[3])
+        self.assertEqual(out[4], list(models.RULES))
+        study = json.loads((ROOT / "research/studies" / models.STUDY / "results.json").read_text())
+        self.assertEqual(out[5], list(study["assets"]))
+
+    def test_board_about_to_be_published_passes_the_page_contract(self):
+        if not self.live_board:
+            self.skipTest("only runs in the pipeline, against the board it is about to publish")
+        if not self.live_board.exists():
+            self.skipTest("no board was produced in this run; the page shows that state itself")
+        out = self.evaluate("const m=j.validateModels(q);console.log(JSON.stringify(m.status));", self.live_board)
+        self.assertIn(out, ("ok", "stale", "retained", "unavailable"))
+
+    def test_board_states_survive_and_old_boards_are_stale(self):
+        out = self.evaluate(f"const a=j.validateModels(q,Date.parse('2026-12-20T00:00:00Z'));q.status='retained';q.reason='input_missing_VIXCLS';"
+                            f"const b=j.validateModels(q,{NOW});const c=j.validateModels({{schema_version:1,status:'unavailable',reason:'input_missing_M2SL'}},{NOW});"
+                            "console.log(JSON.stringify([a.status,b.status,c.status,c.reason]));", self.board)
+        self.assertEqual(out, ["stale", "retained", "unavailable", "input_missing_M2SL"])
+
+    def test_broken_boards_are_refused(self):
+        cases = {
+            "wrong schema": "q.schema_version=2;",
+            "unknown status": "q.status='fine';",
+            "missing rule": "delete q.states.F3;",
+            "missing name": "delete q.names.Q8;",
+            "non-boolean state": "q.states.Q1.on='yes';",
+            "weight out of range": "q.states.C2.on=1.4;",
+            "score differs from its states": "q.score.on+=1;",
+            "weight differs from the score": "q.states.C2.on=q.states.C2.on>0.5?0.1:0.9;",
+            "majority differs from the score": "q.states.C1.on=!q.states.C1.on;",
+            "voter outside the rule list": "q.score.voters[0]='Z9';",
+            "since after the as-of week": "q.states.Q2.since='2027-01-06';",
+            "history out of order": "[q.history[3],q.history[4]]=[q.history[4],q.history[3]];",
+            "history count out of range": "q.history[2].n=9;",
+            "history ends on another week": "q.history.pop();",
+            "empty history": "q.history=[];",
+            "future week": "q.asof='2027-03-03';q.history[q.history.length-1].d='2027-03-03';",
+        }
+        for label, mutate in cases.items():
+            with self.subTest(case=label):
+                out = self.evaluate(mutate + f"try{{j.validateModels(q,{NOW});console.log('false')}}catch{{console.log('true')}}", self.board)
+                self.assertTrue(out, label)
+
+    def test_board_that_contradicts_the_map_for_the_same_week_is_not_shown(self):
+        body = ("const map=JSON.parse(fs.readFileSync(process.argv[3],'utf8'));const m=j.validateModels(q,%s);"
+                "const flip=JSON.parse(JSON.stringify(m));flip.states.Q2.on=!flip.states.Q2.on;"
+                "const other=JSON.parse(JSON.stringify(flip));other.asof='2026-11-04';"
+                "console.log(JSON.stringify([j.boardMatchesMap(m,map),j.boardMatchesMap(flip,map),j.boardMatchesMap(other,map)]));" % NOW)
+        self.assertEqual(self.evaluate(body, self.board, self.fixture), [True, False, True])
+
+    def test_model_study_has_what_the_board_reads(self):
+        base = ROOT / "research/studies" / models.STUDY
+        study, diag = json.loads((base / "results.json").read_text()), json.loads((base / "diagnostics.json").read_text())
+        self.assertRegex(study["asof"], r"^\d{4}-\d{2}-\d{2}$")
+        for asset, block in study["assets"].items():
+            for key in models.RULES:
+                row = block["models"][key]
+                self.assertTrue({"spread", "p_raw", "p_global", "grade", "periods", "delayed"} <= set(row), (asset, key))
+                self.assertIn(row["grade"], ("통과", "후보", "미달"))
+                # a pass must hold under both tests before the page may call it one
+                self.assertIn(diag[asset]["conservative_grades"][key], ("통과", "후보", "미달"))
+                if diag[asset]["conservative_grades"][key] == "통과":
+                    self.assertLess(diag[asset]["block_bootstrap"][key]["p_global"], 0.10)
+                    self.assertLess(row["p_global"], 0.10)
+            for label, cell in diag[asset]["by_count"].items():
+                self.assertRegex(label, r"^\d(~\d)?$")
+                self.assertTrue({"weeks", "mean"} <= set(cell))
+        html = (SITE / "index.html").read_text()
+        for target in ("./models.json", f"./research/studies/{models.STUDY}/README.md"):
+            self.assertIn(f'href="{target}"', html)
+        manifest = json.loads((ROOT / "lm/render/public-files.json").read_text())["repo"]
+        for name in ("PROTOCOL.md", "README.md", "results.json", "diagnostics.json"):
+            self.assertIn(f"research/studies/{models.STUDY}/{name}", manifest)
 
     def test_entry_page_loads_the_map_and_links_the_other_screens(self):
         html = (SITE / "index.html").read_text()

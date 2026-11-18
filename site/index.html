@@ -35,6 +35,27 @@
         <p class="note" id="sources-note"></p>
       </section>
 
+      <section id="models" aria-labelledby="models-title" hidden>
+        <h2 id="models-title">임시 모델 보드 <span class="badge stale" id="models-grade">실시간 검증 전</span></h2>
+        <p class="lead" id="models-lead"></p>
+        <div id="models-banner" class="banner" role="status" hidden></div>
+        <div id="models-body" hidden>
+          <div class="score">
+            <article class="panel score-now"><span class="score-label">조건 점수</span><b id="score-now">—</b><span id="score-week" class="score-week"></span><div class="chips" id="score-chips"></div></article>
+            <article class="panel"><h3>최근 52주의 조건 점수</h3><div id="score-strip"></div>
+              <div class="legend"><span><i class="sq" style="background:var(--pos)"></i><span id="legend-hi">절반 넘게 켜짐</span></span><span><i class="sq" style="background:var(--guide)"></i><span id="legend-mid">절반 바로 아래</span></span><span><i class="sq" style="background:var(--neg)"></i><span id="legend-lo">그보다 적음</span></span></div></article>
+          </div>
+          <div id="score-past" hidden>
+            <h3 class="sub">과거에 같은 점수였던 주의 다음 주 초과수익 (연율 %)</h3>
+            <article class="panel scroll"><table id="score-table"></table></article>
+            <p class="note">결과를 본 뒤에 만든 표이며 등급에 쓰지 않았다. 작은 글씨는 그 점수였던 주의 수다. 암호화폐 표본은 큰 순환 두세 번이 전부이고, BTC와 ETH는 함께 움직이므로 독립된 두 증거가 아니다.</p>
+          </div>
+          <h3 class="sub">규칙별 이번 주 상태와 과거 성적</h3>
+          <article class="panel scroll"><table id="rules"></table></article>
+          <p class="note" id="rules-note"></p>
+        </div>
+      </section>
+
       <section id="plane" aria-labelledby="plane-title">
         <h2 id="plane-title">사분면: 총량 × 방향</h2>
         <p class="lead">가로축은 총량, 즉 연준 총자산의 13주 변화다. 세로축은 방향, 즉 역레포·재무부 계정 같은 곳에 주차돼 있던 돈이 준비금 쪽으로 옮겨 온 양이다. 둘 다 13주 전 총자산 대비 %다. 대각선 위는 준비금이 는 주, 아래는 준 주다.</p>
@@ -72,11 +93,12 @@
       <section id="method" class="note-panel">
         <h2>읽는 법과 한계</h2>
         <p>총량 s는 총자산(WALCL)의 13주 변화, 방향 v는 준비금이 아닌 부채(WALCL − WRBWFRBL)의 13주 감소를 13주 전 총자산으로 나눈 값이다. s + v는 준비금 13주 변화와 오차 없이 같다. 구간은 그 주의 준비금 변화를 2009년 이후 그 주보다 앞선 값들과 비교한 다섯 등분이다.</p>
+        <p>임시 모델 보드는 미리 적어 둔 규칙이 이번 주에 켜졌는지만 계산한다. 상태는 H.4.1과 금리·스프레드·달러·변동성·통화량 자료에서 나오고, 규칙을 시험한 자산의 가격은 읽지 않는다. 일별 자료는 기준 수요일 다음 날인 목요일 값까지 쓴다. 켜짐과 꺼짐은 전량 매수·전량 매도 지시가 아니라, 비중을 조절할 근거가 얼마나 있는지를 말한다. 가격이 있어야 계산되는 전진식 모델 세 개는 보드에 없고 연구 문서에 있다.</p>
         <p>이 화면은 측정이다. 가격을 읽지 않고 예측하지 않는다. 칸별 과거 성적은 2026년 11월의 탐색 연구에서 온 고정된 표이며, 사전에 정한 검정을 통과한 것은 일부뿐이다. H.4.1은 목요일에 공표되므로 수요일 기준 값은 그 뒤에야 알 수 있다. 수집이 실패하면 마지막 정상 지도를 그 날짜 그대로 보여 준다.</p>
       </section>
     </div>
   </main>
-  <footer class="footer"><div>유동성 측정기 · 판단 화면<br>투자 조언이 아닙니다. This product uses the FRED® API but is not endorsed or certified by the Federal Reserve Bank of St. Louis.</div><div><a href="./quadrant.json">지도 자료(JSON) ↗</a><br><a href="./research/studies/quadrant-2026-11/PROTOCOL.md">연구 설계 ↗</a></div></footer>
+  <footer class="footer"><div>유동성 측정기 · 판단 화면<br>투자 조언이 아닙니다. This product uses the FRED® API but is not endorsed or certified by the Federal Reserve Bank of St. Louis.</div><div><a href="./quadrant.json">지도 자료(JSON) ↗</a> · <a href="./models.json">보드 자료(JSON) ↗</a><br><a href="./research/studies/quadrant-2026-11/PROTOCOL.md">사분면 연구 설계 ↗</a> · <a href="./research/studies/models-2026-11/README.md">모델 연구 ↗</a></div></footer>
 </div>
 <div id="tip" hidden></div>
 <script src="./judgment.js" defer></script>

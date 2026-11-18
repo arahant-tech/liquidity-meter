@@ -27,5 +27,6 @@ python -m unittest discover -s tests -p 'test_*.py'      # 전체 테스트 (오
 python -m lm.collect.cloud_feeds --output-root .run/live --checkpoint data/live --public-output data/public/live-data.json
 python -m lm.collect.chart_history --output-root .run/chart-history --live-root data/live --checkpoint data/chart-history --public-output data/public/chart-data.json
 python -m lm.measure.quadrant --history data/history --output data/public/quadrant.json   # 사분면 지도
+python -m lm.measure.models --history data/history --runtime .private/history --output data/public/models.json   # 임시 모델 보드
 python -m lm.render.package --public-dir data/public     # _site/ 생성
 ```

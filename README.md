@@ -4,7 +4,7 @@
 
 이전의 세 저장소(`macro-liquidity-dashboard`, `liqdesk`, `liqdesk-page`)를 하나로 합쳐 새로 짓고 있다.
 
-> 투자 조언이 아니다. 이 프로젝트의 어떤 신호도 다중검정 보정을 통과한 적이 없다. 주식에 대해서는 검증된 신호가 없다. 그래서 새 신호를 찾는 것보다 **판정을 고칠 수 없게 기록하고 나중에 채점하는 것**을 먼저 만든다.
+> 투자 조언이 아니다. 이 프로젝트에서 두 가지 검정을 모두 넘은 신호는 아직 없다(사전 기준 하나만 넘은 것이 암호화폐에 하나 있고, 후보로 다룬다). 주식에 대해서는 검증된 신호가 없다. 그래서 새 신호를 찾는 것보다 **판정을 고칠 수 없게 기록하고 나중에 채점하는 것**을 먼저 만든다.
 
 ## 지금 상태
 
@@ -15,7 +15,7 @@
 | P2 | 실시간 검증 기록: 사전 고정 규약, 추가 전용 기록, 채점 | 예정 |
 | P3 | 하나의 판단 화면, 기계가 읽는 판독 JSON | 첫 화면에 유동성 사분면(총량 × 방향) 구현됨. 판독 JSON·주차 보관은 예정 |
 | P4 | 잠정치(일별 TGA·역레포)와 확정치 구분 | 예정 |
-| P5 | 측정 범위 확대: 맥락 층 + 섀도 후보 신호 | 예정 |
+| P5 | 측정 범위 확대: 맥락 층 + 섀도 후보 신호 | 임시 모델 보드(규칙 17개의 이번 주 상태와 조건 점수)만 구현됨. 섀도 기록은 예정 |
 | P6 | 연결·정리 | 예정 |
 
 ## 구조
@@ -24,7 +24,7 @@
 catalog/series.json   단일 등록부. provider·FRED 계열 목록은 여기서 파생하거나 테스트로 묶는다
 lm/collect/           관측: 수집 조율, FRED 클라이언트, 차트 이력, provider 12개
 lm/store/             이력 저장소: 모델 입력 계열의 전체 이력과 개정 기록
-lm/measure/           측정: 총량·방향·준비금 변화와 여섯 칸(사분면). 가격을 읽지 않는다
+lm/measure/           측정: 총량·방향·준비금 변화와 여섯 칸(사분면), 임시 모델 보드. 가격을 읽지 않는다
 lm/render/            화면: 허용 목록 기반 사이트 패키징
 site/                 정적 화면: 판단 화면(index), 관측(observatory), 전체 자료(sources)
 docs/                 소스별 원천·한계 문서 (게시됨)
@@ -37,7 +37,7 @@ tests/                오프라인 테스트
 브랜치는 역할이 다르다.
 
 - `main`: 코드만.
-- `data`: 기계가 쓰는 상태. `live/`(체크포인트), `chart-history/`, `history/`(모델 입력 이력과 개정 기록), `public/`(게시되는 JSON: 관측 스냅숏, 차트 이력, 사분면 지도). 파이프라인이 `./data`로 체크아웃해 쓴다.
+- `data`: 기계가 쓰는 상태. `live/`(체크포인트), `chart-history/`, `history/`(모델 입력 이력과 개정 기록), `public/`(게시되는 JSON: 관측 스냅숏, 차트 이력, 사분면 지도, 임시 모델 보드). 파이프라인이 `./data`로 체크아웃해 쓴다.
 
 ## 실행
 
@@ -61,6 +61,10 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 ```bash
 .venv/bin/python -m lm.measure.quadrant --history data/history --output data/public/quadrant.json
+```
+
+```bash
+.venv/bin/python -m lm.measure.models --history data/history --runtime .private/history --output data/public/models.json
 ```
 
 ```bash

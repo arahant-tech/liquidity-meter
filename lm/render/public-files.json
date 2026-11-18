@@ -32,6 +32,10 @@
     "research/archive/us-equities-v3_2/protocol.json",
     "research/studies/quadrant-2026-11/PROTOCOL.md",
     "research/studies/quadrant-2026-11/README.md",
-    "research/studies/quadrant-2026-11/results.json"
+    "research/studies/quadrant-2026-11/results.json",
+    "research/studies/models-2026-11/PROTOCOL.md",
+    "research/studies/models-2026-11/README.md",
+    "research/studies/models-2026-11/results.json",
+    "research/studies/models-2026-11/diagnostics.json"
   ]
 }
