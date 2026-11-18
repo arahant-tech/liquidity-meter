@@ -26,7 +26,8 @@ SPECS = (
     {"asset": "BTC", "series_id": "ETF_BTC_SPOT_NET_FLOW_FARSIDE", "url": "https://farside.co.uk/btc/",
      "funds": ("IBIT", "FBTC", "BITB", "ARKB", "BTCO", "EZBC", "BRRR", "HODL", "BTCW", "MSBT", "GBTC", "BTC")},
     {"asset": "ETH", "series_id": "ETF_ETH_SPOT_NET_FLOW_FARSIDE", "url": "https://farside.co.uk/eth/",
-     "funds": ("ETHA", "ETHB", "FETH", "ETHW", "TETH", "ETHV", "QETH", "EZET", "ETHE", "ETH")},
+     # MSSE joined the publisher's table after 2026-09-16; the reported total includes it from then on.
+     "funds": ("ETHA", "ETHB", "FETH", "ETHW", "TETH", "ETHV", "QETH", "EZET", "MSSE", "ETHE", "ETH")},
 )
 MONTHS = {name: number for number, name in enumerate("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(), 1)}
 ASSUMPTIONS = [
