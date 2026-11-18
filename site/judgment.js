@@ -50,6 +50,12 @@ function checkJudgment(q) {
   if (!finite(a.value) || !finite(a.line) || a.above !== (a.value > a.line) || !validDate(a.since)) throw Error('감시 항목(총자산)이 맞지 않습니다.');
   if (!finite(r.billion_usd) || r.billion_usd < 0 || !finite(r.share) || !finite(r.line) || !validDate(r.since)) throw Error('감시 항목(역레포)을 읽을 수 없습니다.');
   if (r.share_mean === null ? r.above !== null : (!finite(r.share_mean) || r.above !== (r.share_mean >= r.line))) throw Error('감시 항목(역레포)이 맞지 않습니다.');
+  // Two later additions. A map made before them has neither; one made without their inputs carries a reason instead of a value.
+  const ra = w.reserve_adequacy, fs = w.funding_spread;
+  if (ra != null && (ra.value === null ? typeof ra.reason !== 'string' || !ra.reason
+    : !finite(ra.value) || !finite(ra.line) || !finite(ra.band_high) || ra.below !== (ra.value < ra.line) || !validDate(ra.since) || !validDate(ra.assets_date))) throw Error('감시 항목(준비금 충분성)이 맞지 않습니다.');
+  if (fs != null && (fs.value_bp === null ? typeof fs.reason !== 'string' || !fs.reason
+    : !finite(fs.value_bp) || !finite(fs.line_bp) || fs.above !== (fs.value_bp > fs.line_bp) || !validDate(fs.since) || !validDate(fs.through))) throw Error('감시 항목(자금 압박)이 맞지 않습니다.');
 }
 
 /* Refuse to draw a map that is malformed or disagrees with itself. */
@@ -283,6 +289,11 @@ function drawJudgment(q) {
   const a = w.total_assets, r = w.reverse_repo;
   tile(watch, fmt(a.value, 2) + '%', `총자산 13주 변화 · 감시선 ${fmt(a.line, 0)}%p · ${a.above ? '넘었다' : '아래'} (${a.since}부터)`, a.above ? 'hit' : '');
   tile(watch, r.billion_usd.toFixed(1), `국내 역레포 (십억 달러) · 총자산의 ${(r.share_mean === null ? r.share : r.share_mean).toFixed(2)}%${r.share_mean === null ? '' : ` (${r.mean_weeks}주 평균)`} · 감시선 ${r.line}% · ${r.above === null ? '판단 보류' : r.above ? '넘었다' : '아래'}${r.above === null ? '' : ` (${r.since}부터)`}`, r.above ? 'hit' : '');
+  const ra = w.reserve_adequacy, fs = w.funding_spread;
+  if (ra) tile(watch, ra.value === null ? '—' : ra.value.toFixed(2) + '%', ra.value === null ? `준비금 ÷ 은행 자산 · 자료 없음 (${ra.reason})`
+    : `준비금 ÷ 은행 자산 · 포화 구간 ${ra.line}~${ra.band_high}% · ${ra.below ? '그 아래' : ra.value < ra.band_high ? '구간 안' : '그 위'} (${ra.since}부터) · 은행 자산 ${ra.assets_date} 기준`, ra.below ? 'hit' : '');
+  if (fs) tile(watch, fs.value_bp === null ? '—' : fmt(fs.value_bp, 1) + 'bp', fs.value_bp === null ? `레포 금리 − 준비금 이자율 · 자료 없음 (${fs.reason})`
+    : `레포 금리 − 준비금 이자율 (SOFR − IORB, ${fs.days}일 평균, ${fs.through}까지) · 감시선 ${fs.line_bp}bp · ${fs.above ? '넘었다' : '아래'} (${fs.since}부터)`, fs.above ? 'hit' : '');
   section.hidden = false;
   judged = q; drawJudgmentCharts();
 }

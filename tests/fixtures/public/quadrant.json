@@ -26,7 +26,7 @@
       "weeks": 217
     }
   },
-  "checked_at": "2026-11-18T04:04:09.045922Z",
+  "checked_at": "2026-11-18T13:07:20.573094Z",
   "definition": {
     "bucket": "quintile of s + v against strictly earlier weeks since 2009-01-01",
     "candidate": "x = s + v with the Treasury account's contribution removed; own quintiles",
@@ -37,37 +37,52 @@
     "vector": "minus the change in non-reserve liabilities (WALCL − WRBWFRBL)",
     "window_weeks": 13
   },
-  "generated_at": "2026-11-18T04:04:09.045922Z",
+  "generated_at": "2026-11-18T13:07:20.573094Z",
   "inputs": {
+    "IORB": {
+      "last_date": "2026-11-17",
+      "retrieved_at": "2026-11-17T18:06:25.363795Z",
+      "status": "ok"
+    },
+    "SOFR": {
+      "last_date": "2026-11-16",
+      "retrieved_at": "2026-11-17T18:06:22.671809Z",
+      "status": "ok"
+    },
+    "TLAACBW027NBOG": {
+      "last_date": "2026-11-04",
+      "retrieved_at": "2026-11-17T18:06:51.676938Z",
+      "status": "ok"
+    },
     "WALCL": {
       "last_date": "2026-11-11",
       "retrieved_at": "2026-11-17T18:05:28.782065Z",
-      "status": "error"
+      "status": "ok"
     },
     "WCURCIR": {
       "last_date": "2026-11-11",
       "retrieved_at": "2026-11-17T18:05:40.046676Z",
-      "status": "error"
+      "status": "ok"
     },
     "WDTGAL": {
       "last_date": "2026-11-11",
       "retrieved_at": "2026-11-17T18:05:31.673188Z",
-      "status": "error"
+      "status": "ok"
     },
     "WLRRAFOIAL": {
       "last_date": "2026-11-11",
       "retrieved_at": "2026-11-17T18:05:48.375237Z",
-      "status": "error"
+      "status": "ok"
     },
     "WLRRAOL": {
       "last_date": "2026-11-11",
       "retrieved_at": "2026-11-17T18:08:54.053687Z",
-      "status": "error"
+      "status": "ok"
     },
     "WRBWFRBL": {
       "last_date": "2026-11-11",
       "retrieved_at": "2026-11-17T18:05:37.258262Z",
-      "status": "error"
+      "status": "ok"
     }
   },
   "judgment": {
@@ -8534,6 +8549,22 @@
   "status": "ok",
   "vintage": "current_as_of_retrieval",
   "watch": {
+    "funding_spread": {
+      "above": true,
+      "days": 5,
+      "line_bp": 0.0,
+      "since": "2026-10-28",
+      "through": "2026-11-10",
+      "value_bp": 0.4
+    },
+    "reserve_adequacy": {
+      "assets_date": "2026-11-04",
+      "band_high": 13.0,
+      "below": true,
+      "line": 12.0,
+      "since": "2026-07-22",
+      "value": 11.39
+    },
     "reverse_repo": {
       "above": false,
       "billion_usd": 0.152,

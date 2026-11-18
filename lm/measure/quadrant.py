@@ -24,6 +24,7 @@ store and writes the map. It never reads prices and makes no forecast.
 from __future__ import annotations
 
 import argparse
+from bisect import bisect_right
 from datetime import date, datetime, timedelta, timezone
 import json
 from pathlib import Path
@@ -42,6 +43,14 @@ TILT_FROM_BUCKET = 4          # buckets 4 and 5 tilt toward growth
 TOTAL_LINE = 1.0              # watch: total assets growing by more than this (% over 13 weeks)
 RRP_SHARE_LINE = 1.0          # watch: domestic reverse repos above this share of total assets (%)
 RRP_MEAN_WEEKS = 4            # quarter-end spikes are averaged out
+# Watch items for "are reserves still enough". Optional inputs: when one is missing the map is still made.
+WATCH_SERIES = {"ASSETS": "TLAACBW027NBOG", "SOFR": "SOFR", "IORB": "IORB"}
+ADEQUACY_LINE = 12.0          # reserves as % of commercial bank assets. A New York Fed estimate (Staff Report
+ADEQUACY_BAND_HIGH = 13.0     # 1019) puts the point where reserve demand is satiated at about 12–13%; it moves over time
+ASSETS_MAX_AGE_DAYS = 21      # H.8 trails H.4.1 by about a week; anything older is not used
+SPREAD_DAYS = 5               # business days averaged, ending on the H.4.1 Wednesday
+SPREAD_MAX_AGE_DAYS = 7
+SPREAD_LINE_BP = 0.0          # repo (SOFR) above the rate paid on reserves (IORB): reserves are being bid for
 
 
 def classify(s, v):
@@ -98,6 +107,37 @@ def weekly_rows(series):
     return rows
 
 
+def attach_watch(rows, assets=None, sofr=None, iorb=None):
+    """Reserve adequacy and the funding spread for every week.
+
+    ``assets`` is commercial bank total assets in billions; ``sofr`` and ``iorb`` are daily rates in
+    percent, all as [(iso_date, value-or-None)]. A missing, stale or incomplete input gives None
+    with a reason. Nothing is filled or carried forward beyond the stated limits.
+    """
+    pairs = sorted((d, float(v)) for d, v in (assets or []) if v is not None)
+    asset_days, asset_values = [d for d, _ in pairs], [v for _, v in pairs]
+    paid = {d: float(v) for d, v in (iorb or []) if v is not None}
+    spreads = sorted((d, (float(v) - paid[d]) * 100) for d, v in (sofr or []) if v is not None and d in paid)   # basis points
+    spread_days, spread_values = [d for d, _ in spreads], [v for _, v in spreads]
+    age = lambda later, earlier: (date.fromisoformat(later) - date.fromisoformat(earlier)).days
+    for row in rows:
+        row.update(adequacy=None, assets_date=None, spread=None, spread_through=None,
+                   adequacy_reason="input_missing_" + WATCH_SERIES["ASSETS"] if not pairs else "bank_assets_stale",
+                   spread_reason=("input_missing_" + WATCH_SERIES["SOFR"] if not sofr else
+                                  "input_missing_" + WATCH_SERIES["IORB"] if not iorb else "funding_rates_incomplete"))
+        position = bisect_right(asset_days, row["date"])
+        if position and asset_values[position - 1] > 0 and age(row["date"], asset_days[position - 1]) <= ASSETS_MAX_AGE_DAYS:
+            # rounded here so that the flag, its start date and the published number always agree
+            row["adequacy"] = round(100 * row["levels"]["R"] / asset_values[position - 1], 2)
+            row["assets_date"], row["adequacy_reason"] = asset_days[position - 1], None
+        position = bisect_right(spread_days, row["date"])
+        if (position >= SPREAD_DAYS and age(row["date"], spread_days[position - 1]) <= SPREAD_MAX_AGE_DAYS
+                and age(row["date"], spread_days[position - SPREAD_DAYS]) <= SPREAD_MAX_AGE_DAYS + 7):
+            row["spread"] = round(sum(spread_values[position - SPREAD_DAYS:position]) / SPREAD_DAYS, 1)
+            row["spread_through"], row["spread_reason"] = spread_days[position - 1], None
+    return rows
+
+
 def assign_buckets(rows, value="g", bucket="bucket", bounds="bounds"):
     """Quintile of a value against strictly earlier weeks only; None until enough history exists."""
     past = []
@@ -148,7 +188,11 @@ def judgment(rows):
         driver = "both"
     else:
         driver = "total" if last["s"] > 0 else "direction"
-    mean = last["rrp_share_mean"]
+    # Flags are taken from the rounded numbers that are published, so the two can never disagree.
+    total = lambda r: round(r["s"], 4)
+    repo = lambda r: None if r["rrp_share_mean"] is None else round(r["rrp_share_mean"], 4)
+    mean, adequacy, spread = repo(last), last.get("adequacy"), last.get("spread")
+    held = lambda key, test: since(rows, lambda r: None if r.get(key) is None else test(r[key]))
     return {
         "protocol": PROTOCOL, "tilt": main["tilt"], "since": main["since"],
         "indicator": {"id": "reserve_change_13w", **main},
@@ -157,13 +201,20 @@ def judgment(rows):
         "source": {"driver": driver, "total": round(last["s"], 4), "direction": round(last["v"], 4),
                    "tga": round(last["sources"]["tga"], 4)},
     }, {
-        "total_assets": {"value": round(last["s"], 4), "line": TOTAL_LINE, "above": last["s"] > TOTAL_LINE,
-                         "since": since(rows, lambda r: r["s"] > TOTAL_LINE)},
+        "total_assets": {"value": total(last), "line": TOTAL_LINE, "above": total(last) > TOTAL_LINE,
+                         "since": since(rows, lambda r: total(r) > TOTAL_LINE)},
         "reverse_repo": {"billion_usd": round(last["levels"]["RRP"], 3), "share": round(last["rrp_share"], 4),
-                         "share_mean": None if mean is None else round(mean, 4), "mean_weeks": RRP_MEAN_WEEKS,
+                         "share_mean": mean, "mean_weeks": RRP_MEAN_WEEKS,
                          "line": RRP_SHARE_LINE, "above": None if mean is None else mean >= RRP_SHARE_LINE,
-                         "since": since(rows, lambda r: None if r["rrp_share_mean"] is None
-                                        else r["rrp_share_mean"] >= RRP_SHARE_LINE)},
+                         "since": since(rows, lambda r: None if repo(r) is None else repo(r) >= RRP_SHARE_LINE)},
+        "reserve_adequacy": ({"value": None, "reason": last.get("adequacy_reason") or "not_computed"} if adequacy is None else
+                             {"value": adequacy, "line": ADEQUACY_LINE, "band_high": ADEQUACY_BAND_HIGH,
+                              "below": adequacy < ADEQUACY_LINE, "since": held("adequacy", lambda a: a < ADEQUACY_LINE),
+                              "assets_date": last["assets_date"]}),
+        "funding_spread": ({"value_bp": None, "reason": last.get("spread_reason") or "not_computed"} if spread is None else
+                           {"value_bp": spread, "line_bp": SPREAD_LINE_BP, "above": spread > SPREAD_LINE_BP,
+                            "since": held("spread", lambda x: x > SPREAD_LINE_BP), "days": SPREAD_DAYS,
+                            "through": last["spread_through"]}),
     }
 
 
@@ -202,6 +253,16 @@ def build(history_root, *, clock=None, previous_output=None):
             return _retained(previous_output, "input_invalid_" + sid, stamp)
     rows = assign_buckets([r for r in weekly_rows(series) if r["date"] >= START])
     assign_buckets(rows, "x", "xbucket", "xbounds")
+    extra = {}
+    for key, sid in WATCH_SERIES.items():
+        try:
+            extra[key] = history.read_series(root, root, sid, True)
+        except Exception:
+            extra[key] = None
+    try:
+        attach_watch(rows, extra["ASSETS"], extra["SOFR"], extra["IORB"])
+    except ValueError:
+        attach_watch(rows)                 # an unreadable watch input must not cost the map
     if not rows:
         return _retained(previous_output, "no_complete_week", stamp)
     last = rows[-1]
@@ -232,7 +293,8 @@ def build(history_root, *, clock=None, previous_output=None):
         "cells": {c: {"weeks": counts[c], "share": round(counts[c] / len(rows), 4)} for c in CELLS},
         "points": [{"d": r["date"], "s": round(r["s"], 3), "v": round(r["v"], 3), "c": r["cell"], "b": r["bucket"],
                     "x": round(r["x"], 3), "xb": r["xbucket"]} for r in rows],
-        "inputs": {sid: {k: index.get(sid, {}).get(k) for k in ("last_date", "retrieved_at", "status")} for sid in SERIES.values()},
+        "inputs": {sid: {k: index.get(sid, {}).get(k) for k in ("last_date", "retrieved_at", "status")}
+                   for sid in list(SERIES.values()) + list(WATCH_SERIES.values())},
     }
 
 

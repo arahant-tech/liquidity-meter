@@ -172,6 +172,18 @@ class JudgmentPageTests(unittest.TestCase):
             self.assertEqual(reading["tilt_from"], reading["bounds"][quadrant.TILT_FROM_BUCKET - 2])
         self.assertEqual(judged["protocol"], quadrant.PROTOCOL)
         self.assertEqual((watch["total_assets"]["line"], watch["reverse_repo"]["line"]), (quadrant.TOTAL_LINE, quadrant.RRP_SHARE_LINE))
+        self.assertEqual((watch["reserve_adequacy"]["line"], watch["reserve_adequacy"]["band_high"]),
+                         (quadrant.ADEQUACY_LINE, quadrant.ADEQUACY_BAND_HIGH))
+        self.assertEqual((watch["funding_spread"]["line_bp"], watch["funding_spread"]["days"]),
+                         (quadrant.SPREAD_LINE_BP, quadrant.SPREAD_DAYS))
+
+    def test_watch_items_without_their_inputs_or_from_an_earlier_map_still_draw(self):
+        out = self.evaluate("q.watch.reserve_adequacy={value:null,reason:'input_missing_TLAACBW027NBOG'};"
+                            "q.watch.funding_spread={value_bp:null,reason:'input_missing_SOFR'};"
+                            f"const a=j.validate(q,{NOW});const empty=a.watch.reserve_adequacy.value;"
+                            f"delete q.watch.reserve_adequacy;delete q.watch.funding_spread;const b=j.validate(q,{NOW});"
+                            "console.log(JSON.stringify([a.status,empty,b.status,Object.keys(b.watch).length]));")
+        self.assertEqual(out, ["ok", None, "ok", 2])
 
     def test_an_older_map_without_a_judgment_still_draws(self):
         out = self.evaluate(f"delete q.judgment;delete q.watch;const r=j.validate(q,{NOW});console.log(JSON.stringify([r.status,r.judgment===undefined]));")
@@ -192,6 +204,10 @@ class JudgmentPageTests(unittest.TestCase):
             "watch flag contradicts its value": "q.watch.total_assets.above=!q.watch.total_assets.above;",
             "repo flag contradicts its mean": "q.watch.reverse_repo.above=!q.watch.reverse_repo.above;",
             "judgment without watch items": "delete q.watch;",
+            "adequacy flag contradicts its value": "q.watch.reserve_adequacy.below=!q.watch.reserve_adequacy.below;",
+            "adequacy without a reason for being empty": "q.watch.reserve_adequacy={value:null};",
+            "spread flag contradicts its value": "q.watch.funding_spread.above=!q.watch.funding_spread.above;",
+            "spread with an unreadable value": "q.watch.funding_spread.value_bp='3';",
             "bad candidate bucket on a point": "q.points[400].xb=0;",
         }
         for label, mutate in cases.items():
