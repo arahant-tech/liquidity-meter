@@ -62,6 +62,18 @@ tr.current td:first-child{box-shadow:inset 3px 0 0 var(--text)}
 .cellname small{margin:0}
 .mark{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
 .here{font-size:11px;color:var(--text);border:1px solid var(--guide);border-radius:4px;padding:0 5px;margin-left:6px}
+.judge{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:14px;align-items:stretch}
+.verdict b{display:block;font-size:34px;line-height:1.2;letter-spacing:-.9px;font-weight:700;margin:2px 0 4px}
+.verdict b.on{color:var(--pos)}
+#scale{margin-top:6px}
+svg .on-pos{fill:#fff;font-weight:600}
+.tiles.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tiles.stack{grid-template-columns:minmax(0,1fr)}
+.tiles.stack .tile b{font-size:19px}
+.tile.warn{border-color:var(--warning-line);background:var(--warning-bg)}
+.tile.hit{border-color:var(--pos)}
+.sub small{font-weight:400;color:var(--muted);margin-left:6px;font-size:12.5px}
+a.inline{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
 .score{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:14px;align-items:stretch}
 .score-now b{display:block;font-size:44px;line-height:1.1;letter-spacing:-1.2px;font-weight:700;font-variant-numeric:tabular-nums;margin:2px 0 4px}
 .score-label{font-size:13px;color:var(--muted)}
@@ -85,5 +97,5 @@ td.cand{background:var(--warning-bg)}
 #tip{position:fixed;z-index:20;pointer-events:none;background:var(--tooltip);color:var(--text);border:1px solid var(--guide);border-radius:8px;padding:7px 9px;font-size:12px;line-height:1.45;max-width:240px}
 #tip b{font-size:13px;display:block}
 @media(max-width:1120px){.shell{width:calc(100% - 44px)}}
-@media(max-width:760px){.shell{width:calc(100% - 32px)}.planes{grid-template-columns:minmax(0,1fr)}.score{grid-template-columns:minmax(0,1fr)}.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.hero h1{font-size:27px}.run-panel{text-align:left}.run-head,.run-foot{justify-content:flex-start}.toplinks{gap:16px}}
+@media(max-width:760px){.shell{width:calc(100% - 32px)}.planes{grid-template-columns:minmax(0,1fr)}.score{grid-template-columns:minmax(0,1fr)}.judge{grid-template-columns:minmax(0,1fr)}.tiles.two{grid-template-columns:minmax(0,1fr)}.verdict b{font-size:28px}.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.hero h1{font-size:27px}.run-panel{text-align:left}.run-head,.run-foot{justify-content:flex-start}.toplinks{gap:16px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
