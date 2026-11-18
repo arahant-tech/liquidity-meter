@@ -1,0 +1,128 @@
+{
+  "count": {
+    "records": 1,
+    "scores": 0
+  },
+  "generated_at": "2026-11-18T15:55:43.732646Z",
+  "head": {
+    "records": "ccac3e491d3c7787dbe70b3d804e16cfc2f1eab4cecbd29b2c6514c19198ae96",
+    "scores": null
+  },
+  "protocols": {
+    "tilt-v1": {
+      "assets": [
+        {
+          "asset": "NASDAQ100",
+          "by_bucket": {
+            "1": {
+              "n": 0
+            },
+            "2": {
+              "n": 0
+            },
+            "3": {
+              "n": 0
+            },
+            "4": {
+              "n": 0
+            },
+            "5": {
+              "n": 0
+            }
+          },
+          "enough_to_read": false,
+          "horizon_weeks": 13,
+          "independent": 0,
+          "on_off": {
+            "difference": null,
+            "off": {
+              "mean": null,
+              "n": 0
+            },
+            "on": {
+              "mean": null,
+              "n": 0
+            }
+          },
+          "pending": 1,
+          "rank_correlation": null,
+          "role": "claim",
+          "scored": 0,
+          "shift_null": null
+        },
+        {
+          "asset": "SP500",
+          "by_bucket": {
+            "1": {
+              "n": 0
+            },
+            "2": {
+              "n": 0
+            },
+            "3": {
+              "n": 0
+            },
+            "4": {
+              "n": 0
+            },
+            "5": {
+              "n": 0
+            }
+          },
+          "enough_to_read": false,
+          "horizon_weeks": 13,
+          "independent": 0,
+          "on_off": {
+            "difference": null,
+            "off": {
+              "mean": null,
+              "n": 0
+            },
+            "on": {
+              "mean": null,
+              "n": 0
+            }
+          },
+          "pending": 1,
+          "rank_correlation": null,
+          "role": "reference",
+          "scored": 0,
+          "shift_null": null
+        }
+      ],
+      "confirmed": 1,
+      "criteria": {
+        "kill_at_or_below": [
+          -1.63,
+          -1.07,
+          -0.76,
+          -0.54
+        ],
+        "min_group_weeks": 26,
+        "pass_at_or_above": 1.64,
+        "pass_only_at_scored_weeks": 260,
+        "reviews_at_scored_weeks": [
+          104,
+          156,
+          208,
+          260
+        ],
+        "statistic": "mean outcome when on minus mean outcome when off, percentage points"
+      },
+      "first_week": "2026-11-11",
+      "last_week": "2026-11-11",
+      "latest": {
+        "bucket": 3,
+        "sealed_at": "2026-11-18T15:55:42.359899Z",
+        "signal": 0.3306,
+        "week": "2026-11-11"
+      },
+      "off_weeks": 1,
+      "on_weeks": 0,
+      "provisional": 0,
+      "tilt_from_bucket": 4,
+      "unavailable": 0
+    }
+  },
+  "schema_version": 1
+}
