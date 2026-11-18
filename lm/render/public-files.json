@@ -16,6 +16,7 @@
     ".nojekyll"
   ],
   "repo": [
+    "research/archive/README.md",
     "research/archive/buffett-v3_1/REPORT.md",
     "research/archive/buffett-v3_1/SOURCES.md",
     "research/archive/buffett-v3_1/quarterly.csv",
@@ -36,6 +37,10 @@
     "research/studies/models-2026-11/PROTOCOL.md",
     "research/studies/models-2026-11/README.md",
     "research/studies/models-2026-11/results.json",
-    "research/studies/models-2026-11/diagnostics.json"
+    "research/studies/models-2026-11/diagnostics.json",
+    "research/archive/v6-btc-forward/OUTCOME.md",
+    "research/archive/v6-btc-forward/outcome.json",
+    "research/protocols/PROTOCOL_primary_v1.md",
+    "research/protocols/registry.json"
   ]
 }

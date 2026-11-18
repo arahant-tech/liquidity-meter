@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "note": "A protocol can be sealed under only when status is 'fixed' and the document still has the recorded sha256.",
+  "protocols": [
+    {
+      "id": "primary-v1",
+      "status": "draft",
+      "document": "PROTOCOL_primary_v1.md",
+      "sha256": null,
+      "fixed_at": null,
+      "scoring": [
+        {"asset": "CBBTCUSD", "horizon_weeks": 8, "role": "claim"},
+        {"asset": "NASDAQCOM", "horizon_weeks": 8, "role": "reference"},
+        {"asset": "SP500", "horizon_weeks": 8, "role": "reference"}
+      ]
+    }
+  ]
+}
