@@ -98,6 +98,47 @@ def due(directory, prices, plan, *, clock=None):
     return added
 
 
+def cross_check(directory):
+    """What the chain alone cannot see: a record that contradicts itself, or a score for a record that is not there.
+
+    Each line commits to the one before it, so the newest line has nothing after it to vouch for it.
+    """
+    directory = Path(directory)
+    records = chain.read(directory / RECORDS)
+    known = set()
+    for record in records:
+        if record.get("status") == "ok":
+            bounds, signal = record.get("bounds") or [], record.get("signal")
+            if not isinstance(signal, (int, float)) or 1 + sum(signal > b for b in bounds) != record.get("bucket"):
+                raise LedgerError("record_bucket_disagrees_with_its_bounds")
+        known.add(record_hash(record))
+    for item in chain.read(directory / SCORES):
+        if item.get("record") not in known:
+            raise LedgerError("score_refers_to_a_record_that_is_not_there")
+
+
+def check_anchor(directory, published):
+    """The record must still contain, line for line, what the last published summary described.
+
+    The summary is saved outside the record branch. A record that was rewritten, shortened or
+    replaced no longer matches it, even if its own chain is consistent.
+    """
+    directory = Path(directory)
+    head, count = (published or {}).get("head") or {}, (published or {}).get("count") or {}
+    checked = {}
+    for name, key in ((RECORDS, "records"), (SCORES, "scores")):
+        expected, lines = head.get(key), count.get(key)
+        if expected is None and not lines:
+            continue
+        path = directory / name
+        chain.read(path)                                           # raises if the file itself is broken
+        text = path.read_bytes().decode()[:-1].split("\n") if path.exists() and path.read_bytes() else []
+        if not isinstance(lines, int) or lines < 1 or len(text) < lines or chain.line_hash(text[lines - 1]) != expected:
+            raise LedgerError("record_no_longer_matches_the_published_summary")
+        checked[key] = lines
+    return checked
+
+
 def _ranks(values):
     order = sorted(range(len(values)), key=lambda i: values[i])
     ranks = [0.0] * len(values)
@@ -142,25 +183,36 @@ def shift_null(buckets, returns):
     return values, sum(v >= observed for v in values) / len(values)
 
 
-def scorecard(directory, plan, *, min_independent=6, clock=None):
-    """A summary for the site. It reports counts and spreads; it does not declare a verdict."""
+def scorecard(directory, plan, *, min_independent=6, clock=None, extras=None):
+    """A summary for the site. It reports counts and spreads; it does not declare a verdict.
+
+    ``extras`` maps a protocol to what its registry entry says about reading the record:
+    ``tilt_from_bucket`` (buckets at or above it are "on") and ``criteria`` (the review lines).
+    """
     directory = Path(directory)
     records = chain.read(directory / RECORDS)
     scores = chain.read(directory / SCORES)
     now = (clock or (lambda: datetime.now(timezone.utc)))()
     out = {"schema_version": 1, "generated_at": stamp(now),
            "head": {"records": chain.head(directory / RECORDS), "scores": chain.head(directory / SCORES)},
+           "count": {"records": len(records), "scores": len(scores)},
            "protocols": {}}
     for protocol, items in plan.items():
         mine = [r for r in records if r["protocol"] == protocol]
         confirmed = [r for r in mine if r["kind"] == "confirmed"]
         usable = [r for r in confirmed if r["status"] == "ok"]
+        extra = (extras or {}).get(protocol, {})
+        split = extra.get("tilt_from_bucket")
         summary = {"confirmed": len(confirmed), "provisional": sum(r["kind"] == "provisional" for r in mine),
                    "unavailable": len(confirmed) - len(usable),
                    "first_week": confirmed[0]["week"] if confirmed else None,
                    "last_week": confirmed[-1]["week"] if confirmed else None,
                    "latest": ({k: usable[-1][k] for k in ("week", "bucket", "signal", "sealed_at")} if usable else None),
-                   "assets": []}
+                   "criteria": extra.get("criteria"), "assets": []}
+        if split:
+            summary["tilt_from_bucket"] = split
+            summary["on_weeks"] = sum(r["bucket"] >= split for r in usable)
+            summary["off_weeks"] = len(usable) - summary["on_weeks"]
         for item in items:
             rows = sorted((s for s in scores if s["protocol"] == protocol and s["asset"] == item["asset"]
                            and s["horizon_weeks"] == item["horizon_weeks"]), key=lambda s: s["week"])
@@ -178,6 +230,14 @@ def scorecard(directory, plan, *, min_independent=6, clock=None):
                      "scored": len(rows), "pending": len(usable) - len(rows), "independent": independent,
                      "enough_to_read": enough, "by_bucket": by_bucket,
                      "rank_correlation": None, "shift_null": None}
+            if split:
+                # The tilt protocols' statistic: mean outcome when on minus mean outcome when off.
+                on = [r for b, r in zip(buckets, returns) if b >= split]
+                off = [r for b, r in zip(buckets, returns) if b < split]
+                asset["on_off"] = {
+                    "on": {"n": len(on), "mean": round(statistics.fmean(on), 6) if on else None},
+                    "off": {"n": len(off), "mean": round(statistics.fmean(off), 6) if off else None},
+                    "difference": round(statistics.fmean(on) - statistics.fmean(off), 6) if on and off else None}
             if enough:
                 rho = rank_correlation(buckets, returns)
                 asset["rank_correlation"] = None if rho is None else round(rho, 4)

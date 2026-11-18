@@ -6,8 +6,10 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from lm.ledger import chain, score, seal
+from lm.ledger import chain, score, seal, tilt
 from lm.ledger.chain import LedgerError
+from lm.measure import quadrant
+from lm.store import history
 
 PROTOCOLS = {"primary-v1": {"id": "primary-v1", "status": "fixed"}}
 PLAN = {"primary-v1": [{"asset": "BTC", "horizon_weeks": 8, "role": "claim"},
@@ -286,6 +288,168 @@ class ScorecardTests(Base):
         self.assertAlmostEqual(score.rank_correlation([1, 1, 2, 2], [1, 2, 3, 4]), 0.894427, places=5)
 
 
+def wobble(i):
+    """Reserves that move unevenly, so 13-week changes take many different values."""
+    return 3_000_000 + 1_000 * ((7 * i * i + 13 * i) % 97 - 48)
+
+
+def write_store(root, weeks=220, reserves=wobble, skip=()):
+    """A small H.4.1 history in the store's own format, ending on Wednesday 2026-11-11."""
+    last = datetime(2026, 11, 11).date()
+    days = [(last - timedelta(weeks=weeks - 1 - i)).isoformat() for i in range(weeks)]
+    levels = {"L": lambda i: 6_000_000, "R": reserves, "RRP": lambda i: 100_000, "FRRP": lambda i: 300_000,
+              "TGA": lambda i: 800_000, "CUR": lambda i: 2_400_000}
+    (Path(root) / "series").mkdir(parents=True, exist_ok=True)
+    for key, sid in quadrant.SERIES.items():
+        if key not in skip:
+            rows = [(d, repr(float(levels[key](i)))) for i, d in enumerate(days)]
+            (Path(root) / "series" / f"{sid}.csv").write_bytes(history.encode(rows))
+    return days
+
+
+class TiltJudgmentTests(Base):
+    REAL = Path(__file__).resolve().parents[1] / "research" / "protocols"
+
+    def setUp(self):
+        super().setUp()
+        self.store = self.dir / "history"
+
+    def test_judgment_is_the_measurement_and_passes_the_seal_checks(self):
+        days = write_store(self.store, reserves=lambda i: wobble(i) + (900_000 if i >= 215 else 0))
+        made = tilt.build(self.store)
+        self.assertEqual((made["protocol"], made["week"], made["kind"], made["status"]), ("tilt-v1", days[-1], "confirmed", "ok"))
+        seal.validate(made)
+        self.assertEqual((made["bucket"], made["components"]["tilt"]), (5, 1))
+        self.assertEqual(made["bucket"], tilt.bucket_of(made["signal"], made["bounds"]))        # from the sealed numbers
+        self.assertEqual(made["components"]["x_tilt"], 1)                                       # the Treasury account did not move
+        self.assertEqual(made["inputs"]["series"], sorted(quadrant.SERIES.values()))
+        self.assertNotIn("return", json.dumps(made))
+
+    def test_a_value_on_a_boundary_goes_to_the_lower_bucket(self):
+        self.assertEqual([tilt.bucket_of(v, [-1.0, 0.0, 1.0, 2.0]) for v in (-2, -1.0, 0.5, 1.0, 1.0001, 2.0, 9)], [1, 1, 3, 3, 4, 4, 5])
+
+    def test_input_hash_follows_the_data_and_a_missing_input_stops_the_judgment(self):
+        write_store(self.store)
+        first = tilt.build(self.store)["inputs"]["sha256"]
+        self.assertEqual(first, tilt.build(self.store)["inputs"]["sha256"])
+        write_store(self.store, reserves=lambda i: 3_000_001)
+        self.assertNotEqual(first, tilt.build(self.store)["inputs"]["sha256"])
+        (self.store / "series" / "WDTGAL.csv").unlink()
+        with self.assertRaisesRegex(LedgerError, "judgment_input_missing"):
+            tilt.build(self.store)
+
+    def test_without_enough_history_the_week_is_recorded_as_unavailable(self):
+        write_store(self.store, weeks=60)
+        made = tilt.build(self.store)
+        self.assertEqual((made["status"], made["reason"]), ("unavailable", "not_enough_history_for_a_bucket"))
+        seal.validate(made)
+
+    def test_the_fixed_protocol_seals_a_week_once(self):
+        write_store(self.store)
+        protocols = seal.load_protocols(self.REAL)
+        record, reason = seal.seal(self.dir, tilt.build(self.store), protocols=protocols, clock=lambda: THURSDAY, env=ENV)
+        self.assertEqual((record["protocol"], record["week"], record["status"], reason), ("tilt-v1", "2026-11-11", "ok", None))
+        again, reason = seal.seal(self.dir, tilt.build(self.store), protocols=protocols, clock=lambda: THURSDAY, env=ENV)
+        self.assertEqual((again, reason), (None, "already_confirmed"))
+
+    def test_command_seals_and_reports(self):
+        import contextlib, io
+        from lm.ledger import __main__ as cli
+        write_store(self.store)
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            code = cli.main(["seal-tilt", "--dir", str(self.dir / "record"), "--history", str(self.store)])
+        result = json.loads(out.getvalue())
+        self.assertEqual((code, result["sealed"], result["week"]), (0, True, "2026-11-11"))
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            code = cli.main(["seal-tilt", "--dir", str(self.dir / "record"), "--history", str(self.dir / "nowhere")])
+        self.assertEqual((code, json.loads(out.getvalue())), (1, {"error": "judgment_input_missing"}))
+
+
+class TamperTests(Base):
+    """What a consistent-looking chain cannot hide."""
+
+    def sealed(self, weeks=("2026-10-28", "2026-11-04", "2026-11-11")):
+        for i, week in enumerate(weeks):
+            when = datetime.fromisoformat(week).replace(tzinfo=timezone.utc) + timedelta(days=1, hours=22)
+            self.seal(judgment(week=week, signal=-0.4 + i), when=when)
+        return score.scorecard(self.dir, PLAN)
+
+    def rewrite(self, change):
+        rows = [json.loads(line) for line in self.records.read_text().strip().split("\n")]
+        self.records.unlink()
+        for row in rows:
+            for key in ("seq", "prev", "schema_version"):
+                row.pop(key)
+            change(row)
+            chain.append(self.records, row)
+
+    def test_summary_carries_the_head_and_count_it_was_made_from(self):
+        card = self.sealed()
+        self.assertEqual(card["count"], {"records": 3, "scores": 0})
+        self.assertEqual(card["head"]["records"], chain.head(self.records))
+
+    def test_record_that_only_grew_still_matches_the_published_summary(self):
+        card = self.sealed()
+        self.seal(judgment(week="2026-11-18"), when=datetime(2026, 11, 19, 22, 30, tzinfo=timezone.utc))
+        self.assertEqual(score.check_anchor(self.dir, card), {"records": 3})
+        self.assertEqual(score.check_anchor(self.dir, {}), {})                                  # nothing published yet
+
+    def test_a_rewritten_record_is_caught_even_though_its_own_chain_is_consistent(self):
+        card = self.sealed()
+        self.rewrite(lambda row: row.update(signal=1.2, bucket=4) if row["week"] == "2026-11-04" else None)
+        self.assertEqual(len(chain.read(self.records)), 3)                                       # the chain itself is fine
+        score.cross_check(self.dir)
+        with self.assertRaisesRegex(LedgerError, "record_no_longer_matches_the_published_summary"):
+            score.check_anchor(self.dir, card)
+
+    def test_a_shortened_record_is_caught(self):
+        card = self.sealed()
+        lines = self.records.read_text().strip().split("\n")
+        self.records.write_text("\n".join(lines[:2]) + "\n")
+        with self.assertRaisesRegex(LedgerError, "record_no_longer_matches_the_published_summary"):
+            score.check_anchor(self.dir, card)
+
+    def test_an_edited_newest_line_is_caught_by_its_own_numbers(self):
+        self.sealed()
+        text = self.records.read_text()
+        last = text.strip().split("\n")[-1]
+        self.assertIn('"bucket":5', last)
+        self.records.write_text(text.replace(last, last.replace('"bucket":5', '"bucket":4')))
+        self.assertEqual(len(chain.read(self.records)), 3)                                       # nothing after it to vouch for it
+        with self.assertRaisesRegex(LedgerError, "record_bucket_disagrees_with_its_bounds"):
+            score.cross_check(self.dir)
+
+    def test_a_score_for_a_record_that_is_gone_is_caught(self):
+        self.seal(judgment())
+        days = [(datetime(2026, 11, 10) + timedelta(days=i)).date().isoformat() for i in range(80)]
+        prices = {"BTC": [(d, str(100 + i)) for i, d in enumerate(days)], "EQ": []}
+        self.assertEqual(len(score.due(self.dir, prices, PLAN, clock=lambda: THURSDAY)), 1)
+        score.cross_check(self.dir)
+        self.rewrite(lambda row: row.update(signal=-0.3))                                      # same bucket, different record
+        with self.assertRaisesRegex(LedgerError, "score_refers_to_a_record_that_is_not_there"):
+            score.cross_check(self.dir)
+
+
+class OnOffSummaryTests(Base):
+    def test_tilt_summary_splits_scores_at_the_tilt_bucket(self):
+        plan = {"tilt-v1": [{"asset": "G", "minus": "M", "horizon_weeks": 13, "role": "claim"}]}
+        protocols = {"tilt-v1": {"id": "tilt-v1", "status": "fixed"}}
+        days = [(datetime(2026, 10, 1) + timedelta(days=i)).date().isoformat() for i in range(160)]
+        prices = {"G": [(d, str(1000 + 3 * i)) for i, d in enumerate(days)], "M": [(d, "500") for d in days]}
+        for week, signal in (("2026-10-07", 1.2), ("2026-10-14", -0.4)):                         # bucket 4, then bucket 2
+            when = datetime.fromisoformat(week).replace(tzinfo=timezone.utc) + timedelta(days=1, hours=22)
+            self.seal(judgment(protocol="tilt-v1", week=week, signal=signal), when=when, protocols=protocols)
+        score.due(self.dir, prices, plan, clock=lambda: THURSDAY)
+        extras = {"tilt-v1": {"tilt_from_bucket": 4, "criteria": {"reviews_at_scored_weeks": [104]}}}
+        card = score.scorecard(self.dir, plan, extras=extras)["protocols"]["tilt-v1"]
+        self.assertEqual((card["on_weeks"], card["off_weeks"], card["criteria"]), (1, 1, {"reviews_at_scored_weeks": [104]}))
+        split = card["assets"][0]["on_off"]
+        self.assertEqual((split["on"]["n"], split["off"]["n"]), (1, 1))
+        self.assertAlmostEqual(split["difference"], split["on"]["mean"] - split["off"]["mean"], places=6)
+        plain = score.scorecard(self.dir, plan)["protocols"]["tilt-v1"]
+        self.assertNotIn("on_off", plain["assets"][0])                                           # only where the registry asks for it
+
+
 class ProtocolRegistryTests(unittest.TestCase):
     ROOT = Path(__file__).resolve().parents[1] / "research" / "protocols"
 
@@ -314,6 +478,35 @@ class ProtocolRegistryTests(unittest.TestCase):
             self.assertEqual(len(assets), len(set(assets)))
             self.assertEqual([item["role"] for item in entry["scoring"]].count("claim"), 1)
             self.assertTrue(all(item["role"] in ("claim", "reference") for item in entry["scoring"]))
+
+    def test_tilt_protocol_is_fixed_with_the_studys_review_lines(self):
+        study = json.loads((self.ROOT.parent / "studies" / "tilt-2026-11" / "results.json").read_text())["live_criteria"]
+        entry = next(e for e in self.registry if e["id"] == "tilt-v1")
+        self.assertEqual(entry["status"], "fixed")
+        self.assertIn("tilt-v1", seal.load_protocols(self.ROOT))
+        self.assertEqual(entry["tilt_from_bucket"], quadrant.TILT_FROM_BUCKET)
+        criteria = entry["criteria"]
+        self.assertEqual(criteria["reviews_at_scored_weeks"], study["reviews"])
+        self.assertEqual(criteria["kill_at_or_below"], study["kill_lines"])
+        self.assertEqual((criteria["pass_at_or_above"], criteria["pass_only_at_scored_weeks"]), (study["pass_line_at_260"], study["reviews"][-1]))
+        self.assertEqual(criteria["min_group_weeks"], study["min_group_weeks"])
+        self.assertEqual(tilt.PROTOCOL, "tilt-v1")
+
+    def test_pipeline_saves_the_record_without_force_and_publishes_the_summary_last(self):
+        text = (self.ROOT.parents[1] / ".github" / "workflows" / "pipeline.yml").read_text()
+        order = [text.index(marker) for marker in (
+            "ref: ledger", "lm.ledger verify --dir ledger --anchor data/public/ledger.json",
+            "lm.ledger seal-tilt --dir ledger --history data/history", "lm.ledger score --dir ledger",
+            "name: Save the verification record", "git push origin HEAD:ledger",
+            "name: Publish the record summary", "lm.ledger scorecard --dir ledger --output data/public/ledger.json",
+            "name: Save state to the data branch")]
+        self.assertEqual(order, sorted(order))
+        self.assertEqual(text.count("lm.ledger scorecard"), 1)                                   # only after the record is saved
+        self.assertIn("if: steps.record.outcome == 'success'", text)
+        self.assertIn("if: steps.save_record.outcome == 'success'", text)
+        record_part = text[text.index("name: Save the verification record"):text.index("name: Publish the record summary")]
+        for forbidden in ("--force", "-f ", "rebase", "+HEAD", "reset"):
+            self.assertNotIn(forbidden, record_part)
 
     def test_tilt_protocol_states_the_lines_the_study_derived(self):
         study = json.loads((self.ROOT.parent / "studies" / "tilt-2026-11" / "results.json").read_text())

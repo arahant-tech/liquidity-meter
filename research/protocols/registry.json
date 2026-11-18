@@ -28,10 +28,10 @@
     },
     {
       "id": "tilt-v1",
-      "status": "draft",
+      "status": "fixed",
       "document": "PROTOCOL_tilt_v1.md",
-      "sha256": null,
-      "fixed_at": null,
+      "sha256": "5f8cf6b19fff5d94337ee1b5c6e590be4826eebae9a5b66497a73c3ce54876a8",
+      "fixed_at": "2026-11-18T15:10:00Z",
       "scoring": [
         {
           "asset": "NASDAQ100",
@@ -44,7 +44,26 @@
           "horizon_weeks": 13,
           "role": "reference"
         }
-      ]
+      ],
+      "tilt_from_bucket": 4,
+      "criteria": {
+        "statistic": "mean outcome when on minus mean outcome when off, percentage points",
+        "reviews_at_scored_weeks": [
+          104,
+          156,
+          208,
+          260
+        ],
+        "min_group_weeks": 26,
+        "kill_at_or_below": [
+          -1.63,
+          -1.07,
+          -0.76,
+          -0.54
+        ],
+        "pass_at_or_above": 1.64,
+        "pass_only_at_scored_weeks": 260
+      }
     }
   ]
 }
