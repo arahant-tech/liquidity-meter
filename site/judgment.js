@@ -9,6 +9,7 @@ const STUDY_URL = './research/studies/quadrant-2026-11/results.json';
 const MODELS_URL = './models.json';
 const TILT_STUDY = './research/studies/tilt-2026-11/';
 const PROTOCOLS_URL = './research/protocols/registry.json';
+const TILT_CONTROLS_URL = './research/studies/tilt-controls-2026-11/results.json';
 const TILTS = { growth: '성장주 쪽으로 기울임', neutral: '시장 중립' };
 const DRIVERS = ['total', 'direction', 'both', 'none'];
 const MODEL_STUDY = './research/studies/models-2026-11/';
@@ -301,13 +302,15 @@ function drawJudgment(q) {
 /* Past results come from the fixed study; the protocol's status from the registry. Both are optional. */
 async function drawEvidence(q) {
   if (!q.judgment) return;
-  const [study, diag, registry] = await Promise.all([get(TILT_STUDY + 'results.json').catch(() => null), get(TILT_STUDY + 'diagnostics.json').catch(() => null), get(PROTOCOLS_URL).catch(() => null)]);
+  const [study, diag, registry, controls] = await Promise.all([get(TILT_STUDY + 'results.json').catch(() => null), get(TILT_STUDY + 'diagnostics.json').catch(() => null), get(PROTOCOLS_URL).catch(() => null), get(TILT_CONTROLS_URL).catch(() => null)]);
   const g = study && study.indicators && study.indicators.g, parts = [];
   if (g && [g.mean_on, g.mean_off, g.D, g.p_raw, g.p_holm].every(finite) && study.sample) {
     parts.push(`과거 ${study.sample.from}~${study.sample.to}의 ${study.sample.weeks}주에서, 기울인 주의 이후 13주 QQQ−SPY는 평균 ${fmt(g.mean_on, 2)}%p, 아닌 주는 ${fmt(g.mean_off, 2)}%p였다(차이 ${fmt(g.D, 2)}%p, 두 검정 중 큰 p ${g.p_raw.toFixed(3)}, 보정 ${g.p_holm.toFixed(3)}). 규칙이 같은 표본을 본 뒤에 만들어졌으므로 이것은 새 증거가 아니다.`);
     const x = study.indicators.x;
     if (x && finite(x.D)) parts.push(`후보 지표의 차이는 ${fmt(x.D, 2)}%p였다.`);
   }
+  const both = controls && controls.primary && controls.primary.tests && controls.primary.tests.T_AB;
+  if (both && [both.b, both.p_holm].every(finite) && controls.verdicts && typeof controls.verdicts['종합'] === 'string') parts.push(`직전 수익·낙폭·변동성과 실질금리 변화를 함께 통제해도 차이는 ${fmt(both.b, 2)}%p였다(보정 p ${both.p_holm.toFixed(3)}, 사전 기준으로 "${controls.verdicts['종합']}"). 이것도 같은 표본 안의 점검이다.`);
   const inside = diag && diag.inside_on_weeks;
   if (inside && [inside.total_up_mean, inside.total_not_up_mean, inside.total_not_up_weeks].every(finite)) parts.push(`기울인 주 가운데 총자산도 늘던 주는 ${fmt(inside.total_up_mean, 2)}%p, 총자산이 늘지 않던 주(${inside.total_not_up_weeks}주)는 ${fmt(inside.total_not_up_mean, 2)}%p였다(사후 점검).`);
   const entry = registry && Array.isArray(registry.protocols) && registry.protocols.find((e) => e.id === q.judgment.protocol);

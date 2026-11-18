@@ -1,0 +1,278 @@
+{
+ "schema_version": 1,
+ "study": "tilt-controls-2026-11",
+ "asof": "2026-08-12",
+ "sample": {
+  "from": "2012-01-04",
+  "to": "2026-08-12",
+  "weeks": 763
+ },
+ "primary": {
+  "b0": 1.902,
+  "tests": {
+   "T_A": {
+    "controls": [
+     "P13",
+     "DD26",
+     "V"
+    ],
+    "b": 1.933,
+    "retention": 1.017,
+    "p_shift": 0.0014,
+    "p_bootstrap": 0.007,
+    "p_raw": 0.007,
+    "control_coefficients": {
+     "ON": 1.933,
+     "P13": -0.036,
+     "DD26": -0.05,
+     "V": 0.797
+    },
+    "p_holm": 0.014
+   },
+   "T_B": {
+    "controls": [
+     "DR"
+    ],
+    "b": 1.88,
+    "retention": 0.989,
+    "p_shift": 0.0014,
+    "p_bootstrap": 0.0098,
+    "p_raw": 0.0098,
+    "control_coefficients": {
+     "ON": 1.88,
+     "DR": -0.702
+    },
+    "p_holm": 0.014
+   },
+   "T_AB": {
+    "controls": [
+     "P13",
+     "DD26",
+     "V",
+     "DR"
+    ],
+    "b": 1.942,
+    "retention": 1.021,
+    "p_shift": 0.0014,
+    "p_bootstrap": 0.0046,
+    "p_raw": 0.0046,
+    "control_coefficients": {
+     "ON": 1.942,
+     "P13": -0.056,
+     "DD26": -0.046,
+     "V": 0.636,
+     "DR": -0.869
+    },
+    "p_holm": 0.0138
+   }
+  }
+ },
+ "strata": {
+  "A": {
+   "직전 13주 수익 낮음": {
+    "weeks": 255,
+    "on_weeks": 54,
+    "D": 3.34,
+    "used_for_verdict": true
+   },
+   "직전 13주 수익 중간": {
+    "weeks": 254,
+    "on_weeks": 64,
+    "D": 1.63,
+    "used_for_verdict": true
+   },
+   "직전 13주 수익 높음": {
+    "weeks": 254,
+    "on_weeks": 98,
+    "D": 1.29,
+    "used_for_verdict": true
+   },
+   "26주 안에 10% 넘게 빠진 적 있음": {
+    "weeks": 231,
+    "on_weeks": 51,
+    "D": 2.85,
+    "used_for_verdict": true
+   },
+   "26주 안에 10% 넘게 빠진 적 없음": {
+    "weeks": 532,
+    "on_weeks": 165,
+    "D": 1.71,
+    "used_for_verdict": true
+   }
+  },
+  "B": {
+   "실질금리 하락": {
+    "weeks": 367,
+    "on_weeks": 116,
+    "D": 1.76,
+    "used_for_verdict": true
+   },
+   "실질금리 상승·보합": {
+    "weeks": 396,
+    "on_weeks": 100,
+    "D": 1.94,
+    "used_for_verdict": true
+   }
+  }
+ },
+ "verdicts": {
+  "A 폭락 뒤 반등": "남는다",
+  "B 실질금리": "남는다",
+  "종합": "남는다"
+ },
+ "on_versus_off": {
+  "on": {
+   "weeks": 216,
+   "P13_mean": 4.53,
+   "share_after_10pct_drawdown": 23.6,
+   "V_mean": 0.117,
+   "DR_mean": 0.016,
+   "share_real_yield_falling": 53.7
+  },
+  "off": {
+   "weeks": 547,
+   "P13_mean": 3.11,
+   "share_after_10pct_drawdown": 32.9,
+   "V_mean": 0.06,
+   "DR_mean": 0.046,
+   "share_real_yield_falling": 45.9
+  }
+ },
+ "correlation_with_ON": {
+  "P13": 0.102,
+  "DD26": 0.032,
+  "V": 0.061,
+  "DR": -0.039
+ },
+ "beta_adjusted": {
+  "b0": 2.15,
+  "tests": {
+   "T_A": {
+    "controls": [
+     "P13",
+     "DD26",
+     "V"
+    ],
+    "b": 2.113,
+    "retention": 0.983,
+    "p_shift": 0.0014,
+    "p_bootstrap": 0.0048,
+    "p_raw": 0.0048,
+    "control_coefficients": {
+     "ON": 2.113,
+     "P13": 0.003,
+     "DD26": -0.052,
+     "V": 1.033
+    },
+    "p_holm": 0.0096
+   },
+   "T_B": {
+    "controls": [
+     "DR"
+    ],
+    "b": 2.132,
+    "retention": 0.992,
+    "p_shift": 0.0014,
+    "p_bootstrap": 0.0048,
+    "p_raw": 0.0048,
+    "control_coefficients": {
+     "ON": 2.132,
+     "DR": -0.582
+    },
+    "p_holm": 0.0096
+   },
+   "T_AB": {
+    "controls": [
+     "P13",
+     "DD26",
+     "V",
+     "DR"
+    ],
+    "b": 2.118,
+    "retention": 0.985,
+    "p_shift": 0.0014,
+    "p_bootstrap": 0.0024,
+    "p_raw": 0.0024,
+    "control_coefficients": {
+     "ON": 2.118,
+     "P13": -0.008,
+     "DD26": -0.05,
+     "V": 0.939,
+     "DR": -0.505
+    },
+    "p_holm": 0.0072
+   }
+  }
+ },
+ "without_2020_03_to_2021_12": {
+  "weeks": 667,
+  "on_weeks": 151,
+  "D": 2.02,
+  "b0": 2.016,
+  "tests": {
+   "T_A": {
+    "controls": [
+     "P13",
+     "DD26",
+     "V"
+    ],
+    "b": 2.09,
+    "retention": 1.036,
+    "p_shift": 0.0016,
+    "p_bootstrap": 0.0034,
+    "p_raw": 0.0034,
+    "control_coefficients": {
+     "ON": 2.09,
+     "P13": -0.01,
+     "DD26": -0.021,
+     "V": 0.308
+    },
+    "p_holm": 0.0078
+   },
+   "T_B": {
+    "controls": [
+     "DR"
+    ],
+    "b": 2.017,
+    "retention": 1.0,
+    "p_shift": 0.0016,
+    "p_bootstrap": 0.0046,
+    "p_raw": 0.0046,
+    "control_coefficients": {
+     "ON": 2.017,
+     "DR": -0.635
+    },
+    "p_holm": 0.0078
+   },
+   "T_AB": {
+    "controls": [
+     "P13",
+     "DD26",
+     "V",
+     "DR"
+    ],
+    "b": 2.126,
+    "retention": 1.054,
+    "p_shift": 0.0016,
+    "p_bootstrap": 0.0026,
+    "p_raw": 0.0026,
+    "control_coefficients": {
+     "ON": 2.126,
+     "P13": -0.027,
+     "DD26": -0.022,
+     "V": 0.266,
+     "DR": -0.831
+    },
+    "p_holm": 0.0078
+   }
+  }
+ },
+ "reverse": {
+  "D_real_yield_falling": 0.82,
+  "after_ON": {
+   "b": 0.703,
+   "p_shift": 0.1122,
+   "p_bootstrap": 0.1426
+  }
+ }
+}

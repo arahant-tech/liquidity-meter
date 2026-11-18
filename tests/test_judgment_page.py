@@ -226,6 +226,14 @@ class JudgmentPageTests(unittest.TestCase):
         text = json.dumps(study) + json.dumps(diag)
         for forbidden in ('"close"', '"adjclose"', '"price"'):
             self.assertNotIn(forbidden, text)
+        controls = json.loads((ROOT / "research/studies/tilt-controls-2026-11/results.json").read_text())
+        self.assertTrue({"b", "p_holm", "retention"} <= set(controls["primary"]["tests"]["T_AB"]))
+        self.assertIn(controls["verdicts"]["종합"], ("남는다", "일부 설명된다", "설명된다"))
+        # the control study must start from exactly the tilt study's number
+        self.assertAlmostEqual(controls["primary"]["b0"], study["indicators"]["g"]["D"], places=2)
+        self.assertEqual(controls["sample"]["weeks"], study["sample"]["weeks"])
+        for forbidden in ('"close"', '"adjclose"', '"price"', '"vix"'):
+            self.assertNotIn(forbidden, json.dumps(controls))
         registry = json.loads((ROOT / "research/protocols/registry.json").read_text())["protocols"]
         self.assertIn(quadrant.PROTOCOL, [entry["id"] for entry in registry])
         html = (SITE / "index.html").read_text()
@@ -235,7 +243,9 @@ class JudgmentPageTests(unittest.TestCase):
         manifest = json.loads((ROOT / "lm/render/public-files.json").read_text())["repo"]
         for name in ("research/protocols/PROTOCOL_tilt_v1.md", "research/protocols/registry.json",
                      "research/studies/tilt-2026-11/results.json", "research/studies/tilt-2026-11/diagnostics.json",
-                     "research/studies/tilt-2026-11/README.md", "research/studies/tilt-2026-11/PROTOCOL.md"):
+                     "research/studies/tilt-2026-11/README.md", "research/studies/tilt-2026-11/PROTOCOL.md",
+                     "research/studies/tilt-controls-2026-11/results.json", "research/studies/tilt-controls-2026-11/README.md",
+                     "research/studies/tilt-controls-2026-11/PROTOCOL.md"):
             self.assertIn(name, manifest)
 
     def test_entry_page_loads_the_map_and_links_the_other_screens(self):
