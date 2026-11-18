@@ -26,7 +26,7 @@
       "weeks": 217
     }
   },
-  "checked_at": "2026-11-17T22:29:41.848547Z",
+  "checked_at": "2026-11-18T03:11:54.241350Z",
   "definition": {
     "bucket": "quintile of s + v against strictly earlier weeks since 2009-01-01",
     "identity": "s + v = change in reserve balances (WRBWFRBL)",
@@ -35,37 +35,37 @@
     "vector": "minus the change in non-reserve liabilities (WALCL − WRBWFRBL)",
     "window_weeks": 13
   },
-  "generated_at": "2026-11-17T22:29:41.848547Z",
+  "generated_at": "2026-11-18T03:11:54.241350Z",
   "inputs": {
     "WALCL": {
       "last_date": "2026-11-11",
       "retrieved_at": "2026-11-17T18:05:28.782065Z",
-      "status": "ok"
+      "status": "error"
     },
     "WCURCIR": {
       "last_date": "2026-11-11",
       "retrieved_at": "2026-11-17T18:05:40.046676Z",
-      "status": "ok"
+      "status": "error"
     },
     "WDTGAL": {
       "last_date": "2026-11-11",
       "retrieved_at": "2026-11-17T18:05:31.673188Z",
-      "status": "ok"
+      "status": "error"
     },
     "WLRRAFOIAL": {
       "last_date": "2026-11-11",
       "retrieved_at": "2026-11-17T18:05:48.375237Z",
-      "status": "ok"
+      "status": "error"
     },
     "WLRRAOL": {
       "last_date": "2026-11-11",
       "retrieved_at": "2026-11-17T18:08:54.053687Z",
-      "status": "ok"
+      "status": "error"
     },
     "WRBWFRBL": {
       "last_date": "2026-11-11",
       "retrieved_at": "2026-11-17T18:05:37.258262Z",
-      "status": "ok"
+      "status": "error"
     }
   },
   "now": {
