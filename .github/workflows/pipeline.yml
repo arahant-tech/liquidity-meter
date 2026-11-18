@@ -54,6 +54,21 @@ jobs:
           ref: data
           path: data
 
+      # The verification record lives on its own branch and is only ever appended to.
+      - name: Create the record branch on first run
+        run: |
+          if ! git ls-remote --exit-code --heads origin ledger >/dev/null 2>&1; then
+            empty_tree=$(git hash-object -t tree /dev/null)
+            commit=$(git commit-tree "$empty_tree" -m 'Start verification record')
+            git push origin "$commit:refs/heads/ledger"
+          fi
+
+      - name: Check out the verification record
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ledger
+          path: ledger
+
       - name: Install pinned source parsers and CA certificates
         run: |
           python3 -m venv .venv-cloud
@@ -110,6 +125,50 @@ jobs:
           .venv-cloud/bin/python -m lm.measure.models
           --history data/history --runtime .private/history
           --output data/public/models.json
+
+      # One judgment per week is sealed under a protocol fixed beforehand, then scored
+      # once its horizon has been observed. A failure here leaves the record untouched
+      # and does not stop collection or publishing.
+      - name: Seal this week's judgment and score what is due
+        id: record
+        continue-on-error: true
+        run: |
+          .venv-cloud/bin/python -m lm.ledger verify --dir ledger --anchor data/public/ledger.json
+          .venv-cloud/bin/python -m lm.ledger seal-tilt --dir ledger --history data/history
+          .venv-cloud/bin/python -m lm.ledger score --dir ledger --history data/history --runtime .private/history
+          .venv-cloud/bin/python -m lm.ledger verify --dir ledger --anchor data/public/ledger.json
+
+      # Additions only. The push is never forced and never rebased: if it is rejected,
+      # someone else wrote to the record and a person has to look.
+      - name: Save the verification record
+        id: save_record
+        if: steps.record.outcome == 'success'
+        continue-on-error: true
+        working-directory: ledger
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for file in records.jsonl scores.jsonl; do
+            if [ -e "$file" ]; then git add -- "$file"; fi
+          done
+          if git diff --cached --quiet; then
+            echo 'Record unchanged.'
+            exit 0
+          fi
+          if ! git diff --cached --numstat | awk '$2 != 0 { changed = 1 } END { exit changed }'; then
+            echo '::error::An existing line of the record would change; nothing was saved.'
+            exit 1
+          fi
+          git commit -q -m 'Seal and score'
+          git push origin HEAD:ledger
+
+      # The summary is written only after the record itself is safely saved. It is kept on the
+      # data branch and on the site, and the next run checks the record against it: a record
+      # that was rewritten elsewhere no longer matches and is not extended.
+      - name: Publish the record summary
+        if: steps.save_record.outcome == 'success'
+        continue-on-error: true
+        run: .venv-cloud/bin/python -m lm.ledger scorecard --dir ledger --output data/public/ledger.json
 
       - name: Preserve full source receipts for replay
         if: always()

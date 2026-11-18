@@ -1,0 +1,128 @@
+{
+ "schema_version": 1,
+ "generated_at": "2026-11-18T15:30:00Z",
+ "head": {
+  "records": "f6d645a85d639394a6197a4b2ee70ba3a2b5848978cfefaae94a2d23f2cb333d",
+  "scores": null
+ },
+ "count": {
+  "records": 1,
+  "scores": 0
+ },
+ "protocols": {
+  "tilt-v1": {
+   "confirmed": 1,
+   "provisional": 0,
+   "unavailable": 0,
+   "first_week": "2026-11-11",
+   "last_week": "2026-11-11",
+   "latest": {
+    "week": "2026-11-11",
+    "bucket": 3,
+    "signal": 0.3306,
+    "sealed_at": "2026-11-18T15:30:00Z"
+   },
+   "criteria": {
+    "statistic": "mean outcome when on minus mean outcome when off, percentage points",
+    "reviews_at_scored_weeks": [
+     104,
+     156,
+     208,
+     260
+    ],
+    "min_group_weeks": 26,
+    "kill_at_or_below": [
+     -1.63,
+     -1.07,
+     -0.76,
+     -0.54
+    ],
+    "pass_at_or_above": 1.64,
+    "pass_only_at_scored_weeks": 260
+   },
+   "assets": [
+    {
+     "asset": "NASDAQ100",
+     "role": "claim",
+     "horizon_weeks": 13,
+     "scored": 0,
+     "pending": 1,
+     "independent": 0,
+     "enough_to_read": false,
+     "by_bucket": {
+      "1": {
+       "n": 0
+      },
+      "2": {
+       "n": 0
+      },
+      "3": {
+       "n": 0
+      },
+      "4": {
+       "n": 0
+      },
+      "5": {
+       "n": 0
+      }
+     },
+     "rank_correlation": null,
+     "shift_null": null,
+     "on_off": {
+      "on": {
+       "n": 0,
+       "mean": null
+      },
+      "off": {
+       "n": 0,
+       "mean": null
+      },
+      "difference": null
+     }
+    },
+    {
+     "asset": "SP500",
+     "role": "reference",
+     "horizon_weeks": 13,
+     "scored": 0,
+     "pending": 1,
+     "independent": 0,
+     "enough_to_read": false,
+     "by_bucket": {
+      "1": {
+       "n": 0
+      },
+      "2": {
+       "n": 0
+      },
+      "3": {
+       "n": 0
+      },
+      "4": {
+       "n": 0
+      },
+      "5": {
+       "n": 0
+      }
+     },
+     "rank_correlation": null,
+     "shift_null": null,
+     "on_off": {
+      "on": {
+       "n": 0,
+       "mean": null
+      },
+      "off": {
+       "n": 0,
+       "mean": null
+      },
+      "difference": null
+     }
+    }
+   ],
+   "tilt_from_bucket": 4,
+   "on_weeks": 0,
+   "off_weeks": 1
+  }
+ }
+}

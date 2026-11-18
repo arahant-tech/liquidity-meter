@@ -68,6 +68,7 @@ tr.current td:first-child{box-shadow:inset 3px 0 0 var(--text)}
 #scale{margin-top:6px}
 svg .on-pos{fill:#fff;font-weight:600}
 .tiles.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tiles.three{grid-template-columns:repeat(3,minmax(0,1fr))}
 .tiles.stack{grid-template-columns:minmax(0,1fr)}
 .tiles.stack .tile b{font-size:19px}
 .tile.warn{border-color:var(--warning-line);background:var(--warning-bg)}
@@ -97,5 +98,5 @@ td.cand{background:var(--warning-bg)}
 #tip{position:fixed;z-index:20;pointer-events:none;background:var(--tooltip);color:var(--text);border:1px solid var(--guide);border-radius:8px;padding:7px 9px;font-size:12px;line-height:1.45;max-width:240px}
 #tip b{font-size:13px;display:block}
 @media(max-width:1120px){.shell{width:calc(100% - 44px)}}
-@media(max-width:760px){.shell{width:calc(100% - 32px)}.planes{grid-template-columns:minmax(0,1fr)}.score{grid-template-columns:minmax(0,1fr)}.judge{grid-template-columns:minmax(0,1fr)}.tiles.two{grid-template-columns:minmax(0,1fr)}.verdict b{font-size:28px}.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.hero h1{font-size:27px}.run-panel{text-align:left}.run-head,.run-foot{justify-content:flex-start}.toplinks{gap:16px}}
+@media(max-width:760px){.shell{width:calc(100% - 32px)}.planes{grid-template-columns:minmax(0,1fr)}.score{grid-template-columns:minmax(0,1fr)}.judge{grid-template-columns:minmax(0,1fr)}.tiles.two{grid-template-columns:minmax(0,1fr)}.tiles.three{grid-template-columns:minmax(0,1fr)}.verdict b{font-size:28px}.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.hero h1{font-size:27px}.run-panel{text-align:left}.run-head,.run-foot{justify-content:flex-start}.toplinks{gap:16px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

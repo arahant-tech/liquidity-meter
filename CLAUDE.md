@@ -19,6 +19,7 @@
 - 측정(`lm/measure/`)은 가격을 읽지 않는다. 수익률과의 관계는 `research/studies/`의 고정된 연구 결과로만 화면에 싣고, 증거 등급을 함께 표시한다.
 - 기계가 쓰는 상태는 `data` 브랜치에만 둔다. `main`에 상태 파일을 커밋하지 않는다.
 - **봉인된 기록은 고치지 않는다.** 신호를 바꾸려면 새 규약 id로 새 기록을 시작한다. 고정된 규약 문서를 수정하면 봉인이 거부된다.
+- `ledger` 브랜치에는 파이프라인만 쓴다. 손으로 커밋하거나 강제 push 하지 않는다. `research/protocols/PROTOCOL_tilt_v1.md`는 고정됐으므로 오탈자도 고치지 않는다.
 - 재배포가 금지된 가격 계열(`persist: false`)의 값을 저장소·`data` 브랜치·게시물에 쓰지 않는다. 수익률과 날짜만 쓴다.
 - 코드 변경 후에는 항상 테스트를 돌린다.
 
@@ -30,5 +31,6 @@ python -m lm.collect.cloud_feeds --output-root .run/live --checkpoint data/live 
 python -m lm.collect.chart_history --output-root .run/chart-history --live-root data/live --checkpoint data/chart-history --public-output data/public/chart-data.json
 python -m lm.measure.quadrant --history data/history --output data/public/quadrant.json   # 사분면 지도
 python -m lm.measure.models --history data/history --runtime .private/history --output data/public/models.json   # 임시 모델 보드
+python -m lm.ledger verify --dir ledger --anchor data/public/ledger.json   # 검증 기록 점검 (ledger 브랜치를 ./ledger 로 받은 뒤)
 python -m lm.render.package --public-dir data/public     # _site/ 생성
 ```

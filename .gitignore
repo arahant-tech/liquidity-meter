@@ -1,5 +1,7 @@
 # machine state lives on the data branch, checked out here by the pipeline
 /data/
+# the verification record lives on the ledger branch, checked out here by the pipeline
+/ledger/
 .run/
 _site/
 __pycache__/

@@ -10,6 +10,7 @@ const MODELS_URL = './models.json';
 const TILT_STUDY = './research/studies/tilt-2026-11/';
 const PROTOCOLS_URL = './research/protocols/registry.json';
 const TILT_CONTROLS_URL = './research/studies/tilt-controls-2026-11/results.json';
+const LEDGER_URL = './ledger.json';
 const TILTS = { growth: '성장주 쪽으로 기울임', neutral: '시장 중립' };
 const DRIVERS = ['total', 'direction', 'both', 'none'];
 const MODEL_STUDY = './research/studies/models-2026-11/';
@@ -110,6 +111,20 @@ function validateModels(m, now = Date.now()) {
   return { ...m, status: m.status === 'ok' && age > STALE_DAYS ? 'stale' : m.status, age };
 }
 
+/* What the verification record says about one protocol, or null when it cannot be read. Counts only: no verdict is made here. */
+function ledgerSummary(card, protocol) {
+  const p = card && card.schema_version === 1 && card.protocols && card.protocols[protocol];
+  if (!p || !Number.isInteger(p.confirmed) || p.confirmed < 0) return null;
+  if (p.confirmed && !(validDate(p.first_week) && validDate(p.last_week) && p.first_week <= p.last_week)) return null;
+  const claim = Array.isArray(p.assets) ? p.assets.find((a) => a && a.role === 'claim') : null;
+  if (!claim || !Number.isInteger(claim.scored) || claim.scored < 0 || claim.scored > p.confirmed) return null;
+  const reviews = p.criteria && Array.isArray(p.criteria.reviews_at_scored_weeks) && p.criteria.reviews_at_scored_weeks.every(Number.isInteger) ? p.criteria.reviews_at_scored_weeks : [];
+  const diff = claim.on_off && finite(claim.on_off.difference) ? claim.on_off.difference * 100 : null;
+  return { sealed: p.confirmed, first: p.first_week || null, last: p.last_week || null, scored: claim.scored, horizon: claim.horizon_weeks,
+    on: Number.isInteger(p.on_weeks) ? p.on_weeks : null, off: Number.isInteger(p.off_weeks) ? p.off_weeks : null,
+    nextReview: reviews.find((n) => n > claim.scored) || null, difference: diff };
+}
+
 /* The board and the map read the same balance sheet. If they describe the same week they must agree. */
 function boardMatchesMap(m, q) {
   if (!q || !q.now || m.asof !== q.asof) return true;
@@ -118,7 +133,7 @@ function boardMatchesMap(m, q) {
   return (!sure(g) || m.states.Q1.on === g > 0) && (!sure(n.v) || m.states.Q2.on === n.v > 0) && (!sure(n.s) || m.states.Q3.on === n.s > 0);
 }
 
-if (typeof module !== 'undefined') module.exports = { classify, validate, validateModels, boardMatchesMap, CELLS, SHORT, SIDE, RULES, ASSETS, TILTS };
+if (typeof module !== 'undefined') module.exports = { classify, validate, validateModels, boardMatchesMap, ledgerSummary, CELLS, SHORT, SIDE, RULES, ASSETS, TILTS };
 if (typeof document === 'undefined') return;
 
 const $ = (id) => document.getElementById(id);
@@ -302,7 +317,7 @@ function drawJudgment(q) {
 /* Past results come from the fixed study; the protocol's status from the registry. Both are optional. */
 async function drawEvidence(q) {
   if (!q.judgment) return;
-  const [study, diag, registry, controls] = await Promise.all([get(TILT_STUDY + 'results.json').catch(() => null), get(TILT_STUDY + 'diagnostics.json').catch(() => null), get(PROTOCOLS_URL).catch(() => null), get(TILT_CONTROLS_URL).catch(() => null)]);
+  const [study, diag, registry, controls, card] = await Promise.all([get(TILT_STUDY + 'results.json').catch(() => null), get(TILT_STUDY + 'diagnostics.json').catch(() => null), get(PROTOCOLS_URL).catch(() => null), get(TILT_CONTROLS_URL).catch(() => null), get(LEDGER_URL).catch(() => null)]);
   const g = study && study.indicators && study.indicators.g, parts = [];
   if (g && [g.mean_on, g.mean_off, g.D, g.p_raw, g.p_holm].every(finite) && study.sample) {
     parts.push(`과거 ${study.sample.from}~${study.sample.to}의 ${study.sample.weeks}주에서, 기울인 주의 이후 13주 QQQ−SPY는 평균 ${fmt(g.mean_on, 2)}%p, 아닌 주는 ${fmt(g.mean_off, 2)}%p였다(차이 ${fmt(g.D, 2)}%p, 두 검정 중 큰 p ${g.p_raw.toFixed(3)}, 보정 ${g.p_holm.toFixed(3)}). 규칙이 같은 표본을 본 뒤에 만들어졌으므로 이것은 새 증거가 아니다.`);
@@ -314,8 +329,17 @@ async function drawEvidence(q) {
   const inside = diag && diag.inside_on_weeks;
   if (inside && [inside.total_up_mean, inside.total_not_up_mean, inside.total_not_up_weeks].every(finite)) parts.push(`기울인 주 가운데 총자산도 늘던 주는 ${fmt(inside.total_up_mean, 2)}%p, 총자산이 늘지 않던 주(${inside.total_not_up_weeks}주)는 ${fmt(inside.total_not_up_mean, 2)}%p였다(사후 점검).`);
   const entry = registry && Array.isArray(registry.protocols) && registry.protocols.find((e) => e.id === q.judgment.protocol);
-  if (entry) {
-    parts.push(entry.status === 'fixed' ? '검증 기록 규약은 고정됐다.' : '검증 기록 규약은 초안이고, 실시간 기록은 아직 시작하지 않았다.');
+  const record = ledgerSummary(card, q.judgment.protocol), box = $('record');
+  if (entry && entry.status === 'fixed' && record && record.sealed) {
+    $('judgment-grade').textContent = '후보 · 실시간 검증 중';
+    box.replaceChildren();
+    const add = (big, small) => { const d = html('div', 'tile'); d.append(html('b', '', big), html('span', '', small)); box.append(d); };
+    add(`${record.sealed}주`, `봉인된 판정 · ${record.first}부터 ${record.last}까지` + (record.on === null ? '' : ` · 기울임 ${record.on}주, 중립 ${record.off}주`));
+    add(`${record.scored}주`, `채점된 판정 (${record.horizon}주 뒤에 채점)` + (record.difference === null ? '' : ` · 지금까지의 차이 ${fmt(record.difference, 2)}%p`));
+    add(record.nextReview ? `채점 ${record.nextReview}주` : '끝남', record.nextReview ? '다음 점검 시점 · 그 전에는 판정하지 않는다' : '정해 둔 점검을 모두 지났다');
+    $('record-block').hidden = false;
+  } else if (entry) {
+    parts.push(entry.status === 'fixed' ? '검증 규약은 고정됐고, 첫 봉인을 기다리고 있다.' : '검증 기록 규약은 초안이고, 실시간 기록은 아직 시작하지 않았다.');
     $('judgment-grade').textContent = entry.status === 'fixed' ? '후보 · 실시간 검증 중' : '후보 · 실시간 검증 전';
   }
   $('judgment-evidence').textContent = parts.join(' ');

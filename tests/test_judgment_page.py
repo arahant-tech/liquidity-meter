@@ -26,6 +26,8 @@ class JudgmentPageTests(unittest.TestCase):
         cls.fixture = ROOT / "tests" / "fixtures" / "public" / "quadrant.json"
         cls.live_board = Path(live).resolve() / "models.json" if live else None
         cls.board = ROOT / "tests" / "fixtures" / "public" / "models.json"
+        cls.live_record = Path(live).resolve() / "ledger.json" if live else None
+        cls.record = ROOT / "tests" / "fixtures" / "public" / "ledger.json"
 
     def evaluate(self, body, path=None, second=None):
         setup = "const j=require(process.argv[1]);const fs=require('fs');const q=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));"
@@ -237,7 +239,7 @@ class JudgmentPageTests(unittest.TestCase):
         registry = json.loads((ROOT / "research/protocols/registry.json").read_text())["protocols"]
         self.assertIn(quadrant.PROTOCOL, [entry["id"] for entry in registry])
         html = (SITE / "index.html").read_text()
-        for target in ("./research/protocols/PROTOCOL_tilt_v1.md", "./research/studies/tilt-2026-11/README.md"):
+        for target in ("./research/protocols/PROTOCOL_tilt_v1.md", "./research/studies/tilt-2026-11/README.md", "./ledger.json"):
             self.assertIn(f'href="{target}"', html)
         self.assertIn("지수 방향에 대한 판단이 아니다", html)
         manifest = json.loads((ROOT / "lm/render/public-files.json").read_text())["repo"]
@@ -247,6 +249,39 @@ class JudgmentPageTests(unittest.TestCase):
                      "research/studies/tilt-controls-2026-11/results.json", "research/studies/tilt-controls-2026-11/README.md",
                      "research/studies/tilt-controls-2026-11/PROTOCOL.md"):
             self.assertIn(name, manifest)
+
+    def test_record_summary_is_read_as_counts_only(self):
+        out = self.evaluate(f"console.log(JSON.stringify(j.ledgerSummary(q,'{quadrant.PROTOCOL}')));", self.record)
+        self.assertEqual((out["sealed"], out["scored"], out["horizon"], out["nextReview"]), (1, 0, 13, 104))
+        self.assertEqual((out["first"], out["last"], out["on"], out["off"], out["difference"]), ("2026-11-11", "2026-11-11", 0, 1, None))
+        scored = self.evaluate(
+            f"const p=q.protocols['{quadrant.PROTOCOL}'];p.confirmed=120;p.on_weeks=40;p.off_weeks=80;p.last_week='2029-02-21';"
+            "p.assets[0].scored=107;p.assets[0].on_off={on:{n:36,mean:0.031},off:{n:71,mean:0.004},difference:0.027};"
+            f"console.log(JSON.stringify(j.ledgerSummary(q,'{quadrant.PROTOCOL}')));", self.record)
+        self.assertEqual((scored["scored"], scored["nextReview"]), (107, 156))
+        self.assertAlmostEqual(scored["difference"], 2.7)                                       # shown in percentage points
+
+    def test_unreadable_record_summaries_give_nothing_rather_than_a_guess(self):
+        cases = {
+            "another protocol": f"delete q.protocols['{quadrant.PROTOCOL}'];",
+            "wrong schema": "q.schema_version=2;",
+            "negative count": f"q.protocols['{quadrant.PROTOCOL}'].confirmed=-1;",
+            "weeks out of order": f"q.protocols['{quadrant.PROTOCOL}'].first_week='2027-01-06';",
+            "more scored than sealed": f"q.protocols['{quadrant.PROTOCOL}'].assets[0].scored=5;",
+            "no claim": f"q.protocols['{quadrant.PROTOCOL}'].assets.forEach((a)=>a.role='reference');",
+        }
+        for label, mutate in cases.items():
+            with self.subTest(case=label):
+                out = self.evaluate(mutate + f"console.log(JSON.stringify(j.ledgerSummary(q,'{quadrant.PROTOCOL}')));", self.record)
+                self.assertIsNone(out, label)
+
+    def test_record_summary_about_to_be_published_is_readable(self):
+        if not self.live_record:
+            self.skipTest("only runs in the pipeline, against the summary it is about to publish")
+        if not self.live_record.exists():
+            self.skipTest("no summary yet; the page says the first seal is awaited")
+        out = self.evaluate(f"console.log(JSON.stringify(j.ledgerSummary(q,'{quadrant.PROTOCOL}')));", self.live_record)
+        self.assertIsNotNone(out)
 
     def test_entry_page_loads_the_map_and_links_the_other_screens(self):
         html = (SITE / "index.html").read_text()
