@@ -1,64 +1,64 @@
 {
-  "known_by": "2026-11-18T14:47:46.726400Z",
+  "known_by": "2026-11-18T14:50:33.680202Z",
   "metadata_response": {
     "realtime_end": "2026-11-18",
     "realtime_start": "2026-11-18",
     "seriess": [
       {
-        "frequency": "Quarterly",
-        "frequency_short": "Q",
-        "id": "DRTSCILM",
-        "last_updated": "2026-11-02 13:02:14-06",
-        "notes": "data source (https://www.federalreserve.gov/apps/ContactUs/feedback.aspx?refurl=/data/SLOOS%). For questions on FRED functionality, please contact us here (https://fred.stlouisfed.org/contactus/).</p>",
-        "observation_end": "2026-10-01",
-        "observation_start": "1990-04-01",
-        "popularity": 70,
+        "frequency": "Weekly, As of Wednesday",
+        "frequency_short": "W",
+        "id": "WLRRAOL",
+        "last_updated": "2026-11-12 15:33:14-06",
+        "notes": "For questions on the data, please contact the data source (https://www.federalreserve.gov/apps/ContactUs/feedback.aspx?refurl=/releases/h41/%). For questions on FRED functionality, please contact us here (https://fred.stlouisfed.org/contactus/).",
+        "observation_end": "2026-11-11",
+        "observation_start": "2002-12-18",
+        "popularity": 25,
         "realtime_end": "2026-11-18",
         "realtime_start": "2026-11-18",
         "seasonal_adjustment": "Not Seasonally Adjusted",
         "seasonal_adjustment_short": "NSA",
-        "title": "Net Percentage of Domestic Banks Tightening Standards for Commercial and Industrial Loans to Large and Middle-Market Firms",
-        "units": "Percent",
-        "units_short": "%"
+        "title": "Liabilities and Capital: Liabilities: Reverse Repurchase Agreements: Others: Wednesday Level",
+        "units": "Millions of U.S. Dollars",
+        "units_short": "Mil. of U.S. $"
       }
     ]
   },
   "observation_response": {
-    "count": 147,
+    "count": 1248,
     "file_type": "json",
     "limit": 5,
     "observation_end": "2026-11-18",
     "observation_start": "1600-01-01",
     "observations": [
       {
-        "date": "2026-10-01",
+        "date": "2026-11-11",
         "realtime_end": "2026-11-18",
         "realtime_start": "2026-11-18",
-        "value": "1.7"
+        "value": "152"
       },
       {
-        "date": "2026-07-01",
+        "date": "2026-11-04",
         "realtime_end": "2026-11-18",
         "realtime_start": "2026-11-18",
-        "value": "0"
+        "value": "225"
       },
       {
-        "date": "2026-04-01",
+        "date": "2026-10-28",
         "realtime_end": "2026-11-18",
         "realtime_start": "2026-11-18",
-        "value": "8.1"
+        "value": "176"
       },
       {
-        "date": "2026-01-01",
+        "date": "2026-10-21",
         "realtime_end": "2026-11-18",
         "realtime_start": "2026-11-18",
-        "value": "5.3"
+        "value": "237"
       },
       {
-        "date": "2025-10-01",
+        "date": "2026-10-14",
         "realtime_end": "2026-11-18",
         "realtime_start": "2026-11-18",
-        "value": "6.5"
+        "value": "201"
       }
     ],
     "offset": 0,
@@ -76,14 +76,14 @@
       "output_type": 1,
       "realtime_end": "2026-11-18",
       "realtime_start": "2026-11-18",
-      "series_id": "DRTSCILM",
+      "series_id": "WLRRAOL",
       "sort_order": "desc",
       "units": "lin"
     },
     "provider": "FRED"
   },
   "research_eligible": false,
-  "retrieved_at": "2026-11-18T14:47:46.726400Z",
+  "retrieved_at": "2026-11-18T14:50:33.680202Z",
   "schema_version": 1,
-  "series_id": "DRTSCILM"
+  "series_id": "WLRRAOL"
 }

@@ -7,14 +7,14 @@
     "자료 개정·공표 지연·이력 부족이 남습니다. 국가 간 합산·빈도 늘리기·결측 보간을 하지 않습니다."
   ],
   "errors": [],
-  "generated_at": "2026-11-18T14:48:33.891122Z",
-  "github_run_url": "https://github.com/arahant-tech/liquidity-meter/actions/runs/44328082194",
+  "generated_at": "2026-11-18T14:51:24.880221Z",
+  "github_run_url": "https://github.com/arahant-tech/liquidity-meter/actions/runs/44328169280",
   "research_eligible": false,
   "schema_version": 1,
   "series": [
     {
       "chart_type": "line",
-      "checked_at": "2026-11-18T14:48:28.986335Z",
+      "checked_at": "2026-11-18T14:51:20.942340Z",
       "frequency": "Weekly, Ending Wednesday",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-13T09:46:48.293533Z",
@@ -669,7 +669,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-18T14:48:29.696663Z",
+      "checked_at": "2026-11-18T14:51:21.766959Z",
       "frequency": "Weekly, As of Wednesday",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-13T09:46:48.952478Z",
@@ -1324,7 +1324,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-18T14:48:31.027756Z",
+      "checked_at": "2026-11-18T14:51:22.490058Z",
       "frequency": "Weekly",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-17T18:05:22.350993Z",
@@ -1979,7 +1979,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-18T14:48:32.222814Z",
+      "checked_at": "2026-11-18T14:51:23.344052Z",
       "frequency": "Monthly, End of Period",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-05T11:15:05.105643Z",
@@ -2142,7 +2142,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-18T14:48:33.136491Z",
+      "checked_at": "2026-11-18T14:51:24.055364Z",
       "frequency": "Daily",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-17T21:24:32.050546Z",
@@ -5341,7 +5341,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-18T14:48:33.792384Z",
+      "checked_at": "2026-11-18T14:51:24.780971Z",
       "frequency": "Weekly, Ending Wednesday",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-13T09:46:51.837595Z",
@@ -5996,7 +5996,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-18T14:48:33.809195Z",
+      "checked_at": "2026-11-18T14:51:24.798250Z",
       "frequency": "Monthly",
       "history_basis": "available_official_monthly_table",
       "known_by": "2026-11-13T09:46:51.862457Z",
@@ -6056,7 +6056,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-18T14:48:33.824653Z",
+      "checked_at": "2026-11-18T14:51:24.813903Z",
       "frequency": "Monthly",
       "history_basis": "available_official_monthly_table",
       "known_by": "2026-11-13T09:46:51.884579Z",
@@ -6116,7 +6116,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-18T14:48:33.829956Z",
+      "checked_at": "2026-11-18T14:51:24.819249Z",
       "frequency": "Monthly",
       "history_basis": "available_official_monthly_table",
       "known_by": "2026-11-13T09:46:51.891994Z",
@@ -6176,7 +6176,7 @@
     },
     {
       "chart_type": "bar",
-      "checked_at": "2026-11-18T14:48:33.835902Z",
+      "checked_at": "2026-11-18T14:51:24.825326Z",
       "frequency": "Monthly",
       "history_basis": "available_official_monthly_table",
       "known_by": "2026-11-13T09:46:51.901932Z",
@@ -6236,7 +6236,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-18T14:48:33.836236Z",
+      "checked_at": "2026-11-18T14:51:24.825690Z",
       "frequency": "Monthly",
       "history_basis": "current_vintage_available_monthly_history_max_36_observations",
       "known_by": "2026-11-04T21:59:36.698070Z",
@@ -6408,7 +6408,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-18T14:48:33.846159Z",
+      "checked_at": "2026-11-18T14:51:24.835650Z",
       "frequency": "Monthly",
       "history_basis": "current_vintage_available_monthly_history_max_36_observations",
       "known_by": "2026-11-13T23:43:46.149364Z",
@@ -6484,7 +6484,7 @@
     },
     {
       "chart_type": "bar",
-      "checked_at": "2026-11-18T14:48:33.859086Z",
+      "checked_at": "2026-11-18T14:51:24.848682Z",
       "frequency": "Monthly",
       "history_basis": "current_vintage_available_monthly_history_max_36_observations",
       "known_by": "2026-11-01T02:22:09.547767Z",
