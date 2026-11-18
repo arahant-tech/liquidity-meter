@@ -1,0 +1,115 @@
+{
+ "note": "결과를 본 뒤에 한 점검이다. 등급에는 쓰지 않았다.",
+ "spy_direction": {
+  "on_weeks": 216,
+  "D": 2.68,
+  "p_shift": 0.021,
+  "p_bootstrap": 0.0082,
+  "periods": [
+   2.19,
+   1.67,
+   4.67
+  ],
+  "mean_on": 5.3,
+  "mean_off": 2.62,
+  "off_weeks_with_positive_return_share": 72.8
+ },
+ "on_weeks_by_year": {
+  "2012": {
+   "total_up": 4,
+   "total_not_up": 0
+  },
+  "2013": {
+   "total_up": 50,
+   "total_not_up": 0
+  },
+  "2014": {
+   "total_up": 7,
+   "total_not_up": 0
+  },
+  "2015": {
+   "total_up": 3,
+   "total_not_up": 2
+  },
+  "2016": {
+   "total_up": 0,
+   "total_not_up": 1
+  },
+  "2017": {
+   "total_up": 8,
+   "total_not_up": 6
+  },
+  "2019": {
+   "total_up": 5,
+   "total_not_up": 2
+  },
+  "2020": {
+   "total_up": 39,
+   "total_not_up": 0
+  },
+  "2021": {
+   "total_up": 35,
+   "total_not_up": 0
+  },
+  "2023": {
+   "total_up": 12,
+   "total_not_up": 9
+  },
+  "2024": {
+   "total_up": 0,
+   "total_not_up": 7
+  },
+  "2025": {
+   "total_up": 0,
+   "total_not_up": 15
+  },
+  "2026": {
+   "total_up": 11,
+   "total_not_up": 0
+  }
+ },
+ "alternatives_post_hoc": {
+  "총자산 13주 변화 > +1%p": {
+   "on_weeks": 269,
+   "D": 0.59,
+   "p_shift": 0.1978,
+   "p_bootstrap": 0.2611,
+   "periods": [
+    1.24,
+    0.82,
+    -1.43
+   ],
+   "beta_adjusted_D": 1.21
+  },
+  "총자산 13주 변화 > 0": {
+   "on_weeks": 361,
+   "D": 0.74,
+   "p_shift": 0.1613,
+   "p_bootstrap": 0.2028,
+   "periods": [
+    0.95,
+    1.12,
+    0.05
+   ],
+   "beta_adjusted_D": 1.25
+  },
+  "4~5구간이고 총자산도 증가": {
+   "on_weeks": 174,
+   "D": 2.27,
+   "p_shift": 0.0014,
+   "p_bootstrap": 0.0112,
+   "periods": [
+    1.37,
+    2.39,
+    3.64
+   ],
+   "beta_adjusted_D": 2.83
+  }
+ },
+ "inside_on_weeks": {
+  "total_up_mean": 2.72,
+  "total_not_up_mean": 0.73,
+  "total_not_up_weeks": 42,
+  "total_not_up_independent_13w": 3.2
+ }
+}
