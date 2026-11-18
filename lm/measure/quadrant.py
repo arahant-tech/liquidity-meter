@@ -12,12 +12,19 @@ Signs of s and v give four quadrants; the diagonal s + v = 0 separates weeks
 when reserves rose from weeks when they fell, splitting two of the quadrants.
 That makes six cells.
 
+The judgment is one number: the 13-week change in reserves, g, placed in a
+quintile of its own past. Buckets 4 and 5 mean "tilt toward growth stocks";
+anything else means "no tilt". Scalar and vector only explain where g came
+from. A candidate, g with the Treasury account's contribution removed, is
+reported next to it so the two can be compared as they are recorded.
+
 This module only measures. It reads Wednesday H.4.1 levels from the history
 store and writes the map. It never reads prices and makes no forecast.
 """
 from __future__ import annotations
 
 import argparse
+from bisect import bisect_right
 from datetime import date, datetime, timedelta, timezone
 import json
 from pathlib import Path
@@ -31,6 +38,19 @@ START = "2009-01-01"          # reserves became a meaningful share of the balanc
 MIN_HISTORY = 156             # weeks of past values before a bucket is assigned
 STALE_AFTER_DAYS = 14
 CELLS = ("A", "B+", "B-", "C+", "C-", "D")
+PROTOCOL = "tilt-v1"          # research/protocols/PROTOCOL_tilt_v1.md
+TILT_FROM_BUCKET = 4          # buckets 4 and 5 tilt toward growth
+TOTAL_LINE = 1.0              # watch: total assets growing by more than this (% over 13 weeks)
+RRP_SHARE_LINE = 1.0          # watch: domestic reverse repos above this share of total assets (%)
+RRP_MEAN_WEEKS = 4            # quarter-end spikes are averaged out
+# Watch items for "are reserves still enough". Optional inputs: when one is missing the map is still made.
+WATCH_SERIES = {"ASSETS": "TLAACBW027NBOG", "SOFR": "SOFR", "IORB": "IORB"}
+ADEQUACY_LINE = 12.0          # reserves as % of commercial bank assets. A New York Fed estimate (Staff Report
+ADEQUACY_BAND_HIGH = 13.0     # 1019) puts the point where reserve demand is satiated at about 12–13%; it moves over time
+ASSETS_MAX_AGE_DAYS = 21      # H.8 trails H.4.1 by about a week; anything older is not used
+SPREAD_DAYS = 5               # business days averaged, ending on the H.4.1 Wednesday
+SPREAD_MAX_AGE_DAYS = 7
+SPREAD_LINE_BP = 0.0          # repo (SOFR) above the rate paid on reserves (IORB): reserves are being bid for
 
 
 def classify(s, v):
@@ -76,23 +96,126 @@ def weekly_rows(series):
         sources = {"rrp": -100 * change["RRP"] / base, "frrp": -100 * change["FRRP"] / base,
                    "tga": -100 * change["TGA"] / base, "cur": -100 * change["CUR"] / base}
         sources["other"] = v - sum(sources.values())
-        rows.append({"date": day, "s": s, "v": v, "g": g, "cell": classify(s, v), "levels": now, "sources": sources})
+        rows.append({"date": day, "s": s, "v": v, "g": g, "cell": classify(s, v), "levels": now, "sources": sources,
+                     # reserves had the Treasury account not moved: g + ΔTGA / L₀
+                     "x": g - sources["tga"], "rrp_share": 100 * now["RRP"] / now["L"] if now["L"] > 0 else None})
+    for i, row in enumerate(rows):
+        recent = rows[max(0, i - RRP_MEAN_WEEKS + 1):i + 1]
+        complete = (len(recent) == RRP_MEAN_WEEKS and all(r["rrp_share"] is not None for r in recent)
+                    and recent[0]["date"] == (date.fromisoformat(row["date"]) - timedelta(weeks=RRP_MEAN_WEEKS - 1)).isoformat())
+        row["rrp_share_mean"] = sum(r["rrp_share"] for r in recent) / RRP_MEAN_WEEKS if complete else None
     return rows
 
 
-def assign_buckets(rows):
-    """Quintile of g against strictly earlier weeks only; None until enough history exists."""
+def attach_watch(rows, assets=None, sofr=None, iorb=None):
+    """Reserve adequacy and the funding spread for every week.
+
+    ``assets`` is commercial bank total assets in billions; ``sofr`` and ``iorb`` are daily rates in
+    percent, all as [(iso_date, value-or-None)]. A missing, stale or incomplete input gives None
+    with a reason. Nothing is filled or carried forward beyond the stated limits.
+    """
+    pairs = sorted((d, float(v)) for d, v in (assets or []) if v is not None)
+    asset_days, asset_values = [d for d, _ in pairs], [v for _, v in pairs]
+    paid = {d: float(v) for d, v in (iorb or []) if v is not None}
+    spreads = sorted((d, (float(v) - paid[d]) * 100) for d, v in (sofr or []) if v is not None and d in paid)   # basis points
+    spread_days, spread_values = [d for d, _ in spreads], [v for _, v in spreads]
+    age = lambda later, earlier: (date.fromisoformat(later) - date.fromisoformat(earlier)).days
+    for row in rows:
+        row.update(adequacy=None, assets_date=None, spread=None, spread_through=None,
+                   adequacy_reason="input_missing_" + WATCH_SERIES["ASSETS"] if not pairs else "bank_assets_stale",
+                   spread_reason=("input_missing_" + WATCH_SERIES["SOFR"] if not sofr else
+                                  "input_missing_" + WATCH_SERIES["IORB"] if not iorb else "funding_rates_incomplete"))
+        position = bisect_right(asset_days, row["date"])
+        if position and asset_values[position - 1] > 0 and age(row["date"], asset_days[position - 1]) <= ASSETS_MAX_AGE_DAYS:
+            # rounded here so that the flag, its start date and the published number always agree
+            row["adequacy"] = round(100 * row["levels"]["R"] / asset_values[position - 1], 2)
+            row["assets_date"], row["adequacy_reason"] = asset_days[position - 1], None
+        position = bisect_right(spread_days, row["date"])
+        if (position >= SPREAD_DAYS and age(row["date"], spread_days[position - 1]) <= SPREAD_MAX_AGE_DAYS
+                and age(row["date"], spread_days[position - SPREAD_DAYS]) <= SPREAD_MAX_AGE_DAYS + 7):
+            row["spread"] = round(sum(spread_values[position - SPREAD_DAYS:position]) / SPREAD_DAYS, 1)
+            row["spread_through"], row["spread_reason"] = spread_days[position - 1], None
+    return rows
+
+
+def assign_buckets(rows, value="g", bucket="bucket", bounds="bounds"):
+    """Quintile of a value against strictly earlier weeks only; None until enough history exists."""
     past = []
     for row in rows:
         if len(past) >= MIN_HISTORY:
             ordered = sorted(past)
-            bounds = [quantile(ordered, q) for q in (.2, .4, .6, .8)]
-            row["bucket"] = 1 + sum(b < row["g"] for b in bounds)
-            row["bounds"] = bounds
+            edges = [quantile(ordered, q) for q in (.2, .4, .6, .8)]
+            row[bucket] = 1 + sum(b < row[value] for b in edges)
+            row[bounds] = edges
         else:
-            row["bucket"], row["bounds"] = None, None
-        past.append(row["g"])
+            row[bucket], row[bounds] = None, None
+        past.append(row[value])
     return rows
+
+
+def tilt(bucket):
+    """'growth' in buckets 4 and 5, 'neutral' below, None while there is no bucket yet."""
+    if bucket is None:
+        return None
+    return "growth" if bucket >= TILT_FROM_BUCKET else "neutral"
+
+
+def since(rows, state):
+    """First week of the unbroken run of weeks that share the latest week's state."""
+    start = rows[-1]["date"]
+    for row in reversed(rows[:-1]):
+        if state(row) != state(rows[-1]):
+            break
+        start = row["date"]
+    return start
+
+
+def judgment(rows):
+    """The single judgment, its candidate, where the change came from, and the two watch items."""
+    last = rows[-1]
+
+    def reading(value, bucket, bounds):
+        edges = last[bounds]
+        return {"value": round(last[value], 4), "bucket": last[bucket],
+                "bounds": None if edges is None else [round(b, 4) for b in edges],
+                "tilt_from": None if edges is None else round(edges[TILT_FROM_BUCKET - 2], 4),
+                "tilt": tilt(last[bucket]), "since": since(rows, lambda r: tilt(r[bucket]))}
+
+    main, candidate = reading("g", "bucket", "bounds"), reading("x", "xbucket", "xbounds")
+    if last["g"] <= 0:
+        driver = "none"
+    elif last["s"] > 0 and last["v"] > 0:
+        driver = "both"
+    else:
+        driver = "total" if last["s"] > 0 else "direction"
+    # Flags are taken from the rounded numbers that are published, so the two can never disagree.
+    total = lambda r: round(r["s"], 4)
+    repo = lambda r: None if r["rrp_share_mean"] is None else round(r["rrp_share_mean"], 4)
+    mean, adequacy, spread = repo(last), last.get("adequacy"), last.get("spread")
+    held = lambda key, test: since(rows, lambda r: None if r.get(key) is None else test(r[key]))
+    return {
+        "protocol": PROTOCOL, "tilt": main["tilt"], "since": main["since"],
+        "indicator": {"id": "reserve_change_13w", **main},
+        "candidate": {"id": "reserve_change_ex_tga_13w", **candidate},
+        "agree": None if main["tilt"] is None or candidate["tilt"] is None else main["tilt"] == candidate["tilt"],
+        "source": {"driver": driver, "total": round(last["s"], 4), "direction": round(last["v"], 4),
+                   "tga": round(last["sources"]["tga"], 4)},
+    }, {
+        "total_assets": {"value": total(last), "line": TOTAL_LINE, "above": total(last) > TOTAL_LINE,
+                         "since": since(rows, lambda r: total(r) > TOTAL_LINE)},
+        "reverse_repo": {"billion_usd": round(last["levels"]["RRP"], 3), "share": round(last["rrp_share"], 4),
+                         "share_mean": mean, "mean_weeks": RRP_MEAN_WEEKS,
+                         "line": RRP_SHARE_LINE, "above": None if mean is None else mean >= RRP_SHARE_LINE,
+                         "since": since(rows, lambda r: None if repo(r) is None else repo(r) >= RRP_SHARE_LINE)},
+        "reserve_adequacy": ({"value": None, "reason": last.get("adequacy_reason") or "not_computed"} if adequacy is None else
+                             {"value": adequacy, "line": ADEQUACY_LINE, "band_high": ADEQUACY_BAND_HIGH,
+                              "below": adequacy < ADEQUACY_LINE, "since": held("adequacy", lambda a: a < ADEQUACY_LINE),
+                              "assets_date": last["assets_date"]}),
+        "funding_spread": ({"value_bp": None, "reason": last.get("spread_reason") or "not_computed"} if spread is None else
+                           {"value_bp": spread, "line_bp": SPREAD_LINE_BP, "above": spread > SPREAD_LINE_BP,
+                            "since": held("spread", lambda x: x > SPREAD_LINE_BP), "days": SPREAD_DAYS,
+                            "through": last["spread_through"]}),
+    }
 
 
 def _retained(output, reason, checked_at):
@@ -129,6 +252,17 @@ def build(history_root, *, clock=None, previous_output=None):
         except ValueError:
             return _retained(previous_output, "input_invalid_" + sid, stamp)
     rows = assign_buckets([r for r in weekly_rows(series) if r["date"] >= START])
+    assign_buckets(rows, "x", "xbucket", "xbounds")
+    extra = {}
+    for key, sid in WATCH_SERIES.items():
+        try:
+            extra[key] = history.read_series(root, root, sid, True)
+        except Exception:
+            extra[key] = None
+    try:
+        attach_watch(rows, extra["ASSETS"], extra["SOFR"], extra["IORB"])
+    except ValueError:
+        attach_watch(rows)                 # an unreadable watch input must not cost the map
     if not rows:
         return _retained(previous_output, "no_complete_week", stamp)
     last = rows[-1]
@@ -136,6 +270,7 @@ def build(history_root, *, clock=None, previous_output=None):
         return _retained(previous_output, "future_observation_rejected", stamp)
     age = (now.date() - date.fromisoformat(last["date"])).days
     counts = {c: sum(r["cell"] == c for r in rows) for c in CELLS}
+    judged, watch = judgment(rows)
     return {
         "schema_version": 1,
         "status": "stale" if age > STALE_AFTER_DAYS else "ok",
@@ -145,16 +280,21 @@ def build(history_root, *, clock=None, previous_output=None):
                        "scalar": "change in total assets (WALCL)",
                        "vector": "minus the change in non-reserve liabilities (WALCL − WRBWFRBL)",
                        "identity": "s + v = change in reserve balances (WRBWFRBL)",
-                       "bucket": "quintile of s + v against strictly earlier weeks since %s" % START},
+                       "bucket": "quintile of s + v against strictly earlier weeks since %s" % START,
+                       "judgment": "tilt toward growth when the bucket is %d or higher, otherwise no tilt" % TILT_FROM_BUCKET,
+                       "candidate": "x = s + v with the Treasury account's contribution removed; own quintiles"},
         "vintage": "current_as_of_retrieval",
         "now": {"date": last["date"], "s": round(last["s"], 4), "v": round(last["v"], 4), "g": round(last["g"], 4),
                 "cell": last["cell"], "bucket": last["bucket"],
                 "bounds": None if last["bounds"] is None else [round(b, 4) for b in last["bounds"]],
                 "levels_billion_usd": {k: round(x, 3) for k, x in last["levels"].items()},
                 "vector_sources": {k: round(x, 4) for k, x in last["sources"].items()}},
+        "judgment": judged, "watch": watch,
         "cells": {c: {"weeks": counts[c], "share": round(counts[c] / len(rows), 4)} for c in CELLS},
-        "points": [{"d": r["date"], "s": round(r["s"], 3), "v": round(r["v"], 3), "c": r["cell"], "b": r["bucket"]} for r in rows],
-        "inputs": {sid: {k: index.get(sid, {}).get(k) for k in ("last_date", "retrieved_at", "status")} for sid in SERIES.values()},
+        "points": [{"d": r["date"], "s": round(r["s"], 3), "v": round(r["v"], 3), "c": r["cell"], "b": r["bucket"],
+                    "x": round(r["x"], 3), "xb": r["xbucket"]} for r in rows],
+        "inputs": {sid: {k: index.get(sid, {}).get(k) for k in ("last_date", "retrieved_at", "status")}
+                   for sid in list(SERIES.values()) + list(WATCH_SERIES.values())},
     }
 
 
@@ -167,7 +307,8 @@ def main(argv=None):
     args.output.parent.mkdir(parents=True, exist_ok=True)
     live_api._atomic_json(args.output, result)
     print(json.dumps({"status": result["status"], "reason": result.get("reason"), "asof": result.get("asof"),
-                      "weeks": len(result.get("points", [])), "cell": (result.get("now") or {}).get("cell")}, ensure_ascii=False))
+                      "weeks": len(result.get("points", [])), "cell": (result.get("now") or {}).get("cell"),
+                      "tilt": (result.get("judgment") or {}).get("tilt")}, ensure_ascii=False))
     return 0 if result["status"] in ("ok", "stale") else 2
 
 

@@ -29,6 +29,22 @@
     <div id="banner" class="banner" role="status" hidden></div>
 
     <div id="content" hidden>
+      <section id="judgment" aria-labelledby="judgment-title" hidden>
+        <h2 id="judgment-title">판정: 성장주 기울기 <span class="badge stale" id="judgment-grade">후보 · 실시간 검증 전</span></h2>
+        <p class="lead">판정 지표는 준비금 13주 변화 하나다. 과거 대비 4~5구간이면 성장주 쪽으로 기울이고, 아니면 기울이지 않는다. 주식 비중이나 지수 방향에 대한 판단이 아니다.</p>
+        <div class="judge">
+          <article class="panel verdict"><span class="score-label">이번 주</span><b id="verdict">—</b><span id="verdict-since" class="score-week"></span><div id="scale"></div><p class="note" id="verdict-why"></p></article>
+          <article class="panel"><h3>후보 지표와 준비금 변화의 출처</h3><div class="tiles stack" id="judge-tiles"></div><p class="note" id="source-note"></p></article>
+        </div>
+        <h3 class="sub">감시 항목 <small>판정이 아니다. 판정 지표가 왜 움직일지 미리 본다</small></h3>
+        <div class="tiles two" id="watch-tiles"></div>
+        <h3 class="sub">최근 52주의 판정</h3>
+        <article class="panel"><div id="tilt-strip"></div>
+          <div class="legend"><span><i class="sq" style="background:var(--pos)"></i>성장주 쪽으로 기울임(4~5구간)</span><span><i class="sq" style="background:var(--chip)"></i>시장 중립</span></div></article>
+        <p class="note" id="judgment-evidence"></p>
+        <p class="note"><a class="inline" href="./research/protocols/PROTOCOL_tilt_v1.md">검증 규약과 통과·폐기 기준 ↗</a> · <a class="inline" href="./research/studies/tilt-2026-11/README.md">실험 결과 ↗</a></p>
+      </section>
+
       <section aria-labelledby="now-title">
         <h2 id="now-title">지금</h2>
         <div class="tiles" id="tiles"></div>
@@ -93,6 +109,8 @@
       <section id="method" class="note-panel">
         <h2>읽는 법과 한계</h2>
         <p>총량 s는 총자산(WALCL)의 13주 변화, 방향 v는 준비금이 아닌 부채(WALCL − WRBWFRBL)의 13주 감소를 13주 전 총자산으로 나눈 값이다. s + v는 준비금 13주 변화와 오차 없이 같다. 구간은 그 주의 준비금 변화를 2009년 이후 그 주보다 앞선 값들과 비교한 다섯 등분이다.</p>
+        <p>판정은 준비금 13주 변화가 과거 값들 사이에서 어느 구간에 있는지만 본다. 총량과 방향은 그 변화가 어디서 왔는지 설명하는 분해이고 판정을 바꾸지 않는다. 후보 지표는 재무부 계정이 움직이지 않았다면 준비금이 얼마나 변했을지를 같은 방식으로 구간에 놓은 것이며, 어느 쪽이 나은지는 실시간 기록으로 비교한다. 감시 항목은 판정이 아니다.</p>
+        <p>감시 항목 가운데 둘은 준비금이 어디서 늘지를 본다. 총자산이 13주에 1%p 넘게 느는지(연준 매입), 국내 역레포가 총자산의 1%를 넘는지다. 나머지 둘은 준비금이 아직 충분한지를 본다. 뉴욕 연준 연구는 준비금이 은행 자산의 일정 비율을 넘으면 수요가 포화되고, 그 아래에서는 금리가 준비금에 민감해진다고 추정했다. 화면의 포화 구간이 그 추정이며 시기에 따라 움직인다. 레포 금리(SOFR)가 준비금 이자율(IORB)보다 높게 이어지면 준비금을 구하는 쪽이 늘었다는 뜻이고, 연준이 매입을 다시 시작할 조건 가운데 하나다. 월말·분기말에는 며칠씩 튀므로 한 주의 값만으로 읽지 않는다.</p>
         <p>임시 모델 보드는 미리 적어 둔 규칙이 이번 주에 켜졌는지만 계산한다. 상태는 H.4.1과 금리·스프레드·달러·변동성·통화량 자료에서 나오고, 규칙을 시험한 자산의 가격은 읽지 않는다. 일별 자료는 기준 수요일 다음 날인 목요일 값까지 쓴다. 켜짐과 꺼짐은 전량 매수·전량 매도 지시가 아니라, 비중을 조절할 근거가 얼마나 있는지를 말한다. 가격이 있어야 계산되는 전진식 모델 세 개는 보드에 없고 연구 문서에 있다.</p>
         <p>이 화면은 측정이다. 가격을 읽지 않고 예측하지 않는다. 칸별 과거 성적은 2026년 11월의 탐색 연구에서 온 고정된 표이며, 사전에 정한 검정을 통과한 것은 일부뿐이다. H.4.1은 목요일에 공표되므로 수요일 기준 값은 그 뒤에야 알 수 있다. 수집이 실패하면 마지막 정상 지도를 그 날짜 그대로 보여 준다.</p>
       </section>

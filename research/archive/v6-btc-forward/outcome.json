@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "study": "v6 BTC macro model, sealed forward forecast",
+  "sealed": {
+    "decision": "2026-09-07",
+    "information_cutoff": "2026-09-05",
+    "entry_reference_date": "2026-09-08",
+    "exit_reference_date": "2026-10-08",
+    "forecasts": {
+      "btc_overfit": {
+        "log_return_prediction": 0.019222137332313385,
+        "simple_return_prediction": 0.019408072057593057,
+        "btc_weight": 1,
+        "sealed_at": "2026-09-07T14:14:01.718254+00:00",
+        "model_sha256": "38e609d53a2fa8ab0d1fddc199a38c5ed493ae13aaf6dc018a1f7d3457e55afe"
+      },
+      "btc_cv": {
+        "log_return_prediction": 0.03249616269549292,
+        "simple_return_prediction": 0.03302992908596414,
+        "btc_weight": 1,
+        "sealed_at": "2026-09-07T14:14:01.725834+00:00",
+        "model_sha256": "c8c0dacaa3af2bf67e1e2091600eb355e71ac115bc8056f779dd8c735c0bc4fc"
+      }
+    },
+    "source": "macro-liquidity-dashboard/dashboard-research-archive.html (status was 'pending', outcome null)"
+  },
+  "outcome": {
+    "scored_on": "2026-11-14",
+    "realized_simple_return": 0.039571,
+    "realized_log_return": 0.038808,
+    "price_source": "FRED CBBTCUSD daily values on the two reference dates",
+    "caveat": "The original study names its own archived price source; this score uses FRED and may differ slightly.",
+    "errors_log_return": {
+      "btc_overfit": -0.019586,
+      "btc_cv": -0.006312
+    },
+    "direction_correct": {
+      "btc_overfit": true,
+      "btc_cv": true
+    }
+  },
+  "reading": "One forecast. It says nothing about stable predictive power either way."
+}

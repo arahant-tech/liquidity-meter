@@ -7,6 +7,11 @@ const SIDE = { 'A': '준비금↑', 'B+': '준비금↑', 'C+': '준비금↑', 
 const STATUS = { ok: ['정상', 'ok'], stale: ['갱신 지연', 'stale'], retained: ['이전 정상값', 'retained'], unavailable: ['자료 없음', 'error'] };
 const STUDY_URL = './research/studies/quadrant-2026-11/results.json';
 const MODELS_URL = './models.json';
+const TILT_STUDY = './research/studies/tilt-2026-11/';
+const PROTOCOLS_URL = './research/protocols/registry.json';
+const TILT_CONTROLS_URL = './research/studies/tilt-controls-2026-11/results.json';
+const TILTS = { growth: '성장주 쪽으로 기울임', neutral: '시장 중립' };
+const DRIVERS = ['total', 'direction', 'both', 'none'];
 const MODEL_STUDY = './research/studies/models-2026-11/';
 const RULES = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'C1', 'C2', 'C3'];
 const ASSETS = ['SPY', 'QQQ', 'QQQ↔SPY', 'BTC', 'ETH'];
@@ -24,6 +29,36 @@ function classify(s, v) {
   return 'D';
 }
 
+/* The judgment must agree with its own bounds and with the map it sits in. An older map may have none. */
+function checkJudgment(q) {
+  const j = q.judgment, w = q.watch;
+  if (j == null && w == null) return;
+  if (!j || !w || !j.indicator || !j.candidate || !j.source || !w.total_assets || !w.reverse_repo) throw Error('판정 자료가 일부만 들어 있습니다.');
+  const reading = (r) => {
+    if (!finite(r.value) || !validDate(r.since)) throw Error('판정 자료를 읽을 수 없습니다.');
+    if (r.bucket === null) { if (r.tilt !== null) throw Error('판정이 구간과 맞지 않습니다.'); return; }
+    if (![1, 2, 3, 4, 5].includes(r.bucket) || !(r.tilt in TILTS) || (r.bucket >= 4) !== (r.tilt === 'growth')) throw Error('판정이 구간과 맞지 않습니다.');
+    if (!Array.isArray(r.bounds) || r.bounds.length !== 4 || !r.bounds.every(finite) || r.bounds.some((b, i) => i && b <= r.bounds[i - 1]) || r.tilt_from !== r.bounds[2]) throw Error('판정의 구간 경계가 잘못됐습니다.');
+    // rounding can move a value across a boundary only when it sits on it
+    if (1 + r.bounds.filter((b) => b < r.value).length !== r.bucket && Math.min(...r.bounds.map((b) => Math.abs(b - r.value))) > 0.0002) throw Error('판정의 구간이 경계와 맞지 않습니다.');
+  };
+  reading(j.indicator); reading(j.candidate);
+  if (j.tilt !== j.indicator.tilt || j.since !== j.indicator.since || j.indicator.bucket !== q.now.bucket || Math.abs(j.indicator.value - q.now.g) > 0.001) throw Error('판정이 지도와 맞지 않습니다.');
+  const both = j.indicator.tilt !== null && j.candidate.tilt !== null;
+  if (j.agree !== (both ? j.indicator.tilt === j.candidate.tilt : null)) throw Error('두 지표의 비교가 맞지 않습니다.');
+  if (!DRIVERS.includes(j.source.driver) || !['total', 'direction', 'tga'].every((k) => finite(j.source[k]))) throw Error('준비금 변화의 출처를 읽을 수 없습니다.');
+  const a = w.total_assets, r = w.reverse_repo;
+  if (!finite(a.value) || !finite(a.line) || a.above !== (a.value > a.line) || !validDate(a.since)) throw Error('감시 항목(총자산)이 맞지 않습니다.');
+  if (!finite(r.billion_usd) || r.billion_usd < 0 || !finite(r.share) || !finite(r.line) || !validDate(r.since)) throw Error('감시 항목(역레포)을 읽을 수 없습니다.');
+  if (r.share_mean === null ? r.above !== null : (!finite(r.share_mean) || r.above !== (r.share_mean >= r.line))) throw Error('감시 항목(역레포)이 맞지 않습니다.');
+  // Two later additions. A map made before them has neither; one made without their inputs carries a reason instead of a value.
+  const ra = w.reserve_adequacy, fs = w.funding_spread;
+  if (ra != null && (ra.value === null ? typeof ra.reason !== 'string' || !ra.reason
+    : !finite(ra.value) || !finite(ra.line) || !finite(ra.band_high) || ra.below !== (ra.value < ra.line) || !validDate(ra.since) || !validDate(ra.assets_date))) throw Error('감시 항목(준비금 충분성)이 맞지 않습니다.');
+  if (fs != null && (fs.value_bp === null ? typeof fs.reason !== 'string' || !fs.reason
+    : !finite(fs.value_bp) || !finite(fs.line_bp) || fs.above !== (fs.value_bp > fs.line_bp) || !validDate(fs.since) || !validDate(fs.through))) throw Error('감시 항목(자금 압박)이 맞지 않습니다.');
+}
+
 /* Refuse to draw a map that is malformed or disagrees with itself. */
 function validate(q, now = Date.now()) {
   if (!q || q.schema_version !== 1 || !(q.status in STATUS)) throw Error('지도 자료의 형식을 확인할 수 없습니다.');
@@ -34,6 +69,7 @@ function validate(q, now = Date.now()) {
     if (!validDate(p.d) || p.d <= previous) throw Error('지도 자료의 날짜 순서가 맞지 않습니다.');
     if (!finite(p.s) || !finite(p.v) || !CELLS.includes(p.c)) throw Error('지도 자료에 읽을 수 없는 값이 있습니다.');
     if (p.b !== null && ![1, 2, 3, 4, 5].includes(p.b)) throw Error('지도 자료의 구간 값이 잘못됐습니다.');
+    if (p.xb !== undefined && p.xb !== null && ![1, 2, 3, 4, 5].includes(p.xb)) throw Error('지도 자료의 후보 구간 값이 잘못됐습니다.');
     // rounding can move a point across a boundary only when it sits on it
     if (classify(p.s, p.v) !== p.c && Math.min(Math.abs(p.s), Math.abs(p.v), Math.abs(p.s + p.v)) > 0.002) throw Error('지도 자료의 칸이 값과 맞지 않습니다.');
     previous = p.d;
@@ -41,6 +77,7 @@ function validate(q, now = Date.now()) {
   const last = q.points[q.points.length - 1];
   if (q.asof !== last.d || q.now.date !== last.d || q.now.cell !== last.c) throw Error('지도 자료의 기준 주가 서로 다릅니다.');
   if (Date.parse(last.d + 'T00:00:00Z') > now + 864e5) throw Error('지도 자료에 미래 날짜가 있습니다.');
+  checkJudgment(q);
   const age = Math.floor((now - Date.parse(last.d + 'T00:00:00Z')) / 864e5);
   const status = q.status === 'ok' && age > STALE_DAYS ? 'stale' : q.status;   // never trust "ok" on an old map
   return { ...q, status, age, points: q.points.map((p) => ({ ...p, g: p.s + p.v })) };
@@ -81,7 +118,7 @@ function boardMatchesMap(m, q) {
   return (!sure(g) || m.states.Q1.on === g > 0) && (!sure(n.v) || m.states.Q2.on === n.v > 0) && (!sure(n.s) || m.states.Q3.on === n.s > 0);
 }
 
-if (typeof module !== 'undefined') module.exports = { classify, validate, validateModels, boardMatchesMap, CELLS, SHORT, SIDE, RULES, ASSETS };
+if (typeof module !== 'undefined') module.exports = { classify, validate, validateModels, boardMatchesMap, CELLS, SHORT, SIDE, RULES, ASSETS, TILTS };
 if (typeof document === 'undefined') return;
 
 const $ = (id) => document.getElementById(id);
@@ -184,6 +221,104 @@ function drawRaster(host, pts) {
   hit.addEventListener('pointerleave', hideTip);
   svg.append(hit);
   host.replaceChildren(svg);
+}
+
+/* One row of five equal buckets with the reading marked on it. Buckets 4 and 5 are the tilt zone. */
+function drawScale(host, rows) {
+  const W = Math.max(280, Math.min(host.clientWidth || 520, 640)), left = 4, right = 4, rowH = 70, seg = (W - left - right) / 5;
+  const svg = el('svg', { viewBox: `0 0 ${W} ${rows.length * rowH}`, width: W, height: rows.length * rowH, role: 'img', 'aria-label': rows.map((r) => `${r.label} ${r.bucket}구간`).join(', ') });
+  rows.forEach((r, k) => {
+    const y = k * rowH + 30;
+    svg.append(el('text', { x: left, y: y - 14, class: 'strong' }, r.label));      // clear of the marker below it
+    for (let b = 1; b <= 5; b += 1) {
+      svg.append(el('rect', { x: left + (b - 1) * seg + 1, y, width: seg - 2, height: 14, rx: 3, fill: b >= 4 ? 'var(--pos)' : 'var(--chip)', opacity: b >= 4 ? (b === r.bucket ? 1 : .45) : 1, stroke: b === r.bucket ? 'var(--text)' : 'none', 'stroke-width': 1.5 }));
+      svg.append(el('text', { x: left + (b - .5) * seg, y: y + 11, 'text-anchor': 'middle', class: b >= 4 ? 'on-pos' : '' }, String(b)));
+      if (b < 5) svg.append(el('text', { x: left + b * seg, y: y + 30, 'text-anchor': 'middle' }, fmt(r.bounds[b - 1], 2)));
+    }
+    // position inside the bucket; the two outer buckets have no far edge, so the mark sits at most one bucket-width out
+    const lo = r.bucket === 1 ? r.bounds[0] - (r.bounds[1] - r.bounds[0]) : r.bounds[r.bucket - 2];
+    const hi = r.bucket === 5 ? r.bounds[3] + (r.bounds[3] - r.bounds[2]) : r.bounds[r.bucket - 1];
+    const inside = Math.min(.92, Math.max(.08, (r.value - lo) / (hi - lo)));
+    const x = left + (r.bucket - 1 + inside) * seg;
+    svg.append(el('path', { d: `M${x - 5},${y - 7}L${x + 5},${y - 7}L${x},${y - 1}Z`, fill: 'var(--text)' }));
+  });
+  host.replaceChildren(svg);
+}
+
+function drawTiltStrip(host, pts) {
+  const rows = [['판정', 'b'], ['후보', 'xb']], W = Math.max(280, Math.min(host.clientWidth || 520, 1100)), left = 38, step = (W - left - 4) / pts.length, rowH = 20;
+  const svg = el('svg', { viewBox: `0 0 ${W} ${rows.length * rowH + 20}`, width: W, height: rows.length * rowH + 20, role: 'img', 'aria-label': `최근 ${pts.length}주의 기울기 판정과 후보 지표` });
+  rows.forEach(([label, key], k) => {
+    svg.append(el('text', { x: 0, y: k * rowH + 13 }, label));
+    pts.forEach((p, i) => {
+      const on = p[key] != null && p[key] >= 4;
+      const cell = el('rect', { x: left + i * step + .5, y: k * rowH + 2, width: Math.max(1, step - 1), height: rowH - 5, rx: 1.5, fill: p[key] == null ? 'none' : on ? 'var(--pos)' : 'var(--chip)', stroke: p[key] == null ? 'var(--grid)' : 'none' });
+      cell.addEventListener('pointermove', (e) => showTip(e, [p.d, `${label}: ${p[key] == null ? '구간 없음' : `${p[key]}구간 · ${on ? TILTS.growth : TILTS.neutral}`}`]));
+      cell.addEventListener('pointerleave', hideTip);
+      svg.append(cell);
+    });
+  });
+  svg.append(el('text', { x: left, y: rows.length * rowH + 14 }, pts[0].d.slice(0, 7)), el('text', { x: W - 4, y: rows.length * rowH + 14, 'text-anchor': 'end' }, pts[pts.length - 1].d.slice(0, 7)));
+  host.replaceChildren(svg);
+}
+
+let judged = null;
+function drawJudgmentCharts() {
+  if (!judged) return;
+  const j = judged.judgment, rows = [['준비금 13주 변화', j.indicator], ['재무부 계정을 뺀 변화 (후보)', j.candidate]].filter(([, r]) => r.bucket !== null).map(([label, r]) => ({ label, ...r }));
+  if (rows.length) drawScale($('scale'), rows); else $('scale').replaceChildren();
+  drawTiltStrip($('tilt-strip'), judged.points.slice(-52));
+}
+
+function drawJudgment(q) {
+  const j = q.judgment, w = q.watch, section = $('judgment');
+  if (!j) { section.hidden = true; return; }
+  const m = j.indicator, c = j.candidate, tile = (host, big, small, cls) => { const d = html('div', 'tile' + (cls ? ' ' + cls : '')); d.append(html('b', '', big), html('span', '', small)); host.append(d); };
+  $('verdict').textContent = j.tilt ? TILTS[j.tilt] : '판정 없음';
+  $('verdict').className = j.tilt === 'growth' ? 'on' : '';
+  $('verdict-since').textContent = j.tilt ? `${j.since}부터 · 기준 주 ${q.asof}` : '과거 값이 충분히 쌓이기 전이다';
+  $('verdict-why').textContent = j.tilt
+    ? `준비금 13주 변화 ${fmt(m.value, 2)}%는 과거 대비 ${m.bucket}구간이다. 4구간은 ${fmt(m.tilt_from, 2)}%부터다. ` + (j.tilt === 'growth' ? '4~5구간이므로 성장주 쪽으로 기울인다.' : '4~5구간이 아니므로 기울이지 않는다. 주식을 줄이라는 뜻이 아니다.')
+    : '';
+  const tiles = $('judge-tiles'); tiles.replaceChildren();
+  tile(tiles, c.tilt ? `${fmt(c.value, 2)}% · ${c.bucket}구간` : `${fmt(c.value, 2)}%`, `재무부 계정을 뺀 준비금 변화(후보) · ${j.agree === null ? '비교 불가' : j.agree ? '같은 답' : '다른 답: ' + TILTS[c.tilt]}`, j.agree === false ? 'warn' : '');
+  tile(tiles, fmt(j.source.total, 2) + '%', '총량이 보탠 몫');
+  tile(tiles, fmt(j.source.direction, 2) + '%', `방향이 보탠 몫 · 그중 재무부 계정 ${fmt(j.source.tga, 2)}`);
+  const said = { direction: '이번 준비금 증가는 방향에서 나왔다. 주차돼 있던 돈이 준비금으로 옮겨 왔고 총량은 늘지 않았다.', total: '이번 준비금 증가는 총량에서 나왔다. 방향은 오히려 깎았다.', both: '총량과 방향이 함께 준비금을 늘렸다.', none: '준비금이 늘지 않았다.' };
+  $('source-note').textContent = said[j.source.driver];
+  const watch = $('watch-tiles'); watch.replaceChildren();
+  const a = w.total_assets, r = w.reverse_repo;
+  tile(watch, fmt(a.value, 2) + '%', `총자산 13주 변화 · 감시선 ${fmt(a.line, 0)}%p · ${a.above ? '넘었다' : '아래'} (${a.since}부터)`, a.above ? 'hit' : '');
+  tile(watch, r.billion_usd.toFixed(1), `국내 역레포 (십억 달러) · 총자산의 ${(r.share_mean === null ? r.share : r.share_mean).toFixed(2)}%${r.share_mean === null ? '' : ` (${r.mean_weeks}주 평균)`} · 감시선 ${r.line}% · ${r.above === null ? '판단 보류' : r.above ? '넘었다' : '아래'}${r.above === null ? '' : ` (${r.since}부터)`}`, r.above ? 'hit' : '');
+  const ra = w.reserve_adequacy, fs = w.funding_spread;
+  if (ra) tile(watch, ra.value === null ? '—' : ra.value.toFixed(2) + '%', ra.value === null ? `준비금 ÷ 은행 자산 · 자료 없음 (${ra.reason})`
+    : `준비금 ÷ 은행 자산 · 포화 구간 ${ra.line}~${ra.band_high}% · ${ra.below ? '그 아래' : ra.value < ra.band_high ? '구간 안' : '그 위'} (${ra.since}부터) · 은행 자산 ${ra.assets_date} 기준`, ra.below ? 'hit' : '');
+  if (fs) tile(watch, fs.value_bp === null ? '—' : fmt(fs.value_bp, 1) + 'bp', fs.value_bp === null ? `레포 금리 − 준비금 이자율 · 자료 없음 (${fs.reason})`
+    : `레포 금리 − 준비금 이자율 (SOFR − IORB, ${fs.days}일 평균, ${fs.through}까지) · 감시선 ${fs.line_bp}bp · ${fs.above ? '넘었다' : '아래'} (${fs.since}부터)`, fs.above ? 'hit' : '');
+  section.hidden = false;
+  judged = q; drawJudgmentCharts();
+}
+
+/* Past results come from the fixed study; the protocol's status from the registry. Both are optional. */
+async function drawEvidence(q) {
+  if (!q.judgment) return;
+  const [study, diag, registry, controls] = await Promise.all([get(TILT_STUDY + 'results.json').catch(() => null), get(TILT_STUDY + 'diagnostics.json').catch(() => null), get(PROTOCOLS_URL).catch(() => null), get(TILT_CONTROLS_URL).catch(() => null)]);
+  const g = study && study.indicators && study.indicators.g, parts = [];
+  if (g && [g.mean_on, g.mean_off, g.D, g.p_raw, g.p_holm].every(finite) && study.sample) {
+    parts.push(`과거 ${study.sample.from}~${study.sample.to}의 ${study.sample.weeks}주에서, 기울인 주의 이후 13주 QQQ−SPY는 평균 ${fmt(g.mean_on, 2)}%p, 아닌 주는 ${fmt(g.mean_off, 2)}%p였다(차이 ${fmt(g.D, 2)}%p, 두 검정 중 큰 p ${g.p_raw.toFixed(3)}, 보정 ${g.p_holm.toFixed(3)}). 규칙이 같은 표본을 본 뒤에 만들어졌으므로 이것은 새 증거가 아니다.`);
+    const x = study.indicators.x;
+    if (x && finite(x.D)) parts.push(`후보 지표의 차이는 ${fmt(x.D, 2)}%p였다.`);
+  }
+  const both = controls && controls.primary && controls.primary.tests && controls.primary.tests.T_AB;
+  if (both && [both.b, both.p_holm].every(finite) && controls.verdicts && typeof controls.verdicts['종합'] === 'string') parts.push(`직전 수익·낙폭·변동성과 실질금리 변화를 함께 통제해도 차이는 ${fmt(both.b, 2)}%p였다(보정 p ${both.p_holm.toFixed(3)}, 사전 기준으로 "${controls.verdicts['종합']}"). 이것도 같은 표본 안의 점검이다.`);
+  const inside = diag && diag.inside_on_weeks;
+  if (inside && [inside.total_up_mean, inside.total_not_up_mean, inside.total_not_up_weeks].every(finite)) parts.push(`기울인 주 가운데 총자산도 늘던 주는 ${fmt(inside.total_up_mean, 2)}%p, 총자산이 늘지 않던 주(${inside.total_not_up_weeks}주)는 ${fmt(inside.total_not_up_mean, 2)}%p였다(사후 점검).`);
+  const entry = registry && Array.isArray(registry.protocols) && registry.protocols.find((e) => e.id === q.judgment.protocol);
+  if (entry) {
+    parts.push(entry.status === 'fixed' ? '검증 기록 규약은 고정됐다.' : '검증 기록 규약은 초안이고, 실시간 기록은 아직 시작하지 않았다.');
+    $('judgment-grade').textContent = entry.status === 'fixed' ? '후보 · 실시간 검증 중' : '후보 · 실시간 검증 전';
+  }
+  $('judgment-evidence').textContent = parts.join(' ');
 }
 
 function drawTiles(q) {
@@ -409,12 +544,13 @@ async function start() {
   if (q.status === 'unavailable') { $('content').hidden = true; return; }
   state = q;
   $('content').hidden = false;
-  drawTiles(q); drawRecent(q.points); drawCharts();
+  drawJudgment(q); drawTiles(q); drawRecent(q.points); drawCharts();
+  drawEvidence(q).catch(() => { /* the judgment stands without the study text */ });
   try { drawStudy(await get(STUDY_URL), q.now.cell); } catch { /* the map stands on its own without the study table */ }
   try { await startBoard(q); } catch { /* the map stands on its own without the board */ }
 }
 
 let timer;
-addEventListener('resize', () => { clearTimeout(timer); timer = setTimeout(() => { drawCharts(); drawStrip(); }, 150); });
+addEventListener('resize', () => { clearTimeout(timer); timer = setTimeout(() => { drawCharts(); drawStrip(); drawJudgmentCharts(); }, 150); });
 start();
 })();

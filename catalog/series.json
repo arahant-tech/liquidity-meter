@@ -455,6 +455,11 @@
         "reason": "copyrighted on FRED: reproduction prohibited without permission"
       },
       {
+        "series_id": "NASDAQ100",
+        "persist": false,
+        "reason": "copyrighted on FRED: reproduction prohibited without permission"
+      },
+      {
         "series_id": "BAA10Y",
         "persist": false,
         "reason": "copyrighted on FRED: Moody's data may not be redistributed or stored without consent"

@@ -163,6 +163,91 @@ class JudgmentPageTests(unittest.TestCase):
         for name in ("PROTOCOL.md", "README.md", "results.json", "diagnostics.json"):
             self.assertIn(f"research/studies/{models.STUDY}/{name}", manifest)
 
+    def test_real_map_carries_a_judgment_that_follows_the_measurement_rule(self):
+        out = self.evaluate(f"const r=j.validate(q,{NOW});console.log(JSON.stringify([r.judgment,r.watch,Object.keys(j.TILTS)]));")
+        judged, watch, tilts = out
+        self.assertEqual(set(tilts), {"growth", "neutral"})
+        for reading in (judged["indicator"], judged["candidate"]):
+            self.assertEqual(reading["tilt"], quadrant.tilt(reading["bucket"]))
+            self.assertEqual(reading["tilt_from"], reading["bounds"][quadrant.TILT_FROM_BUCKET - 2])
+        self.assertEqual(judged["protocol"], quadrant.PROTOCOL)
+        self.assertEqual((watch["total_assets"]["line"], watch["reverse_repo"]["line"]), (quadrant.TOTAL_LINE, quadrant.RRP_SHARE_LINE))
+        self.assertEqual((watch["reserve_adequacy"]["line"], watch["reserve_adequacy"]["band_high"]),
+                         (quadrant.ADEQUACY_LINE, quadrant.ADEQUACY_BAND_HIGH))
+        self.assertEqual((watch["funding_spread"]["line_bp"], watch["funding_spread"]["days"]),
+                         (quadrant.SPREAD_LINE_BP, quadrant.SPREAD_DAYS))
+
+    def test_watch_items_without_their_inputs_or_from_an_earlier_map_still_draw(self):
+        out = self.evaluate("q.watch.reserve_adequacy={value:null,reason:'input_missing_TLAACBW027NBOG'};"
+                            "q.watch.funding_spread={value_bp:null,reason:'input_missing_SOFR'};"
+                            f"const a=j.validate(q,{NOW});const empty=a.watch.reserve_adequacy.value;"
+                            f"delete q.watch.reserve_adequacy;delete q.watch.funding_spread;const b=j.validate(q,{NOW});"
+                            "console.log(JSON.stringify([a.status,empty,b.status,Object.keys(b.watch).length]));")
+        self.assertEqual(out, ["ok", None, "ok", 2])
+
+    def test_an_older_map_without_a_judgment_still_draws(self):
+        out = self.evaluate(f"delete q.judgment;delete q.watch;const r=j.validate(q,{NOW});console.log(JSON.stringify([r.status,r.judgment===undefined]));")
+        self.assertEqual(out, ["ok", True])
+
+    def test_judgments_that_contradict_themselves_or_the_map_are_refused(self):
+        cases = {
+            "tilt contradicts its bucket": "q.judgment.indicator.tilt='growth';q.judgment.tilt='growth';",
+            "bucket differs from the map": "q.judgment.indicator.bucket=2;",
+            "value differs from the map": "q.judgment.indicator.value+=0.5;",
+            "bucket contradicts its bounds": "q.judgment.candidate.value=9;",
+            "bounds out of order": "q.judgment.indicator.bounds=[1,0,2,3];",
+            "tilt line is not the fourth bucket's edge": "q.judgment.indicator.tilt_from=0;",
+            "headline differs from the indicator": "q.judgment.tilt=q.judgment.tilt==='growth'?'neutral':'growth';",
+            "wrong comparison": "q.judgment.agree=!q.judgment.agree;",
+            "unknown source": "q.judgment.source.driver='magic';",
+            "candidate bucket out of range": "q.judgment.candidate.bucket=9;",
+            "watch flag contradicts its value": "q.watch.total_assets.above=!q.watch.total_assets.above;",
+            "repo flag contradicts its mean": "q.watch.reverse_repo.above=!q.watch.reverse_repo.above;",
+            "judgment without watch items": "delete q.watch;",
+            "adequacy flag contradicts its value": "q.watch.reserve_adequacy.below=!q.watch.reserve_adequacy.below;",
+            "adequacy without a reason for being empty": "q.watch.reserve_adequacy={value:null};",
+            "spread flag contradicts its value": "q.watch.funding_spread.above=!q.watch.funding_spread.above;",
+            "spread with an unreadable value": "q.watch.funding_spread.value_bp='3';",
+            "bad candidate bucket on a point": "q.points[400].xb=0;",
+        }
+        for label, mutate in cases.items():
+            with self.subTest(case=label):
+                out = self.evaluate(mutate + f"try{{j.validate(q,{NOW});console.log('false')}}catch{{console.log('true')}}")
+                self.assertTrue(out, label)
+
+    def test_tilt_study_and_protocol_have_what_the_judgment_block_reads(self):
+        base = ROOT / "research/studies/tilt-2026-11"
+        study, diag = json.loads((base / "results.json").read_text()), json.loads((base / "diagnostics.json").read_text())
+        for key in ("mean_on", "mean_off", "D", "p_raw", "p_holm", "grade"):
+            self.assertIn(key, study["indicators"]["g"])
+        self.assertIn("D", study["indicators"]["x"])
+        self.assertTrue({"from", "to", "weeks"} <= set(study["sample"]))
+        self.assertTrue({"total_up_mean", "total_not_up_mean", "total_not_up_weeks"} <= set(diag["inside_on_weeks"]))
+        text = json.dumps(study) + json.dumps(diag)
+        for forbidden in ('"close"', '"adjclose"', '"price"'):
+            self.assertNotIn(forbidden, text)
+        controls = json.loads((ROOT / "research/studies/tilt-controls-2026-11/results.json").read_text())
+        self.assertTrue({"b", "p_holm", "retention"} <= set(controls["primary"]["tests"]["T_AB"]))
+        self.assertIn(controls["verdicts"]["종합"], ("남는다", "일부 설명된다", "설명된다"))
+        # the control study must start from exactly the tilt study's number
+        self.assertAlmostEqual(controls["primary"]["b0"], study["indicators"]["g"]["D"], places=2)
+        self.assertEqual(controls["sample"]["weeks"], study["sample"]["weeks"])
+        for forbidden in ('"close"', '"adjclose"', '"price"', '"vix"'):
+            self.assertNotIn(forbidden, json.dumps(controls))
+        registry = json.loads((ROOT / "research/protocols/registry.json").read_text())["protocols"]
+        self.assertIn(quadrant.PROTOCOL, [entry["id"] for entry in registry])
+        html = (SITE / "index.html").read_text()
+        for target in ("./research/protocols/PROTOCOL_tilt_v1.md", "./research/studies/tilt-2026-11/README.md"):
+            self.assertIn(f'href="{target}"', html)
+        self.assertIn("지수 방향에 대한 판단이 아니다", html)
+        manifest = json.loads((ROOT / "lm/render/public-files.json").read_text())["repo"]
+        for name in ("research/protocols/PROTOCOL_tilt_v1.md", "research/protocols/registry.json",
+                     "research/studies/tilt-2026-11/results.json", "research/studies/tilt-2026-11/diagnostics.json",
+                     "research/studies/tilt-2026-11/README.md", "research/studies/tilt-2026-11/PROTOCOL.md",
+                     "research/studies/tilt-controls-2026-11/results.json", "research/studies/tilt-controls-2026-11/README.md",
+                     "research/studies/tilt-controls-2026-11/PROTOCOL.md"):
+            self.assertIn(name, manifest)
+
     def test_entry_page_loads_the_map_and_links_the_other_screens(self):
         html = (SITE / "index.html").read_text()
         self.assertRegex(html, r'<script\b[^>]*\bsrc="\./judgment\.js"')

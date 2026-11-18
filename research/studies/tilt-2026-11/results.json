@@ -1,0 +1,500 @@
+{
+ "schema_version": 1,
+ "study": "tilt-2026-11",
+ "sample": {
+  "from": "2012-01-04",
+  "to": "2026-08-12",
+  "weeks": 763,
+  "independent_13w": 58.7
+ },
+ "mean_y13": 0.97,
+ "sd_y13": 3.72,
+ "indicators": {
+  "g": {
+   "name": "준비금 13주 변화",
+   "on_weeks": 216,
+   "off_weeks": 547,
+   "mean_on": 2.33,
+   "mean_off": 0.43,
+   "D": 1.9,
+   "p_shift": 0.0014,
+   "p_bootstrap": 0.0086,
+   "p_raw": 0.0086,
+   "shifts": 712,
+   "periods": [
+    1.28,
+    2.27,
+    1.78
+   ],
+   "delayed": 1.81,
+   "beta_adjusted_D": 2.15,
+   "spy_direction_D": 2.68,
+   "by_bucket": {
+    "1": {
+     "weeks": 172,
+     "mean": 0.09,
+     "beta_adjusted": -0.32,
+     "spy": 2.45
+    },
+    "2": {
+     "weeks": 166,
+     "mean": 0.53,
+     "beta_adjusted": 0.13,
+     "spy": 2.42
+    },
+    "3": {
+     "weeks": 209,
+     "mean": 0.62,
+     "beta_adjusted": 0.16,
+     "spy": 2.93
+    },
+    "4": {
+     "weeks": 162,
+     "mean": 1.78,
+     "beta_adjusted": 1.41,
+     "spy": 4.94
+    },
+    "5": {
+     "weeks": 54,
+     "mean": 4.0,
+     "beta_adjusted": 4.37,
+     "spy": 6.38
+    }
+   },
+   "horizons": {
+    "4": 0.59,
+    "26": 1.88
+   },
+   "thresholds": {
+    "5": 3.26,
+    "3+": 1.18
+   },
+   "weekly_spread_per_year": 6.5,
+   "strategy": {
+    "cagr": 17.2,
+    "sharpe": 0.97,
+    "mdd": -27.3,
+    "qqq_share": 28,
+    "turns_per_year": 4.8
+   },
+   "switches": 70,
+   "p_holm": 0.0172,
+   "grade": "통과"
+  },
+  "x": {
+   "name": "TGA를 뺀 준비금 변화",
+   "on_weeks": 212,
+   "off_weeks": 551,
+   "mean_on": 1.92,
+   "mean_off": 0.6,
+   "D": 1.31,
+   "p_shift": 0.0056,
+   "p_bootstrap": 0.0686,
+   "p_raw": 0.0686,
+   "shifts": 712,
+   "periods": [
+    1.08,
+    2.66,
+    0.19
+   ],
+   "delayed": 1.3,
+   "beta_adjusted_D": 1.42,
+   "spy_direction_D": 2.11,
+   "by_bucket": {
+    "1": {
+     "weeks": 178,
+     "mean": 0.14,
+     "beta_adjusted": -0.2,
+     "spy": 2.7
+    },
+    "2": {
+     "weeks": 161,
+     "mean": 1.0,
+     "beta_adjusted": 0.4,
+     "spy": 3.2
+    },
+    "3": {
+     "weeks": 212,
+     "mean": 0.69,
+     "beta_adjusted": 0.41,
+     "spy": 2.56
+    },
+    "4": {
+     "weeks": 166,
+     "mean": 1.3,
+     "beta_adjusted": 0.94,
+     "spy": 4.24
+    },
+    "5": {
+     "weeks": 46,
+     "mean": 4.14,
+     "beta_adjusted": 4.13,
+     "spy": 7.31
+    }
+   },
+   "horizons": {
+    "4": 0.42,
+    "26": 1.94
+   },
+   "thresholds": {
+    "5": 3.37,
+    "3+": 0.76
+   },
+   "weekly_spread_per_year": 5.1,
+   "strategy": {
+    "cagr": 17.0,
+    "sharpe": 0.95,
+    "mdd": -27.3,
+    "qqq_share": 28,
+    "turns_per_year": 3.3
+   },
+   "switches": 48,
+   "p_holm": 0.0686,
+   "grade": "통과"
+  }
+ },
+ "benchmarks": {
+  "SPY만": {
+   "cagr": 14.9,
+   "sharpe": 0.87,
+   "mdd": -31.8,
+   "qqq_share": 0,
+   "turns_per_year": 0.0
+  },
+  "QQQ만": {
+   "cagr": 19.7,
+   "sharpe": 0.97,
+   "mdd": -35.1,
+   "qqq_share": 100,
+   "turns_per_year": 0.0
+  },
+  "절반씩": {
+   "cagr": 17.4,
+   "sharpe": 0.94,
+   "mdd": -29.6,
+   "qqq_share": 50,
+   "turns_per_year": 0.0
+  }
+ },
+ "source": {
+  "on_and_total_up": {
+   "weeks": 174,
+   "mean": 2.72,
+   "beta_adjusted": 2.79
+  },
+  "on_and_total_not_up": {
+   "weeks": 42,
+   "mean": 0.73,
+   "beta_adjusted": -0.52
+  },
+  "total_down_direction_up_reserves_up": {
+   "weeks": 109,
+   "mean": 0.68,
+   "beta_adjusted": -0.15
+  },
+  "total_down_direction_up_reserves_down": {
+   "weeks": 105,
+   "mean": 0.59,
+   "beta_adjusted": 0.08
+  }
+ },
+ "tga_discount": {
+  "both_on": {
+   "weeks": 144,
+   "mean": 2.42,
+   "beta_adjusted": 2.36
+  },
+  "g_on_x_off": {
+   "weeks": 72,
+   "mean": 2.15,
+   "beta_adjusted": 1.72
+  },
+  "g_off_x_on": {
+   "weeks": 68,
+   "mean": 0.84,
+   "beta_adjusted": 0.1
+  },
+  "both_off": {
+   "weeks": 479,
+   "mean": 0.37,
+   "beta_adjusted": -0.02
+  },
+  "agreement_share": 81.7
+ },
+ "watch": {
+  "total_assets_above_1pp": [
+   {
+    "start": "2009-01-07",
+    "weeks": 3,
+    "bucket_at_start": null,
+    "max_bucket_next_26w": null,
+    "weeks_on_next_26w": null
+   },
+   {
+    "start": "2009-04-15",
+    "weeks": 9,
+    "bucket_at_start": null,
+    "max_bucket_next_26w": null,
+    "weeks_on_next_26w": null
+   },
+   {
+    "start": "2009-09-09",
+    "weeks": 44,
+    "bucket_at_start": null,
+    "max_bucket_next_26w": null,
+    "weeks_on_next_26w": null
+   },
+   {
+    "start": "2010-11-24",
+    "weeks": 43,
+    "bucket_at_start": null,
+    "max_bucket_next_26w": null,
+    "weeks_on_next_26w": null
+   },
+   {
+    "start": "2011-12-14",
+    "weeks": 13,
+    "bucket_at_start": null,
+    "max_bucket_next_26w": 4,
+    "weeks_on_next_26w": 2
+   },
+   {
+    "start": "2012-11-14",
+    "weeks": 112,
+    "bucket_at_start": 2,
+    "max_bucket_next_26w": 5,
+    "weeks_on_next_26w": 21
+   },
+   {
+    "start": "2019-10-02",
+    "weeks": 45,
+    "bucket_at_start": 3,
+    "max_bucket_next_26w": 5,
+    "weeks_on_next_26w": 19
+   },
+   {
+    "start": "2020-10-07",
+    "weeks": 80,
+    "bucket_at_start": 3,
+    "max_bucket_next_26w": 5,
+    "weeks_on_next_26w": 26
+   },
+   {
+    "start": "2023-03-22",
+    "weeks": 6,
+    "bucket_at_start": 4,
+    "max_bucket_next_26w": 4,
+    "weeks_on_next_26w": 11
+   },
+   {
+    "start": "2026-03-04",
+    "weeks": 4,
+    "bucket_at_start": 4,
+    "max_bucket_next_26w": 4,
+    "weeks_on_next_26w": 9
+   },
+   {
+    "start": "2026-04-08",
+    "weeks": 12,
+    "bucket_at_start": 4,
+    "max_bucket_next_26w": 4,
+    "weeks_on_next_26w": 6
+   }
+  ],
+  "rrp_share_above_1pct": [
+   {
+    "start": "2013-12-25",
+    "weeks": 113,
+    "bucket_at_start": 3,
+    "max_bucket_next_26w": 5,
+    "weeks_on_next_26w": 3
+   },
+   {
+    "start": "2016-03-09",
+    "weeks": 4,
+    "bucket_at_start": 3,
+    "max_bucket_next_26w": 4,
+    "weeks_on_next_26w": 1
+   },
+   {
+    "start": "2016-05-18",
+    "weeks": 3,
+    "bucket_at_start": 2,
+    "max_bucket_next_26w": 3,
+    "weeks_on_next_26w": 0
+   },
+   {
+    "start": "2016-06-22",
+    "weeks": 73,
+    "bucket_at_start": 1,
+    "max_bucket_next_26w": 3,
+    "weeks_on_next_26w": 0
+   },
+   {
+    "start": "2017-11-22",
+    "weeks": 8,
+    "bucket_at_start": 3,
+    "max_bucket_next_26w": 3,
+    "weeks_on_next_26w": 0
+   },
+   {
+    "start": "2018-01-31",
+    "weeks": 2,
+    "bucket_at_start": 1,
+    "max_bucket_next_26w": 3,
+    "weeks_on_next_26w": 0
+   },
+   {
+    "start": "2018-02-21",
+    "weeks": 2,
+    "bucket_at_start": 1,
+    "max_bucket_next_26w": 3,
+    "weeks_on_next_26w": 0
+   },
+   {
+    "start": "2020-01-01",
+    "weeks": 1,
+    "bucket_at_start": 4,
+    "max_bucket_next_26w": 5,
+    "weeks_on_next_26w": 27
+   },
+   {
+    "start": "2020-03-25",
+    "weeks": 2,
+    "bucket_at_start": 5,
+    "max_bucket_next_26w": 5,
+    "weeks_on_next_26w": 15
+   },
+   {
+    "start": "2021-03-31",
+    "weeks": 1,
+    "bucket_at_start": 5,
+    "max_bucket_next_26w": 5,
+    "weeks_on_next_26w": 21
+   },
+   {
+    "start": "2021-04-21",
+    "weeks": 199,
+    "bucket_at_start": 5,
+    "max_bucket_next_26w": 5,
+    "weeks_on_next_26w": 20
+   },
+   {
+    "start": "2025-02-19",
+    "weeks": 8,
+    "bucket_at_start": 3,
+    "max_bucket_next_26w": 5,
+    "weeks_on_next_26w": 12
+   },
+   {
+    "start": "2025-04-23",
+    "weeks": 16,
+    "bucket_at_start": 2,
+    "max_bucket_next_26w": 5,
+    "weeks_on_next_26w": 5
+   },
+   {
+    "start": "2025-12-31",
+    "weeks": 1,
+    "bucket_at_start": 2,
+    "max_bucket_next_26w": 4,
+    "weeks_on_next_26w": 9
+   }
+  ],
+  "share_of_on_weeks_with_total_above_1pp": 69.9
+ },
+ "live_criteria": {
+  "reviews": [
+   104,
+   156,
+   208,
+   260
+  ],
+  "min_group_weeks": 26,
+  "pass_line_at_260": 1.64,
+  "kill_lines": [
+   -1.63,
+   -1.07,
+   -0.76,
+   -0.54
+  ],
+  "median_D": {
+   "H0": [
+    0.03,
+    0.01,
+    0.03,
+    0.05
+   ],
+   "H1": [
+    1.36,
+    1.36,
+    1.39,
+    1.42
+   ]
+  },
+  "review_possible_share": {
+   "H0": [
+    53.4,
+    81.9,
+    94.5,
+    98.7
+   ],
+   "H1": [
+    53.1,
+    81.6,
+    94.1,
+    98.5
+   ]
+  },
+  "outcomes": {
+   "H0": {
+    "killed_at_each_review": [
+     10.0,
+     11.5,
+     10.8,
+     8.0
+    ],
+    "killed_total": 40.3,
+    "passed": 9.7,
+    "unresolved": 50.0
+   },
+   "H1": {
+    "killed_at_each_review": [
+     2.7,
+     2.5,
+     2.2,
+     1.8
+    ],
+    "killed_total": 9.2,
+    "passed": 42.2,
+    "unresolved": 48.6
+   }
+  }
+ },
+ "now": {
+  "week": "2026-11-11",
+  "g": 0.331,
+  "g_bucket": 3,
+  "g_bounds": [
+   -2.872,
+   -0.837,
+   1.113,
+   3.84
+  ],
+  "x": -0.369,
+  "x_bucket": 3,
+  "x_bounds": [
+   -2.553,
+   -0.977,
+   0.705,
+   3.827
+  ],
+  "tilt_g": false,
+  "tilt_x": false,
+  "s": -0.016,
+  "v": 0.347,
+  "rrp_billion": 0.2,
+  "rrp_share": 0.002
+ },
+ "asof": "2026-11-11"
+}
