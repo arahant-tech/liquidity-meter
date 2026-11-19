@@ -64,6 +64,11 @@ class HistoryStoreTests(unittest.TestCase):
         path = self.root / "revisions.jsonl"
         return [json.loads(line) for line in path.read_text().splitlines()] if path.exists() else []
 
+    def test_a_run_just_after_midnight_utc_asks_for_freds_date(self):
+        # 03:00 UTC on the 15th is 21:00 on the 14th at FRED. The fake refuses any other observation_end.
+        result = self.refresh(now=datetime(2026, 11, 15, 3, 0, tzinfo=timezone.utc))
+        self.assertEqual((result["outcome"], result["errors"]), ("ok", 0))
+
     def test_first_run_stores_full_history_and_logs_no_revisions(self):
         result = self.refresh()
         self.assertEqual((result["outcome"], result["total"], result["errors"], result["revisions"]), ("ok", 3, 0, 0))

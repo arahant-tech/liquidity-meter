@@ -156,7 +156,7 @@ def refresh(root, runtime, *, client=None, clock=None, section=None, max_seconds
         except Exception:
             credential_error = True
     started = live_api._utc(clock)
-    day = started.date().isoformat()
+    day = live_api.fred_day(started).isoformat()          # FRED's own date, not UTC's (see fred_day)
     index_path = root / "index.json"
     previous = {}
     if index_path.exists():
