@@ -18,7 +18,7 @@
       "ticker": "V"
     }
   ],
-  "fetched_at": "2026-11-18T22:03:04.727854Z",
+  "fetched_at": "2026-11-19T02:51:06.173187Z",
   "limitations": [
     "The fixed five-company convenience panel is not market-wide buybacks and is not representative.",
     "Cash settlement can differ from market purchase execution timing, including accelerated repurchase settlements.",
@@ -37,7 +37,7 @@
       "discovery_mode": "official_latest_earnings_link",
       "discovery_status": "automatic",
       "duration_months": 3,
-      "fetched_at": "2026-11-18T22:03:00.657653Z",
+      "fetched_at": "2026-11-19T02:51:04.491911Z",
       "fiscal_quarter": 1,
       "fiscal_year": 2027,
       "frequency": "quarterly",
@@ -80,7 +80,7 @@
       "discovery_mode": "official_newsroom_latest_release",
       "discovery_status": "automatic",
       "duration_months": 12,
-      "fetched_at": "2026-11-18T22:03:02.551294Z",
+      "fetched_at": "2026-11-19T02:51:05.070791Z",
       "frequency": "annual",
       "id": "IR_BUYBACKS_AAPL",
       "issuer": "Apple",
@@ -129,7 +129,7 @@
       "discovery_mode": "official_public_financial_report_feed",
       "discovery_status": "automatic",
       "duration_months": 3,
-      "fetched_at": "2026-11-18T22:03:03.186054Z",
+      "fetched_at": "2026-11-19T02:51:05.489485Z",
       "frequency": "quarterly",
       "id": "IR_BUYBACKS_GOOGL",
       "issuer": "Alphabet",
@@ -173,7 +173,7 @@
       "discovery_mode": "registered_official_document",
       "discovery_status": "blocked",
       "duration_months": 3,
-      "fetched_at": "2026-11-18T22:03:04.078136Z",
+      "fetched_at": "2026-11-19T02:51:05.898101Z",
       "frequency": "quarterly",
       "id": "IR_BUYBACKS_META",
       "issuer": "Meta Platforms",
@@ -259,35 +259,35 @@
   ],
   "sources": [
     {
-      "fetched_at": "2026-11-18T22:02:59.651326Z",
-      "known_by": "2026-11-18T22:02:59.651326Z",
+      "fetched_at": "2026-11-19T02:51:04.147996Z",
+      "known_by": "2026-11-19T02:51:04.147996Z",
       "original_release_at": null,
-      "raw_path": "raw/issuer_buybacks/7736591e20894ed6a796ef52c9845a7964e02359260d79b6dbc8300d3bf7e533.html",
+      "raw_path": "raw/issuer_buybacks/894e7d3bc93429d0feaf82ff013d3f36c07afde95cda81bd00a2e4f9ef226d88.html",
       "requested_url": "https://www.microsoft.com/en-us/Investor/earnings/",
-      "source_sha256": "7736591e20894ed6a796ef52c9845a7964e02359260d79b6dbc8300d3bf7e533",
+      "source_sha256": "894e7d3bc93429d0feaf82ff013d3f36c07afde95cda81bd00a2e4f9ef226d88",
       "source_url": "https://www.microsoft.com/en-us/Investor/earnings/default"
     },
     {
-      "fetched_at": "2026-11-18T22:03:00.657653Z",
-      "known_by": "2026-11-18T22:03:00.657653Z",
+      "fetched_at": "2026-11-19T02:51:04.491911Z",
+      "known_by": "2026-11-19T02:51:04.491911Z",
       "original_release_at": null,
-      "raw_path": "raw/issuer_buybacks/caa6b4426028f004ebd0100f37eab05e7e51b131f100073430e91447c3e53093.html",
+      "raw_path": "raw/issuer_buybacks/bca8ee90e1c766232ff34b19b8a8c3d7217b3797e428ca9eb133d0ffcf2c0e69.html",
       "requested_url": "https://aka.ms/latestearnings",
-      "source_sha256": "caa6b4426028f004ebd0100f37eab05e7e51b131f100073430e91447c3e53093",
+      "source_sha256": "bca8ee90e1c766232ff34b19b8a8c3d7217b3797e428ca9eb133d0ffcf2c0e69",
       "source_url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast"
     },
     {
-      "fetched_at": "2026-11-18T22:03:01.591202Z",
-      "known_by": "2026-11-18T22:03:01.591202Z",
+      "fetched_at": "2026-11-19T02:51:04.871652Z",
+      "known_by": "2026-11-19T02:51:04.871652Z",
       "original_release_at": null,
-      "raw_path": "raw/issuer_buybacks/dd6fab9ff1c6c51f28ec8c0f8ee160ab8fc00faf463fdd31f0a9f891ec37bd5b.html",
+      "raw_path": "raw/issuer_buybacks/49e2ec81b4d1db5d409736943c6aabac9a051443a68627530ab98727dd9212ee.html",
       "requested_url": "https://www.apple.com/newsroom/topics/company-news/",
-      "source_sha256": "dd6fab9ff1c6c51f28ec8c0f8ee160ab8fc00faf463fdd31f0a9f891ec37bd5b",
+      "source_sha256": "49e2ec81b4d1db5d409736943c6aabac9a051443a68627530ab98727dd9212ee",
       "source_url": "https://www.apple.com/newsroom/topics/company-news/"
     },
     {
-      "fetched_at": "2026-11-18T22:03:01.781544Z",
-      "known_by": "2026-11-18T22:03:01.781544Z",
+      "fetched_at": "2026-11-19T02:51:04.981489Z",
+      "known_by": "2026-11-19T02:51:04.981489Z",
       "original_release_at": null,
       "raw_path": "raw/issuer_buybacks/32ed8eb639e56b730f05711498466bc58471dc78545b039c08b679b00b90eb39.html",
       "requested_url": "https://www.apple.com/newsroom/2026/11/apple-reports-fourth-quarter-results/",
@@ -295,8 +295,8 @@
       "source_url": "https://www.apple.com/newsroom/2026/11/apple-reports-fourth-quarter-results/"
     },
     {
-      "fetched_at": "2026-11-18T22:03:02.551294Z",
-      "known_by": "2026-11-18T22:03:02.551294Z",
+      "fetched_at": "2026-11-19T02:51:05.070791Z",
+      "known_by": "2026-11-19T02:51:05.070791Z",
       "original_release_at": null,
       "raw_path": "raw/issuer_buybacks/bf4b4b934fd06703a63feb63c2e4f5b0c6bd17cb96d3a67a7188307d71034d83.pdf",
       "requested_url": "https://www.apple.com/newsroom/pdfs/fy2026q4/FY26_Q4_Consolidated_Financial_Statements.pdf",
@@ -304,8 +304,8 @@
       "source_url": "https://www.apple.com/newsroom/pdfs/fy2026q4/FY26_Q4_Consolidated_Financial_Statements.pdf"
     },
     {
-      "fetched_at": "2026-11-18T22:03:03.087530Z",
-      "known_by": "2026-11-18T22:03:03.087530Z",
+      "fetched_at": "2026-11-19T02:51:05.463538Z",
+      "known_by": "2026-11-19T02:51:05.463538Z",
       "original_release_at": null,
       "raw_path": "raw/issuer_buybacks/ec18efd730f207ca67cb90adbbaa0b4011b3c75f9b2f25237066b1e36ee837f7.json",
       "requested_url": "https://abc.xyz/feed/FinancialReport.svc/GetFinancialReportList?year=2026&reportSubType=Quarterly+Report&reportSubTypeList=Quarterly+Report",
@@ -313,8 +313,8 @@
       "source_url": "https://abc.xyz/feed/FinancialReport.svc/GetFinancialReportList?year=2026&reportSubType=Quarterly+Report&reportSubTypeList=Quarterly+Report"
     },
     {
-      "fetched_at": "2026-11-18T22:03:03.186054Z",
-      "known_by": "2026-11-18T22:03:03.186054Z",
+      "fetched_at": "2026-11-19T02:51:05.489485Z",
+      "known_by": "2026-11-19T02:51:05.489485Z",
       "original_release_at": null,
       "raw_path": "raw/issuer_buybacks/2f9b94e9194ea4b462bf754c4b651615ab53518b314550f3402b27aabf0735e9.pdf",
       "requested_url": "https://s206.q4cdn.com/479360582/files/doc_financials/2026/q3/2026q3-alphabet-earnings-release.pdf",
@@ -322,8 +322,8 @@
       "source_url": "https://s206.q4cdn.com/479360582/files/doc_financials/2026/q3/2026q3-alphabet-earnings-release.pdf"
     },
     {
-      "fetched_at": "2026-11-18T22:03:03.982401Z",
-      "known_by": "2026-11-18T22:03:03.982401Z",
+      "fetched_at": "2026-11-19T02:51:05.865329Z",
+      "known_by": "2026-11-19T02:51:05.865329Z",
       "original_release_at": null,
       "raw_path": "raw/issuer_buybacks/c705565e5fac85d5c1302ee33ab1e123ed2538fb58a5f25a2f9dc64cf9339ca9.json",
       "requested_url": "https://investor.atmeta.com/feed/FinancialReport.svc/GetFinancialReportList?year=2026&reportSubType=Quarterly+Report&reportSubTypeList=Quarterly+Report",
@@ -331,8 +331,8 @@
       "source_url": "https://investor.atmeta.com/feed/FinancialReport.svc/GetFinancialReportList?year=2026&reportSubType=Quarterly+Report&reportSubTypeList=Quarterly+Report"
     },
     {
-      "fetched_at": "2026-11-18T22:03:04.078136Z",
-      "known_by": "2026-11-18T22:03:04.078136Z",
+      "fetched_at": "2026-11-19T02:51:05.898101Z",
+      "known_by": "2026-11-19T02:51:05.898101Z",
       "original_release_at": null,
       "raw_path": "raw/issuer_buybacks/b3b181046d78b553af6547e45e5907496fb343ecbc7ffad4003ba74b08db8564.pdf",
       "requested_url": "https://s21.q4cdn.com/399680738/files/doc_financials/2026/q2/Meta-06-30-2026-Exhibit-99-1-FINAL.pdf",
@@ -340,8 +340,8 @@
       "source_url": "https://s21.q4cdn.com/399680738/files/doc_financials/2026/q2/Meta-06-30-2026-Exhibit-99-1-FINAL.pdf"
     },
     {
-      "fetched_at": "2026-11-18T22:03:04.727486Z",
-      "known_by": "2026-11-18T22:03:04.727486Z",
+      "fetched_at": "2026-11-19T02:51:06.172969Z",
+      "known_by": "2026-11-19T02:51:06.172969Z",
       "original_release_at": null,
       "raw_path": "raw/issuer_buybacks/5eab1223ce403dc3f31a677c1c40f67853e29d7f9292b6bbf1dc77070cb76e5d.json",
       "requested_url": "https://investor.visa.com/feed/FinancialReport.svc/GetFinancialReportList?year=2026&reportSubType=Quarterly+Report&reportSubTypeList=Quarterly+Report",
