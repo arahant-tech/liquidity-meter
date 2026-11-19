@@ -1,9 +1,9 @@
 {
   "asof": "2026-11-11",
-  "checked_at": "2026-11-19T10:50:17.045639Z",
+  "checked_at": "2026-11-19T13:23:55.891228Z",
   "daily_complete": true,
   "decision_date": "2026-11-13",
-  "generated_at": "2026-11-19T10:50:17.045639Z",
+  "generated_at": "2026-11-19T13:23:55.891228Z",
   "history": [
     {
       "d": "2025-11-19",
@@ -221,8 +221,8 @@
       "status": "ok"
     },
     "DFEDTARU": {
-      "last_date": "2026-11-18",
-      "retrieved_at": "2026-11-18T14:49:21.824228Z",
+      "last_date": "2026-11-19",
+      "retrieved_at": "2026-11-19T13:23:37.478961Z",
       "status": "ok"
     },
     "DFII10": {
