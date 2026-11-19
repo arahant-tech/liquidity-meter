@@ -1,14 +1,10 @@
 {
-  "asof": "2026-11-11",
-  "checked_at": "2026-11-19T19:14:08.969244Z",
-  "daily_complete": true,
-  "decision_date": "2026-11-13",
-  "generated_at": "2026-11-19T19:14:08.969244Z",
+  "asof": "2026-11-18",
+  "checked_at": "2026-11-19T21:43:03.392082Z",
+  "daily_complete": false,
+  "decision_date": "2026-11-20",
+  "generated_at": "2026-11-19T21:43:03.392082Z",
   "history": [
-    {
-      "d": "2025-11-19",
-      "n": 1
-    },
     {
       "d": "2025-11-26",
       "n": 1
@@ -212,6 +208,10 @@
     {
       "d": "2026-11-11",
       "n": 3
+    },
+    {
+      "d": "2026-11-18",
+      "n": 4
     }
   ],
   "inputs": {
@@ -226,8 +226,8 @@
       "status": "ok"
     },
     "DFII10": {
-      "last_date": "2026-11-17",
-      "retrieved_at": "2026-11-18T22:04:23.025325Z",
+      "last_date": "2026-11-18",
+      "retrieved_at": "2026-11-19T21:42:44.529284Z",
       "status": "ok"
     },
     "DTWEXBGS": {
@@ -246,23 +246,23 @@
       "status": "ok"
     },
     "WALCL": {
-      "last_date": "2026-11-11",
-      "retrieved_at": "2026-11-17T18:05:28.782065Z",
+      "last_date": "2026-11-18",
+      "retrieved_at": "2026-11-19T21:41:32.590143Z",
       "status": "ok"
     },
     "WDTGAL": {
-      "last_date": "2026-11-11",
-      "retrieved_at": "2026-11-17T18:05:31.673188Z",
+      "last_date": "2026-11-18",
+      "retrieved_at": "2026-11-19T21:41:35.446788Z",
       "status": "ok"
     },
     "WLRRAOL": {
-      "last_date": "2026-11-11",
-      "retrieved_at": "2026-11-17T18:08:54.053687Z",
+      "last_date": "2026-11-18",
+      "retrieved_at": "2026-11-19T21:41:50.948013Z",
       "status": "ok"
     },
     "WRBWFRBL": {
-      "last_date": "2026-11-11",
-      "retrieved_at": "2026-11-17T18:05:37.258262Z",
+      "last_date": "2026-11-18",
+      "retrieved_at": "2026-11-19T21:41:40.839913Z",
       "status": "ok"
     }
   },
@@ -289,7 +289,7 @@
   "schema_version": 1,
   "score": {
     "of": 7,
-    "on": 3,
+    "on": 4,
     "voters": [
       "Q1",
       "Q2",
@@ -302,12 +302,12 @@
   },
   "states": {
     "C1": {
-      "on": false,
-      "since": "2026-09-30"
+      "on": true,
+      "since": "2026-11-18"
     },
     "C2": {
-      "on": 0.4286,
-      "since": "2026-11-11"
+      "on": 0.5714,
+      "since": "2026-11-18"
     },
     "C3": {
       "on": true,
@@ -362,8 +362,8 @@
       "since": "2026-10-28"
     },
     "Q7": {
-      "on": false,
-      "since": "2026-10-28"
+      "on": true,
+      "since": "2026-11-18"
     },
     "Q8": {
       "on": true,
@@ -375,14 +375,14 @@
   "values": {
     "d_ffr": 0.25,
     "d_m2": 336.2,
-    "d_net": 0.692,
-    "d_real": 0.47,
-    "d_usd": 2.818,
-    "g": 0.331,
-    "g_accel": 1.363,
-    "g_ex_tga": -0.369,
-    "s": -0.016,
-    "v": 0.347
+    "d_net": 0.591,
+    "d_real": 0.53,
+    "d_usd": 3.717,
+    "g": 1.052,
+    "g_accel": 2.466,
+    "g_ex_tga": 0.398,
+    "s": -0.063,
+    "v": 1.115
   },
   "vintage": "current_as_of_retrieval"
 }

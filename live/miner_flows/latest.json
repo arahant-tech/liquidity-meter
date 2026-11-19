@@ -5,7 +5,7 @@
     "The fixed observation panel is CleanSpark and MARA, not a representative sample of the whole mining industry."
   ],
   "errors": [],
-  "fetched_at": "2026-11-19T19:12:16.409506Z",
+  "fetched_at": "2026-11-19T21:41:03.264115Z",
   "limitations": [
     "Reported realized sales are a delayed partial observation of selling activity, not contemporaneous pressure or exchange inflow.",
     "Coins sold may come from prior treasury holdings or purchases, not just this period's mining production.",
@@ -88,43 +88,43 @@
   "retained_observations": [],
   "sources": [
     {
-      "known_by": "2026-11-19T19:12:15.975897Z",
+      "known_by": "2026-11-19T21:41:02.562267Z",
       "original_release_at": null,
-      "raw_path": "raw/miner_flows/ae9f2737150fab2fb9f41cefd342ec396256bf9d7f383a8cd63df254c6e2b9ed.json",
+      "raw_path": "raw/miner_flows/75a4ac548f4017b7cebddaf07a6f41446e2ce8bd330c4b3ff7a3d1542c9f164b.json",
       "raw_scope": "original_public_issuer_document",
-      "raw_sha256": "ae9f2737150fab2fb9f41cefd342ec396256bf9d7f383a8cd63df254c6e2b9ed",
+      "raw_sha256": "75a4ac548f4017b7cebddaf07a6f41446e2ce8bd330c4b3ff7a3d1542c9f164b",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-19T19:12:15.975897Z",
+      "retrieved_at": "2026-11-19T21:41:02.562267Z",
       "source_url": "https://investors.cleanspark.com/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&pressReleaseDateFilter=3&categoryId=00000000-0000-0000-0000-000000000000&bodyType=0&pageSize=25&pageNumber=0&includeTags=true&year=-1"
     },
     {
-      "known_by": "2026-11-19T19:12:16.070162Z",
+      "known_by": "2026-11-19T21:41:02.740433Z",
       "original_release_at": null,
-      "raw_path": "raw/miner_flows/7c96b3c59ad3dfea7a99bf7d11276acc19f335d010ada4d34946cf75967de45b.html",
+      "raw_path": "raw/miner_flows/f560883b5ff36a8d363b089d7f4c565c13b48f2e2efe05e1b6dd99688a16f48a.html",
       "raw_scope": "original_public_issuer_document",
-      "raw_sha256": "7c96b3c59ad3dfea7a99bf7d11276acc19f335d010ada4d34946cf75967de45b",
+      "raw_sha256": "f560883b5ff36a8d363b089d7f4c565c13b48f2e2efe05e1b6dd99688a16f48a",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-19T19:12:16.070162Z",
+      "retrieved_at": "2026-11-19T21:41:02.740433Z",
       "source_url": "https://investors.cleanspark.com/news/news-details/2026/CleanSpark-Releases-September-2026-Operational-Update/default.aspx"
     },
     {
-      "known_by": "2026-11-19T19:12:16.236459Z",
+      "known_by": "2026-11-19T21:41:02.994251Z",
       "original_release_at": null,
       "raw_path": "raw/miner_flows/f4d922438ed0631d8091c039383992281405ffb0be157218ab4c443982455775.html",
       "raw_scope": "original_public_issuer_document",
       "raw_sha256": "f4d922438ed0631d8091c039383992281405ffb0be157218ab4c443982455775",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-19T19:12:16.236459Z",
+      "retrieved_at": "2026-11-19T21:41:02.994251Z",
       "source_url": "https://ir.mara.com/"
     },
     {
-      "known_by": "2026-11-19T19:12:16.362418Z",
+      "known_by": "2026-11-19T21:41:03.237032Z",
       "original_release_at": null,
       "raw_path": "raw/miner_flows/063a1865cf78a511473a5b0e7de9fa17ee35baf8d4bda877e4bb94cc47494d78.html",
       "raw_scope": "original_public_issuer_document",
       "raw_sha256": "063a1865cf78a511473a5b0e7de9fa17ee35baf8d4bda877e4bb94cc47494d78",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-19T19:12:16.362418Z",
+      "retrieved_at": "2026-11-19T21:41:03.237032Z",
       "source_url": "https://ir.mara.com/sec-filings/all-sec-filings/content/0001507605-26-000028/mara-20260930.htm"
     }
   ],

@@ -7,17 +7,17 @@
     "자료 개정·공표 지연·이력 부족이 남습니다. 국가 간 합산·빈도 늘리기·결측 보간을 하지 않습니다."
   ],
   "errors": [],
-  "generated_at": "2026-11-19T19:12:42.209365Z",
-  "github_run_url": "https://github.com/arahant-tech/liquidity-meter/actions/runs/44595705514",
+  "generated_at": "2026-11-19T21:41:29.205823Z",
+  "github_run_url": "https://github.com/arahant-tech/liquidity-meter/actions/runs/44621080890",
   "research_eligible": false,
   "schema_version": 1,
   "series": [
     {
       "chart_type": "line",
-      "checked_at": "2026-11-19T19:12:37.100657Z",
+      "checked_at": "2026-11-19T21:41:24.709954Z",
       "frequency": "Weekly, Ending Wednesday",
       "history_basis": "current_vintage_3_years",
-      "known_by": "2026-11-13T09:46:48.293533Z",
+      "known_by": "2026-11-19T21:41:24.709954Z",
       "label": "Fed 지급준비금",
       "points": [
         {
@@ -655,11 +655,15 @@
         {
           "date": "2026-11-11",
           "value": 2960603.0
+        },
+        {
+          "date": "2026-11-18",
+          "value": 2979656.0
         }
       ],
       "provider": "fred",
-      "raw_path": "raw/e42f7b25c2b121760d793629395351660b1359d3e5d6e3f6aab77cd01f315ad2.json",
-      "raw_sha256": "e42f7b25c2b121760d793629395351660b1359d3e5d6e3f6aab77cd01f315ad2",
+      "raw_path": "raw/8f655947583e210252f88e06b8a78219b361adbe5927210b51cef1b67d3ef8d1.json",
+      "raw_sha256": "8f655947583e210252f88e06b8a78219b361adbe5927210b51cef1b67d3ef8d1",
       "research_eligible": false,
       "series_id": "WRESBAL",
       "source_url": "https://fred.stlouisfed.org/series/WRESBAL",
@@ -669,10 +673,10 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-19T19:12:38.271649Z",
+      "checked_at": "2026-11-19T21:41:25.675560Z",
       "frequency": "Weekly, As of Wednesday",
       "history_basis": "current_vintage_3_years",
-      "known_by": "2026-11-13T09:46:48.952478Z",
+      "known_by": "2026-11-19T21:41:25.675560Z",
       "label": "Fed 총자산",
       "points": [
         {
@@ -1310,11 +1314,15 @@
         {
           "date": "2026-11-11",
           "value": 6758867.0
+        },
+        {
+          "date": "2026-11-18",
+          "value": 6741452.0
         }
       ],
       "provider": "fred",
-      "raw_path": "raw/e3a1383fc83b696afa2b6c7bd973862c2cc99aca9643ea9924397eb80b5c61e1.json",
-      "raw_sha256": "e3a1383fc83b696afa2b6c7bd973862c2cc99aca9643ea9924397eb80b5c61e1",
+      "raw_path": "raw/ad626650aff0c854ef8300f9b7ba47a3c1650e7a81112de2d7e3d6d8704461b0.json",
+      "raw_sha256": "ad626650aff0c854ef8300f9b7ba47a3c1650e7a81112de2d7e3d6d8704461b0",
       "research_eligible": false,
       "series_id": "WALCL",
       "source_url": "https://fred.stlouisfed.org/series/WALCL",
@@ -1324,7 +1332,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-19T19:12:39.558337Z",
+      "checked_at": "2026-11-19T21:41:26.474716Z",
       "frequency": "Weekly",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-17T18:05:22.350993Z",
@@ -1979,7 +1987,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-19T19:12:40.401190Z",
+      "checked_at": "2026-11-19T21:41:27.316275Z",
       "frequency": "Monthly, End of Period",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-05T11:15:05.105643Z",
@@ -2142,7 +2150,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-19T19:12:41.157875Z",
+      "checked_at": "2026-11-19T21:41:28.207541Z",
       "frequency": "Daily",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-19T19:12:41.157875Z",
@@ -5349,10 +5357,10 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-19T19:12:42.013179Z",
+      "checked_at": "2026-11-19T21:41:29.076958Z",
       "frequency": "Weekly, Ending Wednesday",
       "history_basis": "current_vintage_3_years",
-      "known_by": "2026-11-13T09:46:51.837595Z",
+      "known_by": "2026-11-19T21:41:29.076958Z",
       "label": "미 재무부 일반계정",
       "points": [
         {
@@ -5990,11 +5998,15 @@
         {
           "date": "2026-11-11",
           "value": 914370.0
+        },
+        {
+          "date": "2026-11-18",
+          "value": 916613.0
         }
       ],
       "provider": "fred",
-      "raw_path": "raw/2cfc842a55051e053365cf09ae95e2e0a526b276aba02b3dd9fabfb0ee73bd0c.json",
-      "raw_sha256": "2cfc842a55051e053365cf09ae95e2e0a526b276aba02b3dd9fabfb0ee73bd0c",
+      "raw_path": "raw/e6e11cb1807a0bdbabeb4ddfa46edcbc418ca874b871980a0b60e1c77c2f1153.json",
+      "raw_sha256": "e6e11cb1807a0bdbabeb4ddfa46edcbc418ca874b871980a0b60e1c77c2f1153",
       "research_eligible": false,
       "series_id": "WTREGEN",
       "source_url": "https://fred.stlouisfed.org/series/WTREGEN",
@@ -6004,7 +6016,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-19T19:12:42.047090Z",
+      "checked_at": "2026-11-19T21:41:29.098722Z",
       "frequency": "Monthly",
       "history_basis": "available_official_monthly_table",
       "known_by": "2026-11-13T09:46:51.862457Z",
@@ -6064,7 +6076,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-19T19:12:42.077049Z",
+      "checked_at": "2026-11-19T21:41:29.119160Z",
       "frequency": "Monthly",
       "history_basis": "available_official_monthly_table",
       "known_by": "2026-11-13T09:46:51.884579Z",
@@ -6124,7 +6136,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-19T19:12:42.087172Z",
+      "checked_at": "2026-11-19T21:41:29.126771Z",
       "frequency": "Monthly",
       "history_basis": "available_official_monthly_table",
       "known_by": "2026-11-13T09:46:51.891994Z",
@@ -6184,7 +6196,7 @@
     },
     {
       "chart_type": "bar",
-      "checked_at": "2026-11-19T19:12:42.098614Z",
+      "checked_at": "2026-11-19T21:41:29.134787Z",
       "frequency": "Monthly",
       "history_basis": "available_official_monthly_table",
       "known_by": "2026-11-13T09:46:51.901932Z",
@@ -6244,7 +6256,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-19T19:12:42.099461Z",
+      "checked_at": "2026-11-19T21:41:29.135284Z",
       "frequency": "Monthly",
       "history_basis": "current_vintage_available_monthly_history_max_36_observations",
       "known_by": "2026-11-04T21:59:36.698070Z",
@@ -6416,7 +6428,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-19T19:12:42.116697Z",
+      "checked_at": "2026-11-19T21:41:29.147980Z",
       "frequency": "Monthly",
       "history_basis": "current_vintage_available_monthly_history_max_36_observations",
       "known_by": "2026-11-13T23:43:46.149364Z",
@@ -6492,7 +6504,7 @@
     },
     {
       "chart_type": "bar",
-      "checked_at": "2026-11-19T19:12:42.141675Z",
+      "checked_at": "2026-11-19T21:41:29.164970Z",
       "frequency": "Monthly",
       "history_basis": "current_vintage_available_monthly_history_max_36_observations",
       "known_by": "2026-11-18T22:03:23.209383Z",
