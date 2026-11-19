@@ -1,9 +1,9 @@
 {
   "asof": "2026-11-11",
-  "checked_at": "2026-11-19T13:23:55.891228Z",
+  "checked_at": "2026-11-19T19:14:08.969244Z",
   "daily_complete": true,
   "decision_date": "2026-11-13",
-  "generated_at": "2026-11-19T13:23:55.891228Z",
+  "generated_at": "2026-11-19T19:14:08.969244Z",
   "history": [
     {
       "d": "2025-11-19",
@@ -241,8 +241,8 @@
       "status": "ok"
     },
     "VIXCLS": {
-      "last_date": "2026-11-17",
-      "retrieved_at": "2026-11-18T14:49:36.993470Z",
+      "last_date": "2026-11-18",
+      "retrieved_at": "2026-11-19T19:14:08.619921Z",
       "status": "ok"
     },
     "WALCL": {

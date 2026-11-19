@@ -1,5 +1,5 @@
 {
-  "known_by": "2026-11-19T13:21:25.742241Z",
+  "known_by": "2026-11-19T19:11:42.724784Z",
   "metadata_response": {
     "realtime_end": "2026-11-19",
     "realtime_start": "2026-11-19",
@@ -83,7 +83,7 @@
     "provider": "FRED"
   },
   "research_eligible": false,
-  "retrieved_at": "2026-11-19T13:21:25.742241Z",
+  "retrieved_at": "2026-11-19T19:11:42.724784Z",
   "schema_version": 1,
   "series_id": "WTREGEN"
 }

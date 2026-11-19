@@ -10,7 +10,7 @@
       "series_id": "SPDJI_SP500_REPORTED_BUYBACKS"
     }
   ],
-  "fetched_at": "2026-11-19T13:22:44.003485Z",
+  "fetched_at": "2026-11-19T19:12:35.842398Z",
   "limitations": [
     "The accessible archive may lag other S&P DJI publications. Reference periods older than 190 days are explicitly stale and are never extended to newer quarters.",
     "Preliminary aggregate figures can be revised, and headline billion-dollar amounts are rounded. Raw issuer definitions, cash timing and the exact constituent observation date are not independently certified.",
@@ -71,21 +71,21 @@
   "retained_observations": [],
   "sources": [
     {
-      "known_by": "2026-11-19T13:22:43.907631Z",
+      "known_by": "2026-11-19T19:12:35.742257Z",
       "original_release_at": null,
-      "raw_path": "raw/market_buybacks/327982904703bc5377a8dc8a96c717bcd91fa6889fb6eac5bb7c32da69bfb9ca.html",
-      "raw_sha256": "327982904703bc5377a8dc8a96c717bcd91fa6889fb6eac5bb7c32da69bfb9ca",
+      "raw_path": "raw/market_buybacks/065d468ab8667db0005f134611fe31fabb0d257f395dc6f95d169d4c91195632.html",
+      "raw_sha256": "065d468ab8667db0005f134611fe31fabb0d257f395dc6f95d169d4c91195632",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-19T13:22:43.907631Z",
+      "retrieved_at": "2026-11-19T19:12:35.742257Z",
       "source_url": "https://press.spglobal.com/index.php?s=2429&keywords=buybacks"
     },
     {
-      "known_by": "2026-11-19T13:22:44.001082Z",
+      "known_by": "2026-11-19T19:12:35.838133Z",
       "original_release_at": null,
-      "raw_path": "raw/market_buybacks/c25b5faee45cee1142800167fc5440117bdc2300df494c939d84926b5613fd4a.html",
-      "raw_sha256": "c25b5faee45cee1142800167fc5440117bdc2300df494c939d84926b5613fd4a",
+      "raw_path": "raw/market_buybacks/27ffa2ab66fbba6e2b7f02e66e8e8a2f18b8b48f711fd74cd6f4e9e40d0cef41.html",
+      "raw_sha256": "27ffa2ab66fbba6e2b7f02e66e8e8a2f18b8b48f711fd74cd6f4e9e40d0cef41",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-19T13:22:44.001082Z",
+      "retrieved_at": "2026-11-19T19:12:35.838133Z",
       "source_url": "https://press.spglobal.com/2025-12-18-S-P-500-Q3-2025-Buybacks-Post-Modest-6-2-Gain-to-249-0-Billion-After-Declining-20-1-Amidst-Uncertainty-in-Q2-Q4-2025-Expenditures-Expected-to-Post-Similar-Growth,-As-2025-Anticipates-a-Record-1-Trillion"
     }
   ],
