@@ -9,8 +9,8 @@
     "Only the latest five native observations are fetched, so older revisions can be missed.",
     "The collection covers a subset of the five-layer model; missing sources are not imputed."
   ],
-  "capture_id": "20261120T012725395916Z_2b14d38de9c3",
-  "completed_at": "2026-11-20T01:27:33.721280Z",
+  "capture_id": "20261120T032625815141Z_de679d492f69",
+  "completed_at": "2026-11-20T03:26:33.012068Z",
   "derived": {
     "SOFR_IORB": {
       "reason": "both_inputs_must_have_successful_capture",
@@ -23,7 +23,7 @@
   "series": {
     "DPSACBW027SBOG": {
       "block": "sector_distribution",
-      "checked_at": "2026-11-20T01:27:29.609646Z",
+      "checked_at": "2026-11-20T03:26:29.484710Z",
       "error": "http_400",
       "fetch_failed": true,
       "freshness": {
@@ -92,7 +92,7 @@
     },
     "DRTSCILM": {
       "block": "bank_credit",
-      "checked_at": "2026-11-20T01:27:33.362666Z",
+      "checked_at": "2026-11-20T03:26:32.636956Z",
       "error": "http_400",
       "fetch_failed": true,
       "freshness": {
@@ -161,7 +161,7 @@
     },
     "ECBASSETSW": {
       "block": "ecb",
-      "checked_at": "2026-11-20T01:27:32.609065Z",
+      "checked_at": "2026-11-20T03:26:31.635407Z",
       "error": "http_400",
       "fetch_failed": true,
       "freshness": {
@@ -230,7 +230,7 @@
     },
     "IORB": {
       "block": "fed_funding",
-      "checked_at": "2026-11-20T01:27:28.785435Z",
+      "checked_at": "2026-11-20T03:26:28.688445Z",
       "error": "http_400",
       "fetch_failed": true,
       "freshness": {
@@ -299,7 +299,7 @@
     },
     "JPNASSETS": {
       "block": "boj",
-      "checked_at": "2026-11-20T01:27:32.997456Z",
+      "checked_at": "2026-11-20T03:26:32.217224Z",
       "error": "http_400",
       "fetch_failed": true,
       "freshness": {
@@ -368,7 +368,7 @@
     },
     "MMMFFAQ027S": {
       "block": "sector_distribution",
-      "checked_at": "2026-11-20T01:27:33.721204Z",
+      "checked_at": "2026-11-20T03:26:33.012019Z",
       "error": "http_400",
       "fetch_failed": true,
       "freshness": {
@@ -437,7 +437,7 @@
     },
     "RRPONTSYD": {
       "block": "fed",
-      "checked_at": "2026-11-20T01:27:26.822380Z",
+      "checked_at": "2026-11-20T03:26:27.176542Z",
       "error": "http_400",
       "fetch_failed": true,
       "freshness": {
@@ -506,7 +506,7 @@
     },
     "SOFR": {
       "block": "fed_funding",
-      "checked_at": "2026-11-20T01:27:28.432137Z",
+      "checked_at": "2026-11-20T03:26:27.958369Z",
       "error": "http_400",
       "fetch_failed": true,
       "freshness": {
@@ -575,7 +575,7 @@
     },
     "TOTBKCR": {
       "block": "bank_credit",
-      "checked_at": "2026-11-20T01:27:29.186285Z",
+      "checked_at": "2026-11-20T03:26:29.083730Z",
       "error": "http_400",
       "fetch_failed": true,
       "freshness": {
@@ -644,7 +644,7 @@
     },
     "TOTLL": {
       "block": "bank_credit",
-      "checked_at": "2026-11-20T01:27:32.182048Z",
+      "checked_at": "2026-11-20T03:26:31.264709Z",
       "error": "http_400",
       "fetch_failed": true,
       "freshness": {
@@ -713,7 +713,7 @@
     },
     "WALCL": {
       "block": "fed",
-      "checked_at": "2026-11-20T01:27:25.990699Z",
+      "checked_at": "2026-11-20T03:26:26.397225Z",
       "error": "http_400",
       "fetch_failed": true,
       "freshness": {
@@ -782,7 +782,7 @@
     },
     "WDTGAL": {
       "block": "fed",
-      "checked_at": "2026-11-20T01:27:31.220393Z",
+      "checked_at": "2026-11-20T03:26:30.865856Z",
       "error": "http_400",
       "fetch_failed": true,
       "freshness": {
@@ -851,7 +851,7 @@
     },
     "WLRRAOL": {
       "block": "fed",
-      "checked_at": "2026-11-20T01:27:30.852968Z",
+      "checked_at": "2026-11-20T03:26:30.465725Z",
       "error": "http_400",
       "fetch_failed": true,
       "freshness": {
@@ -920,7 +920,7 @@
     },
     "WRBWFRBL": {
       "block": "fed",
-      "checked_at": "2026-11-20T01:27:30.454512Z",
+      "checked_at": "2026-11-20T03:26:29.884064Z",
       "error": "http_400",
       "fetch_failed": true,
       "freshness": {
@@ -989,7 +989,7 @@
     },
     "WRESBAL": {
       "block": "fed",
-      "checked_at": "2026-11-20T01:27:26.409133Z",
+      "checked_at": "2026-11-20T03:26:26.759722Z",
       "error": "http_400",
       "fetch_failed": true,
       "freshness": {
@@ -1058,7 +1058,7 @@
     },
     "WTREGEN": {
       "block": "fed",
-      "checked_at": "2026-11-20T01:27:27.904659Z",
+      "checked_at": "2026-11-20T03:26:27.572657Z",
       "error": "http_400",
       "fetch_failed": true,
       "freshness": {
@@ -1126,5 +1126,5 @@
       "status": "error"
     }
   },
-  "started_at": "2026-11-20T01:27:25.395916Z"
+  "started_at": "2026-11-20T03:26:25.815141Z"
 }

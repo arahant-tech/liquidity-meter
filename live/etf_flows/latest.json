@@ -5,7 +5,7 @@
       "asset": "BTC",
       "business_date": "2026-11-18",
       "changed": false,
-      "checked_at": "2026-11-20T01:27:52.278088Z",
+      "checked_at": "2026-11-20T03:26:51.110814Z",
       "covered_funds": 12,
       "error": null,
       "fingerprint": "999764c7b1c36581f6593184052cb896c18b74c17967bed71db682478309537a",
@@ -153,7 +153,7 @@
       "asset": "ETH",
       "business_date": "2026-11-18",
       "changed": false,
-      "checked_at": "2026-11-20T01:27:53.314009Z",
+      "checked_at": "2026-11-20T03:26:52.121259Z",
       "covered_funds": 11,
       "error": null,
       "fingerprint": "dc46325c7fcdbcaecf891dd2612621ef0ed27ca0d68946e45a56e4fa88d4eb1e",
@@ -304,9 +304,9 @@
     "Only BTC and ETH US spot-product universes on the source tables are covered; equity ETF flows and other crypto products remain absent.",
     "Capture time is the earliest knowability certified by this collector; a business date is not an original publication timestamp."
   ],
-  "capture_id": "20261120T012751022957Z_8b8c897c2e64",
+  "capture_id": "20261120T032649812384Z_cc05a59f92fe",
   "errors": [],
-  "fetched_at": "2026-11-20T01:27:53.326152Z",
+  "fetched_at": "2026-11-20T03:26:52.130280Z",
   "limitations": [
     "Underlying flow construction and revisions are not independently audited against each issuer's creations and redemptions.",
     "The current New York calendar date is deliberately excluded, even if all cells are filled; this introduces a conservative reporting delay.",
@@ -585,22 +585,22 @@
   "raw_captures": [
     {
       "asset": "BTC",
-      "raw_path": "raw/20261120T012751022957Z_8b8c897c2e64/btc_flow_table.html",
-      "raw_sha256": "a70a5e444dca08eb578174576cdd9e8ec49d0ee5aaa583114a68c29610196bb1",
-      "retrieved_at": "2026-11-20T01:27:52.278088Z"
+      "raw_path": "raw/20261120T032649812384Z_cc05a59f92fe/btc_flow_table.html",
+      "raw_sha256": "f4cf59037cb64a160ce45762dae59da29b33b847b7c9feaa36a4a2e1a2433220",
+      "retrieved_at": "2026-11-20T03:26:51.110814Z"
     },
     {
       "asset": "ETH",
-      "raw_path": "raw/20261120T012751022957Z_8b8c897c2e64/eth_flow_table.html",
-      "raw_sha256": "86f926fc8fe917333d05d81f85e9e8637aaa09282bf3f26ea69c4c2bc1a19f58",
-      "retrieved_at": "2026-11-20T01:27:53.314009Z"
+      "raw_path": "raw/20261120T032649812384Z_cc05a59f92fe/eth_flow_table.html",
+      "raw_sha256": "e8cd8449c3f43670b2b05398498e9155b264faa6a15d54df27788cf86a29ac29",
+      "retrieved_at": "2026-11-20T03:26:52.121259Z"
     }
   ],
   "research_eligible": false,
   "retained_observations": [],
   "schema_version": 1,
   "stale": 0,
-  "started_at": "2026-11-20T01:27:51.022957Z",
+  "started_at": "2026-11-20T03:26:49.812384Z",
   "status": "ok",
   "success": 2,
   "total": 2
