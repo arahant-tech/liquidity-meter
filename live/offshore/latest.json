@@ -232,24 +232,24 @@
   "retained_observations": [],
   "sources": [
     {
-      "known_by": "2026-11-19T21:41:22.424456Z",
+      "known_by": "2026-11-20T01:28:11.550544Z",
       "original_release_at": null,
-      "raw_path": "raw/offshore/dad72f69858c68634fa0a1ca4e87245234d199f93a0efeec371c0e6be44d424b.xml",
+      "raw_path": "raw/offshore/7ef7850bcdcde63eec9f862e5bc7b8deef36bb0923ea8990568294bf855d8f98.xml",
       "raw_scope": "original_official_source_response",
-      "raw_sha256": "dad72f69858c68634fa0a1ca4e87245234d199f93a0efeec371c0e6be44d424b",
+      "raw_sha256": "7ef7850bcdcde63eec9f862e5bc7b8deef36bb0923ea8990568294bf855d8f98",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-19T21:41:22.424456Z",
+      "retrieved_at": "2026-11-20T01:28:11.550544Z",
       "source_url": "https://stats.bis.org/api/v1/data/WS_GLI/Q.USD.3P.N..I..USD/all?lastNObservations=1"
     },
     {
-      "known_by": "2026-11-19T21:41:22.789434Z",
+      "known_by": "2026-11-20T01:28:11.951425Z",
       "original_release_at": null,
-      "raw_path": "raw/offshore/bd921639a4910a8fb5698a092c74d0dba794bdaeb6cda0aec72420d317876eae.json",
+      "raw_path": "raw/offshore/4a2b0337a6d1faae785a753334fc77b841219b77fa9787354522757167c3d85b.json",
       "raw_scope": "original_official_source_response",
-      "raw_sha256": "bd921639a4910a8fb5698a092c74d0dba794bdaeb6cda0aec72420d317876eae",
+      "raw_sha256": "4a2b0337a6d1faae785a753334fc77b841219b77fa9787354522757167c3d85b",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-19T21:41:22.789434Z",
-      "source_url": "https://data.financialresearch.gov/v1/series/multifull?mnemonics=REPO-DVP_OV_TOT-P%2CREPO-TRIV1_TV_TOT-P&start_date=2026-10-05&end_date=2026-11-19"
+      "retrieved_at": "2026-11-20T01:28:11.951425Z",
+      "source_url": "https://data.financialresearch.gov/v1/series/multifull?mnemonics=REPO-DVP_OV_TOT-P%2CREPO-TRIV1_TV_TOT-P&start_date=2026-10-06&end_date=2026-11-20"
     }
   ],
   "status": "ok",
