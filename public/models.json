@@ -1,9 +1,9 @@
 {
   "asof": "2026-11-18",
-  "checked_at": "2026-11-20T03:28:10.017710Z",
+  "checked_at": "2026-11-20T09:15:54.563699Z",
   "daily_complete": false,
   "decision_date": "2026-11-20",
-  "generated_at": "2026-11-19T21:43:03.392082Z",
+  "generated_at": "2026-11-20T09:15:54.563699Z",
   "history": [
     {
       "d": "2025-11-26",
@@ -216,8 +216,8 @@
   ],
   "inputs": {
     "BAA10Y": {
-      "last_date": "2026-11-17",
-      "retrieved_at": "2026-11-18T22:04:39.775410Z",
+      "last_date": "2026-11-18",
+      "retrieved_at": "2026-11-20T09:15:51.915591Z",
       "status": "ok"
     },
     "DFEDTARU": {
@@ -285,7 +285,7 @@
     "Q7": "재무부 현금 제외",
     "Q8": "통설 순유동성"
   },
-  "reason": "input_missing_BAA10Y",
+  "reason": null,
   "schema_version": 1,
   "score": {
     "of": 7,
@@ -370,7 +370,7 @@
       "since": "2026-11-11"
     }
   },
-  "status": "retained",
+  "status": "ok",
   "study": "models-2026-11",
   "values": {
     "d_ffr": 0.25,
