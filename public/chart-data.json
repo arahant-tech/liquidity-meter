@@ -7,14 +7,14 @@
     "자료 개정·공표 지연·이력 부족이 남습니다. 국가 간 합산·빈도 늘리기·결측 보간을 하지 않습니다."
   ],
   "errors": [],
-  "generated_at": "2026-11-20T18:03:30.499493Z",
-  "github_run_url": "https://github.com/arahant-tech/liquidity-meter/actions/runs/44788944599",
+  "generated_at": "2026-11-20T21:14:31.636555Z",
+  "github_run_url": "https://github.com/arahant-tech/liquidity-meter/actions/runs/44818351168",
   "research_eligible": false,
   "schema_version": 1,
   "series": [
     {
       "chart_type": "line",
-      "checked_at": "2026-11-20T18:03:26.189525Z",
+      "checked_at": "2026-11-20T21:14:26.597494Z",
       "frequency": "Weekly, Ending Wednesday",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-19T21:41:24.709954Z",
@@ -672,7 +672,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-20T18:03:26.930746Z",
+      "checked_at": "2026-11-20T21:14:27.408591Z",
       "frequency": "Weekly, As of Wednesday",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-19T21:41:25.675560Z",
@@ -1330,7 +1330,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-20T18:03:27.763893Z",
+      "checked_at": "2026-11-20T21:14:28.291860Z",
       "frequency": "Weekly",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-17T18:05:22.350993Z",
@@ -1984,7 +1984,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-20T18:03:28.552630Z",
+      "checked_at": "2026-11-20T21:14:29.355681Z",
       "frequency": "Monthly, End of Period",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-05T11:15:05.105643Z",
@@ -2146,10 +2146,10 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-20T18:03:29.366585Z",
+      "checked_at": "2026-11-20T21:14:30.693132Z",
       "frequency": "Daily",
       "history_basis": "current_vintage_3_years",
-      "known_by": "2026-11-19T19:12:41.157875Z",
+      "known_by": "2026-11-20T21:14:30.693132Z",
       "label": "미국 익일물 역레포",
       "points": [
         {
@@ -5339,10 +5339,14 @@
         {
           "date": "2026-11-19",
           "value": 0.405
+        },
+        {
+          "date": "2026-11-20",
+          "value": 0.401
         }
       ],
       "provider": "fred",
-      "raw_sha256": "c6129e4073d4031383acb06d76348da1d310e0cdc3ae95fef12672960387768f",
+      "raw_sha256": "a7333beefbd2997cf4720bcbfb4a3ccf75fc17a3deab787c22c99da1398e54c5",
       "research_eligible": false,
       "series_id": "RRPONTSYD",
       "source_url": "https://fred.stlouisfed.org/series/RRPONTSYD",
@@ -5352,7 +5356,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-20T18:03:30.403639Z",
+      "checked_at": "2026-11-20T21:14:31.537234Z",
       "frequency": "Weekly, Ending Wednesday",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-19T21:41:29.076958Z",
@@ -6010,7 +6014,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-20T18:03:30.419530Z",
+      "checked_at": "2026-11-20T21:14:31.554244Z",
       "frequency": "Monthly",
       "history_basis": "available_official_monthly_table",
       "known_by": "2026-11-13T09:46:51.862457Z",
@@ -6069,7 +6073,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-20T18:03:30.433594Z",
+      "checked_at": "2026-11-20T21:14:31.569972Z",
       "frequency": "Monthly",
       "history_basis": "available_official_monthly_table",
       "known_by": "2026-11-13T09:46:51.884579Z",
@@ -6128,7 +6132,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-20T18:03:30.438828Z",
+      "checked_at": "2026-11-20T21:14:31.575320Z",
       "frequency": "Monthly",
       "history_basis": "available_official_monthly_table",
       "known_by": "2026-11-13T09:46:51.891994Z",
@@ -6187,7 +6191,7 @@
     },
     {
       "chart_type": "bar",
-      "checked_at": "2026-11-20T18:03:30.444476Z",
+      "checked_at": "2026-11-20T21:14:31.581409Z",
       "frequency": "Monthly",
       "history_basis": "available_official_monthly_table",
       "known_by": "2026-11-13T09:46:51.901932Z",
@@ -6246,7 +6250,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-20T18:03:30.444806Z",
+      "checked_at": "2026-11-20T21:14:31.581726Z",
       "frequency": "Monthly",
       "history_basis": "current_vintage_available_monthly_history_max_36_observations",
       "known_by": "2026-11-04T21:59:36.698070Z",
@@ -6417,7 +6421,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-20T18:03:30.453572Z",
+      "checked_at": "2026-11-20T21:14:31.591574Z",
       "frequency": "Monthly",
       "history_basis": "current_vintage_available_monthly_history_max_36_observations",
       "known_by": "2026-11-13T23:43:46.149364Z",
@@ -6492,7 +6496,7 @@
     },
     {
       "chart_type": "bar",
-      "checked_at": "2026-11-20T18:03:30.465989Z",
+      "checked_at": "2026-11-20T21:14:31.604540Z",
       "frequency": "Monthly",
       "history_basis": "current_vintage_available_monthly_history_max_36_observations",
       "known_by": "2026-11-18T22:03:23.209383Z",
