@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#10181f">
+  <meta name="description" content="연준 대차대조표의 총량과 방향을 사분면에 놓고 지금 어느 칸에 있는지 보여 주는 측정 화면. 준비금 변화는 두 축의 합입니다.">
+  <title>유동성 사분면 · 유동성 측정기</title>
+  <link rel="stylesheet" href="./site.css">
+  <link rel="stylesheet" href="./content.css">
+</head>
+<body>
+<a class="skip" href="#plane">사분면으로 이동</a>
+<div class="shell">
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="유동성 측정기 홈">
+      <svg class="brand-mark" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M5 24V12M13 29V7M21 23V13M29 27V9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="21" cy="9" r="2" fill="currentColor"/></svg>
+      <div><strong>유동성 측정기</strong><span>LIQUIDITY METER</span></div>
+    </a>
+    <nav class="toplinks" aria-label="주 메뉴"><a href="./">판정</a><a href="./measure.html" aria-current="page">측정</a><a href="./models.html">모델</a><a href="./observatory.html">관측</a><a href="./sources.html">자료</a><a href="./research.html">연구·검증</a></nav>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="title">
+      <div><p class="eyebrow">MEASURE · 측정</p><h1 id="title">유동성 사분면</h1><p class="hero-copy">총량과 방향을 더하면 준비금 변화다. 대각선이 준비금이 느는 쪽과 주는 쪽을 가른다.</p></div>
+      <div class="run-panel"><div class="run-head"><span>기준 주</span><strong id="asof">—</strong><span id="state" class="badge" role="status" aria-live="polite">확인 중</span></div><div class="run-foot"><span>계산</span><span id="generated-at">—</span></div></div>
+    </section>
+    <nav class="subnav" aria-label="이 페이지"><a href="#now">지금</a><a href="#plane">사분면</a><a href="#when">언제 어느 칸</a><a href="#study">칸 뒤의 수익</a><a href="#recent-weeks">최근 12주</a><a href="#method">읽는 법</a></nav>
+    <div id="banner" class="banner" role="status" hidden></div>
+
+    <div id="content" hidden>
+      <section id="now" aria-labelledby="now-title">
+        <h2 id="now-title">지금</h2>
+        <div class="tiles" id="tiles"></div>
+        <p class="note" id="sources-note"></p>
+      </section>
+
+      <section id="plane" aria-labelledby="plane-title">
+        <h2 id="plane-title">사분면: 총량 × 방향</h2>
+        <p class="lead">가로축은 총량, 즉 연준 총자산의 13주 변화다. 세로축은 방향, 즉 역레포·재무부 계정 같은 곳에 주차돼 있던 돈이 준비금 쪽으로 옮겨 온 양이다. 둘 다 13주 전 총자산 대비 %다. 대각선 위는 준비금이 는 주, 아래는 준 주다.</p>
+        <div class="planes">
+          <article class="panel"><h3>2009년 이후 모든 주</h3><div id="plane-all"></div></article>
+          <article class="panel"><h3>최근 52주 경로</h3><div id="plane-zoom"></div></article>
+        </div>
+        <div class="legend">
+          <span><i style="background:var(--pos)"></i>준비금이 는 주</span>
+          <span><i style="background:var(--neg)"></i>준비금이 준 주</span>
+          <span><i class="line"></i>최근 52주 경로(오른쪽)</span>
+          <span><i style="background:var(--text)"></i>지금</span>
+        </div>
+        <p class="note">왼쪽 그림은 큰 값이 눌리도록 축을 압축했다. 사분면 넷 중 "총량↑ 방향↓"와 "총량↓ 방향↑"는 대각선으로 다시 나뉘어 모두 여섯 칸이 된다.</p>
+      </section>
+
+      <section id="when" aria-labelledby="when-title">
+        <h2 id="when-title">언제 어느 칸이었나</h2>
+        <article class="panel scroll"><div id="raster"></div></article>
+        <p class="note">위 세 줄은 준비금이 는 칸, 아래 세 줄은 준 칸이다.</p>
+      </section>
+
+      <section id="study" aria-labelledby="study-title" hidden>
+        <h2 id="study-title">과거에 이 칸 뒤에는 <span class="badge stale" id="study-grade">탐색 · 실시간 검증 전</span></h2>
+        <p class="lead" id="study-lead"></p>
+        <article class="panel scroll"><table id="heat"></table></article>
+        <p class="note" id="study-note"></p>
+      </section>
+
+      <section id="recent-weeks" aria-labelledby="recent-title">
+        <h2 id="recent-title">최근 12주</h2>
+        <article class="panel scroll"><table id="recent"></table></article>
+      </section>
+
+      <p class="note"><a class="inline" href="./doc.html?p=research/studies/quadrant-2026-11/README.md">사분면 연구 →</a> · <a class="inline" href="./doc.html?p=research/studies/quadrant-2026-11/PROTOCOL.md">사전 설계 →</a> · <a class="inline" href="./quadrant.json">지도 자료(JSON) ↗</a></p>
+
+      <section id="method" class="note-panel">
+        <h2>읽는 법과 한계</h2>
+        <p>총량 s는 총자산(WALCL)의 13주 변화, 방향 v는 준비금이 아닌 부채(WALCL − WRBWFRBL)의 13주 감소를 13주 전 총자산으로 나눈 값이다. s + v는 준비금 13주 변화와 오차 없이 같다. 구간은 그 주의 준비금 변화를 2009년 이후 그 주보다 앞선 값들과 비교한 다섯 등분이다.</p>
+        <p>이 화면은 측정이다. 가격을 읽지 않고 예측하지 않는다. 칸별 과거 성적은 2026년 11월의 탐색 연구에서 온 고정된 표이며, 사전에 정한 검정을 통과한 것은 일부뿐이다. H.4.1은 목요일에 공표되므로 수요일 기준 값은 그 뒤에야 알 수 있다. 수집이 실패하면 마지막 정상 지도를 그 날짜 그대로 보여 준다.</p>
+      </section>
+    </div>
+  </main>
+  <footer class="footer"><div><span class="flow">유동성 측정기</span> · 관측 → 측정 → 판정 → 검증<br>투자 조언이 아닙니다. This product uses the FRED® API but is not endorsed or certified by the Federal Reserve Bank of St. Louis.</div><div><a href="./research.html">연구와 검증 기록</a> · <a href="./sources.html">전체 자료</a><br><a href="https://github.com/arahant-tech/liquidity-meter" rel="noopener noreferrer">저장소 ↗</a></div></footer>
+</div>
+<div id="tip" hidden></div>
+<script src="./judgment.js" defer></script>
+</body>
+</html>

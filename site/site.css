@@ -1,0 +1,78 @@
+/* One shell for every page: tokens, header, page head, status marks, footer.
+   Page stylesheets (content.css, overview.css, dashboard.css) add components only and must not restyle these. */
+:root{color-scheme:dark;--bg:#10181f;--panel:#18232c;--line:#2b3842;--border:#2b3842;--text:#edf2f4;--muted:#91a2ae;--faint:#91a2ae;--accent:#87c8b7;--accent-dim:#213a37;--amber:#d3c7b8;--red:#e0a1aa;--surface:#1b2933;--chip:#25323c;--hover:#23333e;--focus:#67b7aa;--accent-line:#4a766b;--warning-bg:#272620;--warning-line:#63594e;--danger-bg:#382930;--lavender:#bbace0;--lavender-bg:#302c3d;--lavender-line:#615578;--grid:#26343f;--guide:#52616c;--tooltip:#34434d;--radius:14px;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  /* chart polarity: validated as a colour-blind-safe pair on the panel surface */
+  --pos:#3987e5;--neg:#e66767}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:25px}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+a,button{-webkit-tap-highlight-color:transparent}
+a:focus-visible,button:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:3px}
+[hidden]{display:none!important}
+.skip{position:fixed;top:-100px;left:20px;background:var(--text);color:var(--panel);padding:12px;z-index:30}
+.skip:focus{top:12px}
+.shell{width:min(1240px,calc(100% - 80px));margin:auto}
+
+/* header: the same six doors on every page */
+.topbar{min-height:84px;display:flex;align-items:center;justify-content:space-between;gap:12px 28px;border-bottom:1px solid var(--line);flex-wrap:wrap;padding:12px 0}
+.brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.brand-mark{width:35px;height:35px;color:var(--accent)}
+.brand strong{display:block;font-size:19px;letter-spacing:-.5px;font-weight:700}
+.brand span{display:block;font:11px var(--mono);letter-spacing:1.7px;color:var(--muted);margin-top:2px}
+.toplinks{display:flex;gap:4px;align-items:center;font-size:14.5px;color:var(--muted)}
+.toplinks a{padding:7px 12px;border-radius:7px;white-space:nowrap}
+.toplinks a:hover{color:var(--text);background:var(--surface)}
+.toplinks a[aria-current=page]{color:var(--accent);background:var(--accent-dim);font-weight:650}
+
+/* page head */
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:18px 28px;padding:32px 0 26px;margin:0;flex-wrap:wrap}
+.eyebrow{font:12px var(--mono);color:var(--muted);letter-spacing:1.5px;margin:0 0 5px;text-transform:uppercase}
+.hero h1{font-size:31px;letter-spacing:-1.1px;line-height:1.3;margin:0;font-weight:700}
+.hero-copy{font-size:14.5px;color:var(--muted);margin:7px 0 0;max-width:64ch}
+.run-panel{text-align:right;font-size:13px;color:var(--muted)}
+.run-head{display:flex;align-items:center;justify-content:flex-end;gap:9px}
+.run-head strong{color:var(--text);font-variant-numeric:tabular-nums;font-weight:600}
+.run-foot{display:flex;justify-content:flex-end;align-items:center;gap:8px;font-size:12px;margin-top:7px;flex-wrap:wrap}
+.run-foot a{color:var(--accent)}
+.subnav{display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:-6px 0 22px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.subnav::before{content:"이 페이지";font:11px var(--mono);letter-spacing:1px;color:var(--guide)}
+.subnav a{border-bottom:1px solid transparent;padding-bottom:1px}
+.subnav a:hover{color:var(--text);border-color:var(--guide)}
+
+/* status marks */
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:5px;background:var(--chip);color:var(--muted);font-size:12px;line-height:1.5;white-space:nowrap;font-weight:500;letter-spacing:0}
+.badge.ok{background:var(--accent-dim);color:var(--accent)}
+.badge.partial,.badge.stale,.badge.retained{background:var(--warning-bg);color:var(--amber)}
+.badge.error,.badge.blocked{background:var(--danger-bg);color:var(--red)}
+.banner{padding:13px 17px;border:1px solid var(--warning-line);border-radius:8px;background:var(--warning-bg);color:var(--amber);font-size:14px;margin-bottom:18px}
+.button{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border:1px solid var(--line);border-radius:7px;background:transparent;color:var(--text);font-size:12.5px;cursor:pointer}
+.button:hover{background:var(--surface)}
+.button:disabled{opacity:.5;cursor:default}
+a.inline{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+
+/* the closing note every page carries */
+.note-panel{border:1px solid var(--line);border-radius:11px;padding:22px;background:var(--panel)}
+.note-panel p{font-size:14px;color:var(--muted);line-height:1.8;margin:0 0 10px;max-width:86ch}
+.note-panel p:last-child{margin-bottom:0}
+
+.footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding:22px 0 30px;margin-top:40px;font-size:12px;line-height:1.8;color:var(--muted);flex-wrap:wrap}
+.footer a:hover{color:var(--text)}
+.footer .flow{color:var(--text)}
+#tip{position:fixed;z-index:20;pointer-events:none;background:var(--tooltip);color:var(--text);border:1px solid var(--guide);border-radius:8px;padding:7px 9px;font-size:12px;line-height:1.45;max-width:240px}
+#tip b{font-size:13px;display:block}
+
+@media(max-width:1120px){.shell{width:calc(100% - 44px)}}
+@media(max-width:760px){
+  .shell{width:calc(100% - 32px)}
+  .topbar{min-height:0;padding:14px 0 10px}
+  .toplinks{width:100%;overflow-x:auto;scrollbar-width:none}
+  .toplinks::-webkit-scrollbar{display:none}
+  .toplinks a{padding:6px 10px;font-size:14px}
+  .hero{padding:22px 0 18px}
+  .hero h1{font-size:26px}
+  .run-panel{text-align:left}
+  .run-head,.run-foot{justify-content:flex-start}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
