@@ -158,8 +158,8 @@ class JudgmentPageTests(unittest.TestCase):
             for label, cell in diag[asset]["by_count"].items():
                 self.assertRegex(label, r"^\d(~\d)?$")
                 self.assertTrue({"weeks", "mean"} <= set(cell))
-        html = (SITE / "index.html").read_text()
-        for target in ("./models.json", f"./research/studies/{models.STUDY}/README.md"):
+        html = (SITE / "models.html").read_text()
+        for target in ("./models.json", f"./doc.html?p=research/studies/{models.STUDY}/README.md"):
             self.assertIn(f'href="{target}"', html)
         manifest = json.loads((ROOT / "lm/render/public-files.json").read_text())["repo"]
         for name in ("PROTOCOL.md", "README.md", "results.json", "diagnostics.json"):
@@ -239,7 +239,7 @@ class JudgmentPageTests(unittest.TestCase):
         registry = json.loads((ROOT / "research/protocols/registry.json").read_text())["protocols"]
         self.assertIn(quadrant.PROTOCOL, [entry["id"] for entry in registry])
         html = (SITE / "index.html").read_text()
-        for target in ("./research/protocols/PROTOCOL_tilt_v1.md", "./research/studies/tilt-2026-11/README.md", "./ledger.json"):
+        for target in ("./doc.html?p=research/protocols/PROTOCOL_tilt_v1.md", "./doc.html?p=research/studies/tilt-2026-11/README.md", "./ledger.json"):
             self.assertIn(f'href="{target}"', html)
         self.assertIn("지수 방향에 대한 판단이 아니다", html)
         manifest = json.loads((ROOT / "lm/render/public-files.json").read_text())["repo"]
@@ -283,32 +283,46 @@ class JudgmentPageTests(unittest.TestCase):
         out = self.evaluate(f"console.log(JSON.stringify(j.ledgerSummary(q,'{quadrant.PROTOCOL}')));", self.live_record)
         self.assertIsNotNone(out)
 
-    def test_entry_page_loads_the_map_and_links_the_other_screens(self):
-        html = (SITE / "index.html").read_text()
-        self.assertRegex(html, r'<script\b[^>]*\bsrc="\./judgment\.js"')
-        self.assertRegex(html, r'<link\b[^>]*\bhref="\./judgment\.css"')
-        for target in ("./observatory.html", "./sources.html", "./quadrant.json", "./research/studies/quadrant-2026-11/README.md"):
-            self.assertIn(f'href="{target}"', html)
-        self.assertIn("투자 조언이 아닙니다", html)
-        self.assertIn("FRED® API", html)
-        self.assertNotIn("const DATA", html)                       # nothing is baked into the page
-        self.assertNotRegex(html, r"20\d\d-\d\d-\d\d")            # no dated numbers either
+    def test_judgment_measure_and_model_pages_share_one_script_and_bake_nothing_in(self):
+        for name, anchors in {"index.html": ("judgment", "door-measure", "record-block"), "measure.html": ("tiles", "plane-all", "raster", "study", "recent"),
+                              "models.html": ("models", "score-strip", "rules")}.items():
+            html = (SITE / name).read_text()
+            with self.subTest(page=name):
+                self.assertRegex(html, r'<script\b[^>]*\bsrc="\./judgment\.js"')
+                self.assertRegex(html, r'<link\b[^>]*\bhref="\./site\.css"[^>]*>\s*<link\b[^>]*\bhref="\./content\.css"')
+                for anchor in anchors:
+                    self.assertIn(f'id="{anchor}"', html)
+                for needed in ('id="asof"', 'id="state"', 'id="generated-at"', 'id="banner"', 'id="content"'):
+                    self.assertIn(needed, html)
+                self.assertIn("투자 조언이 아닙니다", html)
+                self.assertIn("FRED® API", html)
+                self.assertNotIn("const DATA", html)                       # nothing is baked into the page
+                self.assertNotRegex(html, r"20\d\d-\d\d-\d\d")            # no dated numbers either
+        self.assertIn('href="./quadrant.json"', (SITE / "measure.html").read_text())
+        self.assertIn('href="./models.json"', (SITE / "models.html").read_text())
 
-    def test_old_overview_moved_and_still_wired(self):
+    def test_observation_page_uses_the_shared_shell_and_builds_no_header_of_its_own(self):
         html = (SITE / "observatory.html").read_text()
         self.assertIn("overview.js", html)
-        self.assertIn("'./','판단 화면 ↗'", (SITE / "overview.js").read_text())
-        self.assertIn('href="./observatory.html"', (SITE / "sources.html").read_text())
+        script = (SITE / "overview.js").read_text()
+        for gone in ("node('header'", "topnav", "유동성 관측실", "node('footer'"):
+            self.assertNotIn(gone, script)
+        for filled in ("ob-captured", "ob-state", "ob-refresh", "connection-banner"):
+            self.assertIn(f'id="{filled}"', html)
+            self.assertIn(filled, script)
 
-    def test_shared_design_tokens_match_the_rest_of_the_site(self):
-        def tokens(name):
-            block = re.search(r":root\{([^}]*)\}", (SITE / name).read_text().replace("\n", "")).group(1)
-            return dict(re.findall(r"(--[a-z0-9-]+):\s*([^;]+)", block))
-        base, mine = tokens("dashboard.css"), tokens("judgment.css")
-        shared = set(base) & set(mine)
-        self.assertGreater(len(shared), 12)
-        for name in sorted(shared):
-            self.assertEqual(mine[name].strip(), base[name].strip(), name)
+    def test_design_tokens_are_defined_once(self):
+        def tokens(text):
+            return dict(re.findall(r"(--[a-z0-9-]+):\s*([^;}]+)", text))
+        shared = tokens(re.search(r":root\{([^}]*)\}", (SITE / "site.css").read_text().replace("\n", "")).group(1))
+        self.assertGreater(len(shared), 20)
+        for name in ("content.css", "dashboard.css", "overview.css"):
+            text = (SITE / name).read_text()
+            self.assertNotIn(":root", text, name)
+            # the observation page still names a few tokens for its own variants; they must say the same thing
+            for token, value in tokens(text).items():
+                if token in shared:
+                    self.assertEqual(value.strip(), shared[token].strip(), (name, token))
 
     def test_study_table_has_what_the_page_reads_and_no_price_levels(self):
         study = json.loads((ROOT / "research/studies/quadrant-2026-11/results.json").read_text())

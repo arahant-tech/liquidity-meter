@@ -3,7 +3,14 @@
     "index.html",
     "observatory.html",
     "judgment.js",
-    "judgment.css",
+    "content.css",
+    "site.css",
+    "measure.html",
+    "models.html",
+    "research.html",
+    "research.js",
+    "doc.html",
+    "doc.js",
     "sources.html",
     "overview.js",
     "overview.css",
@@ -49,6 +56,7 @@
     "research/archive/v6-btc-forward/outcome.json",
     "research/protocols/PROTOCOL_primary_v1.md",
     "research/protocols/PROTOCOL_tilt_v1.md",
-    "research/protocols/registry.json"
+    "research/protocols/registry.json",
+    "research/index.json"
   ]
 }

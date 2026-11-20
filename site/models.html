@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#10181f">
+  <meta name="description" content="미리 적어 둔 규칙 열일곱 개가 이번 주에 켜졌는지와, 과거에 그 규칙들이 주식과 암호화폐에서 무엇을 구분했는지 보여 주는 화면.">
+  <title>임시 모델 보드 · 유동성 측정기</title>
+  <link rel="stylesheet" href="./site.css">
+  <link rel="stylesheet" href="./content.css">
+</head>
+<body>
+<a class="skip" href="#models">보드로 이동</a>
+<div class="shell">
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="유동성 측정기 홈">
+      <svg class="brand-mark" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M5 24V12M13 29V7M21 23V13M29 27V9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="21" cy="9" r="2" fill="currentColor"/></svg>
+      <div><strong>유동성 측정기</strong><span>LIQUIDITY METER</span></div>
+    </a>
+    <nav class="toplinks" aria-label="주 메뉴"><a href="./">판정</a><a href="./measure.html">측정</a><a href="./models.html" aria-current="page">모델</a><a href="./observatory.html">관측</a><a href="./sources.html">자료</a><a href="./research.html">연구·검증</a></nav>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="title">
+      <div><p class="eyebrow">MODELS · 모델</p><h1 id="title">임시 모델 보드</h1><p class="hero-copy">미리 적어 둔 규칙 열일곱 개가 이번 주에 켜졌는지, 그리고 과거에 그 규칙들이 무엇을 구분했는지. 어느 것도 실시간으로 검증되지 않았다.</p></div>
+      <div class="run-panel"><div class="run-head"><span>기준 주</span><strong id="asof">—</strong><span id="state" class="badge" role="status" aria-live="polite">확인 중</span></div><div class="run-foot"><span>계산</span><span id="generated-at">—</span></div></div>
+    </section>
+    <div id="banner" class="banner" role="status" hidden></div>
+
+    <div id="content" hidden>
+      <section id="models" aria-labelledby="models-title" hidden>
+        <h2 id="models-title">조건 점수와 규칙 <span class="badge stale" id="models-grade">실시간 검증 전</span></h2>
+        <p class="lead" id="models-lead"></p>
+        <div id="models-banner" class="banner" role="status" hidden></div>
+        <div id="models-body" hidden>
+          <div class="score">
+            <article class="panel score-now"><span class="score-label">조건 점수</span><b id="score-now">—</b><span id="score-week" class="score-week"></span><div class="chips" id="score-chips"></div></article>
+            <article class="panel"><h3>최근 52주의 조건 점수</h3><div id="score-strip"></div>
+              <div class="legend"><span><i class="sq" style="background:var(--pos)"></i><span id="legend-hi">절반 넘게 켜짐</span></span><span><i class="sq" style="background:var(--guide)"></i><span id="legend-mid">절반 바로 아래</span></span><span><i class="sq" style="background:var(--neg)"></i><span id="legend-lo">그보다 적음</span></span></div></article>
+          </div>
+          <div id="score-past" hidden>
+            <h3 class="sub">과거에 같은 점수였던 주의 다음 주 초과수익 (연율 %)</h3>
+            <article class="panel scroll"><table id="score-table"></table></article>
+            <p class="note">결과를 본 뒤에 만든 표이며 등급에 쓰지 않았다. 작은 글씨는 그 점수였던 주의 수다. 암호화폐 표본은 큰 순환 두세 번이 전부이고, BTC와 ETH는 함께 움직이므로 독립된 두 증거가 아니다.</p>
+          </div>
+          <h3 class="sub">규칙별 이번 주 상태와 과거 성적</h3>
+          <article class="panel scroll"><table id="rules"></table></article>
+          <p class="note" id="rules-note"></p>
+        </div>
+      </section>
+
+      <p class="note"><a class="inline" href="./doc.html?p=research/studies/models-2026-11/README.md">모델 연구 →</a> · <a class="inline" href="./doc.html?p=research/studies/models-2026-11/PROTOCOL.md">사전 설계 →</a> · <a class="inline" href="./models.json">보드 자료(JSON) ↗</a></p>
+
+      <section id="method" class="note-panel">
+        <h2>읽는 법과 한계</h2>
+        <p>임시 모델 보드는 미리 적어 둔 규칙이 이번 주에 켜졌는지만 계산한다. 상태는 H.4.1과 금리·스프레드·달러·변동성·통화량 자료에서 나오고, 규칙을 시험한 자산의 가격은 읽지 않는다. 일별 자료는 기준 수요일 다음 날인 목요일 값까지 쓴다. 켜짐과 꺼짐은 전량 매수·전량 매도 지시가 아니라, 비중을 조절할 근거가 얼마나 있는지를 말한다. 가격이 있어야 계산되는 전진식 모델 세 개는 보드에 없고 연구 문서에 있다.</p>
+      </section>
+    </div>
+  </main>
+  <footer class="footer"><div><span class="flow">유동성 측정기</span> · 관측 → 측정 → 판정 → 검증<br>투자 조언이 아닙니다. This product uses the FRED® API but is not endorsed or certified by the Federal Reserve Bank of St. Louis.</div><div><a href="./research.html">연구와 검증 기록</a> · <a href="./sources.html">전체 자료</a><br><a href="https://github.com/arahant-tech/liquidity-meter" rel="noopener noreferrer">저장소 ↗</a></div></footer>
+</div>
+<div id="tip" hidden></div>
+<script src="./judgment.js" defer></script>
+</body>
+</html>

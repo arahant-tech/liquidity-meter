@@ -4,6 +4,8 @@
   "protocols": [
     {
       "id": "primary-v1",
+      "title": "준비금·활성비중 신호",
+      "claim": "신호의 분위가 높을수록 이후 8주 BTC 수익이 높다",
       "status": "draft",
       "document": "PROTOCOL_primary_v1.md",
       "sha256": null,
@@ -28,6 +30,8 @@
     },
     {
       "id": "tilt-v1",
+      "title": "성장주 기울기",
+      "claim": "준비금 13주 변화가 4~5구간이면 이후 13주 나스닥100 이 S&P 500 보다 낫다",
       "status": "fixed",
       "document": "PROTOCOL_tilt_v1.md",
       "sha256": "5f8cf6b19fff5d94337ee1b5c6e590be4826eebae9a5b66497a73c3ce54876a8",
