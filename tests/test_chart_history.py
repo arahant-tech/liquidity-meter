@@ -168,7 +168,10 @@ class HistoryTests(unittest.TestCase):
         self.assertEqual({p["series_id"] for _,p in client.calls},set(h.FRED_IDS))
         for endpoint,p in client.calls:
             self.assertNotIn("frequency",p)
-            self.assertEqual(p["realtime_start"],"2026-09-09")
+            # The clock reads midnight UTC on the 9th, when it is still the 8th at FRED (US Central time).
+            self.assertEqual((p["realtime_start"],p["realtime_end"]),("2026-09-08","2026-09-08"))
+            if endpoint=="series/observations":
+                self.assertEqual(p["observation_end"],"2026-09-08")
             if endpoint=="series/observations":
                 self.assertEqual(p["units"],"lin")
                 self.assertLessEqual(p["limit"],2000)

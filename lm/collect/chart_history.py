@@ -199,7 +199,7 @@ def collect(runtime, live_root, checkpoint, *, client=None, clock=None):
         raise ValueError("history_state_and_runtime_must_differ")
     runtime.mkdir(parents=True, exist_ok=True)
     now = clock or (lambda: datetime.now(timezone.utc))
-    end = live_api._utc(now).date()
+    end = live_api.fred_day(live_api._utc(now))          # FRED's own date, not UTC's (see fred_day)
     # Monthly FRED observations can be returned with the first day of the
     # intersecting month. Ask from that boundary and retain the native date.
     start = (end - timedelta(days=1096)).replace(day=1)

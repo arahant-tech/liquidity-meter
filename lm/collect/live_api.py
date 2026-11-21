@@ -11,7 +11,7 @@ import argparse
 import calendar
 from contextlib import contextmanager
 from dataclasses import asdict, dataclass
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 import fcntl
 import hashlib
 import json
@@ -69,6 +69,26 @@ def _utc(clock=None):
 
 def _stamp(value):
     return value.isoformat().replace("+00:00", "Z")
+
+
+try:
+    from zoneinfo import ZoneInfo
+    _FRED_ZONE = ZoneInfo("America/Chicago")
+except Exception:                                   # no time-zone database on this machine
+    _FRED_ZONE = None
+
+
+def fred_day(moment):
+    """The calendar date FRED itself is on.
+
+    FRED keeps US Central time and answers HTTP 400 to a ``realtime`` or
+    ``observation_end`` date that is still tomorrow there. From midnight UTC
+    until midnight in St. Louis the UTC date is that tomorrow, so every request
+    dated in UTC fails for five to six hours a day.
+    """
+    if _FRED_ZONE is not None:
+        return moment.astimezone(_FRED_ZONE).date()
+    return (moment - timedelta(hours=6)).date()     # never ahead of Central time
 
 
 def _json_bytes(value):
@@ -353,7 +373,7 @@ def poll(output_root=DEFAULT_OUTPUT_ROOT, specs=None, client=None, clock=None,
             try:
                 if credential_error:
                     raise FredError("credential_unavailable")
-                day = started.date().isoformat()
+                day = fred_day(started).isoformat()
                 params = {"series_id": spec.series_id, "realtime_start": day, "realtime_end": day}
                 metadata_body = client.request("series", params)
                 observation_body = client.request("series/observations", {

@@ -52,6 +52,22 @@ class LiveApiTests(unittest.TestCase):
     def ledger(self):
         return [json.loads(line) for line in (self.output / "observed.jsonl").read_text().splitlines() if line]
 
+    def test_requests_are_dated_by_freds_calendar_not_utc(self):
+        from lm.collect import live_api
+        at = lambda text: datetime.fromisoformat(text).replace(tzinfo=timezone.utc)
+        # Winter (UTC−6) and summer (UTC−5): until midnight in St. Louis it is still yesterday at FRED.
+        cases = {"2026-11-19T03:36:00": "2026-11-18", "2026-11-19T05:59:00": "2026-11-18", "2026-11-19T06:00:00": "2026-11-19",
+                 "2026-11-19T22:00:00": "2026-11-19", "2026-07-01T04:59:00": "2026-06-30", "2026-07-01T05:00:00": "2026-07-01"}
+        for moment, expected in cases.items():
+            self.assertEqual(live_api.fred_day(at(moment)).isoformat(), expected, moment)
+            self.assertLessEqual(live_api.fred_day(at(moment)), at(moment).date())           # never ahead of UTC
+        self.now = at("2026-09-10T03:00:00")                                               # 22:00 on the 9th in St. Louis
+        self.assertEqual(self.run_poll()["outcome"], "ok")
+        for endpoint, params in self.calls:
+            self.assertEqual((params["realtime_start"], params["realtime_end"]), ("2026-09-09", "2026-09-09"))
+            if endpoint == "series/observations":
+                self.assertEqual(params["observation_end"], "2026-09-09")
+
     def test_new_capture_known_only_at_actual_retrieval_and_not_research_input(self):
         result = self.run_poll()
         item = self.latest()
