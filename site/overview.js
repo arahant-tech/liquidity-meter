@@ -46,7 +46,7 @@ function makeData(live,history,now=Date.now()){
  return {captured_at:history.generated_at,live_generated_at:live.generated_at,series:rows,research_eligible:false,collectorDelayed,run_url:safeUrl(live.github_run_url),model_readiness:live.model_readiness};
 }
 async function fetchJson(path,nonce){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);try{const response=await fetch(path+'?t='+nonce,{cache:'no-store',credentials:'omit',signal:controller.signal});if(!response.ok)throw Error('HTTP '+response.status);return await response.json()}finally{clearTimeout(timer)}}
-function showError(message){let banner=document.getElementById('connection-banner');if(!banner){banner=document.createElement('div');banner.id='connection-banner';banner.className='connection-message';root.prepend(banner)}banner.hidden=false;banner.textContent=message;banner.setAttribute('role','status');}
+function showError(message){const banner=document.getElementById('connection-banner');if(banner){banner.hidden=false;banner.textContent=message}const badge=document.getElementById('ob-state');if(badge){badge.textContent='확인 실패';badge.className='badge error'}}
 async function load(){
  if(busy)return;busy=true;const button=document.querySelector('.refresh-data');if(button)button.disabled=true;
  try{
@@ -106,9 +106,15 @@ function observedChange(s,spec,points,index){
  return {direction,label,text,delta,unit,percent,from:previous.date,to:current.date,detail:`${shortDate(previous.date)} → ${shortDate(current.date)} · ${label} ${text}. 관측값 자체의 증감입니다.`};
 }
 const main=document.querySelector('.app');
-const header=node('header','topbar');const brand=node('a','brand');brand.href='#top';brand.setAttribute('aria-label','유동성 관측실 맨 위로');const mark=node('span','brand-mark');mark.setAttribute('aria-hidden','true');for(let i=0;i<3;i++)mark.append(node('i'));brand.append(mark,node('span','','유동성 관측실'));
-const nav=node('nav','topnav');nav.setAttribute('aria-label','페이지 탐색');for(const [href,label,cls] of [['./','판단 화면 ↗','detail-link'],['#overview','관측',''],['#interpretation','종합 해석',''],['#data-guide','자료 안내',''],['./sources.html','전체 자료 ↗','detail-link']]){const a=node('a',cls,label);a.href=href;nav.append(a)}nav.append(node('span','draft','매시간 수집'));header.append(brand,nav);main.append(header);
-const hero=node('section','hero');const copy=node('div');copy.append(node('div','eyebrow',config.eyebrow),node('h1','',config.title),node('p','',config.description));const snapshot=node('div','snapshot');snapshot.append(node('strong','','클라우드 수집 자료'),node('span','',FINAL_METADATA.captured_kst));const refresh=node('button','refresh-data','↻ 새로 확인');refresh.type='button';refresh.addEventListener('click',load);snapshot.append(node('br'),refresh,node('span','refresh-time','화면 확인 '+kst(Date.now())));if(DATA.run_url){const run=node('a','run-evidence','실행 기록 ↗');run.href=DATA.run_url;run.target='_blank';run.rel='noopener noreferrer';snapshot.append(run)};hero.append(copy,snapshot);main.append(hero);const banner=node('div','connection-message');banner.id='connection-banner';banner.setAttribute('role','status');const problems=DATA.series.filter(s=>s.source_status!=='ok');banner.hidden=!problems.length&&!DATA.collectorDelayed;banner.textContent=(DATA.collectorDelayed?'클라우드 수집이 3시간 이상 지연되었습니다. ':'')+problems.map(s=>s.id+' · '+s.status_label).join(' / ')+(problems.length?' — 기준일과 원 수집시각을 유지하며 현재 종합 해석을 보류합니다.':'');main.append(banner);
+const problems=DATA.series.filter(s=>s.source_status!=='ok');
+const stateBadge=document.getElementById('ob-state');
+if(stateBadge){const [label,cls]=DATA.collectorDelayed?['수집 지연','stale']:problems.length?['일부 이전값','retained']:['정상','ok'];stateBadge.textContent=label;stateBadge.className='badge '+cls}
+const captured=document.getElementById('ob-captured');if(captured)captured.textContent=FINAL_METADATA.captured_kst;
+const checked=document.getElementById('ob-checked');if(checked)checked.textContent='화면 확인 '+kst(Date.now());
+const run=document.getElementById('ob-run');if(run){run.hidden=!DATA.run_url;if(DATA.run_url)run.href=DATA.run_url}
+const refresh=document.getElementById('ob-refresh');if(refresh&&!refresh.dataset.bound){refresh.dataset.bound='1';refresh.addEventListener('click',load)}
+const banner=document.getElementById('connection-banner');
+if(banner){banner.hidden=!problems.length&&!DATA.collectorDelayed;banner.textContent=(DATA.collectorDelayed?'클라우드 수집이 3시간 이상 지연되었습니다. ':'')+problems.map(s=>s.id+' · '+s.status_label).join(' / ')+(problems.length?' — 기준일과 원 수집시각을 유지하며 현재 종합 해석을 보류합니다.':'')}
 const grid=node('section','axis-grid');grid.setAttribute('aria-label',treasuryOverview?'Fed, 재무부, 분포, 전환과 종단 플로우 대표 관측 그래프':'5개 층의 대표 관측 그래프');grid.id='overview';main.append(grid);
 const charts=[];
 for(const layer of config.order){
@@ -131,7 +137,7 @@ for(const layer of config.order){
  const chart=new Chart(canvas,{type:spec.type,data:{labels:points.map(p=>p.date),datasets:[{label:spec.title,data:vals,borderColor:seriesColor(layer),backgroundColor:spec.type==='bar'?vals.map(v=>v<0?(dark?'#52616c':'#b9c2c7'):seriesColor(layer)+'cb'):seriesColor(layer)+(dark?'0e':'08'),borderWidth:spec.type==='bar'?0:1.8,borderRadius:spec.type==='bar'?2:0,fill:spec.type==='line'&&!strip,tension:0,pointRadius:context=>spec.type==='line'&&context.dataIndex===points.length-1?2.2:0,pointHitRadius:12,pointHoverRadius:3,spanGaps:false,barPercentage:.68,categoryPercentage:.9}]},options:{responsive:true,maintainAspectRatio:false,animation:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{displayColors:false,backgroundColor:dark?'#34434d':'#263c45',padding:10,titleFont:{size:11},bodyFont:{size:12},callbacks:{title:items=>items[0].label,label:context=>context.parsed.y.toFixed(spec.digits)+' '+spec.unit,afterLabel:context=>treasuryOverview&&context.dataIndex>0?(()=>{const c=observedChange(s,spec,points,context.dataIndex);return c.label+' '+c.text})():''}}},layout:{padding:{top:6,right:strip?5:0,bottom:0,left:0}},scales:{x:{display:false,grid:{display:false}},y:{display:true,position:'right',beginAtZero:spec.type==='bar',border:{display:false},ticks:{display:!strip,maxTicksLimit:3,color:dark?'#758998':'#a0aab1',font:{size:9},padding:4,callback:v=>Math.abs(v)>=100?Number(v).toFixed(0):Number(v).toFixed(spec.digits===3?1:0)},grid:{display:true,color:context=>context.tick.value===0?(dark?'#52616c':'#cbd3d7'):(dark?'#26343f':'#e8ecee'),drawTicks:false,lineWidth:context=>context.tick.value===0?1:0.6}}}}});charts.push(chart);
 }
 const context=node('section','context-strip');for(const pair of [['대표 관측 5개','같은 크기, 각자의 단위와 관측기간'],['공통 점수로 합산하지 않음',treasuryOverview?'재무부는 1층의 별도 관측':'층별 구조와 크립토 트랙 유지'],['상세 관측으로 이어집니다','아래에서 전체 계열·연결 상태 확인']]){const n=node('div');n.append(node('strong','',pair[0]),node('span','',pair[1]));context.append(n)}main.append(context);
-const footer=node('footer','footer');footer.append(node('div','notice',treasuryOverview?'가정: 현재 빈티지의 원자료이며 단위·기간은 서로 다릅니다. 등락은 직전 관측 대비 변화입니다. 한계: TGA는 재무부의 일부이며, Lₜ·Aₜ는 미추정입니다.':'가정: 각 층의 대표 관측 하나를 선택한 시안입니다. 한계: 전체 층을 대변하지 않으며, Lₜ·Aₜ는 미추정입니다. 단위·기간은 그래프마다 다릅니다.'),node('span','concept-label','LIQUIDITY OBSERVATORY'));main.append(footer);
+const caveat=node('p','page-caveat',treasuryOverview?'가정: 현재 빈티지의 원자료이며 단위·기간은 서로 다릅니다. 등락은 직전 관측 대비 변화입니다. 한계: TGA는 재무부의 일부이며, Lₜ·Aₜ는 미추정입니다.':'가정: 각 층의 대표 관측 하나를 선택한 시안입니다. 한계: 전체 층을 대변하지 않으며, Lₜ·Aₜ는 미추정입니다. 단위·기간은 그래프마다 다릅니다.');
 window.PREVIEW_READY={variant,overview:treasuryOverview?'treasury':'five-layers',chartCount:charts.length,slots:config.order,layers:config.order.map(slot=>series.get(slot).layer),points:DATA.series.map(s=>({id:s.id,slot:s.slot||s.layer,layer:s.layer,count:s.points.length,latest:s.points.at(-1)||null}))};
 
 currentChartObjects=charts;window.mountLiquidityInterpretation({treasuryOverview,DATA,config,series,design,observedChange,shortDate,node,grid,INTERPRETATION_COPY});
@@ -149,11 +155,8 @@ for(const slot of config.order){
  const sourceCell=node('td');sourceCell.dataset.label='원자료';const source=node('a','','원천 확인 ↗');if(s.source_url)source.href=s.source_url;else source.textContent='원천 미확인';source.target='_blank';source.rel='noopener noreferrer';sourceCell.append(source);row.append(sourceCell);tbody.append(row);
 }
 table.append(tbody);tableWrap.append(table);guide.append(tableWrap);
-const links=node('div','deployment-links');for(const [href,label] of [['./sources.html','전체 관측·연결 상태 ↗'],['./docs/OVERVIEW_SOURCE.md','화면의 가정과 한계 ↗']]){const a=node('a','',label);a.href=href;links.append(a)}guide.append(links);const guideNote=node('div','data-guide-note');guideNote.append(node('span','','단위 환산만 적용 · 원빈도 유지'),node('span','','현재 빈티지 · 과거 실시간 검증에 사용 불가'),node('span','','Lₜ·Aₜ 미추정'));guide.append(guideNote);
-document.querySelector('.footer').before(guide);
-const anchors=[...document.querySelectorAll('.topnav a')];
-for(const anchor of anchors){anchor.addEventListener('click',()=>{for(const a of anchors)a.removeAttribute('aria-current');anchor.setAttribute('aria-current','location')})}
-anchors[0]?.setAttribute('aria-current','location');
+const links=node('div','deployment-links');for(const [href,label] of [['./sources.html','전체 관측·연결 상태 →'],['./doc.html?p=docs/OVERVIEW_SOURCE.md','화면의 가정과 한계 →']]){const a=node('a','',label);a.href=href;links.append(a)}guide.append(links);const guideNote=node('div','data-guide-note');guideNote.append(node('span','','단위 환산만 적용 · 원빈도 유지'),node('span','','현재 빈티지 · 과거 실시간 검증에 사용 불가'),node('span','','Lₜ·Aₜ 미추정'));guide.append(guideNote);
+main.append(guide,caveat);
 
 }
 if(typeof module==='object'&&module.exports){module.exports={makeData,validDate,originalNumber};return;}

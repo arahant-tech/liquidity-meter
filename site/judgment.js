@@ -279,7 +279,7 @@ function drawTiltStrip(host, pts) {
 
 let judged = null;
 function drawJudgmentCharts() {
-  if (!judged) return;
+  if (!judged || !$('scale')) return;
   const j = judged.judgment, rows = [['준비금 13주 변화', j.indicator], ['재무부 계정을 뺀 변화 (후보)', j.candidate]].filter(([, r]) => r.bucket !== null).map(([label, r]) => ({ label, ...r }));
   if (rows.length) drawScale($('scale'), rows); else $('scale').replaceChildren();
   drawTiltStrip($('tilt-strip'), judged.points.slice(-52));
@@ -414,7 +414,7 @@ const VALUE_OF = { Q1: ['g', '%'], Q2: ['v', '%'], Q3: ['s', '%'], Q6: ['g_accel
 let board = null;
 
 function drawStrip() {
-  if (!board) return;
+  if (!board || !$('score-strip')) return;
   const host = $('score-strip'), pts = board.history, of = board.score.of;
   const W = Math.max(280, Math.min(host.clientWidth || 520, 720)), H = 132, left = 22, top = 8, bottom = 22;
   const step = (W - left - 4) / pts.length, y = (n) => top + (H - top - bottom) * (1 - n / of);
@@ -526,7 +526,7 @@ async function startBoard(q) {
 }
 
 function drawCharts() {
-  if (!state) return;
+  if (!state || !$('plane-all')) return;
   const pts = state.points, trail = pts.slice(-52), last = trail[trail.length - 1];
   drawPlane($('plane-all'), { asinh: true, range: [-18, 75, -36, 22], ticks: [-20, -10, -5, -2, 0, 2, 5, 10, 20, 50], points: pts, r: 2.3, opacity: .4, trail, path: false, shares: state.cells,
     labels: [[2.9, 2.6, 'A'], [3.6, -1.1, 'B+'], [1.5, -3.3, 'B-'], [-1.6, 2.7, 'C+'], [-2.6, 0.85, 'C-'], [-1.9, -2.6, 'D']], marks: [[last, '지금', 9, -8]], label: '총량과 방향 평면에 놓은 2009년 이후 모든 주', max: 600 });
@@ -568,13 +568,27 @@ async function start() {
   if (q.status === 'unavailable') { $('content').hidden = true; return; }
   state = q;
   $('content').hidden = false;
-  drawJudgment(q); drawTiles(q); drawRecent(q.points); drawCharts();
-  drawEvidence(q).catch(() => { /* the judgment stands without the study text */ });
-  try { drawStudy(await get(STUDY_URL), q.now.cell); } catch { /* the map stands on its own without the study table */ }
-  try { await startBoard(q); } catch { /* the map stands on its own without the board */ }
+  // One script serves the judgment, measurement and model pages; each draws only the sections it carries.
+  if ($('judgment')) { drawJudgment(q); drawEvidence(q).catch(() => { /* the judgment stands without the study text */ }); }
+  if ($('door-measure')) drawDoors(q);
+  if ($('tiles')) drawTiles(q);
+  if ($('recent')) drawRecent(q.points);
+  drawCharts();
+  if ($('study')) { try { drawStudy(await get(STUDY_URL), q.now.cell); } catch { /* the map stands on its own without the study table */ } }
+  if ($('models')) { try { await startBoard(q); } catch { /* the page says so itself */ } }
 }
 
+/* Home page: one line of live state on each door to the other pages. */
+function drawDoors(q) {
+  $('door-measure').textContent = `${SHORT[q.now.cell]} · ${SIDE[q.now.cell]}`;
+  get(MODELS_URL).then((raw) => { const m = validateModels(raw); $('door-models').textContent = m.status === 'unavailable' || !boardMatchesMap(m, q) ? '자료 없음' : `조건 점수 ${m.score.on} / ${m.score.of}`; })
+    .catch(() => { $('door-models').textContent = '자료 없음'; });
+  get(LEDGER_URL).then((card) => { const r = ledgerSummary(card, q.judgment ? q.judgment.protocol : ''); $('door-research').textContent = r && r.sealed ? `봉인 ${r.sealed}주 · 채점 ${r.scored}주` : '연구와 규약'; })
+    .catch(() => { $('door-research').textContent = '연구와 규약'; });
+}
+
+window.LM = { ledgerSummary, validDate, finite, get, html, fmt, kst };
 let timer;
 addEventListener('resize', () => { clearTimeout(timer); timer = setTimeout(() => { drawCharts(); drawStrip(); drawJudgmentCharts(); }, 150); });
-start();
+if ($('content')) start();          // the research page loads this file for its helpers only
 })();

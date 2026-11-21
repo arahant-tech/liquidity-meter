@@ -1,3 +1,38 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><meta name="description" content="준비금·재무부·분포·전환·플로우의 실제 관측과 조건부 해석. GitHub에서 매시간 원자료를 확인합니다."><title>유동성 관측실 · Macro Liquidity</title><link rel="stylesheet" href="./overview.css"></head>
-<body class="variant-b final-preview" data-variant="b" data-overview="treasury"><a class="skip-link" href="#overview">관측 그래프로 건너뛰기</a><main class="app" id="top"><section class="load-state"><h1>유동성 관측실</h1><p><span class="loading-mark" aria-hidden="true"></span>원자료와 관측 이력을 불러오고 있습니다.</p><p><a href="./sources.html">전체 관측·연결 상태 보기 ↗</a></p><button class="refresh-data" type="button" onclick="location.reload()">새로 확인</button><noscript><p>그래프와 시나리오 해석을 보려면 JavaScript가 필요합니다. <a href="./live-data.json">원자료 JSON 보기</a></p></noscript></section></main><footer class="site-notice">투자 조언이 아닙니다. This product uses the FRED® API but is not endorsed or certified by the Federal Reserve Bank of St. Louis.</footer><script src="./vendor/chart.umd.min.js" defer></script><script src="./interpretation.js" defer></script><script src="./overview.js" defer></script></body></html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#10181f">
+  <meta name="description" content="준비금·재무부 계정·분포·전환·플로우의 대표 관측 다섯 가지와 조건부 해석. 원자료의 기준일과 수집 시각을 그대로 보여 줍니다.">
+  <title>대표 관측 · 유동성 측정기</title>
+  <link rel="stylesheet" href="./site.css">
+  <link rel="stylesheet" href="./overview.css">
+</head>
+<body class="variant-b final-preview" data-variant="b" data-overview="treasury">
+<a class="skip" href="#overview">관측 그래프로 이동</a>
+<div class="shell">
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="유동성 측정기 홈">
+      <svg class="brand-mark" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M5 24V12M13 29V7M21 23V13M29 27V9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="21" cy="9" r="2" fill="currentColor"/></svg>
+      <div><strong>유동성 측정기</strong><span>LIQUIDITY METER</span></div>
+    </a>
+    <nav class="toplinks" aria-label="주 메뉴"><a href="./">판정</a><a href="./measure.html">측정</a><a href="./models.html">모델</a><a href="./observatory.html" aria-current="page">관측</a><a href="./sources.html">자료</a><a href="./research.html">연구·검증</a></nav>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="title">
+      <div><p class="eyebrow">OBSERVE · 관측</p><h1 id="title">유동성의 다섯 관측면</h1><p class="hero-copy">Fed와 재무부의 현금, 분포·전환·플로우를 한 화면에. 여기서는 관측만 한다. 판정은 판정 화면에 있다.</p></div>
+      <div class="run-panel"><div class="run-head"><span>수집</span><strong id="ob-captured">—</strong><span id="ob-state" class="badge" role="status" aria-live="polite">확인 중</span></div><div class="run-foot"><button class="button refresh-data" type="button" id="ob-refresh">↻ 새로 확인</button><span id="ob-checked"></span><a id="ob-run" target="_blank" rel="noopener noreferrer" hidden>실행 기록 ↗</a></div></div>
+    </section>
+    <nav class="subnav" aria-label="이 페이지"><a href="#overview">대표 관측</a><a href="#interpretation">종합 해석</a><a href="#data-guide">자료 안내</a><a href="./sources.html">전체 자료 →</a></nav>
+    <div id="connection-banner" class="banner" role="status" hidden></div>
+    <div class="app" id="top"><section class="load-state"><p><span class="loading-mark" aria-hidden="true"></span>원자료와 관측 이력을 불러오고 있습니다.</p><noscript><p>그래프와 해석을 보려면 JavaScript가 필요합니다. <a class="inline" href="./live-data.json">원자료 JSON 보기</a></p></noscript></section></div>
+  </main>
+  <footer class="footer"><div><span class="flow">유동성 측정기</span> · 관측 → 측정 → 판정 → 검증<br>투자 조언이 아닙니다. This product uses the FRED® API but is not endorsed or certified by the Federal Reserve Bank of St. Louis.</div><div><a href="./research.html">연구와 검증 기록</a> · <a href="./sources.html">전체 자료</a><br><a href="https://github.com/arahant-tech/liquidity-meter" rel="noopener noreferrer">저장소 ↗</a></div></footer>
+</div>
+<script src="./vendor/chart.umd.min.js" defer></script>
+<script src="./interpretation.js" defer></script>
+<script src="./overview.js" defer></script>
+</body>
+</html>
