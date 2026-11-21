@@ -9,97 +9,97 @@
     "Only the latest five native observations are fetched, so older revisions can be missed.",
     "The collection covers a subset of the five-layer model; missing sources are not imputed."
   ],
-  "capture_id": "20261121T001951431301Z_2d72aef823b0",
+  "capture_id": "20261121T022443858967Z_e97cbd80d39b",
   "changed": 0,
-  "completed_at": "2026-11-21T00:19:58.481130Z",
+  "completed_at": "2026-11-21T02:24:49.485593Z",
   "errors": 16,
   "outcome": "error",
   "research_eligible": false,
   "schema_version": 1,
   "series": {
     "DPSACBW027SBOG": {
-      "checked_at": "2026-11-21T00:19:54.939951Z",
+      "checked_at": "2026-11-21T02:24:46.793899Z",
       "error": "http_400",
       "status": "error"
     },
     "DRTSCILM": {
-      "checked_at": "2026-11-21T00:19:58.020813Z",
+      "checked_at": "2026-11-21T02:24:49.152763Z",
       "error": "http_400",
       "status": "error"
     },
     "ECBASSETSW": {
-      "checked_at": "2026-11-21T00:19:57.216870Z",
+      "checked_at": "2026-11-21T02:24:48.491890Z",
       "error": "http_400",
       "status": "error"
     },
     "IORB": {
-      "checked_at": "2026-11-21T00:19:54.038995Z",
+      "checked_at": "2026-11-21T02:24:46.085441Z",
       "error": "http_400",
       "status": "error"
     },
     "JPNASSETS": {
-      "checked_at": "2026-11-21T00:19:57.579779Z",
+      "checked_at": "2026-11-21T02:24:48.816868Z",
       "error": "http_400",
       "status": "error"
     },
     "MMMFFAQ027S": {
-      "checked_at": "2026-11-21T00:19:58.481075Z",
+      "checked_at": "2026-11-21T02:24:49.485502Z",
       "error": "http_400",
       "status": "error"
     },
     "RRPONTSYD": {
-      "checked_at": "2026-11-21T00:19:52.714358Z",
+      "checked_at": "2026-11-21T02:24:44.924880Z",
       "error": "http_400",
       "status": "error"
     },
     "SOFR": {
-      "checked_at": "2026-11-21T00:19:53.658400Z",
+      "checked_at": "2026-11-21T02:24:45.754048Z",
       "error": "http_400",
       "status": "error"
     },
     "TOTBKCR": {
-      "checked_at": "2026-11-21T00:19:54.555322Z",
+      "checked_at": "2026-11-21T02:24:46.415577Z",
       "error": "http_400",
       "status": "error"
     },
     "TOTLL": {
-      "checked_at": "2026-11-21T00:19:56.709808Z",
+      "checked_at": "2026-11-21T02:24:48.162031Z",
       "error": "http_400",
       "status": "error"
     },
     "WALCL": {
-      "checked_at": "2026-11-21T00:19:51.958033Z",
+      "checked_at": "2026-11-21T02:24:44.223832Z",
       "error": "http_400",
       "status": "error"
     },
     "WDTGAL": {
-      "checked_at": "2026-11-21T00:19:56.323566Z",
+      "checked_at": "2026-11-21T02:24:47.830880Z",
       "error": "http_400",
       "status": "error"
     },
     "WLRRAOL": {
-      "checked_at": "2026-11-21T00:19:55.928240Z",
+      "checked_at": "2026-11-21T02:24:47.486949Z",
       "error": "http_400",
       "status": "error"
     },
     "WRBWFRBL": {
-      "checked_at": "2026-11-21T00:19:55.492395Z",
+      "checked_at": "2026-11-21T02:24:47.154071Z",
       "error": "http_400",
       "status": "error"
     },
     "WRESBAL": {
-      "checked_at": "2026-11-21T00:19:52.348443Z",
+      "checked_at": "2026-11-21T02:24:44.580954Z",
       "error": "http_400",
       "status": "error"
     },
     "WTREGEN": {
-      "checked_at": "2026-11-21T00:19:53.157538Z",
+      "checked_at": "2026-11-21T02:24:45.418496Z",
       "error": "http_400",
       "status": "error"
     }
   },
   "stale": 0,
-  "started_at": "2026-11-21T00:19:51.431301Z",
+  "started_at": "2026-11-21T02:24:43.858967Z",
   "success": 0,
   "total": 16
 }

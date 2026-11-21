@@ -16,7 +16,7 @@
       "series_id": "ETF"
     }
   ],
-  "fetched_at": "2026-11-21T00:20:39.450342Z",
+  "fetched_at": "2026-11-21T02:25:19.896161Z",
   "limitations": [
     "TIC uses residence, not beneficial-owner nationality; its February 2023 form change is a structural series break. Only the Grand Total equity transaction column is used.",
     "Z.1 excludes financial corporations and includes closely held equities. Cash mergers, repurchases and issuance enter its net measure, so adding independent buybacks would double count retirements.",
@@ -182,72 +182,72 @@
   "retained_observations": [],
   "sources": [
     {
-      "known_by": "2026-11-21T00:20:37.275717Z",
+      "known_by": "2026-11-21T02:25:18.540068Z",
       "original_release_at": null,
       "raw_path": "raw/terminal_flows/a47fd809d67a2bb51ef86135916b0f52af84d2830a9c439c8a35ffdee332f7c8.txt",
       "raw_sha256": "a47fd809d67a2bb51ef86135916b0f52af84d2830a9c439c8a35ffdee332f7c8",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-21T00:20:37.275717Z",
+      "retrieved_at": "2026-11-21T02:25:18.540068Z",
       "source_url": "https://ticdata.treasury.gov/Publish/slt_table1.txt"
     },
     {
-      "known_by": "2026-11-21T00:20:37.575864Z",
+      "known_by": "2026-11-21T02:25:18.776087Z",
       "original_release_at": null,
-      "raw_path": "raw/terminal_flows/9ab23baebabda9f051994f964ca5c9532e21f63ee211c6fa0c5332f88fcc4c68.json",
-      "raw_sha256": "9ab23baebabda9f051994f964ca5c9532e21f63ee211c6fa0c5332f88fcc4c68",
+      "raw_path": "raw/terminal_flows/da2ad7790ad7f214a1d8a3044355009e148e84ca4b6eaace60aba7de3e270a05.json",
+      "raw_sha256": "da2ad7790ad7f214a1d8a3044355009e148e84ca4b6eaace60aba7de3e270a05",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-21T00:20:37.575864Z",
+      "retrieved_at": "2026-11-21T02:25:18.776087Z",
       "source_url": "https://fred.stlouisfed.org/series/BOGZ1FU103164103Q"
     },
     {
-      "known_by": "2026-11-21T00:20:37.889746Z",
-      "metadata_raw_path": "raw/terminal_flows/9ab23baebabda9f051994f964ca5c9532e21f63ee211c6fa0c5332f88fcc4c68.json",
-      "metadata_raw_sha256": "9ab23baebabda9f051994f964ca5c9532e21f63ee211c6fa0c5332f88fcc4c68",
+      "known_by": "2026-11-21T02:25:18.978817Z",
+      "metadata_raw_path": "raw/terminal_flows/da2ad7790ad7f214a1d8a3044355009e148e84ca4b6eaace60aba7de3e270a05.json",
+      "metadata_raw_sha256": "da2ad7790ad7f214a1d8a3044355009e148e84ca4b6eaace60aba7de3e270a05",
       "original_release_at": null,
       "raw_path": "raw/terminal_flows/b8fefce0502ea6b32aa2a36e7ee36380854d6472db80b8f50ae817059d17bb0e.json",
       "raw_sha256": "b8fefce0502ea6b32aa2a36e7ee36380854d6472db80b8f50ae817059d17bb0e",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-21T00:20:37.889746Z",
+      "retrieved_at": "2026-11-21T02:25:18.978817Z",
       "source_url": "https://fred.stlouisfed.org/series/BOGZ1FU103164103Q"
     },
     {
-      "known_by": "2026-11-21T00:20:38.396363Z",
+      "known_by": "2026-11-21T02:25:19.202912Z",
       "original_release_at": null,
-      "raw_path": "raw/terminal_flows/a893949e4dab472543e8820266c6168fa89623a27cab0f652e2d918cba51e8be.json",
-      "raw_sha256": "a893949e4dab472543e8820266c6168fa89623a27cab0f652e2d918cba51e8be",
+      "raw_path": "raw/terminal_flows/9a65f8acacda2fb75de01dd9c6841fd59ce61d6d83596d2fab5cae2dbc51eb8b.json",
+      "raw_sha256": "9a65f8acacda2fb75de01dd9c6841fd59ce61d6d83596d2fab5cae2dbc51eb8b",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-21T00:20:38.396363Z",
+      "retrieved_at": "2026-11-21T02:25:19.202912Z",
       "source_url": "https://fred.stlouisfed.org/series/BOGZ1FU563064100Q"
     },
     {
-      "known_by": "2026-11-21T00:20:38.667736Z",
-      "metadata_raw_path": "raw/terminal_flows/a893949e4dab472543e8820266c6168fa89623a27cab0f652e2d918cba51e8be.json",
-      "metadata_raw_sha256": "a893949e4dab472543e8820266c6168fa89623a27cab0f652e2d918cba51e8be",
+      "known_by": "2026-11-21T02:25:19.410018Z",
+      "metadata_raw_path": "raw/terminal_flows/9a65f8acacda2fb75de01dd9c6841fd59ce61d6d83596d2fab5cae2dbc51eb8b.json",
+      "metadata_raw_sha256": "9a65f8acacda2fb75de01dd9c6841fd59ce61d6d83596d2fab5cae2dbc51eb8b",
       "original_release_at": null,
       "raw_path": "raw/terminal_flows/6c01ff9b68d8ac40f2b5f9b515aa3454f024bae7c9ae737b0150b694c454a258.json",
       "raw_sha256": "6c01ff9b68d8ac40f2b5f9b515aa3454f024bae7c9ae737b0150b694c454a258",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-21T00:20:38.667736Z",
+      "retrieved_at": "2026-11-21T02:25:19.410018Z",
       "source_url": "https://fred.stlouisfed.org/series/BOGZ1FU563064100Q"
     },
     {
-      "known_by": "2026-11-21T00:20:38.965262Z",
+      "known_by": "2026-11-21T02:25:19.608040Z",
       "original_release_at": null,
-      "raw_path": "raw/terminal_flows/54683bc7c9c3ea71f13ff031a2b451b0e2e0bfcfcdf27ac0585251449fe1a62e.json",
-      "raw_sha256": "54683bc7c9c3ea71f13ff031a2b451b0e2e0bfcfcdf27ac0585251449fe1a62e",
+      "raw_path": "raw/terminal_flows/2a631163684b43f0b911723514f88d2c50ee37206d0e9228b4bdd1752f5db913.json",
+      "raw_sha256": "2a631163684b43f0b911723514f88d2c50ee37206d0e9228b4bdd1752f5db913",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-21T00:20:38.965262Z",
+      "retrieved_at": "2026-11-21T02:25:19.608040Z",
       "source_url": "https://fred.stlouisfed.org/series/BOGZ1FU653064100Q"
     },
     {
-      "known_by": "2026-11-21T00:20:39.352154Z",
-      "metadata_raw_path": "raw/terminal_flows/54683bc7c9c3ea71f13ff031a2b451b0e2e0bfcfcdf27ac0585251449fe1a62e.json",
-      "metadata_raw_sha256": "54683bc7c9c3ea71f13ff031a2b451b0e2e0bfcfcdf27ac0585251449fe1a62e",
+      "known_by": "2026-11-21T02:25:19.832621Z",
+      "metadata_raw_path": "raw/terminal_flows/2a631163684b43f0b911723514f88d2c50ee37206d0e9228b4bdd1752f5db913.json",
+      "metadata_raw_sha256": "2a631163684b43f0b911723514f88d2c50ee37206d0e9228b4bdd1752f5db913",
       "original_release_at": null,
       "raw_path": "raw/terminal_flows/7ce20aeef2a3397184e5ba06cabe7e6cabd306bff0a81da434af95684e37fd5d.json",
       "raw_sha256": "7ce20aeef2a3397184e5ba06cabe7e6cabd306bff0a81da434af95684e37fd5d",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-21T00:20:39.352154Z",
+      "retrieved_at": "2026-11-21T02:25:19.832621Z",
       "source_url": "https://fred.stlouisfed.org/series/BOGZ1FU653064100Q"
     }
   ],
