@@ -24,7 +24,7 @@
       "source_group": "ici_index"
     }
   ],
-  "fetched_at": "2026-11-21T18:02:47.462369Z",
+  "fetched_at": "2026-11-21T21:13:47.748156Z",
   "limitations": [
     "No series identifies the causal effect of intermediation on prices, and no single global liquidity score is constructed.",
     "Position signs have no fixed capacity interpretation. Repo and reverse repo are gross sides, not additive market liquidity or collateral reuse.",
@@ -274,63 +274,63 @@
   ],
   "sources": [
     {
-      "known_by": "2026-11-21T18:02:45.956913Z",
+      "known_by": "2026-11-21T21:13:46.558789Z",
       "original_release_at": null,
       "raw_path": "raw/intermediary/ef2ba93b10af9551181daf5a6f013dab9774ad0c84b9136d51fc17b79164ab78.json",
       "raw_scope": "original_public_first_party_document",
       "raw_sha256": "ef2ba93b10af9551181daf5a6f013dab9774ad0c84b9136d51fc17b79164ab78",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-21T18:02:45.956913Z",
+      "retrieved_at": "2026-11-21T21:13:46.558789Z",
       "source_url": "https://markets.newyorkfed.org/api/pd/list/seriesbreaks.json"
     },
     {
-      "known_by": "2026-11-21T18:02:46.362961Z",
+      "known_by": "2026-11-21T21:13:46.751262Z",
       "original_release_at": null,
       "raw_path": "raw/intermediary/77a7805ffdf634d259bdc94c8eb4ff9f44acb7c5ea7c1246f05152a971d4c7c0.json",
       "raw_scope": "original_public_first_party_document",
       "raw_sha256": "77a7805ffdf634d259bdc94c8eb4ff9f44acb7c5ea7c1246f05152a971d4c7c0",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-21T18:02:46.362961Z",
+      "retrieved_at": "2026-11-21T21:13:46.751262Z",
       "source_url": "https://markets.newyorkfed.org/api/pd/list/timeseries.json"
     },
     {
-      "known_by": "2026-11-21T18:02:46.582961Z",
+      "known_by": "2026-11-21T21:13:46.849881Z",
       "original_release_at": null,
       "raw_path": "raw/intermediary/00b0a504d21137a8342796d579fab471340773259e1bd133d9818520f53f499c.json",
       "raw_scope": "original_public_first_party_document",
       "raw_sha256": "00b0a504d21137a8342796d579fab471340773259e1bd133d9818520f53f499c",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-21T18:02:46.582961Z",
+      "retrieved_at": "2026-11-21T21:13:46.849881Z",
       "source_url": "https://markets.newyorkfed.org/api/pd/latest/SBN2024.json"
     },
     {
-      "known_by": "2026-11-21T18:02:46.823058Z",
+      "known_by": "2026-11-21T21:13:47.024045Z",
       "original_release_at": null,
-      "raw_path": "raw/intermediary/88d5acf0c2372fd48fd474ee651d57a8f481b7190c6dfcc1fb045149d3f41fbc.html",
+      "raw_path": "raw/intermediary/7b090633e17dd27f24966e03fa8a35faeffd738002898ae60a8469961b263e58.html",
       "raw_scope": "original_public_first_party_document",
-      "raw_sha256": "88d5acf0c2372fd48fd474ee651d57a8f481b7190c6dfcc1fb045149d3f41fbc",
+      "raw_sha256": "7b090633e17dd27f24966e03fa8a35faeffd738002898ae60a8469961b263e58",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-21T18:02:46.823058Z",
+      "retrieved_at": "2026-11-21T21:13:47.024045Z",
       "source_url": "https://www.finra.org/rules-guidance/key-topics/margin-accounts/margin-statistics"
     },
     {
-      "known_by": "2026-11-21T18:02:47.014756Z",
+      "known_by": "2026-11-21T21:13:47.308989Z",
       "original_release_at": null,
       "raw_path": "raw/intermediary/87e2c5fbd131c5bf6170defc07b0b6d0a1fc363c030f1a3c742db6c9165a4bff.json",
       "raw_scope": "original_public_first_party_document",
       "raw_sha256": "87e2c5fbd131c5bf6170defc07b0b6d0a1fc363c030f1a3c742db6c9165a4bff",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-21T18:02:47.014756Z",
+      "retrieved_at": "2026-11-21T21:13:47.308989Z",
       "source_url": "https://www.jpmorganchase.com/services/json/v1/investor-relations/quarterly-earnings.json"
     },
     {
-      "known_by": "2026-11-21T18:02:47.291277Z",
+      "known_by": "2026-11-21T21:13:47.525782Z",
       "original_release_at": null,
       "raw_path": "raw/intermediary/3b8067c3cbe0b7037c72cacfbe112cd76a8a88562d6d30bd25eff5a820b209ee.xlsx",
       "raw_scope": "original_public_first_party_document",
       "raw_sha256": "3b8067c3cbe0b7037c72cacfbe112cd76a8a88562d6d30bd25eff5a820b209ee",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-21T18:02:47.291277Z",
+      "retrieved_at": "2026-11-21T21:13:47.525782Z",
       "source_url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/3rd-quarter/3q26-earnings-supplement.xlsx"
     }
   ],
