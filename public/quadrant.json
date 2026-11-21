@@ -26,7 +26,7 @@
       "weeks": 217
     }
   },
-  "checked_at": "2026-11-21T02:26:16.796231Z",
+  "checked_at": "2026-11-21T07:47:08.148152Z",
   "definition": {
     "bucket": "quintile of s + v against strictly earlier weeks since 2009-01-01",
     "candidate": "x = s + v with the Treasury account's contribution removed; own quintiles",
@@ -37,52 +37,52 @@
     "vector": "minus the change in non-reserve liabilities (WALCL − WRBWFRBL)",
     "window_weeks": 13
   },
-  "generated_at": "2026-11-21T02:26:16.796231Z",
+  "generated_at": "2026-11-21T07:47:08.148152Z",
   "inputs": {
     "IORB": {
-      "last_date": "2026-11-19",
-      "retrieved_at": "2026-11-19T21:42:23.633949Z",
-      "status": "error"
+      "last_date": "2026-11-21",
+      "retrieved_at": "2026-11-21T07:46:25.782960Z",
+      "status": "ok"
     },
     "SOFR": {
       "last_date": "2026-11-19",
       "retrieved_at": "2026-11-20T13:03:26.767965Z",
-      "status": "error"
+      "status": "ok"
     },
     "TLAACBW027NBOG": {
-      "last_date": "2026-11-04",
-      "retrieved_at": "2026-11-17T18:06:51.676938Z",
-      "status": "error"
+      "last_date": "2026-11-11",
+      "retrieved_at": "2026-11-21T07:46:44.409707Z",
+      "status": "ok"
     },
     "WALCL": {
       "last_date": "2026-11-18",
       "retrieved_at": "2026-11-19T21:41:32.590143Z",
-      "status": "error"
+      "status": "ok"
     },
     "WCURCIR": {
       "last_date": "2026-11-18",
       "retrieved_at": "2026-11-19T21:41:43.396005Z",
-      "status": "error"
+      "status": "ok"
     },
     "WDTGAL": {
       "last_date": "2026-11-18",
       "retrieved_at": "2026-11-19T21:41:35.446788Z",
-      "status": "error"
+      "status": "ok"
     },
     "WLRRAFOIAL": {
       "last_date": "2026-11-18",
       "retrieved_at": "2026-11-19T21:41:53.489329Z",
-      "status": "error"
+      "status": "ok"
     },
     "WLRRAOL": {
       "last_date": "2026-11-18",
       "retrieved_at": "2026-11-19T21:41:50.948013Z",
-      "status": "error"
+      "status": "ok"
     },
     "WRBWFRBL": {
       "last_date": "2026-11-18",
       "retrieved_at": "2026-11-19T21:41:40.839913Z",
-      "status": "error"
+      "status": "ok"
     }
   },
   "judgment": {
@@ -8567,12 +8567,12 @@
       "value_bp": 1.0
     },
     "reserve_adequacy": {
-      "assets_date": "2026-11-04",
+      "assets_date": "2026-11-11",
       "band_high": 13.0,
       "below": true,
       "line": 12.0,
       "since": "2026-07-22",
-      "value": 11.51
+      "value": 11.49
     },
     "reverse_repo": {
       "above": false,
