@@ -1,6 +1,6 @@
 {
   "asof": "2026-11-18",
-  "checked_at": "2026-11-20T21:15:44.323328Z",
+  "checked_at": "2026-11-21T00:21:38.571661Z",
   "daily_complete": false,
   "decision_date": "2026-11-20",
   "generated_at": "2026-11-20T21:15:44.323328Z",
@@ -285,7 +285,7 @@
     "Q7": "재무부 현금 제외",
     "Q8": "통설 순유동성"
   },
-  "reason": null,
+  "reason": "input_missing_BAA10Y",
   "schema_version": 1,
   "score": {
     "of": 7,
@@ -370,7 +370,7 @@
       "since": "2026-11-11"
     }
   },
-  "status": "ok",
+  "status": "retained",
   "study": "models-2026-11",
   "values": {
     "d_ffr": 0.25,

@@ -13,9 +13,9 @@
     "Only BTC and ETH US spot-product universes on the source tables are covered; equity ETF flows and other crypto products remain absent.",
     "Capture time is the earliest knowability certified by this collector; a business date is not an original publication timestamp."
   ],
-  "capture_id": "20261120T211400677560Z_e93f4dd89bf2",
+  "capture_id": "20261121T002017275726Z_88d0cf1edca9",
   "errors": [],
-  "fetched_at": "2026-11-20T21:14:03.491388Z",
+  "fetched_at": "2026-11-21T00:20:19.629445Z",
   "limitations": [
     "Underlying flow construction and revisions are not independently audited against each issuer's creations and redemptions.",
     "The current New York calendar date is deliberately excluded, even if all cells are filled; this introduces a conservative reporting delay.",
@@ -29,7 +29,7 @@
   "research_eligible": false,
   "schema_version": 1,
   "stale": 0,
-  "started_at": "2026-11-20T21:14:00.677560Z",
+  "started_at": "2026-11-21T00:20:17.275726Z",
   "status": "ok",
   "success": 2,
   "total": 2
