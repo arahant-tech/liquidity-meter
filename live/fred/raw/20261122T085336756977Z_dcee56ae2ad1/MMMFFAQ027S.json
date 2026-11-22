@@ -1,5 +1,5 @@
 {
-  "known_by": "2026-11-22T06:59:12.413556Z",
+  "known_by": "2026-11-22T08:53:49.339894Z",
   "metadata_response": {
     "realtime_end": "2026-11-22",
     "realtime_start": "2026-11-22",
@@ -83,7 +83,7 @@
     "provider": "FRED"
   },
   "research_eligible": false,
-  "retrieved_at": "2026-11-22T06:59:12.413556Z",
+  "retrieved_at": "2026-11-22T08:53:49.339894Z",
   "schema_version": 1,
   "series_id": "MMMFFAQ027S"
 }
