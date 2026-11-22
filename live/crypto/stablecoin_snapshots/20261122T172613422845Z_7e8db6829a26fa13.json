@@ -1,0 +1,23 @@
+{
+  "captured_at": "2026-11-22T17:26:13.422845Z",
+  "circulating": {
+    "USDC": 68651627258.94474,
+    "USDT": 174573591645.34595
+  },
+  "http_response_headers": {
+    "Age": "182",
+    "Date": "Sun, 22 Nov 2026 17:26:13 GMT",
+    "ETag": "W/\"6b031c43-8c55e\"",
+    "Last-Modified": "Sun, 22 Nov 2026 16:45:55 GMT"
+  },
+  "known_by": "2026-11-22T17:26:13.422845Z",
+  "method": "defillama_circulating_peggedUSD_native_tokens_v1",
+  "original_release_at": null,
+  "original_release_verified": false,
+  "raw_byte_semantics": "original_http_response_body",
+  "raw_path": "raw/732cf6704ba98f87a88a4887b654b57817db4ce05e08aa1de036c4e7e9ba1c50.json",
+  "raw_sha256": "732cf6704ba98f87a88a4887b654b57817db4ce05e08aa1de036c4e7e9ba1c50",
+  "retrieved_at": "2026-11-22T17:26:13.422845Z",
+  "source_url": "https://stablecoins.llama.fi/stablecoins?includePrices=false",
+  "unit": "native_tokens"
+}

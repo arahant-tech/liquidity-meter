@@ -1,5 +1,5 @@
 {
-  "known_by": "2026-11-22T15:26:21.800685Z",
+  "known_by": "2026-11-22T17:25:49.610847Z",
   "metadata_response": {
     "realtime_end": "2026-11-22",
     "realtime_start": "2026-11-22",
@@ -83,7 +83,7 @@
     "provider": "FRED"
   },
   "research_eligible": false,
-  "retrieved_at": "2026-11-22T15:26:21.800685Z",
+  "retrieved_at": "2026-11-22T17:25:49.610847Z",
   "schema_version": 1,
   "series_id": "IORB"
 }

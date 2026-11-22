@@ -1,30 +1,30 @@
 {
-  "known_by": "2026-11-22T15:26:23.893340Z",
+  "known_by": "2026-11-22T17:25:48.040724Z",
   "metadata_response": {
     "realtime_end": "2026-11-22",
     "realtime_start": "2026-11-22",
     "seriess": [
       {
-        "frequency": "Weekly, As of Wednesday",
+        "frequency": "Weekly, Ending Wednesday",
         "frequency_short": "W",
-        "id": "WRBWFRBL",
-        "last_updated": "2026-11-19 15:31:49-06",
+        "id": "WTREGEN",
+        "last_updated": "2026-11-19 15:32:07-06",
         "notes": "For questions on the data, please contact the data source (https://www.federalreserve.gov/apps/ContactUs/feedback.aspx?refurl=/releases/h41/%). For questions on FRED functionality, please contact us here (https://fred.stlouisfed.org/contactus/).",
         "observation_end": "2026-11-18",
         "observation_start": "2002-12-18",
-        "popularity": 67,
+        "popularity": 85,
         "realtime_end": "2026-11-22",
         "realtime_start": "2026-11-22",
         "seasonal_adjustment": "Not Seasonally Adjusted",
         "seasonal_adjustment_short": "NSA",
-        "title": "Liabilities and Capital: Other Factors Draining Reserve Balances: Reserve Balances with Federal Reserve Banks: Wednesday Level",
+        "title": "Liabilities and Capital: Liabilities: Deposits with F.R. Banks, Other Than Reserve Balances: U.S. Treasury, General Account: Week Average",
         "units": "Millions of U.S. Dollars",
         "units_short": "Mil. of U.S. $"
       }
     ]
   },
   "observation_response": {
-    "count": 1249,
+    "count": 2133,
     "file_type": "json",
     "limit": 5,
     "observation_end": "2026-11-22",
@@ -34,31 +34,31 @@
         "date": "2026-11-18",
         "realtime_end": "2026-11-22",
         "realtime_start": "2026-11-22",
-        "value": "3001790"
+        "value": "916613"
       },
       {
         "date": "2026-11-11",
         "realtime_end": "2026-11-22",
         "realtime_start": "2026-11-22",
-        "value": "2969977"
+        "value": "914370"
       },
       {
         "date": "2026-11-04",
         "realtime_end": "2026-11-22",
         "realtime_start": "2026-11-22",
-        "value": "2962804"
+        "value": "957175"
       },
       {
         "date": "2026-10-28",
         "realtime_end": "2026-11-22",
         "realtime_start": "2026-11-22",
-        "value": "2895236"
+        "value": "999727"
       },
       {
         "date": "2026-10-21",
         "realtime_end": "2026-11-22",
         "realtime_start": "2026-11-22",
-        "value": "2969522"
+        "value": "952002"
       }
     ],
     "offset": 0,
@@ -76,14 +76,14 @@
       "output_type": 1,
       "realtime_end": "2026-11-22",
       "realtime_start": "2026-11-22",
-      "series_id": "WRBWFRBL",
+      "series_id": "WTREGEN",
       "sort_order": "desc",
       "units": "lin"
     },
     "provider": "FRED"
   },
   "research_eligible": false,
-  "retrieved_at": "2026-11-22T15:26:23.893340Z",
+  "retrieved_at": "2026-11-22T17:25:48.040724Z",
   "schema_version": 1,
-  "series_id": "WRBWFRBL"
+  "series_id": "WTREGEN"
 }

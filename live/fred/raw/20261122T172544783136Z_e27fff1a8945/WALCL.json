@@ -1,5 +1,5 @@
 {
-  "known_by": "2026-11-22T15:26:18.288480Z",
+  "known_by": "2026-11-22T17:25:45.859282Z",
   "metadata_response": {
     "realtime_end": "2026-11-22",
     "realtime_start": "2026-11-22",
@@ -83,7 +83,7 @@
     "provider": "FRED"
   },
   "research_eligible": false,
-  "retrieved_at": "2026-11-22T15:26:18.288480Z",
+  "retrieved_at": "2026-11-22T17:25:45.859282Z",
   "schema_version": 1,
   "series_id": "WALCL"
 }
