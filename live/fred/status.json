@@ -9,97 +9,97 @@
     "Only the latest five native observations are fetched, so older revisions can be missed.",
     "The collection covers a subset of the five-layer model; missing sources are not imputed."
   ],
-  "capture_id": "20261123T125937521776Z_703b4cdc8b45",
+  "capture_id": "20261123T134306215907Z_53d2ff63ba1f",
   "changed": 1,
-  "completed_at": "2026-11-23T12:59:48.287746Z",
+  "completed_at": "2026-11-23T13:43:28.521355Z",
   "errors": 0,
   "outcome": "ok",
   "research_eligible": false,
   "schema_version": 1,
   "series": {
     "DPSACBW027SBOG": {
-      "checked_at": "2026-11-23T12:59:43.047233Z",
+      "checked_at": "2026-11-23T13:43:16.667751Z",
       "error": null,
       "status": "ok"
     },
     "DRTSCILM": {
-      "checked_at": "2026-11-23T12:59:47.655857Z",
+      "checked_at": "2026-11-23T13:43:27.755890Z",
       "error": null,
       "status": "ok"
     },
     "ECBASSETSW": {
-      "checked_at": "2026-11-23T12:59:46.359978Z",
+      "checked_at": "2026-11-23T13:43:24.122578Z",
       "error": null,
       "status": "ok"
     },
     "IORB": {
-      "checked_at": "2026-11-23T12:59:41.719728Z",
+      "checked_at": "2026-11-23T13:43:14.835770Z",
       "error": null,
       "status": "ok"
     },
     "JPNASSETS": {
-      "checked_at": "2026-11-23T12:59:47.010481Z",
+      "checked_at": "2026-11-23T13:43:24.940044Z",
       "error": null,
       "status": "ok"
     },
     "MMMFFAQ027S": {
-      "checked_at": "2026-11-23T12:59:48.286623Z",
+      "checked_at": "2026-11-23T13:43:28.520182Z",
       "error": null,
       "status": "ok"
     },
     "RRPONTSYD": {
-      "checked_at": "2026-11-23T12:59:39.576306Z",
+      "checked_at": "2026-11-23T13:43:11.317291Z",
       "error": null,
       "status": "ok"
     },
     "SOFR": {
-      "checked_at": "2026-11-23T12:59:41.050652Z",
+      "checked_at": "2026-11-23T13:43:14.082030Z",
       "error": null,
       "status": "ok"
     },
     "TOTBKCR": {
-      "checked_at": "2026-11-23T12:59:42.408592Z",
+      "checked_at": "2026-11-23T13:43:15.883393Z",
       "error": null,
       "status": "ok"
     },
     "TOTLL": {
-      "checked_at": "2026-11-23T12:59:45.746179Z",
+      "checked_at": "2026-11-23T13:43:20.729115Z",
       "error": null,
       "status": "ok"
     },
     "WALCL": {
-      "checked_at": "2026-11-23T12:59:38.274712Z",
+      "checked_at": "2026-11-23T13:43:07.292764Z",
       "error": null,
       "status": "ok"
     },
     "WDTGAL": {
-      "checked_at": "2026-11-23T12:59:44.967078Z",
+      "checked_at": "2026-11-23T13:43:19.485633Z",
       "error": null,
       "status": "ok"
     },
     "WLRRAOL": {
-      "checked_at": "2026-11-23T12:59:44.306704Z",
+      "checked_at": "2026-11-23T13:43:18.797829Z",
       "error": null,
       "status": "ok"
     },
     "WRBWFRBL": {
-      "checked_at": "2026-11-23T12:59:43.680795Z",
+      "checked_at": "2026-11-23T13:43:17.549360Z",
       "error": null,
       "status": "ok"
     },
     "WRESBAL": {
-      "checked_at": "2026-11-23T12:59:38.925930Z",
+      "checked_at": "2026-11-23T13:43:10.466818Z",
       "error": null,
       "status": "ok"
     },
     "WTREGEN": {
-      "checked_at": "2026-11-23T12:59:40.379277Z",
+      "checked_at": "2026-11-23T13:43:13.209333Z",
       "error": null,
       "status": "ok"
     }
   },
   "stale": 0,
-  "started_at": "2026-11-23T12:59:37.521776Z",
+  "started_at": "2026-11-23T13:43:06.215907Z",
   "success": 16,
   "total": 16
 }
