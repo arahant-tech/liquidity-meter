@@ -14,16 +14,16 @@
     "Current SEC concept history is revised; these captures do not recreate historic point-in-time availability.",
     "SEC companyconcept and companyfacts can disagree on coverage. Visa's empty successful concept response permits only the identical standard concept from official companyfacts; its native period may lag issuer IR."
   ],
-  "capture_id": "20261124T211949249577Z_57a4ce4bc351",
-  "completed_at": "2026-11-24T21:19:52.468545Z",
+  "capture_id": "20261124T213423677458Z_309fcff48b45",
+  "completed_at": "2026-11-24T21:34:27.699283Z",
   "errors": [],
-  "fetched_at": "2026-11-24T21:19:52.468545Z",
+  "fetched_at": "2026-11-24T21:34:27.699283Z",
   "issuer_status": [
     {
       "acquisition_route": "companyconcept",
       "age_calendar_days": 59,
       "changed": false,
-      "checked_at": "2026-11-24T21:19:49.876031Z",
+      "checked_at": "2026-11-24T21:34:24.522833Z",
       "cik": "0000320193",
       "error": null,
       "filed_date": "2026-11-03",
@@ -85,7 +85,7 @@
       "acquisition_route": "companyconcept",
       "age_calendar_days": 55,
       "changed": false,
-      "checked_at": "2026-11-24T21:19:50.521864Z",
+      "checked_at": "2026-11-24T21:34:25.414017Z",
       "cik": "0000789019",
       "error": null,
       "filed_date": "2026-10-28",
@@ -147,7 +147,7 @@
       "acquisition_route": "companyconcept",
       "age_calendar_days": 55,
       "changed": false,
-      "checked_at": "2026-11-24T21:19:51.206097Z",
+      "checked_at": "2026-11-24T21:34:26.137380Z",
       "cik": "0001652044",
       "error": null,
       "filed_date": "2026-10-29",
@@ -209,7 +209,7 @@
       "acquisition_route": "companyconcept",
       "age_calendar_days": 55,
       "changed": false,
-      "checked_at": "2026-11-24T21:19:51.826124Z",
+      "checked_at": "2026-11-24T21:34:26.804926Z",
       "cik": "0001326801",
       "error": null,
       "filed_date": "2026-10-22",
@@ -271,7 +271,7 @@
       "acquisition_route": "companyconcept",
       "age_calendar_days": 55,
       "changed": false,
-      "checked_at": "2026-11-24T21:19:52.467527Z",
+      "checked_at": "2026-11-24T21:34:27.698433Z",
       "cik": "0001403161",
       "error": null,
       "filed_date": "2026-11-05",
@@ -598,50 +598,50 @@
   "provider": "buybacks",
   "raw_captures": [
     {
-      "path": "raw/20261124T211949249577Z_57a4ce4bc351/0000320193.json",
-      "retrieved_at": "2026-11-24T21:19:49.876031Z",
+      "path": "raw/20261124T213423677458Z_309fcff48b45/0000320193.json",
+      "retrieved_at": "2026-11-24T21:34:24.522833Z",
       "sha256": "b8da51178a465dd84dc98e7e109a62fba40246941d40c6dd2021b62b2d2b1685",
       "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000320193/us-gaap/PaymentsForRepurchaseOfCommonStock.json",
       "ticker": "AAPL"
     },
     {
-      "path": "raw/20261124T211949249577Z_57a4ce4bc351/0000789019.json",
-      "retrieved_at": "2026-11-24T21:19:50.521864Z",
+      "path": "raw/20261124T213423677458Z_309fcff48b45/0000789019.json",
+      "retrieved_at": "2026-11-24T21:34:25.414017Z",
       "sha256": "dce433864dbcd1826756ca6f841830560e09150262186c154888ba5ea50d6b74",
       "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000789019/us-gaap/PaymentsForRepurchaseOfCommonStock.json",
       "ticker": "MSFT"
     },
     {
-      "path": "raw/20261124T211949249577Z_57a4ce4bc351/0001652044.json",
-      "retrieved_at": "2026-11-24T21:19:51.206097Z",
+      "path": "raw/20261124T213423677458Z_309fcff48b45/0001652044.json",
+      "retrieved_at": "2026-11-24T21:34:26.137380Z",
       "sha256": "657a7cb16c96b07dc71e08d4072cef84b9779bf6f0a2f1fe0e642e3812be6a4e",
       "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001652044/us-gaap/PaymentsForRepurchaseOfCommonStock.json",
       "ticker": "GOOGL"
     },
     {
-      "path": "raw/20261124T211949249577Z_57a4ce4bc351/0001326801.json",
-      "retrieved_at": "2026-11-24T21:19:51.826124Z",
+      "path": "raw/20261124T213423677458Z_309fcff48b45/0001326801.json",
+      "retrieved_at": "2026-11-24T21:34:26.804926Z",
       "sha256": "aa96cfbae008f0cf94e0dd8b91d3fb26702c652571b30d91c1ee6cdd7cc2f20d",
       "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001326801/us-gaap/PaymentsForRepurchaseOfCommonStock.json",
       "ticker": "META"
     },
     {
-      "path": "raw/20261124T211949249577Z_57a4ce4bc351/0001403161.json",
-      "retrieved_at": "2026-11-24T21:19:52.467527Z",
+      "path": "raw/20261124T213423677458Z_309fcff48b45/0001403161.json",
+      "retrieved_at": "2026-11-24T21:34:27.698433Z",
       "sha256": "5e863a7d99291bc08e6979d2a45e0ca13839feacd0461c01f24b20b69a09df82",
       "source_url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001403161/us-gaap/PaymentsForRepurchaseOfCommonStock.json",
       "ticker": "V"
     }
   ],
   "research_eligible": false,
-  "retrieved_at": "2026-11-24T21:19:52.468545Z",
+  "retrieved_at": "2026-11-24T21:34:27.699283Z",
   "schema_version": 1,
   "sources": [
     "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
     "https://www.sec.gov/about/developer-resources"
   ],
   "stale": 0,
-  "started_at": "2026-11-24T21:19:49.249577Z",
+  "started_at": "2026-11-24T21:34:23.677458Z",
   "status": "ok",
   "success": 5,
   "total": 5
