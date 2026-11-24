@@ -7,14 +7,14 @@
     "자료 개정·공표 지연·이력 부족이 남습니다. 국가 간 합산·빈도 늘리기·결측 보간을 하지 않습니다."
   ],
   "errors": [],
-  "generated_at": "2026-11-24T11:40:32.823975Z",
-  "github_run_url": "https://github.com/arahant-tech/liquidity-meter/actions/runs/45386161009",
+  "generated_at": "2026-11-24T21:20:23.462360Z",
+  "github_run_url": "https://github.com/arahant-tech/liquidity-meter/actions/runs/45489867632",
   "research_eligible": false,
   "schema_version": 1,
   "series": [
     {
       "chart_type": "line",
-      "checked_at": "2026-11-24T11:40:28.179836Z",
+      "checked_at": "2026-11-24T21:20:16.757910Z",
       "frequency": "Weekly, Ending Wednesday",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-19T21:41:24.709954Z",
@@ -673,7 +673,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-24T11:40:28.956597Z",
+      "checked_at": "2026-11-24T21:20:19.415719Z",
       "frequency": "Weekly, As of Wednesday",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-19T21:41:25.675560Z",
@@ -1332,10 +1332,10 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-24T11:40:29.753932Z",
+      "checked_at": "2026-11-24T21:20:20.744680Z",
       "frequency": "Weekly",
       "history_basis": "current_vintage_3_years",
-      "known_by": "2026-11-17T18:05:22.350993Z",
+      "known_by": "2026-11-24T21:20:20.744680Z",
       "label": "ECB 총자산",
       "points": [
         {
@@ -1973,11 +1973,15 @@
         {
           "date": "2026-11-13",
           "value": 5906258.0
+        },
+        {
+          "date": "2026-11-20",
+          "value": 5923063.0
         }
       ],
       "provider": "fred",
-      "raw_path": "raw/c9de8f6a97647091335aaf1d6830e4f9f7b720783b1fe32e17f6964e15ef958f.json",
-      "raw_sha256": "c9de8f6a97647091335aaf1d6830e4f9f7b720783b1fe32e17f6964e15ef958f",
+      "raw_path": "raw/dec64d50d5b979e13c8cb19d0a4b3aa2128705e6981f687f99e54dfc68c56cce.json",
+      "raw_sha256": "dec64d50d5b979e13c8cb19d0a4b3aa2128705e6981f687f99e54dfc68c56cce",
       "research_eligible": false,
       "series_id": "ECBASSETSW",
       "source_url": "https://fred.stlouisfed.org/series/ECBASSETSW",
@@ -1987,7 +1991,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-24T11:40:30.873850Z",
+      "checked_at": "2026-11-24T21:20:21.477203Z",
       "frequency": "Monthly, End of Period",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-05T11:15:05.105643Z",
@@ -2150,10 +2154,10 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-24T11:40:31.883635Z",
+      "checked_at": "2026-11-24T21:20:22.593543Z",
       "frequency": "Daily",
       "history_basis": "current_vintage_3_years",
-      "known_by": "2026-11-24T00:59:20.996342Z",
+      "known_by": "2026-11-24T21:20:22.593543Z",
       "label": "미국 익일물 역레포",
       "points": [
         {
@@ -5351,11 +5355,15 @@
         {
           "date": "2026-11-23",
           "value": 0.35
+        },
+        {
+          "date": "2026-11-24",
+          "value": 0.301
         }
       ],
       "provider": "fred",
-      "raw_path": "raw/48ed13fd15d67591e292c51e2511bfed70c858f67686653e216e15b57ac19783.json",
-      "raw_sha256": "48ed13fd15d67591e292c51e2511bfed70c858f67686653e216e15b57ac19783",
+      "raw_path": "raw/c4447b69af3101e7e5c5e8ec56827cd0685a8fc4d977c06d12b4fb183ff1d21d.json",
+      "raw_sha256": "c4447b69af3101e7e5c5e8ec56827cd0685a8fc4d977c06d12b4fb183ff1d21d",
       "research_eligible": false,
       "series_id": "RRPONTSYD",
       "source_url": "https://fred.stlouisfed.org/series/RRPONTSYD",
@@ -5365,7 +5373,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-24T11:40:32.720615Z",
+      "checked_at": "2026-11-24T21:20:23.362518Z",
       "frequency": "Weekly, Ending Wednesday",
       "history_basis": "current_vintage_3_years",
       "known_by": "2026-11-19T21:41:29.076958Z",
@@ -6024,7 +6032,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-24T11:40:32.738093Z",
+      "checked_at": "2026-11-24T21:20:23.379811Z",
       "frequency": "Monthly",
       "history_basis": "available_official_monthly_table",
       "known_by": "2026-11-13T09:46:51.862457Z",
@@ -6084,7 +6092,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-24T11:40:32.753847Z",
+      "checked_at": "2026-11-24T21:20:23.395458Z",
       "frequency": "Monthly",
       "history_basis": "available_official_monthly_table",
       "known_by": "2026-11-13T09:46:51.884579Z",
@@ -6144,7 +6152,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-24T11:40:32.759352Z",
+      "checked_at": "2026-11-24T21:20:23.400833Z",
       "frequency": "Monthly",
       "history_basis": "available_official_monthly_table",
       "known_by": "2026-11-13T09:46:51.891994Z",
@@ -6204,7 +6212,7 @@
     },
     {
       "chart_type": "bar",
-      "checked_at": "2026-11-24T11:40:32.766088Z",
+      "checked_at": "2026-11-24T21:20:23.406866Z",
       "frequency": "Monthly",
       "history_basis": "available_official_monthly_table",
       "known_by": "2026-11-13T09:46:51.901932Z",
@@ -6264,7 +6272,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-24T11:40:32.766477Z",
+      "checked_at": "2026-11-24T21:20:23.407182Z",
       "frequency": "Monthly",
       "history_basis": "current_vintage_available_monthly_history_max_36_observations",
       "known_by": "2026-11-04T21:59:36.698070Z",
@@ -6436,7 +6444,7 @@
     },
     {
       "chart_type": "line",
-      "checked_at": "2026-11-24T11:40:32.776503Z",
+      "checked_at": "2026-11-24T21:20:23.417193Z",
       "frequency": "Monthly",
       "history_basis": "current_vintage_available_monthly_history_max_36_observations",
       "known_by": "2026-11-13T23:43:46.149364Z",
@@ -6512,7 +6520,7 @@
     },
     {
       "chart_type": "bar",
-      "checked_at": "2026-11-24T11:40:32.790180Z",
+      "checked_at": "2026-11-24T21:20:23.430227Z",
       "frequency": "Monthly",
       "history_basis": "current_vintage_available_monthly_history_max_36_observations",
       "known_by": "2026-11-18T22:03:23.209383Z",

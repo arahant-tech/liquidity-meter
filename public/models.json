@@ -1,9 +1,9 @@
 {
   "asof": "2026-11-18",
-  "checked_at": "2026-11-24T11:41:35.320019Z",
+  "checked_at": "2026-11-24T21:21:41.402505Z",
   "daily_complete": true,
   "decision_date": "2026-11-20",
-  "generated_at": "2026-11-24T11:41:35.320019Z",
+  "generated_at": "2026-11-24T21:21:41.402505Z",
   "history": [
     {
       "d": "2025-11-26",
@@ -221,13 +221,13 @@
       "status": "ok"
     },
     "DFEDTARU": {
-      "last_date": "2026-11-23",
-      "retrieved_at": "2026-11-23T13:02:09.314021Z",
+      "last_date": "2026-11-24",
+      "retrieved_at": "2026-11-24T21:21:22.118991Z",
       "status": "ok"
     },
     "DFII10": {
-      "last_date": "2026-11-20",
-      "retrieved_at": "2026-11-24T01:00:49.207315Z",
+      "last_date": "2026-11-23",
+      "retrieved_at": "2026-11-24T21:21:19.620014Z",
       "status": "ok"
     },
     "DTWEXBGS": {
@@ -236,13 +236,13 @@
       "status": "ok"
     },
     "M2SL": {
-      "last_date": "2026-09-01",
-      "retrieved_at": "2026-11-18T14:49:24.714127Z",
+      "last_date": "2026-10-01",
+      "retrieved_at": "2026-11-24T21:21:24.695783Z",
       "status": "ok"
     },
     "VIXCLS": {
-      "last_date": "2026-11-20",
-      "retrieved_at": "2026-11-24T01:01:16.040180Z",
+      "last_date": "2026-11-23",
+      "retrieved_at": "2026-11-24T21:21:41.207265Z",
       "status": "ok"
     },
     "WALCL": {
@@ -374,7 +374,7 @@
   "study": "models-2026-11",
   "values": {
     "d_ffr": 0.25,
-    "d_m2": 336.2,
+    "d_m2": 336.7,
     "d_net": 0.591,
     "d_real": 0.53,
     "d_usd": 4.457,
