@@ -26,7 +26,7 @@
       "weeks": 217
     }
   },
-  "checked_at": "2026-11-25T23:42:20.278525Z",
+  "checked_at": "2026-11-25T23:51:11.039716Z",
   "definition": {
     "bucket": "quintile of s + v against strictly earlier weeks since 2009-01-01",
     "candidate": "x = s + v with the Treasury account's contribution removed; own quintiles",
@@ -37,7 +37,7 @@
     "vector": "minus the change in non-reserve liabilities (WALCL − WRBWFRBL)",
     "window_weeks": 13
   },
-  "generated_at": "2026-11-25T23:42:20.278525Z",
+  "generated_at": "2026-11-25T23:51:11.039716Z",
   "inputs": {
     "IORB": {
       "last_date": "2026-11-25",
