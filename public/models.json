@@ -1,9 +1,9 @@
 {
   "asof": "2026-11-18",
-  "checked_at": "2026-11-24T21:36:16.564111Z",
+  "checked_at": "2026-11-25T04:20:45.218135Z",
   "daily_complete": true,
   "decision_date": "2026-11-20",
-  "generated_at": "2026-11-24T21:36:16.564111Z",
+  "generated_at": "2026-11-25T04:20:45.218135Z",
   "history": [
     {
       "d": "2025-11-26",
@@ -216,8 +216,8 @@
   ],
   "inputs": {
     "BAA10Y": {
-      "last_date": "2026-11-20",
-      "retrieved_at": "2026-11-24T01:01:13.284262Z",
+      "last_date": "2026-11-23",
+      "retrieved_at": "2026-11-25T04:20:41.663894Z",
       "status": "ok"
     },
     "DFEDTARU": {
