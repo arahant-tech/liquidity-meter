@@ -1,9 +1,9 @@
 {
   "asof": "2026-11-18",
-  "checked_at": "2026-11-25T15:04:14.147215Z",
+  "checked_at": "2026-11-25T23:42:20.399347Z",
   "daily_complete": true,
   "decision_date": "2026-11-20",
-  "generated_at": "2026-11-25T15:04:14.147215Z",
+  "generated_at": "2026-11-25T23:42:20.399347Z",
   "history": [
     {
       "d": "2025-11-26",
@@ -216,8 +216,8 @@
   ],
   "inputs": {
     "BAA10Y": {
-      "last_date": "2026-11-23",
-      "retrieved_at": "2026-11-25T04:20:41.663894Z",
+      "last_date": "2026-11-24",
+      "retrieved_at": "2026-11-25T23:42:17.368156Z",
       "status": "ok"
     },
     "DFEDTARU": {
@@ -226,8 +226,8 @@
       "status": "ok"
     },
     "DFII10": {
-      "last_date": "2026-11-23",
-      "retrieved_at": "2026-11-24T21:21:19.620014Z",
+      "last_date": "2026-11-24",
+      "retrieved_at": "2026-11-25T23:42:02.110709Z",
       "status": "ok"
     },
     "DTWEXBGS": {
