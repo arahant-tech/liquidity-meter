@@ -1,0 +1,61 @@
+name: Retry check (temporary)
+on:
+  push:
+    branches: [retry-check]
+permissions:
+  contents: read
+jobs:
+  first-attempt-fails:
+    runs-on: ubuntu-24.04
+    outputs:
+      url: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
+    steps:
+      - name: Let the artifact list catch up
+        run: sleep 10
+      - name: Publish (simulated failure)
+        id: deployment
+        continue-on-error: true
+        run: echo '::error::No artifacts named "github-pages" were found (simulated)'; exit 1
+      - name: Wait before the second attempt
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 45
+      - name: Publish (second attempt, simulated success)
+        id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
+        run: echo "page_url=https://example.invalid/retry/" >> "$GITHUB_OUTPUT"
+      - name: Show what the job sees
+        run: echo "outcome=${{ steps.deployment.outcome }} conclusion=${{ steps.deployment.conclusion }} retry=${{ steps.deployment_retry.outcome }} url=${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}"
+  first-attempt-succeeds:
+    runs-on: ubuntu-24.04
+    outputs:
+      url: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
+    steps:
+      - name: Publish (simulated success)
+        id: deployment
+        continue-on-error: true
+        run: echo "page_url=https://example.invalid/first/" >> "$GITHUB_OUTPUT"
+      - name: Wait before the second attempt
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 45
+      - name: Publish (second attempt)
+        id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
+        run: echo "page_url=https://example.invalid/retry/" >> "$GITHUB_OUTPUT"
+      - name: Show what the job sees
+        run: echo "outcome=${{ steps.deployment.outcome }} retry=${{ steps.deployment_retry.outcome }} url=${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}"
+  both-attempts-fail:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Publish (simulated failure)
+        id: deployment
+        continue-on-error: true
+        run: exit 1
+      - name: Publish (second attempt, simulated failure)
+        id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
+        run: exit 1
+  report:
+    runs-on: ubuntu-24.04
+    needs: [first-attempt-fails, first-attempt-succeeds]
+    steps:
+      - run: echo "fails-then-retries url=${{ needs.first-attempt-fails.outputs.url }} | first-succeeds url=${{ needs.first-attempt-succeeds.outputs.url }}"
