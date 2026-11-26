@@ -232,23 +232,23 @@
   "retained_observations": [],
   "sources": [
     {
-      "known_by": "2026-11-26T14:58:17.638668Z",
+      "known_by": "2026-11-26T15:51:14.034699Z",
       "original_release_at": null,
-      "raw_path": "raw/offshore/3590dedf6ec4382deb17ee6e2762c3a5f53c1db37a4133f7a3e8ec87603feccf.xml",
+      "raw_path": "raw/offshore/fb6ea0991eb69b0d453e870b8ad94722d36b6c0e422fb97a29886629d961de63.xml",
       "raw_scope": "original_official_source_response",
-      "raw_sha256": "3590dedf6ec4382deb17ee6e2762c3a5f53c1db37a4133f7a3e8ec87603feccf",
+      "raw_sha256": "fb6ea0991eb69b0d453e870b8ad94722d36b6c0e422fb97a29886629d961de63",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-26T14:58:17.638668Z",
+      "retrieved_at": "2026-11-26T15:51:14.034699Z",
       "source_url": "https://stats.bis.org/api/v1/data/WS_GLI/Q.USD.3P.N..I..USD/all?lastNObservations=1"
     },
     {
-      "known_by": "2026-11-26T14:58:18.126293Z",
+      "known_by": "2026-11-26T15:51:14.439136Z",
       "original_release_at": null,
       "raw_path": "raw/offshore/52d4bfdef47eb33acacc277f90992da657d011df7d23c7d08262c2b224684234.json",
       "raw_scope": "original_official_source_response",
       "raw_sha256": "52d4bfdef47eb33acacc277f90992da657d011df7d23c7d08262c2b224684234",
       "release_timestamp_verified": false,
-      "retrieved_at": "2026-11-26T14:58:18.126293Z",
+      "retrieved_at": "2026-11-26T15:51:14.439136Z",
       "source_url": "https://data.financialresearch.gov/v1/series/multifull?mnemonics=REPO-DVP_OV_TOT-P%2CREPO-TRIV1_TV_TOT-P&start_date=2026-10-12&end_date=2026-11-26"
     }
   ],
