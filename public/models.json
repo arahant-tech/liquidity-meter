@@ -1,9 +1,9 @@
 {
   "asof": "2026-11-18",
-  "checked_at": "2026-11-27T10:59:45.906441Z",
+  "checked_at": "2026-11-27T19:14:58.491445Z",
   "daily_complete": true,
   "decision_date": "2026-11-20",
-  "generated_at": "2026-11-27T10:59:45.906441Z",
+  "generated_at": "2026-11-27T19:14:58.491445Z",
   "history": [
     {
       "d": "2025-11-26",
@@ -221,8 +221,8 @@
       "status": "ok"
     },
     "DFEDTARU": {
-      "last_date": "2026-11-26",
-      "retrieved_at": "2026-11-26T14:59:10.575113Z",
+      "last_date": "2026-11-27",
+      "retrieved_at": "2026-11-27T19:14:40.182521Z",
       "status": "ok"
     },
     "DFII10": {
@@ -241,8 +241,8 @@
       "status": "ok"
     },
     "VIXCLS": {
-      "last_date": "2026-11-24",
-      "retrieved_at": "2026-11-25T15:04:13.963743Z",
+      "last_date": "2026-11-26",
+      "retrieved_at": "2026-11-27T19:14:58.295928Z",
       "status": "ok"
     },
     "WALCL": {
