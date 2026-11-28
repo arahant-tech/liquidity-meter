@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-11-28T02:47:05.629727Z",
+  "generated_at": "2026-11-28T10:58:16.838787Z",
   "observation_start": "2002-12-01",
   "outcome": "ok",
   "schema_version": 1,
   "series": {
     "BAA10Y": {
       "changed": false,
-      "checked_at": "2026-11-28T02:47:02.468179Z",
+      "checked_at": "2026-11-28T10:58:14.364074Z",
       "copyright_notice": true,
       "error": null,
       "first_date": "2002-12-02",
@@ -26,7 +26,7 @@
     },
     "CBBTCUSD": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:51.150416Z",
+      "checked_at": "2026-11-28T10:58:04.248860Z",
       "copyright_notice": true,
       "error": null,
       "first_date": "2014-12-01",
@@ -46,7 +46,7 @@
     },
     "DEXJPUS": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:33.878729Z",
+      "checked_at": "2026-11-28T10:57:47.632877Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-02",
@@ -67,7 +67,7 @@
     },
     "DEXUSEU": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:32.386797Z",
+      "checked_at": "2026-11-28T10:57:45.343240Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-02",
@@ -88,7 +88,7 @@
     },
     "DFEDTARU": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:45.757082Z",
+      "checked_at": "2026-11-28T10:57:59.011635Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2008-12-16",
@@ -109,7 +109,7 @@
     },
     "DFII10": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:44.493393Z",
+      "checked_at": "2026-11-28T10:57:57.794401Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2003-01-02",
@@ -130,7 +130,7 @@
     },
     "DGS10": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:28.477569Z",
+      "checked_at": "2026-11-28T10:57:40.483065Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-02",
@@ -151,7 +151,7 @@
     },
     "DGS30": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:29.814372Z",
+      "checked_at": "2026-11-28T10:57:42.069698Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-02",
@@ -172,7 +172,7 @@
     },
     "DPSACBW027SBOG": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:37.886579Z",
+      "checked_at": "2026-11-28T10:57:51.691315Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-04",
@@ -193,7 +193,7 @@
     },
     "DTWEXBGS": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:31.110949Z",
+      "checked_at": "2026-11-28T10:57:44.136027Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2006-01-02",
@@ -214,7 +214,7 @@
     },
     "ECBASSETSW": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:41.826538Z",
+      "checked_at": "2026-11-28T10:57:55.384498Z",
       "copyright_notice": true,
       "error": null,
       "first_date": "2002-12-06",
@@ -235,7 +235,7 @@
     },
     "GDP": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:40.483939Z",
+      "checked_at": "2026-11-28T10:57:54.145679Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-10-01",
@@ -256,7 +256,7 @@
     },
     "IORB": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:27.206727Z",
+      "checked_at": "2026-11-28T10:57:38.160048Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2021-07-29",
@@ -277,7 +277,7 @@
     },
     "JPNASSETS": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:43.157243Z",
+      "checked_at": "2026-11-28T10:57:56.614092Z",
       "copyright_notice": true,
       "error": null,
       "first_date": "2002-12-01",
@@ -298,7 +298,7 @@
     },
     "M2SL": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:46.961199Z",
+      "checked_at": "2026-11-28T10:58:00.600812Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-01",
@@ -318,40 +318,40 @@
       "vintage": "current_as_of_retrieval"
     },
     "NASDAQ100": {
-      "changed": false,
-      "checked_at": "2026-11-28T02:46:59.535074Z",
+      "changed": true,
+      "checked_at": "2026-11-28T10:58:11.848116Z",
       "copyright_notice": true,
       "error": null,
       "first_date": "2002-12-02",
       "first_retrieved_at": "2026-11-18T14:52:22.426235Z",
       "frequency": "Daily, Close",
-      "last_date": "2026-11-25",
-      "observations": 6257,
+      "last_date": "2026-11-27",
+      "observations": 6258,
       "persisted": false,
-      "retrieved_at": "2026-11-26T05:32:12.996670Z",
+      "retrieved_at": "2026-11-28T10:58:11.848116Z",
       "series_id": "NASDAQ100",
-      "sha256": "cfc7988d0175054429826bedb2848043699c9612661514e33b1589c9f6b539d4",
-      "source_last_updated": "2026-11-25 22:37:34-06",
+      "sha256": "defd42e716db84e06664c43ca6f29f85904ca8b0dce3e86efc0e7af895686d63",
+      "source_last_updated": "2026-11-27 22:38:22-06",
       "source_url": "https://fred.stlouisfed.org/series/NASDAQ100",
       "status": "ok",
       "units": "Index",
       "vintage": "current_as_of_retrieval"
     },
     "NASDAQCOM": {
-      "changed": false,
-      "checked_at": "2026-11-28T02:46:53.896983Z",
+      "changed": true,
+      "checked_at": "2026-11-28T10:58:06.911727Z",
       "copyright_notice": true,
       "error": null,
       "first_date": "2002-12-02",
       "first_retrieved_at": "2026-11-17T18:07:05.007151Z",
       "frequency": "Daily, Close",
-      "last_date": "2026-11-25",
-      "observations": 6257,
+      "last_date": "2026-11-27",
+      "observations": 6258,
       "persisted": false,
-      "retrieved_at": "2026-11-26T05:32:08.080055Z",
+      "retrieved_at": "2026-11-28T10:58:06.911727Z",
       "series_id": "NASDAQCOM",
-      "sha256": "1e1dc57c98c7b5190b954de391e48462c5cb1f956fe5cdeb2c9fadce4b23c626",
-      "source_last_updated": "2026-11-25 22:39:12-06",
+      "sha256": "f4797d1afc55d9460ebb1924d178909d1cbeb3b5317cacb6b141f57de1a94c13",
+      "source_last_updated": "2026-11-27 22:39:47-06",
       "source_url": "https://fred.stlouisfed.org/series/NASDAQCOM",
       "status": "ok",
       "units": "Index Feb 5, 1971=100",
@@ -359,7 +359,7 @@
     },
     "RPONTSYD": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:24.646025Z",
+      "checked_at": "2026-11-28T10:57:35.556414Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-02",
@@ -380,7 +380,7 @@
     },
     "RRPONTSYD": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:23.388512Z",
+      "checked_at": "2026-11-28T10:57:34.211362Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2003-02-07",
@@ -401,7 +401,7 @@
     },
     "SOFR": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:25.992742Z",
+      "checked_at": "2026-11-28T10:57:36.836697Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2018-04-03",
@@ -422,7 +422,7 @@
     },
     "SP500": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:56.856154Z",
+      "checked_at": "2026-11-28T10:58:09.351083Z",
       "copyright_notice": true,
       "error": null,
       "first_date": "2016-11-28",
@@ -442,7 +442,7 @@
     },
     "SWPT": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:18.236033Z",
+      "checked_at": "2026-11-28T10:57:27.794814Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-18",
@@ -463,7 +463,7 @@
     },
     "TLAACBW027NBOG": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:39.107027Z",
+      "checked_at": "2026-11-28T10:57:52.876115Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-04",
@@ -484,7 +484,7 @@
     },
     "TOTBKCR": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:35.327004Z",
+      "checked_at": "2026-11-28T10:57:48.835012Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-04",
@@ -505,7 +505,7 @@
     },
     "TOTLL": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:36.589801Z",
+      "checked_at": "2026-11-28T10:57:50.094117Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-04",
@@ -526,7 +526,7 @@
     },
     "TREAST": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:19.469373Z",
+      "checked_at": "2026-11-28T10:57:29.295223Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-18",
@@ -547,7 +547,7 @@
     },
     "VIXCLS": {
       "changed": false,
-      "checked_at": "2026-11-28T02:47:05.628248Z",
+      "checked_at": "2026-11-28T10:58:16.837564Z",
       "copyright_notice": true,
       "error": null,
       "first_date": "2002-12-02",
@@ -567,7 +567,7 @@
     },
     "WALCL": {
       "changed": false,
-      "checked_at": "2026-11-28T02:45:59.686622Z",
+      "checked_at": "2026-11-28T10:57:06.905275Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-18",
@@ -588,7 +588,7 @@
     },
     "WCICL": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:22.063479Z",
+      "checked_at": "2026-11-28T10:57:32.962053Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-18",
@@ -609,7 +609,7 @@
     },
     "WCTCL": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:15.579554Z",
+      "checked_at": "2026-11-28T10:57:25.383907Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-18",
@@ -630,7 +630,7 @@
     },
     "WCURCIR": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:05.000128Z",
+      "checked_at": "2026-11-28T10:57:13.489715Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-04",
@@ -651,7 +651,7 @@
     },
     "WDFOL": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:12.749308Z",
+      "checked_at": "2026-11-28T10:57:22.211059Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-18",
@@ -672,7 +672,7 @@
     },
     "WDTGAL": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:00.928439Z",
+      "checked_at": "2026-11-28T10:57:08.098506Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-18",
@@ -693,7 +693,7 @@
     },
     "WLAD": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:14.101663Z",
+      "checked_at": "2026-11-28T10:57:23.462481Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-18",
@@ -714,7 +714,7 @@
     },
     "WLCFLL": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:16.925995Z",
+      "checked_at": "2026-11-28T10:57:26.570868Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-18",
@@ -735,7 +735,7 @@
     },
     "WLFN": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:06.254292Z",
+      "checked_at": "2026-11-28T10:57:14.799559Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-18",
@@ -756,7 +756,7 @@
     },
     "WLODL": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:11.419784Z",
+      "checked_at": "2026-11-28T10:57:20.997921Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-18",
@@ -777,7 +777,7 @@
     },
     "WLRRAFOIAL": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:10.092243Z",
+      "checked_at": "2026-11-28T10:57:19.772842Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-18",
@@ -798,7 +798,7 @@
     },
     "WLRRAL": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:07.484432Z",
+      "checked_at": "2026-11-28T10:57:17.397305Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-18",
@@ -819,7 +819,7 @@
     },
     "WLRRAOL": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:08.780530Z",
+      "checked_at": "2026-11-28T10:57:18.582680Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-18",
@@ -840,7 +840,7 @@
     },
     "WRBWFRBL": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:03.664347Z",
+      "checked_at": "2026-11-28T10:57:11.547022Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-18",
@@ -861,7 +861,7 @@
     },
     "WRESBAL": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:02.355131Z",
+      "checked_at": "2026-11-28T10:57:10.349317Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-04",
@@ -882,7 +882,7 @@
     },
     "WSHOMCB": {
       "changed": false,
-      "checked_at": "2026-11-28T02:46:20.725897Z",
+      "checked_at": "2026-11-28T10:57:30.565399Z",
       "copyright_notice": false,
       "error": null,
       "first_date": "2002-12-18",
