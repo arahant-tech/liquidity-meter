@@ -1,32 +1,32 @@
 {
-  "asof": "2026-11-18",
+  "asof": "2026-11-25",
   "cells": {
     "A": {
-      "share": 0.1801,
-      "weeks": 168
+      "share": 0.1809,
+      "weeks": 169
     },
     "B+": {
-      "share": 0.1929,
+      "share": 0.1927,
       "weeks": 180
     },
     "B-": {
-      "share": 0.1415,
+      "share": 0.1413,
       "weeks": 132
     },
     "C+": {
-      "share": 0.1275,
+      "share": 0.1274,
       "weeks": 119
     },
     "C-": {
-      "share": 0.1254,
+      "share": 0.1253,
       "weeks": 117
     },
     "D": {
-      "share": 0.2326,
+      "share": 0.2323,
       "weeks": 217
     }
   },
-  "checked_at": "2026-11-27T20:03:00.856114Z",
+  "checked_at": "2026-11-28T02:16:58.854474Z",
   "definition": {
     "bucket": "quintile of s + v against strictly earlier weeks since 2009-01-01",
     "candidate": "x = s + v with the Treasury account's contribution removed; own quintiles",
@@ -37,11 +37,11 @@
     "vector": "minus the change in non-reserve liabilities (WALCL − WRBWFRBL)",
     "window_weeks": 13
   },
-  "generated_at": "2026-11-27T20:03:00.856114Z",
+  "generated_at": "2026-11-28T02:16:58.854474Z",
   "inputs": {
     "IORB": {
-      "last_date": "2026-11-25",
-      "retrieved_at": "2026-11-25T23:41:41.407291Z",
+      "last_date": "2026-11-27",
+      "retrieved_at": "2026-11-28T02:16:08.439347Z",
       "status": "ok"
     },
     "SOFR": {
@@ -50,38 +50,38 @@
       "status": "ok"
     },
     "TLAACBW027NBOG": {
-      "last_date": "2026-11-11",
-      "retrieved_at": "2026-11-21T07:46:44.409707Z",
+      "last_date": "2026-11-18",
+      "retrieved_at": "2026-11-28T02:16:30.868873Z",
       "status": "ok"
     },
     "WALCL": {
-      "last_date": "2026-11-18",
-      "retrieved_at": "2026-11-19T21:41:32.590143Z",
+      "last_date": "2026-11-25",
+      "retrieved_at": "2026-11-28T02:15:11.557465Z",
       "status": "ok"
     },
     "WCURCIR": {
-      "last_date": "2026-11-18",
-      "retrieved_at": "2026-11-19T21:41:43.396005Z",
+      "last_date": "2026-11-25",
+      "retrieved_at": "2026-11-28T02:15:22.772174Z",
       "status": "ok"
     },
     "WDTGAL": {
-      "last_date": "2026-11-18",
-      "retrieved_at": "2026-11-19T21:41:35.446788Z",
+      "last_date": "2026-11-25",
+      "retrieved_at": "2026-11-28T02:15:14.542924Z",
       "status": "ok"
     },
     "WLRRAFOIAL": {
-      "last_date": "2026-11-18",
-      "retrieved_at": "2026-11-19T21:41:53.489329Z",
+      "last_date": "2026-11-25",
+      "retrieved_at": "2026-11-28T02:15:34.385558Z",
       "status": "ok"
     },
     "WLRRAOL": {
-      "last_date": "2026-11-18",
-      "retrieved_at": "2026-11-19T21:41:50.948013Z",
+      "last_date": "2026-11-25",
+      "retrieved_at": "2026-11-28T02:15:31.442072Z",
       "status": "ok"
     },
     "WRBWFRBL": {
-      "last_date": "2026-11-18",
-      "retrieved_at": "2026-11-19T21:41:40.839913Z",
+      "last_date": "2026-11-25",
+      "retrieved_at": "2026-11-28T02:15:19.983311Z",
       "status": "ok"
     }
   },
@@ -90,68 +90,68 @@
     "candidate": {
       "bounds": [
         -2.5529,
-        -0.977,
-        0.7025,
-        3.8251
+        -0.9767,
+        0.6995,
+        3.8233
       ],
       "bucket": 3,
       "id": "reserve_change_ex_tga_13w",
       "since": "2026-09-30",
       "tilt": "neutral",
-      "tilt_from": 0.7025,
-      "value": 0.3984
+      "tilt_from": 0.6995,
+      "value": -0.3571
     },
     "indicator": {
       "bounds": [
-        -2.8709,
-        -0.8334,
-        1.1132,
-        3.8346
+        -2.8693,
+        -0.8297,
+        1.113,
+        3.8288
       ],
       "bucket": 3,
       "id": "reserve_change_13w",
       "since": "2026-07-29",
       "tilt": "neutral",
-      "tilt_from": 1.1132,
-      "value": 1.0521
+      "tilt_from": 1.113,
+      "value": 0.1758
     },
     "protocol": "tilt-v1",
     "since": "2026-07-29",
     "source": {
-      "direction": 1.1151,
-      "driver": "direction",
-      "tga": 0.6537,
-      "total": -0.063
+      "direction": 0.159,
+      "driver": "both",
+      "tga": 0.5329,
+      "total": 0.0168
     },
     "tilt": "neutral"
   },
   "now": {
     "bounds": [
-      -2.8709,
-      -0.8334,
-      1.1132,
-      3.8346
+      -2.8693,
+      -0.8297,
+      1.113,
+      3.8288
     ],
     "bucket": 3,
-    "cell": "C+",
-    "date": "2026-11-18",
-    "g": 1.0521,
+    "cell": "A",
+    "date": "2026-11-25",
+    "g": 0.1758,
     "levels_billion_usd": {
-      "CUR": 2496.856,
-      "FRRP": 316.712,
-      "L": 6741.452,
-      "R": 3001.79,
-      "RRP": 0.331,
-      "TGA": 892.31
+      "CUR": 2503.651,
+      "FRRP": 326.828,
+      "L": 6732.044,
+      "R": 2928.659,
+      "RRP": 0.3,
+      "TGA": 923.563
     },
-    "s": -0.063,
-    "v": 1.1151,
+    "s": 0.0168,
+    "v": 0.159,
     "vector_sources": {
-      "cur": -0.3226,
-      "frrp": 0.8399,
-      "other": -0.0557,
-      "rrp": -0.0002,
-      "tga": 0.6537
+      "cur": -0.4087,
+      "frrp": 0.4253,
+      "other": -0.3966,
+      "rrp": 0.006,
+      "tga": 0.5329
     }
   },
   "points": [
@@ -8551,6 +8551,15 @@
       "v": 1.115,
       "x": 0.398,
       "xb": 3
+    },
+    {
+      "b": 3,
+      "c": "A",
+      "d": "2026-11-25",
+      "s": 0.017,
+      "v": 0.159,
+      "x": -0.357,
+      "xb": 3
     }
   ],
   "reason": null,
@@ -8563,31 +8572,31 @@
       "days": 5,
       "line_bp": 0.0,
       "since": "2026-10-28",
-      "through": "2026-11-18",
-      "value_bp": 1.0
+      "through": "2026-11-25",
+      "value_bp": 2.8
     },
     "reserve_adequacy": {
-      "assets_date": "2026-11-11",
+      "assets_date": "2026-11-18",
       "band_high": 13.0,
       "below": true,
       "line": 12.0,
       "since": "2026-07-22",
-      "value": 11.49
+      "value": 11.16
     },
     "reverse_repo": {
       "above": false,
-      "billion_usd": 0.331,
+      "billion_usd": 0.3,
       "line": 1.0,
       "mean_weeks": 4,
-      "share": 0.0049,
-      "share_mean": 0.0033,
+      "share": 0.0045,
+      "share_mean": 0.0037,
       "since": "2025-08-27"
     },
     "total_assets": {
       "above": false,
       "line": 1.0,
       "since": "2026-07-01",
-      "value": -0.063
+      "value": 0.0168
     }
   }
 }

@@ -1,11 +1,11 @@
 {
   "count": {
-    "records": 2,
+    "records": 3,
     "scores": 0
   },
-  "generated_at": "2026-11-27T20:03:01.312712Z",
+  "generated_at": "2026-11-28T02:17:01.079339Z",
   "head": {
-    "records": "5750dbba434dbcd338f60b8b0a0af9c66de37f46b3ce9077583be78ffbd0365c",
+    "records": "60e2ea955dabdb85a4ac166f1c6dd561b4bc19fa3a48998af27b09392f760771",
     "scores": null
   },
   "protocols": {
@@ -44,7 +44,7 @@
               "n": 0
             }
           },
-          "pending": 2,
+          "pending": 3,
           "rank_correlation": null,
           "role": "claim",
           "scored": 0,
@@ -83,14 +83,14 @@
               "n": 0
             }
           },
-          "pending": 2,
+          "pending": 3,
           "rank_correlation": null,
           "role": "reference",
           "scored": 0,
           "shift_null": null
         }
       ],
-      "confirmed": 2,
+      "confirmed": 3,
       "criteria": {
         "kill_at_or_below": [
           -1.63,
@@ -110,14 +110,14 @@
         "statistic": "mean outcome when on minus mean outcome when off, percentage points"
       },
       "first_week": "2026-11-11",
-      "last_week": "2026-11-18",
+      "last_week": "2026-11-25",
       "latest": {
         "bucket": 3,
-        "sealed_at": "2026-11-19T21:43:03.658750Z",
-        "signal": 1.0521,
-        "week": "2026-11-18"
+        "sealed_at": "2026-11-28T02:16:59.193752Z",
+        "signal": 0.1758,
+        "week": "2026-11-25"
       },
-      "off_weeks": 2,
+      "off_weeks": 3,
       "on_weeks": 0,
       "provisional": 0,
       "tilt_from_bucket": 4,

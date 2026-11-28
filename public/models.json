@@ -1,14 +1,10 @@
 {
-  "asof": "2026-11-18",
-  "checked_at": "2026-11-27T20:03:00.953154Z",
-  "daily_complete": true,
-  "decision_date": "2026-11-20",
-  "generated_at": "2026-11-27T20:03:00.953154Z",
+  "asof": "2026-11-25",
+  "checked_at": "2026-11-28T02:16:58.976282Z",
+  "daily_complete": false,
+  "decision_date": "2026-11-27",
+  "generated_at": "2026-11-28T02:16:58.976282Z",
   "history": [
-    {
-      "d": "2025-11-26",
-      "n": 1
-    },
     {
       "d": "2025-12-03",
       "n": 3
@@ -212,6 +208,10 @@
     {
       "d": "2026-11-18",
       "n": 4
+    },
+    {
+      "d": "2026-11-25",
+      "n": 2
     }
   ],
   "inputs": {
@@ -226,8 +226,8 @@
       "status": "ok"
     },
     "DFII10": {
-      "last_date": "2026-11-24",
-      "retrieved_at": "2026-11-25T23:42:02.110709Z",
+      "last_date": "2026-11-25",
+      "retrieved_at": "2026-11-28T02:16:37.948773Z",
       "status": "ok"
     },
     "DTWEXBGS": {
@@ -246,23 +246,23 @@
       "status": "ok"
     },
     "WALCL": {
-      "last_date": "2026-11-18",
-      "retrieved_at": "2026-11-19T21:41:32.590143Z",
+      "last_date": "2026-11-25",
+      "retrieved_at": "2026-11-28T02:15:11.557465Z",
       "status": "ok"
     },
     "WDTGAL": {
-      "last_date": "2026-11-18",
-      "retrieved_at": "2026-11-19T21:41:35.446788Z",
+      "last_date": "2026-11-25",
+      "retrieved_at": "2026-11-28T02:15:14.542924Z",
       "status": "ok"
     },
     "WLRRAOL": {
-      "last_date": "2026-11-18",
-      "retrieved_at": "2026-11-19T21:41:50.948013Z",
+      "last_date": "2026-11-25",
+      "retrieved_at": "2026-11-28T02:15:31.442072Z",
       "status": "ok"
     },
     "WRBWFRBL": {
-      "last_date": "2026-11-18",
-      "retrieved_at": "2026-11-19T21:41:40.839913Z",
+      "last_date": "2026-11-25",
+      "retrieved_at": "2026-11-28T02:15:19.983311Z",
       "status": "ok"
     }
   },
@@ -289,7 +289,7 @@
   "schema_version": 1,
   "score": {
     "of": 7,
-    "on": 4,
+    "on": 2,
     "voters": [
       "Q1",
       "Q2",
@@ -302,20 +302,20 @@
   },
   "states": {
     "C1": {
-      "on": true,
-      "since": "2026-11-18"
+      "on": false,
+      "since": "2026-11-25"
     },
     "C2": {
-      "on": 0.5714,
-      "since": "2026-11-18"
+      "on": 0.2857,
+      "since": "2026-11-25"
     },
     "C3": {
       "on": true,
       "since": "2026-09-09"
     },
     "F1": {
-      "on": true,
-      "since": "2026-09-09"
+      "on": false,
+      "since": "2026-11-25"
     },
     "F2": {
       "on": false,
@@ -346,12 +346,12 @@
       "since": "2026-11-11"
     },
     "Q3": {
-      "on": false,
-      "since": "2026-11-04"
+      "on": true,
+      "since": "2026-11-25"
     },
     "Q4": {
-      "on": true,
-      "since": "2026-11-11"
+      "on": false,
+      "since": "2026-11-25"
     },
     "Q5": {
       "on": true,
@@ -362,8 +362,8 @@
       "since": "2026-10-28"
     },
     "Q7": {
-      "on": true,
-      "since": "2026-11-18"
+      "on": false,
+      "since": "2026-11-25"
     },
     "Q8": {
       "on": true,
@@ -375,14 +375,14 @@
   "values": {
     "d_ffr": 0.25,
     "d_m2": 336.7,
-    "d_net": 0.591,
-    "d_real": 0.53,
-    "d_usd": 4.457,
-    "g": 1.052,
-    "g_accel": 2.466,
-    "g_ex_tga": 0.398,
-    "s": -0.063,
-    "v": 1.115
+    "d_net": 0.556,
+    "d_real": 0.39,
+    "d_usd": 4.427,
+    "g": 0.176,
+    "g_accel": 0.908,
+    "g_ex_tga": -0.357,
+    "s": 0.017,
+    "v": 0.159
   },
   "vintage": "current_as_of_retrieval"
 }
